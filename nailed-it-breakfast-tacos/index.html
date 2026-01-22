@@ -19,21 +19,14 @@
             margin: 0;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- EDITORIAL HEADER --- */
+        /* --- HERO SECTION --- */
         .hero-section {
             width: 100%;
-            padding: 10vh 0;
+            padding: 8vh 0 4vh 0;
             text-align: center;
-        }
-
-        .category-tag {
-            font-family: 'Courier New', Courier, monospace;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
         }
 
         h1 {
@@ -41,7 +34,7 @@
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: -0.03em;
-            margin: 20px 0;
+            margin: 0 0 40px 0;
         }
 
         .hero-image-container {
@@ -54,28 +47,43 @@
             width: 100%;
             height: auto;
             border: 1px solid var(--border);
-            filter: sepia(10%); /* Subtle editorial warmth */
         }
 
         /* --- CONTENT LAYOUT --- */
         .recipe-grid {
             max-width: 1100px;
-            margin: 80px auto;
+            margin: 40px auto 100px auto;
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 60px;
             padding: 0 5%;
         }
 
+        .editorial-meta {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+            font-family: 'Courier New', Courier, monospace;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+        }
+
+        .archive-tag { font-weight: bold; }
+        .growing-line { color: var(--text-secondary); }
+
         .intro-text {
             grid-column: 1 / -1;
             font-size: 1.4rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 40px;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
             font-family: 'Courier New', Courier, monospace;
         }
 
+        /* --- SIDEBAR & HOVER TOOLTIPS --- */
         .sidebar h2, .main-content h2 {
             font-family: 'Courier New', Courier, monospace;
             text-transform: uppercase;
@@ -86,17 +94,12 @@
             margin-bottom: 30px;
         }
 
-        /* --- INGREDIENTS --- */
-        .ingredients-list {
-            list-style: none;
-            padding: 0;
-            font-size: 0.95rem;
-        }
-
+        .ingredients-list { list-style: none; padding: 0; font-size: 0.95rem; }
         .ingredients-list li {
             margin-bottom: 18px;
             padding-bottom: 18px;
             border-bottom: 1px dashed var(--border);
+            position: relative;
         }
 
         .nailed-it-alert {
@@ -108,95 +111,142 @@
             margin-top: 5px;
         }
 
-        .ingredient-link {
+        /* HOVER PREVIEW LOGIC */
+        .hover-link {
             color: var(--text-secondary);
             text-decoration: underline;
-            font-size: 0.85rem;
+            cursor: help;
+            position: relative;
         }
+
+        .preview-img {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            width: 200px;
+            height: auto;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .hover-link:hover .preview-img { display: block; }
 
         /* --- INSTRUCTIONS --- */
-        .instructions-text {
-            font-size: 1.15rem;
-            line-height: 1.8;
-        }
-
+        .instructions-text { font-size: 1.15rem; line-height: 1.8; }
         .instructions-text p { margin-bottom: 30px; }
 
-        .meta-footer {
-            grid-column: 1 / -1;
-            padding: 60px 0;
-            border-top: 1px solid var(--border);
-            text-align: center;
+        /* --- TACO SCROLL HINT --- */
+        #taco-hint {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
             font-family: 'Courier New', Courier, monospace;
-            color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        .taco-icon {
+            width: 50px;
+            height: 30px;
+            background: #f1c40f;
+            border: 2px solid #333;
+            border-radius: 50px 50px 5px 5px; /* Simple Taco Shape */
+            margin-bottom: 10px;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         @media (max-width: 800px) {
             .recipe-grid { grid-template-columns: 1fr; }
+            .preview-img { display: none !important; } /* Disable hover on mobile */
         }
     </style>
 </head>
 <body>
 
+<div id="taco-hint">
+    <div class="taco-icon"></div>
+    <div>THIS WAY TO<br>NAIL IT</div>
+</div>
+
 <div class="hero-section">
-    <div class="category-tag">Recipe / 01</div>
     <h1>Nailed It Breakfast Tacos</h1>
     <div class="hero-image-container">
-        <img src="taco-engineer.jpg" alt="The Perfect Breakfast Taco">
+        <img src="taco-engineer.jpg" alt="Breakfast Tacos">
     </div>
 </div>
 
 <main class="recipe-grid">
+    <div class="editorial-meta">
+        <div class="archive-tag">RECIPE / 01</div>
+        <div class="growing-line">— Growing Archive —</div>
+    </div>
+
     <div class="intro-text">
-        Do you like breakfast tacos? Do you like when people look at you and say, "Wow! You really NAILED-it!"? If yes, make these. (Note: these are <a href="https://www.differencebetween.net/object/difference-between-taco-and-burrito/" style="color:black">tacos, not burritos</a>).
+        Do you like breakfast tacos? Do you like when people look at you and say, "Wow! You really NAILED-it!"? (Note: these are <a href="https://www.differencebetween.net/object/difference-between-taco-and-burrito/" style="color:black">tacos, not burritos</a>).
     </div>
 
     <aside class="sidebar">
         <h2>Ingredients</h2>
         <ul class="ingredients-list">
-            <li>1 lb <a href="https://www.jimmydean.com/products/fresh-sausage/" class="ingredient-link">Jimmy Dean Sausage</a>
+            <li>1 lb <a href="https://www.jimmydean.com/products/fresh-sausage/" style="color:inherit">Jimmy Dean Sausage</a>
                 <span class="nailed-it-alert">Key: Ensure meat is fresh and loose (no casings).</span>
             </li>
             <li>6 Slices Smoked Bacon</li>
             <li>2 Cloves Garlic, Minced</li>
-            <li>2 Small <a href="https://static1.squarespace.com/static/54d0e715e4b015ba88f0cc19/t/5535b0dee4b04f1506844ddf/1429582046891/whitepotatoes-300x244.jpg" class="ingredient-link">White Potatoes</a>, Cubed</li>
+            <li>2 Small <span class="hover-link">White Potatoes<img src="white-potatoes.jpg" class="preview-img"></span></li>
             <li>1 Small Onion, Chopped</li>
-            <li>1 Small Red Bell Pepper (or <a href="https://static1.squarespace.com/static/54d0e715e4b015ba88f0cc19/t/5535b109e4b0139110c415ae/1429582089625/poblano-pepper.jpg" class="ingredient-link">Poblano</a>)</li>
+            <li>1 Small Red Bell Pepper (or <span class="hover-link">Poblano<img src="poblano-pepper.jpg" class="preview-img"></span>)</li>
             <li>1 Large Jalapeño, Chopped</li>
             <li>1/2 Cup Cilantro, Chopped</li>
-            <li>1 Tbsp <a href="https://www.fiestaspices.com/product/fancy-light-chili-powder/" class="ingredient-link">Fiesta Chili Powder</a></li>
-            <li>1 Tsp <a href="https://www.fiestaspices.com/product/ground-comino/" class="ingredient-link">Fiesta Cumin</a></li>
-            <li>1 Tsp <a href="https://www.fiestaspices.com/product/oregano-mexican/" class="ingredient-link">Fiesta Oregano</a></li>
+            <li>1 Tbsp <a href="https://www.fiestaspices.com/product/fancy-light-chili-powder/" style="color:inherit">Fiesta Chili Powder</a></li>
+            <li>1 Tsp <a href="https://www.fiestaspices.com/product/ground-comino/" style="color:inherit">Fiesta Cumin</a></li>
+            <li>1 Tsp <a href="https://www.fiestaspices.com/product/oregano-mexican/" style="color:inherit">Fiesta Oregano</a></li>
             <li>1/2 Tsp Salt & Black Pepper</li>
             <li>4 Eggs, Beaten</li>
             <li>2 Cups Sharp Cheddar, Shredded</li>
             <li>8 Flour Tortillas (4.5" or 6")
                 <span class="nailed-it-alert">Must use flour. No exceptions.</span>
             </li>
-            <li>Salsa (Super fresh is best)</li>
+            <li>Salsa (Super fresh is best, ask me for my recipes!)</li>
         </ul>
     </aside>
 
     <div class="main-content">
         <h2>Instructions</h2>
         <div class="instructions-text">
-            <p><strong>The Base:</strong> Cook sausage in a medium skillet over medium-high heat. Combine all spices in a small bowl. Remove meat but keep the grease. Cook bacon until crisp, remove, and allow both to cool.</p>
-            
-            <p><strong>The Aromatics:</strong> In the remaining grease, brown the garlic. Add potatoes and cook until browned and crisp (5-10 mins). Chop the bacon while you wait.</p>
-            
-            <p><strong>The Mix:</strong> Add onion, bell pepper, jalapeño, and spice mixture to the potatoes. Cook until translucent. Re-add the sausage and bacon.</p>
-            
-            <p><strong>The Secret:</strong> Add beaten eggs. <span class="nailed-it-alert">Do not stir too much!</span> Allow them to cook into visible, small chunks. Top with cheese and cilantro, cover with a lid, and let it melt completely.</p>
-            
-            <p><strong>The Finish:</strong> Heat flour tortillas directly over a gas burner or wrapped in foil in a 350˚ oven. Spoon in the mixture, top with salsa, and immediately welcome everyone to NAILED-it!</p>
+            <p><strong>Step 1:</strong> Cook sausage in a skillet over medium-high heat. Combine spices in a small bowl. Remove meat, leaving grease. Cook bacon until crisp, remove, and allow to cool.</p>
+            <p><strong>Step 2:</strong> In the grease, brown the minced garlic. Add potatoes and cook until browned and crisp (5-10 mins). Chop the bacon while you wait.</p>
+            <p><strong>Step 3:</strong> Add onion, bell pepper, jalapeño, and spice mixture. Cook until translucent. Add sausage and bacon back in.</p>
+            <p><strong>Step 4:</strong> Add beaten eggs. <span class="nailed-it-alert">Do not stir too much!</span> Eggs should be in visible chunks. Top with cheese and cilantro, cover with a lid to melt.</p>
+            <p><strong>Step 5:</strong> Heat tortillas over a gas burner or wrapped in foil in a 350˚ oven. Spoon in the mixture, top with salsa, and welcome everyone to NAILED-it!</p>
         </div>
     </div>
-
-    <div class="meta-footer">
-        Serves 4 / Two tacos per person / — Anthony C. Dorsey Archive —
-    </div>
 </main>
+
+<script>
+    // Fade hint on scroll
+    window.onscroll = () => {
+        const hint = document.getElementById('taco-hint');
+        if (window.scrollY > 150) hint.style.opacity = "0";
+        else hint.style.opacity = "0.8";
+    };
+</script>
 
 </body>
 </html>
