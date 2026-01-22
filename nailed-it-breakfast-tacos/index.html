@@ -59,28 +59,13 @@
             padding: 0 5%;
         }
 
-        .editorial-meta {
-            grid-column: 1 / -1;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 15px;
-            margin-bottom: 40px;
-            font-family: 'Courier New', Courier, monospace;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.1em;
-        }
-
-        .archive-tag { font-weight: bold; }
-        .growing-line { color: var(--text-secondary); }
-
         .intro-text {
             grid-column: 1 / -1;
             font-size: 1.4rem;
             margin-bottom: 40px;
             font-family: 'Courier New', Courier, monospace;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 40px;
         }
 
         /* --- SIDEBAR & HOVER TOOLTIPS --- */
@@ -161,7 +146,7 @@
             height: 30px;
             background: #f1c40f;
             border: 2px solid #333;
-            border-radius: 50px 50px 5px 5px; /* Simple Taco Shape */
+            border-radius: 50px 50px 5px 5px; 
             margin-bottom: 10px;
             animation: bounce 2s infinite ease-in-out;
         }
@@ -173,7 +158,7 @@
 
         @media (max-width: 800px) {
             .recipe-grid { grid-template-columns: 1fr; }
-            .preview-img { display: none !important; } /* Disable hover on mobile */
+            .preview-img { display: none !important; } 
         }
     </style>
 </head>
@@ -192,11 +177,6 @@
 </div>
 
 <main class="recipe-grid">
-    <div class="editorial-meta">
-        <div class="archive-tag">RECIPE / 01</div>
-        <div class="growing-line">— Growing Archive —</div>
-    </div>
-
     <div class="intro-text">
         Do you like breakfast tacos? Do you like when people look at you and say, "Wow! You really NAILED-it!"? (Note: these are <a href="https://www.differencebetween.net/object/difference-between-taco-and-burrito/" style="color:black">tacos, not burritos</a>).
     </div>
@@ -240,7 +220,6 @@
 </main>
 
 <script>
-    // Fade hint on scroll
     window.onscroll = () => {
         const hint = document.getElementById('taco-hint');
         if (window.scrollY > 150) hint.style.opacity = "0";
