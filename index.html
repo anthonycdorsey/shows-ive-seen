@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shows I've Seen | Anthony C. Dorsey</title>
+    <style>
+        :root {
+            --bg-color: #FAFAF8;
+            --card-white: #FFFFFF;
+            --border-subtle: #E6E6E3;
+            --text-main: #000000;
+            --text-secondary: #555555;
+            --overlay-bg: rgba(250, 250, 248, 0.98);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: hidden;
+            touch-action: pan-y; 
+        }
+
+        /* --- HEADER --- */
+        header { 
+            padding: 15vh 10% 10vh 10%; 
+            border-bottom: 1px solid var(--border-subtle); 
+            position: relative; 
+            z-index: 1; 
+            pointer-events: none;
+        }
+        header h1, header .subtitle { pointer-events: auto; }
+
+        h1 { font-size: 4rem; text-transform: uppercase; font-weight: 900; margin: 0; letter-spacing: 2px; }
+        .subtitle { 
+            font-size: 1.1rem; 
+            margin-top: 25px; 
+            max-width: 600px; 
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        /* --- CANVAS --- */
+        .canvas { position: relative; width: 100%; min-height: 450vh; z-index: 10; }
+
+        .ticket-card {
+            position: absolute;
+            background: var(--card-white);
+            border: 1px solid var(--border-subtle);
+            padding: 10px;
+            width: 320px;
+            cursor: pointer;
+            user-select: none;
+            touch-action: none;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+            z-index: 100;
+        }
+
+        .ticket-card.revealed { opacity: 1; transform: translateY(0) rotate(var(--init-rot)); }
+        .ticket-card img { width: 100%; display: block; pointer-events: none; -webkit-user-drag: none; }
+        .card-meta { margin-top: 15px; padding-top: 10px; border-top: 1px dashed #D9D9D6; pointer-events: none; }
+        .card-artist { font-weight: bold; font-size: 1.1rem; display: block; }
+        .card-year { font-size: 0.95rem; color: var(--text-secondary); display: block; margin-top: 4px; }
+
+        /* --- SCROLL INDICATOR (YOUR PHOTO) --- */
+        #scroll-hint {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-image: url('anthony-photo.jpg'); /* Ensure your photo is named this */
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--border-subtle);
+            z-index: 1000;
+            opacity: 0.7;
+            transition: opacity 0.5s ease;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* --- OVERLAY --- */
+        #info-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--overlay-bg);
+            z-index: 9999; display: none; 
+            align-items: center; justify-content: center;
+            padding: 40px; box-sizing: border-box;
+        }
+        .overlay-content { max-width: 600px; width: 100%; position: relative; }
+        .overlay-venue { font-size: 1.8rem; font-weight: bold; margin-bottom: 5px; display: block; }
+        .overlay-city { font-size: 1rem; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 40px; display: block; }
+        .overlay-microline { font-size: 1.3rem; border-left: 3px solid var(--text-main); padding-left: 25px; }
+        .close-btn { position: absolute; top: -80px; right: 0; font-size: 2.5rem; cursor: pointer; background: none; border: none; font-family: inherit; }
+
+        /* --- STRIPES & FOOTER --- */
+        .accordion-container { 
+            display: flex; flex-direction: column; width: 100%; height: 60vh; 
+            background: #fff; position: relative; z-index: 5;
+        }
+        .stripe {
+            flex: 1; display: flex; align-items: center; padding: 0 10%;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.85rem;
+            cursor: pointer; transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            background: var(--bg-color);
+        }
+        .stripe:hover { flex: 3; background: #F0F0EE; }
+
+        footer {
+            padding: 80px 10%;
+            background: var(--bg-color);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-subtle);
+        }
+    </style>
+</head>
+<body>
+
+<div id="scroll-hint"></div>
+
+<header>
+    <h1>Shows I've Seen</h1>
+    <div class="subtitle">
+        My running archive of live performance.<br>
+        These are all of the shows I chose to spend time with, across years, genres, and cities.
+    </div>
+</header>
+
+<div class="canvas" id="canvas"></div>
+
+<div id="info-overlay">
+    <div class="overlay-content">
+        <button class="close-btn" id="close-overlay">×</button>
+        <span class="overlay-venue" id="v-venue"></span>
+        <span class="overlay-city" id="v-city"></span>
+        <p class="overlay-microline" id="v-microline"></p>
+    </div>
+</div>
+
+<div class="accordion-container">
+    <div class="stripe">Years</div>
+    <div class="stripe">Places</div>
+    <div class="stripe">Alternative</div>
+    <div class="stripe">Festivals</div>
+    <div class="stripe">Icons</div>
+    <div class="stripe">RIP</div>
+</div>
+
+<footer>
+    — This is a growing archive. New stubs and memories added as they surface. —
+</footer>
+
+<script>
+    const showData = [
+        { id: "wallflowers", artist: "The Wallflowers", year: "1997", venue: "Frank Erwin Center", city: "Austin, TX", microline: "First arena show. The scale of the sound felt massive at 14.", img: "Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg", x: 15, y: 20 },
+        { id: "blur", artist: "Blur", year: "1997", venue: "Liberty Lunch", city: "Austin, TX", microline: "Liberty Lunch was at its peak. Small club energy for a world-class band.", img: "Blur_Smashmouth_Liberty Lunch_1997.jpg", x: 50, y: 60 },
+        { id: "aerosmith", artist: "Aerosmith", year: "1997", venue: "Frank Erwin Center", city: "Austin, TX", microline: "A masterclass in stage presence. The scarves on the mic stand were iconic.", img: "Aerosmith__Frank Erwin Center_1997.jpg", x: 10, y: 110 },
+        { id: "thirdeye", artist: "Third Eye Blind", year: "1998", venue: "Austin Music Hall", city: "Austin, TX", microline: "The venue is gone now, but the heat of that April night remains vivid.", img: "Third Eye Blind_Austin Music Hall_1998.jpg", x: 55, y: 150 }
+    ];
+
+    const canvas = document.getElementById('canvas');
+    const overlay = document.getElementById('info-overlay');
+    const scrollHint = document.getElementById('scroll-hint');
+    let highestZ = 100;
+
+    // Fade out scroll hint on scroll
+    window.onscroll = () => {
+        if (window.scrollY > 100) scrollHint.style.opacity = "0";
+        else scrollHint.style.opacity = "0.7";
+    };
+
+    showData.forEach(show => {
+        const savedPos = JSON.parse(localStorage.getItem(`pos-${show.id}`));
+        const posX = savedPos ? savedPos.x : show.x;
+        const posY = savedPos ? savedPos.y : show.y;
+        const rot = (Math.random() * 3 - 1.5).toFixed(2);
+
+        const card = document.createElement('div');
+        card.className = 'ticket-card';
+        card.id = show.id;
+        card.style.left = savedPos ? posX + "px" : posX + "%";
+        card.style.top = savedPos ? posY + "px" : posY + "vh";
+        card.style.setProperty('--init-rot', rot + "deg");
+        
+        card.innerHTML = `
+            <img src="${show.img}">
+            <div class="card-meta">
+                <span class="card-artist">${show.artist}</span>
+                <span class="card-year">${show.year}</span>
+            </div>
+        `;
+
+        canvas.appendChild(card);
+        initInteraction(card, show);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('revealed');
+        });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.ticket-card').forEach(card => observer.observe(card));
+
+    function initInteraction(el, data) {
+        let isDragging = false, didMove = false, startX, startY, origX, origY;
+
+        el.addEventListener('pointerdown', e => {
+            isDragging = true; didMove = false;
+            startX = e.clientX; startY = e.clientY;
+            origX = el.offsetLeft; origY = el.offsetTop;
+            el.style.zIndex = ++highestZ;
+            el.setPointerCapture(e.pointerId);
+        });
+
+        el.addEventListener('pointermove', e => {
+            if (!isDragging) return;
+            const dx = e.clientX - startX, dy = e.clientY - startY;
+            if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+                didMove = true;
+                el.style.left = (origX + dx) + "px";
+                el.style.top = (origY + dy) + "px";
+                el.classList.add('is-dragging');
+            }
+        });
+
+        el.addEventListener('pointerup', e => {
+            if (!isDragging) return;
+            isDragging = false;
+            el.classList.remove('is-dragging');
+            el.releasePointerCapture(e.pointerId);
+            if (!didMove) openInfo(data);
+            else localStorage.setItem(`pos-${el.id}`, JSON.stringify({x: el.offsetLeft, y: el.offsetTop}));
+        });
+    }
+
+    function openInfo(data) {
+        document.getElementById('v-venue').innerText = data.venue;
+        document.getElementById('v-city').innerText = data.city;
+        document.getElementById('v-microline').innerText = data.microline;
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    document.getElementById('close-overlay').onclick = () => {
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    };
+</script>
+</body>
+</html>
