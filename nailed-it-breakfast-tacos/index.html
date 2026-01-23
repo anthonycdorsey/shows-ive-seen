@@ -61,7 +61,6 @@
         .ingredients-list { list-style: none; padding: 0; font-size: 0.95rem; }
         .ingredients-list li { margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px dashed var(--border); position: relative; }
         
-        /* Mobile wrap fix */
         .nailed-it-alert { 
             color: var(--accent); 
             font-weight: bold; 
@@ -72,8 +71,9 @@
             white-space: nowrap; 
         }
 
-        /* --- HOVER IMAGES --- */
-        .hover-link { color: var(--text-secondary); text-decoration: underline; cursor: help; position: relative; }
+        /* --- HOVER IMAGES WITH TAP-TO-CLOSE --- */
+        .hover-link { color: var(--text-secondary); text-decoration: underline; cursor: help; position: relative; -webkit-tap-highlight-color: transparent; }
+        
         .preview-img { 
             position: absolute; 
             bottom: 110%; 
@@ -86,10 +86,16 @@
             z-index: 100; 
             pointer-events: none; 
         }
+
         @media (max-width: 800px) {
             .preview-img { left: 50%; transform: translateX(-50%); width: 140px; }
         }
-        .hover-link:hover .preview-img, .hover-link.is-active .preview-img { display: block; }
+
+        /* Show image on hover (Desktop) or when active class is added (Mobile) */
+        .hover-link:hover .preview-img, 
+        .hover-link.is-active .preview-img { 
+            display: block; 
+        }
 
         /* --- MODAL WINDOW --- */
         #link-modal { 
@@ -103,10 +109,9 @@
         .modal-header { 
             padding: 20px; background: #fff; border-bottom: 1px solid var(--border); 
             display: flex; justify-content: space-between; align-items: center; 
-            min-height: 120px; /* Accommodate larger badge */
+            min-height: 120px; 
         }
         
-        /* 200% Larger Badge */
         .tex-mex-badge-header { height: 100px; width: auto; }
 
         .header-controls { display: flex; align-items: center; gap: 15px; }
@@ -262,16 +267,29 @@
         window.open(currentUrl, '_blank');
     };
 
+    // REFINED HOVER/TAP LOGIC FOR IMAGES
     const hoverLinks = document.querySelectorAll('.hover-link');
     hoverLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            if (window.innerWidth <= 800) {
-                e.stopPropagation();
-                const wasActive = link.classList.contains('is-active');
-                hoverLinks.forEach(l => l.classList.remove('is-active'));
-                if (!wasActive) link.classList.add('is-active');
+            // Prevent link from behaving like a trigger link
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const wasActive = link.classList.contains('is-active');
+            
+            // Close all other open images
+            hoverLinks.forEach(l => l.classList.remove('is-active'));
+            
+            // If it wasn't active, open it. If it was active, it stays closed.
+            if (!wasActive) {
+                link.classList.add('is-active');
             }
         });
+    });
+
+    // Tap anywhere on the screen to close the images
+    document.addEventListener('click', () => {
+        hoverLinks.forEach(link => link.classList.remove('is-active'));
     });
 
     window.onscroll = () => {
