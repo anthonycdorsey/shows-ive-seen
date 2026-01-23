@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* --- HERO & GRID --- */
+        /* --- LAYOUT SECTIONS --- */
         .hero-section { width: 100%; padding: 8vh 0 4vh 0; text-align: center; }
         h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0 0 40px 0; }
         .hero-image-container { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
@@ -48,7 +48,6 @@
             padding-bottom: 40px;
         }
 
-        /* --- SIDEBAR & CONTENT --- */
         .sidebar h2, .main-content h2 {
             font-family: 'Courier New', Courier, monospace;
             text-transform: uppercase;
@@ -75,129 +74,120 @@
         .modal-btn { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; padding: 8px 12px; cursor: pointer; border: 1px solid #ddd; background: #fff; }
         iframe { width: 100%; flex-grow: 1; border: none; }
 
-        /* --- THE FINAL SUN & TACO INDICATOR --- */
+        /* --- LOCKED SUN & TACO UNIT --- */
         #taco-hint {
             position: fixed;
             bottom: 20px;
             left: 5%;
+            z-index: 1000;
             display: flex;
             flex-direction: column;
             align-items: center;
-            z-index: 1000;
-            transition: opacity 0.5s ease;
             pointer-events: none;
+            transition: opacity 0.5s ease;
             animation: pingPong 20s infinite ease-in-out;
         }
 
-        .sun-wrap {
+        .sun-unit {
             position: relative;
-            width: 150px;
-            height: 150px;
+            width: 140px;
+            height: 140px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Wide Triangular Rays */
-        .ray-box {
+        /* 12 Point Rays - Locked to Center */
+        .ray-ring {
             position: absolute;
             width: 100%; height: 100%;
-            display: flex; justify-content: center; align-items: center;
         }
-        .ray-tri {
+        .ray {
             position: absolute;
+            top: 50%; left: 50%;
             width: 0; height: 0;
-            border-left: 18px solid transparent;
-            border-right: 18px solid transparent;
-            border-bottom: 45px solid var(--sun-yellow);
-            transform-origin: 50% 70px;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 40px solid var(--sun-yellow);
+            transform-origin: 50% 65px; /* Fixed distance from core */
         }
 
-        /* Core Sun Body */
-        .sun-core {
+        .sun-circle {
             position: absolute;
-            width: 90px; height: 90px;
+            width: 85px; height: 85px;
             background: var(--sun-yellow);
-            border: 2px solid rgba(255,255,255,0.8);
             border-radius: 50%;
             z-index: 5;
             display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 0 15px rgba(255, 206, 0, 0.3);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* Rhythmic Bobbing Group (Eyebrows + Sunglasses) */
-        .bob-group {
+        /* Grooving Face Group */
+        .bob-face {
             position: absolute;
             width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center;
-            animation: headBob 1.2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+            animation: elasticBob 1.2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
         }
 
-        .sun-brows { display: flex; gap: 18px; margin-top: 24px; }
-        .brow-thick { 
-            width: 24px; height: 8px; 
+        .face-brows { display: flex; gap: 18px; margin-top: 22px; }
+        .brow-arc {
+            width: 22px; height: 6px; 
             background: #000; 
-            border-radius: 50% 50% 0 0; 
+            border-radius: 40% 40% 0 0;
             transform: rotate(-5deg);
         }
-        .brow-thick:last-child { transform: rotate(5deg); }
+        .face-brows div:last-child { transform: rotate(5deg); }
 
-        .sun-shades {
-            width: 68px; height: 24px;
-            background: #222;
-            border-radius: 4px 4px 14px 14px;
+        .face-shades {
+            width: 65px; height: 24px;
+            background: #1A1A1A;
+            border-radius: 4px 4px 12px 12px;
             margin-top: -2px;
             position: relative;
         }
-        .sun-shades::after {
-            content: ""; width: 8px; height: 5px; background: var(--sun-yellow);
+        .face-shades::after {
+            content: ""; width: 8px; height: 4px; background: var(--sun-yellow);
             position: absolute; left: 50%; transform: translateX(-50%); top: 4px;
         }
 
-        /* Fixed Smile */
-        .sun-smile {
+        /* Fixed Smile Line */
+        .face-smile {
             position: absolute;
             top: 60px;
-            width: 26px; height: 12px;
+            width: 24px; height: 10px;
             border-bottom: 2px solid #000;
             border-radius: 50%;
             z-index: 6;
         }
 
-        /* Taco Box Sticker */
-        .taco-box {
+        /* Overlapping Taco Shell */
+        .taco-sticker {
             position: absolute;
-            bottom: -5px;
-            width: 100px; height: 55px;
+            bottom: 0px;
+            width: 100px; height: 50px;
             background: #FFD93D;
             border: 4px solid #4a3703;
-            border-radius: 55px 55px 10px 10px;
+            border-radius: 50px 50px 10px 10px;
             z-index: 10;
             display: flex; justify-content: center; align-items: center;
         }
-        .blink-txt { color: #FF0000; font-family: 'Courier New', monospace; font-weight: 900; font-size: 0.75rem; animation: blinker 0.5s infinite; }
+        .taco-text { color: #FF0000; font-family: 'Courier New', monospace; font-weight: 900; font-size: 0.75rem; animation: blinker 0.5s infinite; }
 
-        /* Label Box Reverted to Transparent White */
-        .label-box {
+        /* Transparent Label */
+        .label-pill {
             background: rgba(250, 250, 248, 0.95);
-            color: #000;
-            padding: 8px 14px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            margin-top: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 8px 16px; border-radius: 10px; border: 1px solid var(--border);
+            margin-top: 5px; font-family: 'Courier New', monospace; font-size: 0.75rem; font-weight: bold;
+            text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .down-icon { font-size: 1.5rem; margin-top: 4px; animation: bounce 1s infinite; }
+        .down-arrow { font-size: 1.4rem; margin-top: 2px; animation: arrowJump 1s infinite; }
 
         /* ANIMATIONS */
-        @keyframes headBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+        @keyframes elasticBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
         @keyframes blinker { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        @keyframes arrowJump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
         @keyframes pingPong { 0% { left: 5%; } 50% { left: 80%; } 100% { left: 5%; } }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
         @media (max-width: 800px) { @keyframes pingPong { 0% { left: 2%; } 50% { left: 60%; } 100% { left: 2%; } } }
     </style>
@@ -218,32 +208,32 @@
 </div>
 
 <div id="taco-hint">
-    <div class="sun-wrap">
-        <div class="ray-box">
-            <div class="ray-tri" style="transform: rotate(0deg) translateY(-50px);"></div>
-            <div class="ray-tri" style="transform: rotate(30deg) translateY(-50px);"></div>
-            <div class="ray-tri" style="transform: rotate(60deg) translateY(-50px);"></div>
-            <div class="ray-tri" style="transform: rotate(90deg) translateY(-50px);"></div>
-            <div class="ray-tri" style="transform: rotate(120deg) translateY(-50px);"></div>
-            <div class="ray-tri" style="transform: rotate(150deg) translateY(-50px);"></div>
-            <div class="ray-tri" style="transform: rotate(180deg) translateY(-50px);"></div>
-            <div class="ray-tri" style="transform: rotate(210deg) translateY(-50px);"></div>
-            <div class="ray-tri" style="transform: rotate(240deg) translateY(-50px);"></div>
-            <div class="ray-tri" style="transform: rotate(270deg) translateY(-50px);"></div>
-            <div class="ray-tri" style="transform: rotate(300deg) translateY(-50px);"></div>
-            <div class="ray-tri" style="transform: rotate(330deg) translateY(-50px);"></div>
+    <div class="sun-unit">
+        <div class="ray-ring">
+            <div class="ray" style="transform: translate(-50%, -50%) rotate(0deg) translateY(-45px);"></div>
+            <div class="ray" style="transform: translate(-50%, -50%) rotate(30deg) translateY(-45px);"></div>
+            <div class="ray" style="transform: translate(-50%, -50%) rotate(60deg) translateY(-45px);"></div>
+            <div class="ray" style="transform: translate(-50%, -50%) rotate(90deg) translateY(-45px);"></div>
+            <div class="ray" style="transform: translate(-50%, -50%) rotate(120deg) translateY(-45px);"></div>
+            <div class="ray" style="transform: translate(-50%, -50%) rotate(150deg) translateY(-45px);"></div>
+            <div class="ray" style="transform: translate(-50%, -50%) rotate(180deg) translateY(-45px);"></div>
+            <div class="ray" style="transform: translate(-50%, -50%) rotate(210deg) translateY(-45px);"></div>
+            <div class="ray" style="transform: translate(-50%, -50%) rotate(240deg) translateY(-45px);"></div>
+            <div class="ray" style="transform: translate(-50%, -50%) rotate(270deg) translateY(-45px);"></div>
+            <div class="ray" style="transform: translate(-50%, -50%) rotate(300deg) translateY(-45px);"></div>
+            <div class="ray" style="transform: translate(-50%, -50%) rotate(330deg) translateY(-45px);"></div>
         </div>
-        <div class="sun-core">
-            <div class="bob-group">
-                <div class="sun-brows"><div class="brow-thick"></div><div class="brow-thick"></div></div>
-                <div class="sun-shades"></div>
+        <div class="sun-circle">
+            <div class="bob-face">
+                <div class="face-brows"><div class="brow-arc"></div><div class="brow-arc"></div></div>
+                <div class="face-shades"></div>
             </div>
-            <div class="sun-smile"></div>
+            <div class="face-smile"></div>
         </div>
-        <div class="taco-box"><div class="blink-txt">TACO TIME!</div></div>
+        <div class="taco-sticker"><div class="taco-text">TACO TIME!</div></div>
     </div>
-    <div class="label-box">THIS WAY TO<br>NAIL IT</div>
-    <div class="down-icon">↓</div>
+    <div class="label-pill">THIS WAY TO<br>NAIL IT</div>
+    <div class="down-arrow">↓</div>
 </div>
 
 <div class="hero-section">
