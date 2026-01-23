@@ -167,11 +167,11 @@
 
         iframe { width: 100%; flex-grow: 1; border: none; }
 
-        /* --- UPDATED TACO & EGG SCROLL INDICATOR --- */
+        /* --- UPDATED TACO & SUN SCROLL INDICATOR --- */
         #taco-hint {
             position: fixed;
             bottom: 30px;
-            left: -200px;
+            left: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -179,60 +179,71 @@
             transition: opacity 0.5s ease;
             opacity: 0.95;
             pointer-events: none;
-            animation: resetDrift 18s infinite linear;
+            animation: pingPong 12s infinite ease-in-out; /* Bounces off the edges */
         }
 
         .taco-stack {
             position: relative;
-            width: 70px;
-            height: 50px;
+            width: 80px;
+            height: 60px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* The Egg */
-        .egg-white {
+        /* The Sun */
+        .sun {
             position: absolute;
-            width: 60px;
+            width: 45px;
             height: 45px;
-            background: #fff;
-            border-radius: 40% 50% 30% 40%;
-            border: 1px solid #ddd;
-            z-index: 1;
-        }
-        .egg-yolk {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #f1c40f;
+            background: #FFD700;
             border-radius: 50%;
-            z-index: 2;
-            box-shadow: inset -2px -2px 0 rgba(0,0,0,0.1);
+            z-index: 1;
+            top: -5px;
+            box-shadow: 0 0 15px #FFD700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sun::before { /* Sunglasses */
+            content: "🕶️";
+            font-size: 1.2rem;
+            position: absolute;
+            top: 10px;
+        }
+        .sun::after { /* Smile */
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 8px;
+            border-bottom: 2px solid #333;
+            border-radius: 50%;
+            top: 22px;
         }
 
-        /* The Tortilla Overlay */
+        /* Cartoon Yellow Taco Shell */
         .tortilla-wrap {
             position: absolute;
-            bottom: 0;
+            bottom: 5px;
             width: 75px;
-            height: 35px;
-            background: #fdf5e6; /* Flour tortilla color */
-            border: 2px solid #d2b48c;
-            border-radius: 50px 50px 5px 5px;
+            height: 40px;
+            background: #FFD93D; /* Bright Cartoon Yellow */
+            border: 3px solid #634806;
+            border-radius: 50px 50px 10px 10px;
             z-index: 3;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
 
-        /* Blinking Text */
         .blinking-text {
-            color: red;
+            color: #FF0000;
             font-family: 'Courier New', Courier, monospace;
             font-weight: 900;
-            font-size: 0.55rem;
-            animation: blink 0.6s infinite;
+            font-size: 0.65rem;
+            text-shadow: 1px 1px 0px white;
+            animation: blink 0.5s infinite;
         }
 
         .indicator-label {
@@ -245,6 +256,7 @@
             font-size: 0.7rem;
             font-weight: bold;
             text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .down-arrow {
@@ -253,22 +265,27 @@
             border-right: 6px solid transparent;
             border-top: 8px solid var(--text-main);
             margin-top: 5px;
-            animation: arrowBump 1.5s infinite ease-in-out;
+            animation: arrowBump 1.2s infinite ease-in-out;
         }
 
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        @keyframes arrowBump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+        @keyframes arrowBump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
         
-        /* Left-to-Right and Reset animation */
-        @keyframes resetDrift {
-            0% { left: -200px; }
-            90% { left: 100%; }
-            100% { left: 100%; }
+        /* Ping Pong Animation: Left to Right to Left */
+        @keyframes pingPong {
+            0% { left: 5%; transform: rotate(-5deg); }
+            50% { left: 85%; transform: rotate(5deg); }
+            100% { left: 5%; transform: rotate(-5deg); }
         }
 
         @media (max-width: 800px) {
             .recipe-grid { grid-template-columns: 1fr; }
-            #taco-hint { animation-duration: 12s; }
+            #taco-hint { animation-duration: 8s; }
+            @keyframes pingPong {
+                0% { left: 5%; }
+                50% { left: 70%; }
+                100% { left: 5%; }
+            }
         }
     </style>
 </head>
@@ -289,8 +306,7 @@
 
 <div id="taco-hint">
     <div class="taco-stack">
-        <div class="egg-white"></div>
-        <div class="egg-yolk"></div>
+        <div class="sun"></div>
         <div class="tortilla-wrap">
             <div class="blinking-text">TACO TIME!</div>
         </div>
