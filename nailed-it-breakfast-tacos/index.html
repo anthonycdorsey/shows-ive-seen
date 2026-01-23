@@ -60,7 +60,17 @@
 
         .ingredients-list { list-style: none; padding: 0; font-size: 0.95rem; }
         .ingredients-list li { margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px dashed var(--border); position: relative; }
-        .nailed-it-alert { color: var(--accent); font-weight: bold; font-size: 0.75rem; text-transform: uppercase; display: block; margin-top: 5px; white-space: nowrap; }
+        
+        /* Mobile wrap fix */
+        .nailed-it-alert { 
+            color: var(--accent); 
+            font-weight: bold; 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            display: block; 
+            margin-top: 5px; 
+            white-space: nowrap; 
+        }
 
         /* --- HOVER IMAGES --- */
         .hover-link { color: var(--text-secondary); text-decoration: underline; cursor: help; position: relative; }
@@ -91,26 +101,26 @@
             overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.4); 
         }
         .modal-header { 
-            padding: 12px 20px; background: #fff; border-bottom: 1px solid var(--border); 
+            padding: 20px; background: #fff; border-bottom: 1px solid var(--border); 
             display: flex; justify-content: space-between; align-items: center; 
+            min-height: 120px; /* Accommodate larger badge */
         }
         
-        .tex-mex-badge-header { height: 50px; width: auto; }
+        /* 200% Larger Badge */
+        .tex-mex-badge-header { height: 100px; width: auto; }
 
         .header-controls { display: flex; align-items: center; gap: 15px; }
         
-        /* Oval Open Button */
         .oval-btn {
             background: #fff; border: 1.5px solid #000; color: #000;
             padding: 8px 20px; border-radius: 50px; font-family: 'Courier New', monospace;
             font-size: 0.75rem; font-weight: bold; text-transform: uppercase; cursor: pointer;
         }
         
-        /* Round Close Button */
         .round-close {
-            width: 34px; height: 34px; border-radius: 50%; background: #f2f2f2;
+            width: 40px; height: 40px; border-radius: 50%; background: #f2f2f2;
             border: 1px solid #ddd; display: flex; justify-content: center; align-items: center;
-            cursor: pointer; color: #000; font-weight: bold; font-family: Arial, sans-serif;
+            cursor: pointer; color: #000; font-size: 1.2rem; font-weight: bold; font-family: Arial, sans-serif;
         }
 
         iframe { width: 100%; flex-grow: 1; border: none; background: #fff; }
@@ -147,6 +157,8 @@
 
         @media (max-width: 800px) { 
             .recipe-grid { grid-template-columns: 1fr; }
+            .modal-header { padding: 10px; min-height: 80px; }
+            .tex-mex-badge-header { height: 60px; }
             @keyframes pingPong { 0% { left: 2%; } 50% { left: 60%; } 100% { left: 2%; } }
         }
     </style>
@@ -233,7 +245,7 @@
         link.addEventListener('click', (e) => {
             e.preventDefault();
             currentUrl = link.href;
-            modalFrame.src = ""; // Clear previous to ensure reset
+            modalFrame.src = ""; 
             setTimeout(() => { modalFrame.src = currentUrl; }, 10);
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; 
@@ -271,4 +283,3 @@
 
 </body>
 </html>
-
