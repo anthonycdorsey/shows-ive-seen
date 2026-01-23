@@ -11,7 +11,7 @@
             --text-secondary: #70706B;
             --accent: #E63946;
             --border: #E6E6E3;
-            --modal-bg: rgba(26, 26, 26, 0.4);
+            --modal-bg: rgba(26, 26, 26, 0.6);
         }
 
         body {
@@ -47,6 +47,7 @@
             padding-bottom: 40px;
         }
 
+        /* --- SIDEBAR & CONTENT --- */
         .sidebar h2, .main-content h2 {
             font-family: 'Courier New', Courier, monospace;
             text-transform: uppercase;
@@ -59,112 +60,95 @@
 
         .ingredients-list { list-style: none; padding: 0; font-size: 0.95rem; }
         .ingredients-list li { margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px dashed var(--border); position: relative; }
-        .nailed-it-alert { color: var(--accent); font-weight: bold; font-size: 0.75rem; text-transform: uppercase; display: block; margin-top: 5px; }
+        .nailed-it-alert { color: var(--accent); font-weight: bold; font-size: 0.75rem; text-transform: uppercase; display: block; margin-top: 5px; white-space: nowrap; }
 
-        /* --- PREVIEW & TEX-MEX BADGE --- */
-        .hover-link, .tex-mex-trigger { 
-            color: var(--text-secondary); 
-            text-decoration: underline; 
-            cursor: help; 
-            position: relative; 
+        /* --- HOVER IMAGES --- */
+        .hover-link { color: var(--text-secondary); text-decoration: underline; cursor: help; position: relative; }
+        .preview-img { 
+            position: absolute; 
+            bottom: 110%; 
+            left: 0; 
+            width: 160px; 
+            height: auto; 
+            border: 5px solid white; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            display: none; 
+            z-index: 100; 
+            pointer-events: none; 
+        }
+        @media (max-width: 800px) {
+            .preview-img { left: 50%; transform: translateX(-50%); width: 140px; }
+        }
+        .hover-link:hover .preview-img, .hover-link.is-active .preview-img { display: block; }
+
+        /* --- MODAL WINDOW --- */
+        #link-modal { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: var(--modal-bg); display: none; justify-content: center; align-items: center; z-index: 2000; 
+        }
+        .modal-container { 
+            width: 92%; height: 85%; background: #fff; border-radius: 20px; 
+            overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.4); 
+        }
+        .modal-header { 
+            padding: 12px 20px; background: #fff; border-bottom: 1px solid var(--border); 
+            display: flex; justify-content: space-between; align-items: center; 
+        }
+        
+        .tex-mex-badge-header { height: 50px; width: auto; }
+
+        .header-controls { display: flex; align-items: center; gap: 15px; }
+        
+        /* Oval Open Button */
+        .oval-btn {
+            background: #fff; border: 1.5px solid #000; color: #000;
+            padding: 8px 20px; border-radius: 50px; font-family: 'Courier New', monospace;
+            font-size: 0.75rem; font-weight: bold; text-transform: uppercase; cursor: pointer;
+        }
+        
+        /* Round Close Button */
+        .round-close {
+            width: 34px; height: 34px; border-radius: 50%; background: #f2f2f2;
+            border: 1px solid #ddd; display: flex; justify-content: center; align-items: center;
+            cursor: pointer; color: #000; font-weight: bold; font-family: Arial, sans-serif;
         }
 
-        .preview-img, .tex-mex-badge {
-            position: absolute;
-            bottom: 110%;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            width: 180px;
-            height: auto;
-            display: none;
-            z-index: 100;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            opacity: 0;
-        }
+        iframe { width: 100%; flex-grow: 1; border: none; background: #fff; }
 
-        .preview-img { border: 5px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
-
-        /* Playful appearing effect */
-        .tex-mex-trigger:hover .tex-mex-badge, 
-        .hover-link:hover .preview-img {
-            display: block;
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* Support for mobile taps */
-        .tex-mex-trigger.is-active .tex-mex-badge,
-        .hover-link.is-active .preview-img {
-            display: block;
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* --- MINI WINDOW MODAL --- */
-        #link-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--modal-bg); display: none; justify-content: center; align-items: center; z-index: 2000; }
-        .modal-container { width: 85%; height: 80%; background: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-        .modal-header { padding: 15px 25px; background: #f8f8f8; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .modal-btn { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; padding: 8px 12px; cursor: pointer; border: 1px solid #ddd; background: #fff; }
-        iframe { width: 100%; flex-grow: 1; border: none; }
-
-        /* --- TACO HINT INDICATOR --- */
+        /* --- TACO HINT --- */
         #taco-hint {
-            position: fixed;
-            bottom: 20px;
-            left: 5%;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
+            position: fixed; bottom: 20px; left: 5%; z-index: 1000;
+            display: flex; flex-direction: column; align-items: center;
+            pointer-events: none; transition: opacity 0.5s ease;
             animation: pingPong 20s infinite ease-in-out;
         }
-
-        .sun-animation-box {
-            position: relative;
-            width: 140px; height: 140px;
-            display: flex; justify-content: center; align-items: center;
-        }
-
-        .sun-gif { width: 130px; height: auto; z-index: 5; }
-
+        .sun-animation-box { position: relative; width: 130px; height: 130px; display: flex; justify-content: center; align-items: center; }
+        .sun-gif { width: 120px; height: auto; z-index: 5; }
         .taco-box {
-            position: absolute;
-            bottom: 5px;
-            width: 95px; height: 50px;
-            background: #FFD93D;
-            border: 4px solid #4a3703;
-            border-radius: 50px 50px 10px 10px;
-            z-index: 10;
+            position: absolute; bottom: 5px; width: 90px; height: 48px; background: #FFD93D;
+            border: 4px solid #4a3703; border-radius: 50px 50px 10px 10px; z-index: 10;
             display: flex; justify-content: center; align-items: center;
         }
-
-        .blink-txt { color: #FF0000; font-family: 'Courier New', monospace; font-weight: 900; font-size: 0.75rem; animation: fastBlink 0.5s infinite; }
-
+        .blink-txt { color: #FF0000; font-family: 'Courier New', monospace; font-weight: 900; font-size: 0.7rem; animation: fastBlink 0.5s infinite; }
         .label-pill {
-            background: rgba(250, 250, 248, 0.95);
-            color: #1A1A1A;
-            padding: 8px 16px; border-radius: 10px; border: 1px solid var(--border);
-            margin-top: 5px; font-family: 'Courier New', monospace; font-size: 0.75rem; font-weight: bold;
+            background: rgba(250, 250, 248, 0.95); color: #1A1A1A; padding: 8px 16px; 
+            border-radius: 10px; border: 1px solid var(--border); margin-top: 5px; 
+            font-family: 'Courier New', monospace; font-size: 0.75rem; font-weight: bold;
             text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-
         .down-arrow-heavy {
-            width: 0; height: 0; 
-            border-left: 12px solid transparent;
-            border-right: 12px solid transparent;
-            border-top: 15px solid #1A1A1A;
-            margin-top: 8px;
-            animation: bounceHeavy 1.2s infinite ease-in-out;
+            width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent;
+            border-top: 15px solid #1A1A1A; margin-top: 8px; animation: bounceHeavy 1.2s infinite ease-in-out;
         }
 
         @keyframes fastBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         @keyframes bounceHeavy { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
         @keyframes pingPong { 0% { left: 5%; } 50% { left: 80%; } 100% { left: 5%; } }
 
-        @media (max-width: 800px) { @keyframes pingPong { 0% { left: 2%; } 50% { left: 60%; } 100% { left: 2%; } } }
+        @media (max-width: 800px) { 
+            .recipe-grid { grid-template-columns: 1fr; }
+            @keyframes pingPong { 0% { left: 2%; } 50% { left: 60%; } 100% { left: 2%; } }
+        }
     </style>
 </head>
 <body>
@@ -172,10 +156,10 @@
 <div id="link-modal">
     <div class="modal-container">
         <div class="modal-header">
-            <span style="font-family:'Courier New'; font-size:0.8rem; color:#888;">Previewing Link</span>
-            <div style="display:flex; gap:10px;">
-                <button class="modal-btn" id="open-tab">Open in New Tab ↗</button>
-                <button class="modal-btn" id="close-modal-btn" style="color:red; font-weight:bold;">Close [X]</button>
+            <img src="Tex Mex_Approved.png" class="tex-mex-badge-header" alt="Tex-Mex Approved">
+            <div class="header-controls">
+                <button class="oval-btn" id="open-tab">Open ↗</button>
+                <button class="round-close" id="close-modal-btn">✕</button>
             </div>
         </div>
         <iframe id="modal-frame" src=""></iframe>
@@ -185,9 +169,7 @@
 <div id="taco-hint">
     <div class="sun-animation-box">
         <img src="sun_wiggle.webp" alt="Smiling Sun" class="sun-gif">
-        <div class="taco-box">
-            <div class="blink-txt">TACO TIME!</div>
-        </div>
+        <div class="taco-box"><div class="blink-txt">TACO TIME!</div></div>
     </div>
     <div class="label-pill">THIS WAY TO<br>NAIL IT</div>
     <div class="down-arrow-heavy"></div>
@@ -208,7 +190,7 @@
     <aside class="sidebar">
         <h2>Ingredients</h2>
         <ul class="ingredients-list">
-            <li>1 lb <a href="https://www.jimmydean.com/products/fresh-sausage/" class="preview-trigger tex-mex-trigger" style="color:inherit">Jimmy Dean Sausage<img src="Tex Mex_Approved.png" class="tex-mex-badge"></a>
+            <li>1 lb <a href="https://www.jimmydean.com/products/fresh-sausage/" class="preview-trigger" style="color:inherit">Jimmy Dean Sausage</a>
                 <span class="nailed-it-alert">Key: Ensure meat is fresh and loose (no casings).</span>
             </li>
             <li>6 Slices Smoked Bacon</li>
@@ -218,16 +200,15 @@
             <li>1 Small Red Bell Pepper (or <span class="hover-link">Poblano<img src="poblano-pepper.jpg" class="preview-img"></span>)</li>
             <li>1 Large Jalapeño, Chopped</li>
             <li>1/2 Cup Cilantro, Chopped</li>
-            <li>1 Tbsp <a href="https://www.fiestaspices.com/product/fancy-light-chili-powder/" class="preview-trigger tex-mex-trigger" style="color:inherit">Fiesta Chili Powder<img src="Tex Mex_Approved.png" class="tex-mex-badge"></a></li>
-            <li>1 Tsp <a href="https://www.fiestaspices.com/product/ground-comino/" class="preview-trigger tex-mex-trigger" style="color:inherit">Fiesta Cumin<img src="Tex Mex_Approved.png" class="tex-mex-badge"></a></li>
-            <li>1 Tsp <a href="https://www.fiestaspices.com/product/oregano-mexican/" class="preview-trigger tex-mex-trigger" style="color:inherit">Fiesta Oregano<img src="Tex Mex_Approved.png" class="tex-mex-badge"></a></li>
+            <li>1 Tbsp <a href="https://www.fiestaspices.com/product/fancy-light-chili-powder/" class="preview-trigger" style="color:inherit">Fiesta Chili Powder</a></li>
+            <li>1 Tsp <a href="https://www.fiestaspices.com/product/ground-comino/" class="preview-trigger" style="color:inherit">Fiesta Cumin</a></li>
+            <li>1 Tsp <a href="https://www.fiestaspices.com/product/oregano-mexican/" class="preview-trigger" style="color:inherit">Fiesta Oregano</a></li>
             <li>1/2 Tsp Salt & Black Pepper</li>
             <li>4 Eggs, Beaten</li>
             <li>2 Cups Sharp Cheddar, Shredded</li>
             <li>8 Flour Tortillas (4.5" or 6")
                 <span class="nailed-it-alert">Must use flour. No exceptions.</span>
             </li>
-            <li>Salsa (Super fresh is best, ask me for my recipes!)</li>
         </ul>
     </aside>
 
@@ -237,7 +218,7 @@
             <p><strong>Step 1:</strong> Cook sausage in a skillet over medium-high heat. Combine spices in a small bowl. Remove meat, leaving grease. Cook bacon until crisp, remove, and allow to cool.</p>
             <p><strong>Step 2:</strong> In the grease, brown the minced garlic. Add potatoes and cook until browned and crisp (5-10 mins). Chop the bacon while you wait.</p>
             <p><strong>Step 3:</strong> Add onion, bell pepper, jalapeño, and spice mixture. Cook until translucent. Add sausage and bacon back in.</p>
-            <p><strong>Step 4:</strong> Add beaten eggs. <span class="nailed-it-alert">Do not stir too much!</span> Eggs should be in visible chunks. Top with cheese and cilantro, cover with a lid to melt.</p>
+            <p><strong>Step 4:</strong> Add beaten eggs. <span style="color:var(--accent); font-weight:bold; text-transform:uppercase;">Do not stir too much!</span> Eggs should be in visible chunks. Top with cheese and cilantro, cover with a lid to melt.</p>
             <p><strong>Step 5:</strong> Heat tortillas over a gas burner or wrapped in foil in a 350˚ oven. Spoon in the mixture, top with salsa, and welcome everyone to NAILED-it!</p>
         </div>
     </div>
@@ -250,49 +231,35 @@
 
     document.querySelectorAll('.preview-trigger').forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault(); 
+            e.preventDefault();
             currentUrl = link.href;
-            modalFrame.src = currentUrl; 
+            modalFrame.src = ""; // Clear previous to ensure reset
+            setTimeout(() => { modalFrame.src = currentUrl; }, 10);
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; 
         });
     });
 
     document.getElementById('close-modal-btn').onclick = () => {
-        modal.style.display = 'none'; 
+        modal.style.display = 'none';
         modalFrame.src = "";
         document.body.style.overflow = 'auto';
     };
 
     document.getElementById('open-tab').onclick = () => {
         window.open(currentUrl, '_blank');
-        modal.style.display = 'none'; 
-        document.body.style.overflow = 'auto';
     };
 
-    // Combined Logic for Hover Link Images and Tex-Mex Badges
-    const allTriggers = document.querySelectorAll('.hover-link, .tex-mex-trigger');
-    
-    allTriggers.forEach(link => {
+    const hoverLinks = document.querySelectorAll('.hover-link');
+    hoverLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             if (window.innerWidth <= 800) {
-                // If it's a link to an external site, the modal logic handles it.
-                // We just stop propagation so it doesn't immediately close.
                 e.stopPropagation();
-                
                 const wasActive = link.classList.contains('is-active');
-                allTriggers.forEach(l => l.classList.remove('is-active'));
-                
-                if (!wasActive) {
-                    link.classList.add('is-active');
-                }
+                hoverLinks.forEach(l => l.classList.remove('is-active'));
+                if (!wasActive) link.classList.add('is-active');
             }
         });
-    });
-
-    // Close mobile active states on outside tap
-    document.addEventListener('click', () => {
-        allTriggers.forEach(l => l.classList.remove('is-active'));
     });
 
     window.onscroll = () => {
@@ -304,3 +271,4 @@
 
 </body>
 </html>
+
