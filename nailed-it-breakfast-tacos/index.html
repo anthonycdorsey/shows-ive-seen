@@ -12,6 +12,7 @@
             --accent: #E63946;
             --border: #E6E6E3;
             --modal-bg: rgba(26, 26, 26, 0.4);
+            --sun-yellow: #FFD700;
         }
 
         body {
@@ -23,34 +24,12 @@
             overflow-x: hidden;
         }
 
-        /* --- HERO SECTION --- */
-        .hero-section {
-            width: 100%;
-            padding: 8vh 0 4vh 0;
-            text-align: center;
-        }
+        /* --- HERO & GRID --- */
+        .hero-section { width: 100%; padding: 8vh 0 4vh 0; text-align: center; }
+        h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0 0 40px 0; }
+        .hero-image-container { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
+        .hero-image-container img { width: 100%; height: auto; border: 1px solid var(--border); }
 
-        h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -0.03em;
-            margin: 0 0 40px 0;
-        }
-
-        .hero-image-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 5%;
-        }
-
-        .hero-image-container img {
-            width: 100%;
-            height: auto;
-            border: 1px solid var(--border);
-        }
-
-        /* --- CONTENT LAYOUT --- */
         .recipe-grid {
             max-width: 1100px;
             margin: 40px auto 100px auto;
@@ -69,7 +48,7 @@
             padding-bottom: 40px;
         }
 
-        /* --- SIDEBAR & HOVER TOOLTIPS --- */
+        /* --- INGREDIENTS & SIDEBAR --- */
         .sidebar h2, .main-content h2 {
             font-family: 'Courier New', Courier, monospace;
             text-transform: uppercase;
@@ -81,223 +60,157 @@
         }
 
         .ingredients-list { list-style: none; padding: 0; font-size: 0.95rem; }
-        .ingredients-list li {
-            margin-bottom: 18px;
-            padding-bottom: 18px;
-            border-bottom: 1px dashed var(--border);
-            position: relative;
-        }
+        .ingredients-list li { margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px dashed var(--border); position: relative; }
+        .nailed-it-alert { color: var(--accent); font-weight: bold; font-size: 0.75rem; text-transform: uppercase; display: block; margin-top: 5px; }
 
-        .nailed-it-alert {
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            display: block;
-            margin-top: 5px;
-        }
-
-        .hover-link {
-            color: var(--text-secondary);
-            text-decoration: underline;
-            cursor: help;
-            position: relative;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .preview-img {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(-10px);
-            width: 200px;
-            height: auto;
-            border: 5px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            display: none;
-            z-index: 100;
-            pointer-events: none;
-        }
-
-        @media (min-width: 801px) {
-            .hover-link:hover .preview-img { display: block; }
-        }
+        /* --- HOVER PREVIEWS --- */
+        .hover-link { color: var(--text-secondary); text-decoration: underline; cursor: help; position: relative; -webkit-tap-highlight-color: transparent; }
+        .preview-img { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(-10px); width: 200px; height: auto; border: 5px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.15); display: none; z-index: 100; pointer-events: none; }
+        @media (min-width: 801px) { .hover-link:hover .preview-img { display: block; } }
         .hover-link.is-active .preview-img { display: block; }
 
         /* --- MINI WINDOW MODAL --- */
-        #link-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--modal-bg);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        .modal-container {
-            width: 85%;
-            height: 80%;
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        .modal-header {
-            padding: 15px 25px;
-            background: #f8f8f8;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-btn {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            padding: 8px 12px;
-            cursor: pointer;
-            border: 1px solid #ddd;
-            background: #fff;
-        }
-
+        #link-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--modal-bg); display: none; justify-content: center; align-items: center; z-index: 2000; }
+        .modal-container { width: 85%; height: 80%; background: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .modal-header { padding: 15px 25px; background: #f8f8f8; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .modal-btn { font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; text-transform: uppercase; padding: 8px 12px; cursor: pointer; border: 1px solid #ddd; background: #fff; }
         iframe { width: 100%; flex-grow: 1; border: none; }
 
-        /* --- REFINED TACO & SUN SCROLL INDICATOR --- */
+        /* --- THE ANIMATED SUN & TACO INDICATOR --- */
         #taco-hint {
             position: fixed;
             bottom: 30px;
-            left: 0;
+            left: 5%;
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 1000;
             transition: opacity 0.5s ease;
-            opacity: 0.95;
             pointer-events: none;
-            animation: pingPong 20s infinite ease-in-out; /* Slower 20s animation */
+            animation: pingPong 20s infinite ease-in-out;
         }
 
-        .taco-stack {
+        .character-container {
             position: relative;
-            width: 100px;
-            height: 80px;
+            width: 120px;
+            height: 110px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Large Visible Sun */
-        .sun {
+        /* The Sun Rays (12 Pills) */
+        .rays-container {
             position: absolute;
-            width: 70px;
-            height: 70px;
-            background: #FFD700;
-            border-radius: 50%;
-            z-index: 1;
-            top: -15px;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
-            border: 2px solid #E67E22;
-        }
-        
-        /* Large Visible Sunglasses */
-        .sunglasses {
-            position: absolute;
-            top: 22px;
-            left: 10px;
-            width: 50px;
-            height: 12px;
-            background: #000;
-            border-radius: 4px;
-            z-index: 2;
-        }
-        .sunglasses::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 22px; width: 6px; height: 100%;
-            background: #FFD700; /* Bridge of glasses */
+            width: 110px;
+            height: 110px;
+            animation: rayRotate 10s infinite linear;
         }
 
-        /* Bold Visible Smile */
-        .smile {
+        .ray {
             position: absolute;
-            top: 42px;
-            left: 25px;
-            width: 20px;
-            height: 10px;
-            border-bottom: 3px solid #333;
-            border-radius: 50%;
-            z-index: 2;
-        }
-
-        /* Cartoon Yellow Taco Shell */
-        .tortilla-wrap {
-            position: absolute;
-            bottom: 5px;
-            width: 85px;
-            height: 45px;
-            background: #FFD93D; 
-            border: 3px solid #634806;
-            border-radius: 50px 50px 10px 10px;
-            z-index: 3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .blinking-text {
-            color: #FF0000;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: 900;
-            font-size: 0.7rem;
-            text-shadow: 1px 1px 0px white;
-            animation: blink 0.5s infinite;
-        }
-
-        .indicator-label {
-            background: rgba(250, 250, 248, 0.95);
-            padding: 8px 12px;
+            top: 50%; left: 50%;
+            width: 8px; height: 20px;
+            background: var(--sun-yellow);
             border-radius: 10px;
-            border: 1px solid var(--border);
-            margin-top: 5px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.7rem;
-            font-weight: bold;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform-origin: 50% -35px; /* Offset from center */
         }
 
-        .down-arrow {
-            width: 0; height: 0; 
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 8px solid var(--text-main);
-            margin-top: 5px;
-            animation: arrowBump 1.2s infinite ease-in-out;
+        /* Generate Ray Positions */
+        .ray:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg); }
+        .ray:nth-child(2) { transform: translate(-50%, -50%) rotate(30deg); }
+        .ray:nth-child(3) { transform: translate(-50%, -50%) rotate(60deg); }
+        .ray:nth-child(4) { transform: translate(-50%, -50%) rotate(90deg); }
+        .ray:nth-child(5) { transform: translate(-50%, -50%) rotate(120deg); }
+        .ray:nth-child(6) { transform: translate(-50%, -50%) rotate(150deg); }
+        .ray:nth-child(7) { transform: translate(-50%, -50%) rotate(180deg); }
+        .ray:nth-child(8) { transform: translate(-50%, -50%) rotate(210deg); }
+        .ray:nth-child(9) { transform: translate(-50%, -50%) rotate(240deg); }
+        .ray:nth-child(10) { transform: translate(-50%, -50%) rotate(270deg); }
+        .ray:nth-child(11) { transform: translate(-50%, -50%) rotate(300deg); }
+        .ray:nth-child(12) { transform: translate(-50%, -50%) rotate(330deg); }
+
+        .sun-core {
+            position: absolute;
+            width: 80px; height: 80px;
+            background: var(--sun-yellow);
+            border-radius: 50%;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: visible;
         }
 
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        @keyframes arrowBump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
-        
-        @keyframes pingPong {
-            0% { left: 5%; transform: rotate(-8deg); }
-            50% { left: 80%; transform: rotate(8deg); }
-            100% { left: 5%; transform: rotate(-8deg); }
+        /* Face Elements */
+        .face-bob-group {
+            position: absolute;
+            width: 100%; height: 100%;
+            animation: headBob 1.2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
         }
 
-        @media (max-width: 800px) {
+        .eyebrows {
+            position: absolute;
+            top: 22px; width: 100%;
+            display: flex; justify-content: center; gap: 18px;
+            animation: browShift 1.2s infinite;
+        }
+        .eyebrow { width: 14px; height: 5px; background: #333; border-radius: 10px; }
+
+        .shades {
+            position: absolute;
+            top: 32px; left: 15px;
+            width: 50px; height: 16px;
+            background: #1A1A1A;
+            border-radius: 4px;
+            display: flex; justify-content: space-around; align-items: center;
+        }
+        .shades::after { content: ""; width: 8px; height: 4px; background: var(--sun-yellow); position: absolute; }
+
+        .static-smile {
+            position: absolute;
+            top: 54px;
+            width: 24px; height: 12px;
+            border-bottom: 4px solid #333;
+            border-radius: 50%;
+            z-index: 6; /* Independent of bob group */
+        }
+
+        /* Cartoon Taco Shell */
+        .taco-shell {
+            position: absolute;
+            bottom: -5px;
+            width: 95px; height: 50px;
+            background: #FFD93D;
+            border: 3px solid #634806;
+            border-radius: 60px 60px 10px 10px;
+            z-index: 10;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        .blink-text { color: #FF0000; font-family: 'Courier New', monospace; font-weight: 900; font-size: 0.7rem; text-shadow: 1px 1px 0px white; animation: fastBlink 0.5s infinite; }
+
+        /* KEYFRAMES */
+        @keyframes headBob {
+            0%, 100% { transform: translateY(0); }
+            40% { transform: translateY(8px); } /* Snappy descent */
+        }
+        @keyframes browShift {
+            0%, 100% { transform: translateY(0); }
+            40% { transform: translateY(3px); } /* Dips closer to shades */
+        }
+        @keyframes rayRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes fastBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        @keyframes pingPong { 0% { left: 5%; } 50% { left: 80%; } 100% { left: 5%; } }
+
+        .indicator-label { background: rgba(250, 250, 248, 0.95); padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); margin-top: 5px; font-family: 'Courier New', monospace; font-size: 0.7rem; font-weight: bold; text-align: center; }
+        .down-arrow { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--text-main); margin-top: 5px; animation: bump 1.5s infinite; }
+        @keyframes bump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+        @media (max-width: 800px) { 
             .recipe-grid { grid-template-columns: 1fr; }
-            #taco-hint { animation-duration: 12s; }
-            @keyframes pingPong {
-                0% { left: 2%; }
-                50% { left: 65%; }
-                100% { left: 2%; }
-            }
+            #taco-hint { animation-duration: 14s; }
+            @keyframes pingPong { 0% { left: 2%; } 50% { left: 60%; } 100% { left: 2%; } }
         }
     </style>
 </head>
@@ -317,13 +230,23 @@
 </div>
 
 <div id="taco-hint">
-    <div class="taco-stack">
-        <div class="sun">
-            <div class="sunglasses"></div>
-            <div class="smile"></div>
+    <div class="character-container">
+        <div class="rays-container">
+            <div class="ray"></div><div class="ray"></div><div class="ray"></div><div class="ray"></div>
+            <div class="ray"></div><div class="ray"></div><div class="ray"></div><div class="ray"></div>
+            <div class="ray"></div><div class="ray"></div><div class="ray"></div><div class="ray"></div>
         </div>
-        <div class="tortilla-wrap">
-            <div class="blinking-text">TACO TIME!</div>
+        <div class="sun-core">
+            <div class="face-bob-group">
+                <div class="eyebrows">
+                    <div class="eyebrow"></div><div class="eyebrow"></div>
+                </div>
+                <div class="shades"></div>
+            </div>
+            <div class="static-smile"></div>
+        </div>
+        <div class="taco-shell">
+            <div class="blink-text">TACO TIME!</div>
         </div>
     </div>
     <div class="indicator-label">THIS WAY TO<br>NAIL IT</div>
