@@ -167,7 +167,7 @@
 
         iframe { width: 100%; flex-grow: 1; border: none; }
 
-        /* --- UPDATED TACO & SUN SCROLL INDICATOR --- */
+        /* --- REFINED TACO & SUN SCROLL INDICATOR --- */
         #taco-hint {
             position: fixed;
             bottom: 30px;
@@ -179,55 +179,68 @@
             transition: opacity 0.5s ease;
             opacity: 0.95;
             pointer-events: none;
-            animation: pingPong 12s infinite ease-in-out; /* Bounces off the edges */
+            animation: pingPong 20s infinite ease-in-out; /* Slower 20s animation */
         }
 
         .taco-stack {
             position: relative;
-            width: 80px;
-            height: 60px;
+            width: 100px;
+            height: 80px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* The Sun */
+        /* Large Visible Sun */
         .sun {
             position: absolute;
-            width: 45px;
-            height: 45px;
+            width: 70px;
+            height: 70px;
             background: #FFD700;
             border-radius: 50%;
             z-index: 1;
-            top: -5px;
-            box-shadow: 0 0 15px #FFD700;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            top: -15px;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+            border: 2px solid #E67E22;
         }
-        .sun::before { /* Sunglasses */
-            content: "🕶️";
-            font-size: 1.2rem;
+        
+        /* Large Visible Sunglasses */
+        .sunglasses {
             position: absolute;
-            top: 10px;
+            top: 22px;
+            left: 10px;
+            width: 50px;
+            height: 12px;
+            background: #000;
+            border-radius: 4px;
+            z-index: 2;
         }
-        .sun::after { /* Smile */
+        .sunglasses::after {
             content: "";
             position: absolute;
-            width: 15px;
-            height: 8px;
-            border-bottom: 2px solid #333;
+            top: 0; left: 22px; width: 6px; height: 100%;
+            background: #FFD700; /* Bridge of glasses */
+        }
+
+        /* Bold Visible Smile */
+        .smile {
+            position: absolute;
+            top: 42px;
+            left: 25px;
+            width: 20px;
+            height: 10px;
+            border-bottom: 3px solid #333;
             border-radius: 50%;
-            top: 22px;
+            z-index: 2;
         }
 
         /* Cartoon Yellow Taco Shell */
         .tortilla-wrap {
             position: absolute;
             bottom: 5px;
-            width: 75px;
-            height: 40px;
-            background: #FFD93D; /* Bright Cartoon Yellow */
+            width: 85px;
+            height: 45px;
+            background: #FFD93D; 
             border: 3px solid #634806;
             border-radius: 50px 50px 10px 10px;
             z-index: 3;
@@ -241,7 +254,7 @@
             color: #FF0000;
             font-family: 'Courier New', Courier, monospace;
             font-weight: 900;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             text-shadow: 1px 1px 0px white;
             animation: blink 0.5s infinite;
         }
@@ -271,20 +284,19 @@
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         @keyframes arrowBump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
         
-        /* Ping Pong Animation: Left to Right to Left */
         @keyframes pingPong {
-            0% { left: 5%; transform: rotate(-5deg); }
-            50% { left: 85%; transform: rotate(5deg); }
-            100% { left: 5%; transform: rotate(-5deg); }
+            0% { left: 5%; transform: rotate(-8deg); }
+            50% { left: 80%; transform: rotate(8deg); }
+            100% { left: 5%; transform: rotate(-8deg); }
         }
 
         @media (max-width: 800px) {
             .recipe-grid { grid-template-columns: 1fr; }
-            #taco-hint { animation-duration: 8s; }
+            #taco-hint { animation-duration: 12s; }
             @keyframes pingPong {
-                0% { left: 5%; }
-                50% { left: 70%; }
-                100% { left: 5%; }
+                0% { left: 2%; }
+                50% { left: 65%; }
+                100% { left: 2%; }
             }
         }
     </style>
@@ -306,7 +318,10 @@
 
 <div id="taco-hint">
     <div class="taco-stack">
-        <div class="sun"></div>
+        <div class="sun">
+            <div class="sunglasses"></div>
+            <div class="smile"></div>
+        </div>
         <div class="tortilla-wrap">
             <div class="blinking-text">TACO TIME!</div>
         </div>
@@ -370,7 +385,6 @@
     const modalFrame = document.getElementById('modal-frame');
     let currentUrl = "";
 
-    // INTERCEPT CLICKS
     document.querySelectorAll('.preview-trigger').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -393,7 +407,6 @@
         document.body.style.overflow = 'auto';
     };
 
-    // HOVER LINKS
     const hoverLinks = document.querySelectorAll('.hover-link');
     hoverLinks.forEach(link => {
         link.addEventListener('click', (e) => {
