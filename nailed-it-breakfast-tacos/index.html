@@ -48,7 +48,7 @@
             padding-bottom: 40px;
         }
 
-        /* --- INGREDIENTS & SIDEBAR --- */
+        /* --- SIDEBAR & CONTENT --- */
         .sidebar h2, .main-content h2 {
             font-family: 'Courier New', Courier, monospace;
             text-transform: uppercase;
@@ -63,13 +63,13 @@
         .ingredients-list li { margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px dashed var(--border); position: relative; }
         .nailed-it-alert { color: var(--accent); font-weight: bold; font-size: 0.75rem; text-transform: uppercase; display: block; margin-top: 5px; }
 
-        /* --- HOVER PREVIEWS --- */
+        /* --- PREVIEW LOGIC --- */
         .hover-link { color: var(--text-secondary); text-decoration: underline; cursor: help; position: relative; -webkit-tap-highlight-color: transparent; }
         .preview-img { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(-10px); width: 200px; height: auto; border: 5px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.15); display: none; z-index: 100; pointer-events: none; }
         @media (min-width: 801px) { .hover-link:hover .preview-img { display: block; } }
         .hover-link.is-active .preview-img { display: block; }
 
-        /* --- MINI WINDOW MODAL --- */
+        /* --- MODAL --- */
         #link-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--modal-bg); display: none; justify-content: center; align-items: center; z-index: 2000; }
         .modal-container { width: 85%; height: 80%; background: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
         .modal-header { padding: 15px 25px; background: #f8f8f8; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
@@ -99,113 +99,109 @@
             align-items: center;
         }
 
-        /* The Sun Rays (12 Pills) */
-        .rays-container {
+        /* Fixed Pill Rays */
+        .rays-static {
             position: absolute;
-            width: 110px;
-            height: 110px;
-            animation: rayRotate 10s infinite linear;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .ray {
             position: absolute;
-            top: 50%; left: 50%;
-            width: 8px; height: 20px;
+            width: 8px; height: 18px;
             background: var(--sun-yellow);
             border-radius: 10px;
-            transform-origin: 50% -35px; /* Offset from center */
+            transform-origin: center 50px; /* Locked distance from center */
         }
 
-        /* Generate Ray Positions */
-        .ray:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg); }
-        .ray:nth-child(2) { transform: translate(-50%, -50%) rotate(30deg); }
-        .ray:nth-child(3) { transform: translate(-50%, -50%) rotate(60deg); }
-        .ray:nth-child(4) { transform: translate(-50%, -50%) rotate(90deg); }
-        .ray:nth-child(5) { transform: translate(-50%, -50%) rotate(120deg); }
-        .ray:nth-child(6) { transform: translate(-50%, -50%) rotate(150deg); }
-        .ray:nth-child(7) { transform: translate(-50%, -50%) rotate(180deg); }
-        .ray:nth-child(8) { transform: translate(-50%, -50%) rotate(210deg); }
-        .ray:nth-child(9) { transform: translate(-50%, -50%) rotate(240deg); }
-        .ray:nth-child(10) { transform: translate(-50%, -50%) rotate(270deg); }
-        .ray:nth-child(11) { transform: translate(-50%, -50%) rotate(300deg); }
-        .ray:nth-child(12) { transform: translate(-50%, -50%) rotate(330deg); }
+        /* Twelve rays around the circle */
+        .ray:nth-child(1) { transform: rotate(0deg) translateY(-40px); }
+        .ray:nth-child(2) { transform: rotate(30deg) translateY(-40px); }
+        .ray:nth-child(3) { transform: rotate(60deg) translateY(-40px); }
+        .ray:nth-child(4) { transform: rotate(90deg) translateY(-40px); }
+        .ray:nth-child(5) { transform: rotate(120deg) translateY(-40px); }
+        .ray:nth-child(6) { transform: rotate(150deg) translateY(-40px); }
+        .ray:nth-child(7) { transform: rotate(180deg) translateY(-40px); }
+        .ray:nth-child(8) { transform: rotate(210deg) translateY(-40px); }
+        .ray:nth-child(9) { transform: rotate(240deg) translateY(-40px); }
+        .ray:nth-child(10) { transform: rotate(270deg) translateY(-40px); }
+        .ray:nth-child(11) { transform: rotate(300deg) translateY(-40px); }
+        .ray:nth-child(12) { transform: rotate(330deg) translateY(-40px); }
 
         .sun-core {
             position: absolute;
-            width: 80px; height: 80px;
+            width: 75px; height: 75px;
             background: var(--sun-yellow);
             border-radius: 50%;
             z-index: 5;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: visible;
         }
 
-        /* Face Elements */
+        /* Decoupled Animated Group (Eyes/Brows Only) */
         .face-bob-group {
             position: absolute;
             width: 100%; height: 100%;
-            animation: headBob 1.2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+            animation: headBob 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
 
         .eyebrows {
             position: absolute;
-            top: 22px; width: 100%;
-            display: flex; justify-content: center; gap: 18px;
-            animation: browShift 1.2s infinite;
+            top: 18px; width: 100%;
+            display: flex; justify-content: center; gap: 15px;
         }
-        .eyebrow { width: 14px; height: 5px; background: #333; border-radius: 10px; }
+        .eyebrow { width: 12px; height: 4px; background: #333; border-radius: 10px; }
 
-        .shades {
+        .pixel-shades {
             position: absolute;
-            top: 32px; left: 15px;
-            width: 50px; height: 16px;
+            top: 28px; left: 12px;
+            width: 50px; height: 14px;
             background: #1A1A1A;
-            border-radius: 4px;
-            display: flex; justify-content: space-around; align-items: center;
+            /* Rectangular Pixel/Flat Style */
+            border-radius: 0;
+            display: flex; justify-content: space-between; align-items: center;
         }
-        .shades::after { content: ""; width: 8px; height: 4px; background: var(--sun-yellow); position: absolute; }
+        .pixel-shades::before { content: ""; width: 6px; height: 4px; background: var(--sun-yellow); position: absolute; left: 22px; }
 
-        .static-smile {
+        /* FIXED SMILE (Decoupled from bob) */
+        .fixed-smile {
             position: absolute;
-            top: 54px;
-            width: 24px; height: 12px;
-            border-bottom: 4px solid #333;
+            top: 52px;
+            width: 20px; height: 8px;
+            border-bottom: 2px solid #333; /* Thin visible line */
             border-radius: 50%;
-            z-index: 6; /* Independent of bob group */
+            z-index: 6;
         }
 
         /* Cartoon Taco Shell */
         .taco-shell {
             position: absolute;
             bottom: -5px;
-            width: 95px; height: 50px;
+            width: 90px; height: 45px;
             background: #FFD93D;
             border: 3px solid #634806;
-            border-radius: 60px 60px 10px 10px;
+            border-radius: 50px 50px 10px 10px;
             z-index: 10;
             display: flex; justify-content: center; align-items: center;
         }
 
-        .blink-text { color: #FF0000; font-family: 'Courier New', monospace; font-weight: 900; font-size: 0.7rem; text-shadow: 1px 1px 0px white; animation: fastBlink 0.5s infinite; }
+        .blink-text { color: #FF0000; font-family: 'Courier New', monospace; font-weight: 900; font-size: 0.65rem; text-shadow: 1px 1px 0px white; animation: fastBlink 0.5s infinite; }
 
         /* KEYFRAMES */
         @keyframes headBob {
             0%, 100% { transform: translateY(0); }
-            40% { transform: translateY(8px); } /* Snappy descent */
+            50% { transform: translateY(8px); } /* Bumping down */
         }
-        @keyframes browShift {
-            0%, 100% { transform: translateY(0); }
-            40% { transform: translateY(3px); } /* Dips closer to shades */
-        }
-        @keyframes rayRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes fastBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         @keyframes pingPong { 0% { left: 5%; } 50% { left: 80%; } 100% { left: 5%; } }
 
         .indicator-label { background: rgba(250, 250, 248, 0.95); padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); margin-top: 5px; font-family: 'Courier New', monospace; font-size: 0.7rem; font-weight: bold; text-align: center; }
-        .down-arrow { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--text-main); margin-top: 5px; animation: bump 1.5s infinite; }
-        @keyframes bump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+        .down-arrow { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--text-main); margin-top: 5px; animation: arrowBump 1.5s infinite; }
+        @keyframes arrowBump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 
         @media (max-width: 800px) { 
             .recipe-grid { grid-template-columns: 1fr; }
@@ -231,19 +227,20 @@
 
 <div id="taco-hint">
     <div class="character-container">
-        <div class="rays-container">
-            <div class="ray"></div><div class="ray"></div><div class="ray"></div><div class="ray"></div>
-            <div class="ray"></div><div class="ray"></div><div class="ray"></div><div class="ray"></div>
-            <div class="ray"></div><div class="ray"></div><div class="ray"></div><div class="ray"></div>
+        <div class="rays-static">
+            <div class="ray"></div><div class="ray"></div><div class="ray:nth-child(3)"></div>
+            <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+            <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+            <div class="ray"></div><div class="ray"></div><div class="ray"></div>
         </div>
         <div class="sun-core">
             <div class="face-bob-group">
                 <div class="eyebrows">
                     <div class="eyebrow"></div><div class="eyebrow"></div>
                 </div>
-                <div class="shades"></div>
+                <div class="pixel-shades"></div>
             </div>
-            <div class="static-smile"></div>
+            <div class="fixed-smile"></div>
         </div>
         <div class="taco-shell">
             <div class="blink-text">TACO TIME!</div>
