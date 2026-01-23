@@ -1,229 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nailed It: Breakfast Tacos | Anthony C. Dorsey</title>
-    <style>
-        :root {
-            --bg-color: #FAFAF8;
-            --text-main: #1A1A1A;
-            --text-secondary: #70706B;
-            --accent: #E63946;
-            --border: #E6E6E3;
-        }
+<style>
+    /* ... existing styles ... */
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    /* --- ENHANCED TACO SCROLL HINT --- */
+    #taco-hint {
+        position: fixed;
+        bottom: 30px;
+        left: 0; /* Start from left for the floating animation */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 1000;
+        transition: opacity 0.5s ease;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-align: center;
+        opacity: 0.9;
+        pointer-events: none; /* Don't block clicks to the recipe */
+        animation: floatAcross 12s infinite linear; /* Playful drift */
+    }
 
-        /* --- HERO SECTION --- */
-        .hero-section {
-            width: 100%;
-            padding: 8vh 0 4vh 0;
-            text-align: center;
-        }
+    .taco-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(250, 250, 248, 0.9); /* Background for contrast */
+        padding: 10px 15px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
 
-        h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -0.03em;
-            margin: 0 0 40px 0;
-        }
+    .taco-icon {
+        width: 45px;
+        height: 25px;
+        background: #f1c40f;
+        border: 2px solid #333;
+        border-radius: 50px 50px 5px 5px; 
+        margin-bottom: 5px;
+        position: relative;
+    }
 
-        .hero-image-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 5%;
-        }
+    /* Simple Down Arrow */
+    .down-arrow {
+        width: 0; 
+        height: 0; 
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 8px solid var(--text-main);
+        margin-top: 5px;
+        animation: bounceSmall 2s infinite ease-in-out;
+    }
 
-        .hero-image-container img {
-            width: 100%;
-            height: auto;
-            border: 1px solid var(--border);
-        }
+    @keyframes bounceSmall {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(4px); }
+    }
 
-        /* --- CONTENT LAYOUT --- */
-        .recipe-grid {
-            max-width: 1100px;
-            margin: 40px auto 100px auto;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 60px;
-            padding: 0 5%;
-        }
+    /* Playful Drift Animation */
+    @keyframes floatAcross {
+        0% { left: -100px; transform: rotate(-5deg); }
+        25% { transform: rotate(5deg); }
+        50% { left: 50%; transform: rotate(-5deg); }
+        75% { transform: rotate(5deg); }
+        100% { left: calc(100% + 100px); transform: rotate(-5deg); }
+    }
 
-        .intro-text {
-            grid-column: 1 / -1;
-            font-size: 1.4rem;
-            margin-bottom: 40px;
-            font-family: 'Courier New', Courier, monospace;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 40px;
-        }
-
-        /* --- SIDEBAR & HOVER TOOLTIPS --- */
-        .sidebar h2, .main-content h2 {
-            font-family: 'Courier New', Courier, monospace;
-            text-transform: uppercase;
-            font-size: 1rem;
-            letter-spacing: 0.1em;
-            border-bottom: 2px solid var(--text-main);
-            display: inline-block;
-            margin-bottom: 30px;
-        }
-
-        .ingredients-list { list-style: none; padding: 0; font-size: 0.95rem; }
-        .ingredients-list li {
-            margin-bottom: 18px;
-            padding-bottom: 18px;
-            border-bottom: 1px dashed var(--border);
-            position: relative;
-        }
-
-        .nailed-it-alert {
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            display: block;
-            margin-top: 5px;
-        }
-
-        /* HOVER PREVIEW LOGIC */
-        .hover-link {
-            color: var(--text-secondary);
-            text-decoration: underline;
-            cursor: help;
-            position: relative;
-        }
-
-        .preview-img {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(-10px);
-            width: 200px;
-            height: auto;
-            border: 5px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            display: none;
-            z-index: 100;
-            pointer-events: none;
-        }
-
-        .hover-link:hover .preview-img { display: block; }
-
-        /* --- INSTRUCTIONS --- */
-        .instructions-text { font-size: 1.15rem; line-height: 1.8; }
-        .instructions-text p { margin-bottom: 30px; }
-
-        /* --- TACO SCROLL HINT --- */
-        #taco-hint {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 1000;
-            transition: opacity 0.5s ease;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.7rem;
-            letter-spacing: 0.1em;
-            text-align: center;
-            opacity: 0.8;
-        }
-
-        .taco-icon {
-            width: 50px;
-            height: 30px;
-            background: #f1c40f;
-            border: 2px solid #333;
-            border-radius: 50px 50px 5px 5px; 
-            margin-bottom: 10px;
-            animation: bounce 2s infinite ease-in-out;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @media (max-width: 800px) {
-            .recipe-grid { grid-template-columns: 1fr; }
-            .preview-img { display: none !important; } 
-        }
-    </style>
-</head>
-<body>
+    @media (max-width: 600px) {
+        #taco-hint { bottom: 20px; animation-duration: 8s; } /* Slightly faster on small screens */
+    }
+</style>
 
 <div id="taco-hint">
-    <div class="taco-icon"></div>
-    <div>THIS WAY TO<br>NAIL IT</div>
-</div>
-
-<div class="hero-section">
-    <h1>Nailed It Breakfast Tacos</h1>
-    <div class="hero-image-container">
-        <img src="taco-engineer.jpg" alt="Breakfast Tacos">
+    <div class="taco-container">
+        <div class="taco-icon"></div>
+        <div>THIS WAY TO<br>NAIL IT</div>
+        <div class="down-arrow"></div>
     </div>
 </div>
-
-<main class="recipe-grid">
-    <div class="intro-text">
-        Do you like breakfast tacos? Do you like when people look at you and say, "Wow! You really NAILED-it!"? (Note: these are <a href="https://www.differencebetween.net/object/difference-between-taco-and-burrito/" style="color:black">tacos, not burritos</a>).
-    </div>
-
-    <aside class="sidebar">
-        <h2>Ingredients</h2>
-        <ul class="ingredients-list">
-            <li>1 lb <a href="https://www.jimmydean.com/products/fresh-sausage/" style="color:inherit">Jimmy Dean Sausage</a>
-                <span class="nailed-it-alert">Key: Ensure meat is fresh and loose (no casings).</span>
-            </li>
-            <li>6 Slices Smoked Bacon</li>
-            <li>2 Cloves Garlic, Minced</li>
-            <li>2 Small <span class="hover-link">White Potatoes<img src="white-potatoes.jpg" class="preview-img"></span></li>
-            <li>1 Small Onion, Chopped</li>
-            <li>1 Small Red Bell Pepper (or <span class="hover-link">Poblano<img src="poblano-pepper.jpg" class="preview-img"></span>)</li>
-            <li>1 Large Jalapeño, Chopped</li>
-            <li>1/2 Cup Cilantro, Chopped</li>
-            <li>1 Tbsp <a href="https://www.fiestaspices.com/product/fancy-light-chili-powder/" style="color:inherit">Fiesta Chili Powder</a></li>
-            <li>1 Tsp <a href="https://www.fiestaspices.com/product/ground-comino/" style="color:inherit">Fiesta Cumin</a></li>
-            <li>1 Tsp <a href="https://www.fiestaspices.com/product/oregano-mexican/" style="color:inherit">Fiesta Oregano</a></li>
-            <li>1/2 Tsp Salt & Black Pepper</li>
-            <li>4 Eggs, Beaten</li>
-            <li>2 Cups Sharp Cheddar, Shredded</li>
-            <li>8 Flour Tortillas (4.5" or 6")
-                <span class="nailed-it-alert">Must use flour. No exceptions.</span>
-            </li>
-            <li>Salsa (Super fresh is best, ask me for my recipes!)</li>
-        </ul>
-    </aside>
-
-    <div class="main-content">
-        <h2>Instructions</h2>
-        <div class="instructions-text">
-            <p><strong>Step 1:</strong> Cook sausage in a skillet over medium-high heat. Combine spices in a small bowl. Remove meat, leaving grease. Cook bacon until crisp, remove, and allow to cool.</p>
-            <p><strong>Step 2:</strong> In the grease, brown the minced garlic. Add potatoes and cook until browned and crisp (5-10 mins). Chop the bacon while you wait.</p>
-            <p><strong>Step 3:</strong> Add onion, bell pepper, jalapeño, and spice mixture. Cook until translucent. Add sausage and bacon back in.</p>
-            <p><strong>Step 4:</strong> Add beaten eggs. <span class="nailed-it-alert">Do not stir too much!</span> Eggs should be in visible chunks. Top with cheese and cilantro, cover with a lid to melt.</p>
-            <p><strong>Step 5:</strong> Heat tortillas over a gas burner or wrapped in foil in a 350˚ oven. Spoon in the mixture, top with salsa, and welcome everyone to NAILED-it!</p>
-        </div>
-    </div>
-</main>
 
 <script>
+    // Fade hint on scroll
     window.onscroll = () => {
         const hint = document.getElementById('taco-hint');
-        if (window.scrollY > 150) hint.style.opacity = "0";
-        else hint.style.opacity = "0.8";
+        // If user scrolls down more than 200px, hide the hint
+        if (window.scrollY > 200) {
+            hint.style.opacity = "0";
+        } else {
+            hint.style.opacity = "0.9";
+        }
     };
 </script>
 
