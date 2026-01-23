@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* --- HERO & GRID --- */
+        /* --- LAYOUT --- */
         .hero-section { width: 100%; padding: 8vh 0 4vh 0; text-align: center; }
         h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0 0 40px 0; }
         .hero-image-container { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
@@ -48,7 +48,6 @@
             padding-bottom: 40px;
         }
 
-        /* --- SIDEBAR & CONTENT --- */
         .sidebar h2, .main-content h2 {
             font-family: 'Courier New', Courier, monospace;
             text-transform: uppercase;
@@ -63,20 +62,19 @@
         .ingredients-list li { margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px dashed var(--border); position: relative; }
         .nailed-it-alert { color: var(--accent); font-weight: bold; font-size: 0.75rem; text-transform: uppercase; display: block; margin-top: 5px; }
 
-        /* --- PREVIEW LOGIC --- */
-        .hover-link { color: var(--text-secondary); text-decoration: underline; cursor: help; position: relative; -webkit-tap-highlight-color: transparent; }
+        /* --- PREVIEW & MODAL --- */
+        .hover-link { color: var(--text-secondary); text-decoration: underline; cursor: help; position: relative; }
         .preview-img { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(-10px); width: 200px; height: auto; border: 5px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.15); display: none; z-index: 100; pointer-events: none; }
         @media (min-width: 801px) { .hover-link:hover .preview-img { display: block; } }
         .hover-link.is-active .preview-img { display: block; }
 
-        /* --- MODAL --- */
         #link-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--modal-bg); display: none; justify-content: center; align-items: center; z-index: 2000; }
         .modal-container { width: 85%; height: 80%; background: #fff; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
         .modal-header { padding: 15px 25px; background: #f8f8f8; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .modal-btn { font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; text-transform: uppercase; padding: 8px 12px; cursor: pointer; border: 1px solid #ddd; background: #fff; }
+        .modal-btn { font-family: 'Courier New', monospace; font-size: 0.75rem; text-transform: uppercase; padding: 8px 12px; cursor: pointer; border: 1px solid #ddd; background: #fff; }
         iframe { width: 100%; flex-grow: 1; border: none; }
 
-        /* --- THE ANIMATED SUN & TACO INDICATOR --- */
+        /* --- MOCKUP STYLE SUN & TACO --- */
         #taco-hint {
             position: fixed;
             bottom: 30px;
@@ -90,124 +88,104 @@
             animation: pingPong 20s infinite ease-in-out;
         }
 
-        .character-container {
+        .sun-character {
             position: relative;
-            width: 120px;
-            height: 110px;
+            width: 140px;
+            height: 140px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Fixed Pill Rays */
-        .rays-static {
+        /* 12 Triangular Rays */
+        .sun-rays {
             position: absolute;
-            width: 100px;
-            height: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 130px; height: 130px;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .ray-tri {
+            position: absolute;
+            width: 0; height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 35px solid var(--sun-yellow);
+            transform-origin: 50% 65px;
         }
 
-        .ray {
+        /* Core Body */
+        .sun-body {
             position: absolute;
-            width: 8px; height: 18px;
+            width: 85px; height: 85px;
             background: var(--sun-yellow);
-            border-radius: 10px;
-            transform-origin: center 50px; /* Locked distance from center */
-        }
-
-        /* Twelve rays around the circle */
-        .ray:nth-child(1) { transform: rotate(0deg) translateY(-40px); }
-        .ray:nth-child(2) { transform: rotate(30deg) translateY(-40px); }
-        .ray:nth-child(3) { transform: rotate(60deg) translateY(-40px); }
-        .ray:nth-child(4) { transform: rotate(90deg) translateY(-40px); }
-        .ray:nth-child(5) { transform: rotate(120deg) translateY(-40px); }
-        .ray:nth-child(6) { transform: rotate(150deg) translateY(-40px); }
-        .ray:nth-child(7) { transform: rotate(180deg) translateY(-40px); }
-        .ray:nth-child(8) { transform: rotate(210deg) translateY(-40px); }
-        .ray:nth-child(9) { transform: rotate(240deg) translateY(-40px); }
-        .ray:nth-child(10) { transform: rotate(270deg) translateY(-40px); }
-        .ray:nth-child(11) { transform: rotate(300deg) translateY(-40px); }
-        .ray:nth-child(12) { transform: rotate(330deg) translateY(-40px); }
-
-        .sun-core {
-            position: absolute;
-            width: 75px; height: 75px;
-            background: var(--sun-yellow);
+            border: 2px solid #D4AF37;
             border-radius: 50%;
             z-index: 5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
         }
 
-        /* Decoupled Animated Group (Eyes/Brows Only) */
-        .face-bob-group {
+        /* Head Bobbing Group (Eyes/Brows Only) */
+        .face-bob {
             position: absolute;
             width: 100%; height: 100%;
-            animation: headBob 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            display: flex; flex-direction: column; align-items: center;
+            animation: elasticBob 1.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
         }
 
-        .eyebrows {
-            position: absolute;
-            top: 18px; width: 100%;
-            display: flex; justify-content: center; gap: 15px;
+        .brows {
+            display: flex; gap: 18px; margin-top: 20px;
         }
-        .eyebrow { width: 12px; height: 4px; background: #333; border-radius: 10px; }
+        .brow-arc {
+            width: 18px; height: 8px;
+            border-top: 4px solid #1a1a1a;
+            border-radius: 50%;
+        }
 
-        .pixel-shades {
-            position: absolute;
-            top: 28px; left: 12px;
-            width: 50px; height: 14px;
+        .shades-wayfarer {
+            width: 65px; height: 22px;
             background: #1A1A1A;
-            /* Rectangular Pixel/Flat Style */
-            border-radius: 0;
-            display: flex; justify-content: space-between; align-items: center;
+            border-radius: 4px 4px 12px 12px; /* Wayfarer curve */
+            margin-top: -2px;
+            position: relative;
         }
-        .pixel-shades::before { content: ""; width: 6px; height: 4px; background: var(--sun-yellow); position: absolute; left: 22px; }
+        .shades-wayfarer::after {
+            content: ""; width: 8px; height: 4px; background: var(--sun-yellow);
+            position: absolute; left: 50%; transform: translateX(-50%); top: 4px;
+        }
 
-        /* FIXED SMILE (Decoupled from bob) */
-        .fixed-smile {
+        /* Static Smile */
+        .smile-line {
             position: absolute;
-            top: 52px;
-            width: 20px; height: 8px;
-            border-bottom: 2px solid #333; /* Thin visible line */
+            top: 62px;
+            width: 22px; height: 10px;
+            border-bottom: 3px solid #1a1a1a;
             border-radius: 50%;
             z-index: 6;
         }
 
-        /* Cartoon Taco Shell */
-        .taco-shell {
+        /* Mockup Taco Shell */
+        .taco-box {
             position: absolute;
             bottom: -5px;
-            width: 90px; height: 45px;
+            width: 100px; height: 55px;
             background: #FFD93D;
-            border: 3px solid #634806;
-            border-radius: 50px 50px 10px 10px;
+            border: 4px solid #4a3703;
+            border-radius: 60px 60px 15px 15px;
             z-index: 10;
             display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .blink-text { color: #FF0000; font-family: 'Courier New', monospace; font-weight: 900; font-size: 0.65rem; text-shadow: 1px 1px 0px white; animation: fastBlink 0.5s infinite; }
+        .taco-time { color: #FF0000; font-family: 'Courier New', monospace; font-weight: 900; font-size: 0.75rem; animation: fastBlink 0.5s infinite; }
 
-        /* KEYFRAMES */
-        @keyframes headBob {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(8px); } /* Bumping down */
-        }
+        @keyframes elasticBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
         @keyframes fastBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         @keyframes pingPong { 0% { left: 5%; } 50% { left: 80%; } 100% { left: 5%; } }
 
-        .indicator-label { background: rgba(250, 250, 248, 0.95); padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); margin-top: 5px; font-family: 'Courier New', monospace; font-size: 0.7rem; font-weight: bold; text-align: center; }
-        .down-arrow { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--text-main); margin-top: 5px; animation: arrowBump 1.5s infinite; }
-        @keyframes arrowBump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+        .hint-text { background: #014F86; color: white; padding: 6px 14px; border-radius: 8px; margin-top: 8px; font-family: 'Courier New', monospace; font-size: 0.8rem; font-weight: bold; border: 2px solid #000; }
+        .down-chevron { font-size: 1.5rem; margin-top: 2px; animation: bounce 1s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
-        @media (max-width: 800px) { 
-            .recipe-grid { grid-template-columns: 1fr; }
-            #taco-hint { animation-duration: 14s; }
-            @keyframes pingPong { 0% { left: 2%; } 50% { left: 60%; } 100% { left: 2%; } }
-        }
+        @media (max-width: 800px) { #taco-hint { animation-duration: 12s; } @keyframes pingPong { 0% { left: 2%; } 50% { left: 60%; } 100% { left: 2%; } } }
     </style>
 </head>
 <body>
@@ -226,28 +204,32 @@
 </div>
 
 <div id="taco-hint">
-    <div class="character-container">
-        <div class="rays-static">
-            <div class="ray"></div><div class="ray"></div><div class="ray:nth-child(3)"></div>
-            <div class="ray"></div><div class="ray"></div><div class="ray"></div>
-            <div class="ray"></div><div class="ray"></div><div class="ray"></div>
-            <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+    <div class="sun-character">
+        <div class="sun-rays">
+            <div class="ray-tri" style="transform: rotate(0deg) translateY(-45px);"></div>
+            <div class="ray-tri" style="transform: rotate(30deg) translateY(-45px);"></div>
+            <div class="ray-tri" style="transform: rotate(60deg) translateY(-45px);"></div>
+            <div class="ray-tri" style="transform: rotate(90deg) translateY(-45px);"></div>
+            <div class="ray-tri" style="transform: rotate(120deg) translateY(-45px);"></div>
+            <div class="ray-tri" style="transform: rotate(150deg) translateY(-45px);"></div>
+            <div class="ray-tri" style="transform: rotate(180deg) translateY(-45px);"></div>
+            <div class="ray-tri" style="transform: rotate(210deg) translateY(-45px);"></div>
+            <div class="ray-tri" style="transform: rotate(240deg) translateY(-45px);"></div>
+            <div class="ray-tri" style="transform: rotate(270deg) translateY(-45px);"></div>
+            <div class="ray-tri" style="transform: rotate(300deg) translateY(-45px);"></div>
+            <div class="ray-tri" style="transform: rotate(330deg) translateY(-45px);"></div>
         </div>
-        <div class="sun-core">
-            <div class="face-bob-group">
-                <div class="eyebrows">
-                    <div class="eyebrow"></div><div class="eyebrow"></div>
-                </div>
-                <div class="pixel-shades"></div>
+        <div class="sun-body">
+            <div class="face-bob">
+                <div class="brows"><div class="brow-arc"></div><div class="brow-arc"></div></div>
+                <div class="shades-wayfarer"></div>
             </div>
-            <div class="fixed-smile"></div>
+            <div class="smile-line"></div>
         </div>
-        <div class="taco-shell">
-            <div class="blink-text">TACO TIME!</div>
-        </div>
+        <div class="taco-box"><div class="taco-time">TACO TIME!</div></div>
     </div>
-    <div class="indicator-label">THIS WAY TO<br>NAIL IT</div>
-    <div class="down-arrow"></div>
+    <div class="hint-text">THIS WAY TO NAIL IT</div>
+    <div class="down-chevron">↓</div>
 </div>
 
 <div class="hero-section">
@@ -307,24 +289,20 @@
 
     document.querySelectorAll('.preview-trigger').forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
-            currentUrl = link.href;
-            modalFrame.src = currentUrl;
-            modal.style.display = 'flex';
+            e.preventDefault(); currentUrl = link.href;
+            modalFrame.src = currentUrl; modal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; 
         });
     });
 
     document.getElementById('close-modal-btn').onclick = () => {
-        modal.style.display = 'none';
-        modalFrame.src = "";
+        modal.style.display = 'none'; modalFrame.src = "";
         document.body.style.overflow = 'auto';
     };
 
     document.getElementById('open-tab').onclick = () => {
         window.open(currentUrl, '_blank');
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        modal.style.display = 'none'; document.body.style.overflow = 'auto';
     };
 
     const hoverLinks = document.querySelectorAll('.hover-link');
