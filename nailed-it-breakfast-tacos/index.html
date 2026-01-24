@@ -71,9 +71,8 @@
             white-space: nowrap; 
         }
 
-        /* --- HOVER IMAGES WITH TAP-TO-CLOSE --- */
+        /* --- HOVER IMAGES --- */
         .hover-link { color: var(--text-secondary); text-decoration: underline; cursor: help; position: relative; -webkit-tap-highlight-color: transparent; }
-        
         .preview-img { 
             position: absolute; 
             bottom: 110%; 
@@ -91,7 +90,6 @@
             .preview-img { left: 50%; transform: translateX(-50%); width: 140px; }
         }
 
-        /* Show image on hover (Desktop) or when active class is added (Mobile) */
         .hover-link:hover .preview-img, 
         .hover-link.is-active .preview-img { 
             display: block; 
@@ -109,10 +107,11 @@
         .modal-header { 
             padding: 20px; background: #fff; border-bottom: 1px solid var(--border); 
             display: flex; justify-content: space-between; align-items: center; 
-            min-height: 120px; 
+            min-height: 200px; /* Increased to fit massive badge */
         }
         
-        .tex-mex-badge-header { height: 100px; width: auto; }
+        /* MASSIVE Badge to fill the outlined area */
+        .tex-mex-badge-header { height: 180px; width: auto; }
 
         .header-controls { display: flex; align-items: center; gap: 15px; }
         
@@ -123,9 +122,9 @@
         }
         
         .round-close {
-            width: 40px; height: 40px; border-radius: 50%; background: #f2f2f2;
+            width: 44px; height: 44px; border-radius: 50%; background: #f2f2f2;
             border: 1px solid #ddd; display: flex; justify-content: center; align-items: center;
-            cursor: pointer; color: #000; font-size: 1.2rem; font-weight: bold; font-family: Arial, sans-serif;
+            cursor: pointer; color: #000; font-size: 1.3rem; font-weight: bold; font-family: Arial, sans-serif;
         }
 
         iframe { width: 100%; flex-grow: 1; border: none; background: #fff; }
@@ -162,8 +161,8 @@
 
         @media (max-width: 800px) { 
             .recipe-grid { grid-template-columns: 1fr; }
-            .modal-header { padding: 10px; min-height: 80px; }
-            .tex-mex-badge-header { height: 60px; }
+            .modal-header { padding: 15px; min-height: 140px; }
+            .tex-mex-badge-header { height: 120px; }
             @keyframes pingPong { 0% { left: 2%; } 50% { left: 60%; } 100% { left: 2%; } }
         }
     </style>
@@ -260,6 +259,7 @@
     document.getElementById('close-modal-btn').onclick = () => {
         modal.style.display = 'none';
         modalFrame.src = "";
+        document.body.style.auto = 'auto';
         document.body.style.overflow = 'auto';
     };
 
@@ -267,27 +267,19 @@
         window.open(currentUrl, '_blank');
     };
 
-    // REFINED HOVER/TAP LOGIC FOR IMAGES
     const hoverLinks = document.querySelectorAll('.hover-link');
     hoverLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            // Prevent link from behaving like a trigger link
             e.preventDefault();
             e.stopPropagation();
-            
             const wasActive = link.classList.contains('is-active');
-            
-            // Close all other open images
             hoverLinks.forEach(l => l.classList.remove('is-active'));
-            
-            // If it wasn't active, open it. If it was active, it stays closed.
             if (!wasActive) {
                 link.classList.add('is-active');
             }
         });
     });
 
-    // Tap anywhere on the screen to close the images
     document.addEventListener('click', () => {
         hoverLinks.forEach(link => link.classList.remove('is-active'));
     });
