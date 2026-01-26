@@ -11,7 +11,7 @@
             --text-secondary: #70706B;
             --accent: #E63946;
             --border: #E6E6E3;
-            --modal-bg: rgba(26, 26, 26, 0.6);
+            --modal-bg: rgba(26, 26, 26, 0.7);
         }
 
         body {
@@ -101,33 +101,49 @@
             background: var(--modal-bg); display: none; justify-content: center; align-items: center; z-index: 2000; 
         }
         .modal-container { 
-            width: 92%; height: 85%; background: #fff; border-radius: 20px; 
-            overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.4); 
-        }
-        .modal-header { 
-            padding: 20px; background: #fff; border-bottom: 1px solid var(--border); 
-            display: flex; justify-content: space-between; align-items: center; 
-            min-height: 200px; /* Increased to fit massive badge */
+            width: 95%; height: 90%; background: #fff; border-radius: 20px; 
+            overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.5); 
         }
         
-        /* MASSIVE Badge to fill the outlined area */
-        .tex-mex-badge-header { height: 180px; width: auto; }
+        .modal-header { 
+            padding: 30px; background: #fff; border-bottom: 2px solid var(--border); 
+            display: flex; justify-content: space-between; align-items: center; 
+            min-height: 250px; /* Accommodate massive badge */
+        }
+        
+        /* MASSIVE BLINKING Tex-Mex Approved Badge */
+        .tex-mex-badge-header { 
+            height: 250px; /* 5x increase */
+            width: auto; 
+            animation: slowBlink 1.5s infinite; 
+        }
 
-        .header-controls { display: flex; align-items: center; gap: 15px; }
+        .header-controls { display: flex; align-items: center; gap: 20px; }
         
         .oval-btn {
-            background: #fff; border: 1.5px solid #000; color: #000;
-            padding: 8px 20px; border-radius: 50px; font-family: 'Courier New', monospace;
-            font-size: 0.75rem; font-weight: bold; text-transform: uppercase; cursor: pointer;
+            background: #fff; border: 2px solid #000; color: #000;
+            padding: 12px 28px; border-radius: 50px; font-family: 'Courier New', monospace;
+            font-size: 0.9rem; font-weight: bold; text-transform: uppercase; cursor: pointer;
+            transition: background 0.2s;
         }
+        .oval-btn:hover { background: #000; color: #fff; }
         
         .round-close {
-            width: 44px; height: 44px; border-radius: 50%; background: #f2f2f2;
-            border: 1px solid #ddd; display: flex; justify-content: center; align-items: center;
-            cursor: pointer; color: #000; font-size: 1.3rem; font-weight: bold; font-family: Arial, sans-serif;
+            width: 50px; height: 50px; border-radius: 50%; background: #f2f2f2;
+            border: 2px solid #ddd; display: flex; justify-content: center; align-items: center;
+            cursor: pointer; color: #000; font-size: 1.5rem; font-weight: bold;
         }
 
+        #iframe-wrapper { position: relative; flex-grow: 1; display: flex; flex-direction: column; }
+        
         iframe { width: 100%; flex-grow: 1; border: none; background: #fff; }
+
+        /* Fallback for sites that won't load in iFrames */
+        #iframe-fallback {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #f9f9f9; display: none; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center; padding: 40px;
+        }
 
         /* --- TACO HINT --- */
         #taco-hint {
@@ -144,6 +160,7 @@
             display: flex; justify-content: center; align-items: center;
         }
         .blink-txt { color: #FF0000; font-family: 'Courier New', monospace; font-weight: 900; font-size: 0.7rem; animation: fastBlink 0.5s infinite; }
+        
         .label-pill {
             background: rgba(250, 250, 248, 0.95); color: #1A1A1A; padding: 8px 16px; 
             border-radius: 10px; border: 1px solid var(--border); margin-top: 5px; 
@@ -155,14 +172,16 @@
             border-top: 15px solid #1A1A1A; margin-top: 8px; animation: bounceHeavy 1.2s infinite ease-in-out;
         }
 
+        /* KEYFRAMES */
+        @keyframes slowBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         @keyframes fastBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         @keyframes bounceHeavy { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
         @keyframes pingPong { 0% { left: 5%; } 50% { left: 80%; } 100% { left: 5%; } }
 
         @media (max-width: 800px) { 
             .recipe-grid { grid-template-columns: 1fr; }
-            .modal-header { padding: 15px; min-height: 140px; }
-            .tex-mex-badge-header { height: 120px; }
+            .modal-header { padding: 15px; min-height: 180px; flex-direction: column; gap: 10px; }
+            .tex-mex-badge-header { height: 150px; }
             @keyframes pingPong { 0% { left: 2%; } 50% { left: 60%; } 100% { left: 2%; } }
         }
     </style>
@@ -178,7 +197,14 @@
                 <button class="round-close" id="close-modal-btn">✕</button>
             </div>
         </div>
-        <iframe id="modal-frame" src=""></iframe>
+        <div id="iframe-wrapper">
+            <iframe id="modal-frame" src=""></iframe>
+            <div id="iframe-fallback">
+                <h3 style="font-family:'Courier New';">Security Notice</h3>
+                <p>This external site prevents previews for security reasons.</p>
+                <button class="oval-btn" id="fallback-btn">Open Jimmy Dean Site ↗</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -206,7 +232,7 @@
     <aside class="sidebar">
         <h2>Ingredients</h2>
         <ul class="ingredients-list">
-            <li>1 lb <a href="https://www.jimmydean.com/products/fresh-sausage/" class="preview-trigger" style="color:inherit">Jimmy Dean Sausage</a>
+            <li>1 lb <a href="https://www.jimmydean.com/products/fresh-sausage/" class="preview-trigger" data-restricted="true" style="color:inherit">Jimmy Dean Sausage</a>
                 <span class="nailed-it-alert">Key: Ensure meat is fresh and loose (no casings).</span>
             </li>
             <li>6 Slices Smoked Bacon</li>
@@ -243,14 +269,24 @@
 <script>
     const modal = document.getElementById('link-modal');
     const modalFrame = document.getElementById('modal-frame');
+    const fallback = document.getElementById('iframe-fallback');
     let currentUrl = "";
 
     document.querySelectorAll('.preview-trigger').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             currentUrl = link.href;
-            modalFrame.src = ""; 
-            setTimeout(() => { modalFrame.src = currentUrl; }, 10);
+            
+            // Check if site is restricted (like Jimmy Dean)
+            if (link.getAttribute('data-restricted') === "true") {
+                modalFrame.style.display = 'none';
+                fallback.style.display = 'flex';
+            } else {
+                modalFrame.style.display = 'block';
+                fallback.style.display = 'none';
+                modalFrame.src = currentUrl;
+            }
+            
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; 
         });
@@ -259,30 +295,24 @@
     document.getElementById('close-modal-btn').onclick = () => {
         modal.style.display = 'none';
         modalFrame.src = "";
-        document.body.style.auto = 'auto';
         document.body.style.overflow = 'auto';
     };
 
-    document.getElementById('open-tab').onclick = () => {
-        window.open(currentUrl, '_blank');
-    };
+    const openAction = () => { window.open(currentUrl, '_blank'); };
+    document.getElementById('open-tab').onclick = openAction;
+    document.getElementById('fallback-btn').onclick = openAction;
 
     const hoverLinks = document.querySelectorAll('.hover-link');
     hoverLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
+            e.preventDefault(); e.stopPropagation();
             const wasActive = link.classList.contains('is-active');
             hoverLinks.forEach(l => l.classList.remove('is-active'));
-            if (!wasActive) {
-                link.classList.add('is-active');
-            }
+            if (!wasActive) link.classList.add('is-active');
         });
     });
 
-    document.addEventListener('click', () => {
-        hoverLinks.forEach(link => link.classList.remove('is-active'));
-    });
+    document.addEventListener('click', () => { hoverLinks.forEach(link => link.classList.remove('is-active')); });
 
     window.onscroll = () => {
         const hint = document.getElementById('taco-hint');
