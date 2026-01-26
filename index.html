@@ -17,22 +17,21 @@
             color: var(--text-main);
             margin: 0;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            overflow-x: hidden;
         }
 
-        /* --- HEADER SECTION --- */
+        /* --- HEADER (FIXED & LOCKED) --- */
         header {
             position: fixed;
             top: 0;
             width: 100%;
             background-color: var(--bg-color);
-            z-index: 1000;
+            z-index: 2000; /* Stays above everything */
             text-align: center;
             padding-top: 40px;
         }
 
         h1 {
-            /* Matched to Taco Page Font */
+            /* Matched to Taco Page Font Style */
             font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 900;
             text-transform: uppercase;
@@ -55,60 +54,55 @@
             letter-spacing: 0.05em;
         }
 
-        /* --- TICKET GRID & ANIMATION --- */
-        .ticket-container {
-            margin-top: 250px; /* Space for fixed header */
-            padding: 50px 5%;
+        /* --- STACKING TICKET SECTIONS --- */
+        .show-archive {
+            margin-top: 260px; /* Locked below header line */
+        }
+
+        .ticket-section {
+            position: sticky;
+            top: 260px; /* Animation starts/locks at the header line */
+            height: 70vh;
+            width: 100%;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 150px; /* Large gap to allow for scroll reveal */
+            background-color: var(--bg-color);
+            border-top: 1px solid var(--border);
+            overflow: hidden;
         }
 
         .ticket-card {
             position: relative;
-            width: 320px;
+            width: 80%;
+            max-width: 500px;
             background: #fff;
-            border: 1px solid var(--border);
-            padding: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, z-index 0s;
+            padding: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             cursor: pointer;
-            opacity: 0;
-            transform: translateY(100px); /* Start below */
-        }
-
-        /* Reveal animation as user scrolls */
-        .ticket-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .ticket-card img {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
 
-        /* Zoom-in Effect */
-        .ticket-card:hover {
-            z-index: 500;
-        }
-        
+        /* ZOOM-IN EFFECT */
         .ticket-card:hover img {
-            transform: scale(1.5); /* Enable user to zoom-in */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: scale(1.8); /* Significantly larger zoom */
+            z-index: 3000;
         }
 
         /* --- PULSING TOUCH INDICATOR --- */
         .touch-indicator {
             position: absolute;
-            bottom: 15px;
-            right: 15px;
-            width: 20px;
-            height: 20px;
+            bottom: 25px;
+            right: 25px;
+            width: 24px;
+            height: 24px;
             background-color: var(--accent);
             border-radius: 50%;
             z-index: 10;
@@ -121,17 +115,17 @@
             width: 100%; height: 100%;
             border-radius: 50%;
             background-color: var(--accent);
-            animation: pulse 1.5s infinite;
+            animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
             0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(3); opacity: 0; }
+            100% { transform: scale(3.5); opacity: 0; }
         }
 
-        /* Ensure tickets stay below the header line */
-        .header-spacer {
-            height: 220px;
+        /* Spacer to allow scrolling through all sections */
+        .scroll-spacer {
+            height: 100vh;
         }
 
     </style>
@@ -144,53 +138,43 @@
     <div class="archive-note">— This is a growing archive. New stubs and memories added as they surface. —</div>
 </header>
 
-<div class="header-spacer"></div>
+<main class="show-archive">
+    <section class="ticket-section">
+        <div class="ticket-card">
+            <img src="oasis-knebworth.jpg" alt="Oasis Ticket">
+            <div class="touch-indicator"></div>
+        </div>
+    </section>
 
-<main class="ticket-container" id="ticket-grid">
-    <div class="ticket-card">
-        <img src="ticket-oasis.jpg" alt="Oasis Ticket">
-        <div class="touch-indicator"></div>
-    </div>
+    <section class="ticket-section">
+        <div class="ticket-card">
+            <img src="morrissey-tour.jpg" alt="Morrissey Ticket">
+            <div class="touch-indicator"></div>
+        </div>
+    </section>
 
-    <div class="ticket-card">
-        <img src="ticket-morrissey.jpg" alt="Morrissey Ticket">
-        <div class="touch-indicator"></div>
-    </div>
+    <section class="ticket-section">
+        <div class="ticket-card">
+            <img src="smiths-stubs.jpg" alt="The Smiths Ticket">
+            <div class="touch-indicator"></div>
+        </div>
+    </section>
 
-    <div class="ticket-card">
-        <img src="ticket-smiths.jpg" alt="The Smiths Ticket">
-        <div class="touch-indicator"></div>
-    </div>
-    
-    </main>
+    <div class="scroll-spacer"></div>
+</main>
 
 <script>
-    // Intersection Observer to trigger the "Fly Up" animation
-    const observerOptions = {
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, observerOptions);
-
+    // Handle Click for Details
     document.querySelectorAll('.ticket-card').forEach(card => {
-        observer.observe(card);
-    });
-
-    // Handle Ticket Clicks for "More Info"
-    document.querySelectorAll('.ticket-card').forEach(card => {
-        card.addEventListener('click', () => {
-            alert("More memories from this show coming soon!");
+        card.addEventListener('click', (e) => {
+            // Check if clicking near the pulse/image
+            alert("Memories from this show are loading...");
         });
     });
 </script>
 
 </body>
 </html>
+
 
 
