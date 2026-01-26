@@ -28,7 +28,8 @@
             background-color: var(--bg-color);
             z-index: 2000;
             text-align: center;
-            padding-top: 40px;
+            padding: 40px 10% 0 10%;
+            box-sizing: border-box;
         }
 
         h1 {
@@ -36,19 +37,20 @@
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: -0.03em;
-            margin: 0 0 10px 0;
+            margin: 0 0 15px 0;
         }
 
         .subheadline {
             font-family: 'Courier New', Courier, monospace;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            font-style: italic;
+            font-size: 0.95rem;
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+            line-height: 1.5;
+            color: var(--text-main);
         }
 
         .header-line {
-            width: 90%;
-            margin: 0 auto;
+            width: 100%;
             border-bottom: 2px solid var(--text-main);
         }
 
@@ -61,16 +63,16 @@
             letter-spacing: 0.05em;
         }
 
-        /* --- ASKEW STACKING SYSTEM --- */
+        /* --- STACKING SYSTEM --- */
         .show-archive {
-            margin-top: 320px; 
-            padding-bottom: 200px;
+            margin-top: 420px; 
+            padding-bottom: 300px;
         }
 
         .ticket-section {
             position: sticky;
-            top: 280px; 
-            height: 90vh;
+            top: 380px; 
+            height: 80vh;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -81,18 +83,16 @@
         .ticket-card {
             position: relative;
             width: 85%;
-            max-width: 500px;
+            max-width: 480px;
             background: #fff;
-            padding: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
             cursor: pointer;
-            /* Paul Smith Askew Effect */
-            transform: rotate(var(--rotation)) translateY(50px);
+            transform: rotate(var(--rotation)) translateY(60px);
             opacity: 0;
-            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease-out;
+            transition: transform 0.9s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.6s ease-out;
         }
 
-        /* Logic for when the card is in view */
         .ticket-section.active .ticket-card {
             opacity: 1;
             transform: rotate(var(--rotation)) translateY(0);
@@ -102,36 +102,49 @@
             width: 100%;
             height: auto;
             display: block;
-            background-color: #eee; /* Placeholder color if image fails */
+            border: 1px solid #f0f0f0;
         }
+
+        /* Ticket Copy Styles */
+        .ticket-copy {
+            margin-top: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            border-top: 1px dashed var(--border);
+            padding-top: 10px;
+        }
+
+        .ticket-copy h2 { font-size: 1.2rem; margin: 0; text-transform: uppercase; }
+        .ticket-copy p { font-size: 0.85rem; color: var(--text-grey); margin: 5px 0 0 0; line-height: 1.4; }
 
         /* ZOOM FEATURE */
         .ticket-card:hover img {
-            transform: scale(1.4);
+            transform: scale(1.45);
             z-index: 3000;
+            transition: transform 0.4s ease;
         }
 
-        /* --- SUBTLE RECORD-STORE INDICATOR --- */
+        /* RECORD STORE INDICATOR */
         .record-light {
             position: absolute;
-            bottom: 15px;
-            right: 15px;
-            width: 8px;
-            height: 8px;
+            top: 25px;
+            right: 25px;
+            width: 7px;
+            height: 7px;
             background-color: var(--accent);
             border-radius: 50%;
-            box-shadow: 0 0 5px var(--accent);
-            animation: radioBlink 2s infinite step-end;
+            box-shadow: 0 0 6px var(--accent);
+            animation: radioBlink 2.5s infinite step-end;
         }
 
         @keyframes radioBlink {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+            50% { opacity: 0.2; }
         }
 
         @media (max-width: 800px) {
-            .show-archive { margin-top: 260px; }
-            .ticket-section { top: 220px; }
+            .show-archive { margin-top: 480px; }
+            .ticket-section { top: 400px; }
+            h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -139,36 +152,60 @@
 
 <header>
     <h1>Shows I've Seen</h1>
-    <div class="subheadline">Shows I wished to spend time with</div>
+    <div class="subheadline">
+        I’ve kept a ticket stub from every concert I’ve attended. This is a running archive of live performance. A record of what I chose to spend time with, across years, genres, and cities.
+    </div>
     <div class="header-line"></div>
     <div class="archive-note">— This is a growing archive. New stubs and memories added as they surface. —</div>
 </header>
 
 <main class="show-archive">
     <section class="ticket-section">
-        <div class="ticket-card" style="--rotation: -3deg;">
-            <img src="ticket-oasis.jpg" alt="Oasis Ticket">
+        <div class="ticket-card" style="--rotation: -2.5deg;">
             <div class="record-light"></div>
+            <img src="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg" alt="The Wallflowers - 1997">
+            <div class="ticket-copy">
+                <h2>The Wallflowers (1997)</h2>
+                <p>Frank Erwin Center, Austin, TX. First arena show. The scale of the sound felt massive at 14.</p>
+            </div>
         </div>
     </section>
 
     <section class="ticket-section">
-        <div class="ticket-card" style="--rotation: 2deg;">
-            <img src="ticket-morrissey.jpg" alt="Morrissey Ticket">
+        <div class="ticket-card" style="--rotation: 3deg;">
             <div class="record-light"></div>
+            <img src="Blur_Smashmouth_Liberty Lunch_1997.jpg" alt="Blur - 1997">
+            <div class="ticket-copy">
+                <h2>Blur (1997)</h2>
+                <p>Liberty Lunch, Austin, TX. Liberty Lunch was at its peak. Small club energy for a world-class band.</p>
+            </div>
         </div>
     </section>
 
     <section class="ticket-section">
-        <div class="ticket-card" style="--rotation: -1.5deg;">
-            <img src="ticket-smiths.jpg" alt="The Smiths Ticket">
+        <div class="ticket-card" style="--rotation: -1.2deg;">
             <div class="record-light"></div>
+            <img src="Aerosmith__Frank Erwin Center_1997.jpg" alt="Aerosmith - 1997">
+            <div class="ticket-copy">
+                <h2>Aerosmith (1997)</h2>
+                <p>Frank Erwin Center, Austin, TX. A masterclass in stage presence. The scarves on the mic stand were iconic.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="ticket-section">
+        <div class="ticket-card" style="--rotation: 1.8deg;">
+            <div class="record-light"></div>
+            <img src="Third Eye Blind_Austin Music Hall_1998.jpg" alt="Third Eye Blind - 1998">
+            <div class="ticket-copy">
+                <h2>Third Eye Blind (1998)</h2>
+                <p>Austin Music Hall, Austin, TX. The venue is gone now, but the heat of that April night remains vivid.</p>
+            </div>
         </div>
     </section>
 </main>
 
 <script>
-    // Intersection Observer to add the "active" class for fly-up animations
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -177,7 +214,7 @@
                 entry.target.classList.remove('active');
             }
         });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.25 });
 
     document.querySelectorAll('.ticket-section').forEach(section => {
         observer.observe(section);
