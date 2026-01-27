@@ -34,33 +34,35 @@
             border-bottom: 1px solid var(--border);
         }
 
-        h1 { font-size: clamp(2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; }
-        .subheadline { font-family: 'Courier New', monospace; font-size: 0.9rem; max-width: 700px; margin: 15px auto; line-height: 1.4; }
+        h1 { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em; }
+        .subheadline { font-family: 'Courier New', Courier, monospace; font-size: 0.95rem; max-width: 700px; margin: 15px auto; line-height: 1.5; }
 
-        /* --- SCROLL CONTAINER --- */
-        .show-archive { margin-top: 300px; }
+        /* --- STACKING ENGINE --- */
+        .show-archive { margin-top: 350px; padding-bottom: 100vh; }
 
         .ticket-section {
             position: sticky;
-            top: 250px;
-            height: 120vh; /* Increased height to slow down the stacking */
+            top: 280px;
+            height: 100vh; 
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding-top: 50px;
+            padding-top: 20px;
+            pointer-events: none; /* Allows scrolling through the empty space */
         }
 
         .ticket-card {
             position: relative;
-            width: 90%;
-            max-width: 450px;
+            width: 85%;
+            max-width: 480px;
             background: #fff;
-            padding: 15px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            padding: 12px;
+            box-shadow: 0 12px 45px rgba(0,0,0,0.08);
             cursor: pointer;
-            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s;
+            pointer-events: auto; /* Re-enable for the actual card */
+            transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease;
             opacity: 0;
-            transform: translateY(100px) rotate(var(--rotation));
+            transform: translateY(150px) rotate(var(--rotation));
         }
 
         .ticket-section.active .ticket-card {
@@ -68,162 +70,177 @@
             transform: translateY(0) rotate(var(--rotation));
         }
 
-        .ticket-card img { width: 100%; height: auto; display: block; }
+        .ticket-card img { width: 100%; height: auto; display: block; border: 1px solid #f9f9f9; }
 
-        /* --- STEREO LIGHT --- */
+        /* --- BIG STEREO LIGHT --- */
         .record-light {
             position: absolute;
-            bottom: 15px;
-            right: 15px;
-            width: 14px;
-            height: 14px;
+            bottom: 20px;
+            right: 20px;
+            width: 16px;
+            height: 16px;
             background-color: var(--accent);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent);
-            animation: pulse 2s infinite ease-in-out;
-            z-index: 10;
+            box-shadow: 0 0 12px var(--accent);
+            animation: stereoPulse 1.8s infinite ease-in-out;
+            z-index: 5;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.8); }
+        @keyframes stereoPulse {
+            0%, 100% { transform: scale(1); opacity: 1; filter: brightness(1); }
+            50% { transform: scale(0.85); opacity: 0.6; filter: brightness(1.2); }
         }
 
-        /* --- MODAL OVERLAY --- */
+        /* --- MODAL SYSTEM --- */
         #detail-modal {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(250, 250, 248, 0.98);
-            z-index: 3000;
+            background: rgba(250, 250, 248, 0.99);
+            z-index: 4000;
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 5vh 5vw;
             box-sizing: border-box;
-            cursor: zoom-out;
+            overflow-y: auto;
         }
 
-        .modal-img-container {
-            max-width: 800px;
+        .modal-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 900px;
             width: 100%;
-            overflow: hidden;
-            cursor: grab;
+        }
+
+        #modal-img {
+            max-width: 100%;
+            max-height: 65vh;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
             margin-bottom: 30px;
+            transition: transform 0.2s ease;
         }
 
-        .modal-img-container img {
-            width: 100%;
-            transition: transform 0.1s ease-out;
-        }
-
-        .modal-info {
+        .modal-text {
             text-align: center;
-            max-width: 600px;
-            font-family: 'Courier New', monospace;
+            font-family: 'Courier New', Courier, monospace;
+            max-width: 650px;
         }
 
-        .modal-info h2 { text-transform: uppercase; margin: 0 0 10px 0; }
-        .modal-info p { line-height: 1.6; color: #444; }
+        .modal-text h2 { text-transform: uppercase; font-size: 1.5rem; margin: 0 0 5px 0; }
+        .modal-text h3 { font-size: 1rem; color: var(--text-grey); margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 0.05em; }
+        .modal-text p { line-height: 1.6; font-size: 1rem; color: #333; }
 
-        .close-hint { margin-top: 20px; font-size: 0.8rem; color: var(--text-grey); text-transform: uppercase; }
+        .close-btn { margin-top: 30px; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-grey); cursor: pointer; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .close-btn:hover { border-bottom: 1px solid var(--text-grey); color: var(--text-main); }
 
+        @media (max-width: 600px) {
+            .show-archive { margin-top: 400px; }
+            .ticket-section { top: 320px; }
+        }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Shows I've Seen</h1>
-    <div class="subheadline">A running archive of live performance. A record of what I chose to spend time with.</div>
+    <div class="subheadline">I’ve kept a ticket stub from every concert I’ve attended. A record of what I chose to spend time with, across years, genres, and cities.</div>
     <div class="archive-note">— Growing Archive —</div>
 </header>
 
 <main class="show-archive">
-    <section class="ticket-section" data-artist="The Wallflowers (1997)" data-venue="Frank Erwin Center, Austin, TX" data-copy="First arena show. The scale of the sound felt massive at 14.">
-        <div class="ticket-card" style="--rotation: -2deg;">
+    <section class="ticket-section" data-artist="The Wallflowers" data-year="1997" data-venue="Frank Erwin Center" data-city="Austin, TX" data-copy="First arena show. The scale of the sound felt massive at 14." data-img="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg">
+        <div class="ticket-card" style="--rotation: -1.5deg;">
             <img src="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg">
             <div class="record-light"></div>
         </div>
     </section>
 
-    <section class="ticket-section" data-artist="Blur (1997)" data-venue="Liberty Lunch, Austin, TX" data-copy="Liberty Lunch was at its peak. Small club energy for a world-class band.">
-        <div class="ticket-card" style="--rotation: 3deg;">
+    <section class="ticket-section" data-artist="Blur" data-year="1997" data-venue="Liberty Lunch" data-city="Austin, TX" data-copy="Liberty Lunch was at its peak. Small club energy for a world-class band." data-img="Blur_Smashmouth_Liberty Lunch_1997.jpg">
+        <div class="ticket-card" style="--rotation: 2deg;">
             <img src="Blur_Smashmouth_Liberty Lunch_1997.jpg">
             <div class="record-light"></div>
         </div>
     </section>
 
-    <section class="ticket-section" data-artist="Aerosmith (1997)" data-venue="Frank Erwin Center, Austin, TX" data-copy="A masterclass in stage presence. The scarves on the mic stand were iconic.">
-        <div class="ticket-card" style="--rotation: -1.5deg;">
+    <section class="ticket-section" data-artist="Aerosmith" data-year="1997" data-venue="Frank Erwin Center" data-city="Austin, TX" data-copy="A masterclass in stage presence. The scarves on the mic stand were iconic." data-img="Aerosmith__Frank Erwin Center_1997.jpg">
+        <div class="ticket-card" style="--rotation: -2.5deg;">
             <img src="Aerosmith__Frank Erwin Center_1997.jpg">
+            <div class="record-light"></div>
+        </div>
+    </section>
+
+    <section class="ticket-section" data-artist="Third Eye Blind" data-year="1998" data-venue="Austin Music Hall" data-city="Austin, TX" data-copy="The venue is gone now, but the heat of that April night remains vivid." data-img="Third Eye Blind_Austin Music Hall_1998.jpg">
+        <div class="ticket-card" style="--rotation: 1.8deg;">
+            <img src="Third Eye Blind_Austin Music Hall_1998.jpg">
             <div class="record-light"></div>
         </div>
     </section>
 </main>
 
 <div id="detail-modal">
-    <div class="modal-img-container">
-        <img id="modal-img" src="">
-    </div>
-    <div class="modal-info">
-        <h2 id="modal-title"></h2>
-        <h3 id="modal-venue" style="font-size: 1rem; color: var(--text-grey);"></h3>
-        <p id="modal-desc"></p>
-        <div class="close-hint">Click anywhere to return</div>
+    <div class="modal-content">
+        <img id="modal-img" src="" alt="Ticket Stub Zoom">
+        <div class="modal-text">
+            <h2 id="m-artist"></h2>
+            <h3 id="m-meta"></h3>
+            <p id="m-copy"></p>
+            <div class="close-btn" onclick="closeModal()">Close Archive View</div>
+        </div>
     </div>
 </div>
 
 <script>
-    // Intersection Observer for Stacking
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) entry.target.classList.add('active');
             else entry.target.classList.remove('active');
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 });
 
-    document.querySelectorAll('.ticket-section').forEach(s => observer.observe(s));
+    document.querySelectorAll('.ticket-section').forEach(section => observer.observe(section));
 
-    // Modal & Zoom Logic
     const modal = document.getElementById('detail-modal');
-    const modalImg = document.getElementById('modal-img');
-    let scale = 1;
+    const mImg = document.getElementById('modal-img');
 
     document.querySelectorAll('.ticket-section').forEach(section => {
         section.addEventListener('click', () => {
-            const artist = section.getAttribute('data-artist');
-            const venue = section.getAttribute('data-venue');
-            const copy = section.getAttribute('data-copy');
-            const imgSrc = section.querySelector('img').src;
-
-            document.getElementById('modal-title').innerText = artist;
-            document.getElementById('modal-venue').innerText = venue;
-            document.getElementById('modal-desc').innerText = copy;
-            modalImg.src = imgSrc;
+            const d = section.dataset;
+            document.getElementById('m-artist').innerText = `${d.artist} (${d.year})`;
+            document.getElementById('m-meta').innerText = `${d.venue} | ${d.city}`;
+            document.getElementById('m-copy').innerText = d.copy;
+            mImg.src = d.img;
             
-            scale = 1;
-            modalImg.style.transform = `scale(${scale})`;
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         });
     });
 
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    // Close modal on background click
     modal.addEventListener('click', (e) => {
-        if (e.target !== modalImg) {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+        if (e.target === modal) closeModal();
     });
 
-    // Simple scroll-to-zoom for desktop
-    modal.addEventListener('wheel', (e) => {
-        e.preventDefault();
-        scale += e.deltaY * -0.001;
-        scale = Math.min(Math.max(1, scale), 3);
-        modalImg.style.transform = `scale(${scale})`;
-    }, { passive: false });
-
+    // Touch support for pinch-zoom is enabled by browser defaults in this modal setup,
+    // but we can add a simple double-tap zoom for mobile users:
+    let lastTap = 0;
+    mImg.addEventListener('touchend', (e) => {
+        const curTime = new Date().getTime();
+        const tapLen = curTime - lastTap;
+        if (tapLen < 500 && tapLen > 0) {
+            e.preventDefault();
+            mImg.style.transform = mImg.style.transform === 'scale(1.5)' ? 'scale(1)' : 'scale(1.5)';
+        }
+        lastTap = curTime;
+    });
 </script>
+
 </body>
 </html>
