@@ -18,9 +18,10 @@
             color: var(--text-main);
             margin: 0;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
         }
 
-        /* --- HEADER SECTION --- */
+        /* --- HEADER --- */
         header {
             position: fixed;
             top: 0;
@@ -28,198 +29,201 @@
             background-color: var(--bg-color);
             z-index: 2000;
             text-align: center;
-            padding: 40px 10% 0 10%;
+            padding: 40px 10% 20px 10%;
             box-sizing: border-box;
+            border-bottom: 1px solid var(--border);
         }
 
-        h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -0.03em;
-            margin: 0 0 15px 0;
-        }
+        h1 { font-size: clamp(2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; }
+        .subheadline { font-family: 'Courier New', monospace; font-size: 0.9rem; max-width: 700px; margin: 15px auto; line-height: 1.4; }
 
-        .subheadline {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.95rem;
-            max-width: 800px;
-            margin: 0 auto 25px auto;
-            line-height: 1.5;
-            color: var(--text-main);
-        }
-
-        .header-line {
-            width: 100%;
-            border-bottom: 2px solid var(--text-main);
-        }
-
-        .archive-note {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.85rem;
-            color: var(--text-grey);
-            margin: 15px 0 20px 0;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* --- STACKING SYSTEM --- */
-        .show-archive {
-            margin-top: 420px; 
-            padding-bottom: 300px;
-        }
+        /* --- SCROLL CONTAINER --- */
+        .show-archive { margin-top: 300px; }
 
         .ticket-section {
             position: sticky;
-            top: 380px; 
-            height: 80vh;
-            width: 100%;
+            top: 250px;
+            height: 120vh; /* Increased height to slow down the stacking */
             display: flex;
             justify-content: center;
-            align-items: center;
-            background-color: var(--bg-color);
+            align-items: flex-start;
+            padding-top: 50px;
         }
 
         .ticket-card {
             position: relative;
-            width: 85%;
-            max-width: 480px;
+            width: 90%;
+            max-width: 450px;
             background: #fff;
-            padding: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            padding: 15px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
             cursor: pointer;
-            transform: rotate(var(--rotation)) translateY(60px);
+            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s;
             opacity: 0;
-            transition: transform 0.9s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.6s ease-out;
+            transform: translateY(100px) rotate(var(--rotation));
         }
 
         .ticket-section.active .ticket-card {
             opacity: 1;
-            transform: rotate(var(--rotation)) translateY(0);
+            transform: translateY(0) rotate(var(--rotation));
         }
 
-        .ticket-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border: 1px solid #f0f0f0;
-        }
+        .ticket-card img { width: 100%; height: auto; display: block; }
 
-        /* Ticket Copy Styles */
-        .ticket-copy {
-            margin-top: 15px;
-            font-family: 'Courier New', Courier, monospace;
-            border-top: 1px dashed var(--border);
-            padding-top: 10px;
-        }
-
-        .ticket-copy h2 { font-size: 1.2rem; margin: 0; text-transform: uppercase; }
-        .ticket-copy p { font-size: 0.85rem; color: var(--text-grey); margin: 5px 0 0 0; line-height: 1.4; }
-
-        /* ZOOM FEATURE */
-        .ticket-card:hover img {
-            transform: scale(1.45);
-            z-index: 3000;
-            transition: transform 0.4s ease;
-        }
-
-        /* RECORD STORE INDICATOR */
+        /* --- STEREO LIGHT --- */
         .record-light {
             position: absolute;
-            top: 25px;
-            right: 25px;
-            width: 7px;
-            height: 7px;
+            bottom: 15px;
+            right: 15px;
+            width: 14px;
+            height: 14px;
             background-color: var(--accent);
             border-radius: 50%;
-            box-shadow: 0 0 6px var(--accent);
-            animation: radioBlink 2.5s infinite step-end;
+            box-shadow: 0 0 10px var(--accent);
+            animation: pulse 2s infinite ease-in-out;
+            z-index: 10;
         }
 
-        @keyframes radioBlink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.2; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
         }
 
-        @media (max-width: 800px) {
-            .show-archive { margin-top: 480px; }
-            .ticket-section { top: 400px; }
-            h1 { font-size: 2.5rem; }
+        /* --- MODAL OVERLAY --- */
+        #detail-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(250, 250, 248, 0.98);
+            z-index: 3000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            cursor: zoom-out;
         }
+
+        .modal-img-container {
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            cursor: grab;
+            margin-bottom: 30px;
+        }
+
+        .modal-img-container img {
+            width: 100%;
+            transition: transform 0.1s ease-out;
+        }
+
+        .modal-info {
+            text-align: center;
+            max-width: 600px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .modal-info h2 { text-transform: uppercase; margin: 0 0 10px 0; }
+        .modal-info p { line-height: 1.6; color: #444; }
+
+        .close-hint { margin-top: 20px; font-size: 0.8rem; color: var(--text-grey); text-transform: uppercase; }
+
     </style>
 </head>
 <body>
 
 <header>
     <h1>Shows I've Seen</h1>
-    <div class="subheadline">
-        I’ve kept a ticket stub from every concert I’ve attended. This is a running archive of live performance. A record of what I chose to spend time with, across years, genres, and cities.
-    </div>
-    <div class="header-line"></div>
-    <div class="archive-note">— This is a growing archive. New stubs and memories added as they surface. —</div>
+    <div class="subheadline">A running archive of live performance. A record of what I chose to spend time with.</div>
+    <div class="archive-note">— Growing Archive —</div>
 </header>
 
 <main class="show-archive">
-    <section class="ticket-section">
-        <div class="ticket-card" style="--rotation: -2.5deg;">
+    <section class="ticket-section" data-artist="The Wallflowers (1997)" data-venue="Frank Erwin Center, Austin, TX" data-copy="First arena show. The scale of the sound felt massive at 14.">
+        <div class="ticket-card" style="--rotation: -2deg;">
+            <img src="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg">
             <div class="record-light"></div>
-            <img src="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg" alt="The Wallflowers - 1997">
-            <div class="ticket-copy">
-                <h2>The Wallflowers (1997)</h2>
-                <p>Frank Erwin Center, Austin, TX. First arena show. The scale of the sound felt massive at 14.</p>
-            </div>
         </div>
     </section>
 
-    <section class="ticket-section">
+    <section class="ticket-section" data-artist="Blur (1997)" data-venue="Liberty Lunch, Austin, TX" data-copy="Liberty Lunch was at its peak. Small club energy for a world-class band.">
         <div class="ticket-card" style="--rotation: 3deg;">
+            <img src="Blur_Smashmouth_Liberty Lunch_1997.jpg">
             <div class="record-light"></div>
-            <img src="Blur_Smashmouth_Liberty Lunch_1997.jpg" alt="Blur - 1997">
-            <div class="ticket-copy">
-                <h2>Blur (1997)</h2>
-                <p>Liberty Lunch, Austin, TX. Liberty Lunch was at its peak. Small club energy for a world-class band.</p>
-            </div>
         </div>
     </section>
 
-    <section class="ticket-section">
-        <div class="ticket-card" style="--rotation: -1.2deg;">
+    <section class="ticket-section" data-artist="Aerosmith (1997)" data-venue="Frank Erwin Center, Austin, TX" data-copy="A masterclass in stage presence. The scarves on the mic stand were iconic.">
+        <div class="ticket-card" style="--rotation: -1.5deg;">
+            <img src="Aerosmith__Frank Erwin Center_1997.jpg">
             <div class="record-light"></div>
-            <img src="Aerosmith__Frank Erwin Center_1997.jpg" alt="Aerosmith - 1997">
-            <div class="ticket-copy">
-                <h2>Aerosmith (1997)</h2>
-                <p>Frank Erwin Center, Austin, TX. A masterclass in stage presence. The scarves on the mic stand were iconic.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="ticket-section">
-        <div class="ticket-card" style="--rotation: 1.8deg;">
-            <div class="record-light"></div>
-            <img src="Third Eye Blind_Austin Music Hall_1998.jpg" alt="Third Eye Blind - 1998">
-            <div class="ticket-copy">
-                <h2>Third Eye Blind (1998)</h2>
-                <p>Austin Music Hall, Austin, TX. The venue is gone now, but the heat of that April night remains vivid.</p>
-            </div>
         </div>
     </section>
 </main>
 
+<div id="detail-modal">
+    <div class="modal-img-container">
+        <img id="modal-img" src="">
+    </div>
+    <div class="modal-info">
+        <h2 id="modal-title"></h2>
+        <h3 id="modal-venue" style="font-size: 1rem; color: var(--text-grey);"></h3>
+        <p id="modal-desc"></p>
+        <div class="close-hint">Click anywhere to return</div>
+    </div>
+</div>
+
 <script>
+    // Intersection Observer for Stacking
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            } else {
-                entry.target.classList.remove('active');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('active');
+            else entry.target.classList.remove('active');
         });
-    }, { threshold: 0.25 });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.ticket-section').forEach(s => observer.observe(s));
+
+    // Modal & Zoom Logic
+    const modal = document.getElementById('detail-modal');
+    const modalImg = document.getElementById('modal-img');
+    let scale = 1;
 
     document.querySelectorAll('.ticket-section').forEach(section => {
-        observer.observe(section);
-    });
-</script>
+        section.addEventListener('click', () => {
+            const artist = section.getAttribute('data-artist');
+            const venue = section.getAttribute('data-venue');
+            const copy = section.getAttribute('data-copy');
+            const imgSrc = section.querySelector('img').src;
 
+            document.getElementById('modal-title').innerText = artist;
+            document.getElementById('modal-venue').innerText = venue;
+            document.getElementById('modal-desc').innerText = copy;
+            modalImg.src = imgSrc;
+            
+            scale = 1;
+            modalImg.style.transform = `scale(${scale})`;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target !== modalImg) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Simple scroll-to-zoom for desktop
+    modal.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        scale += e.deltaY * -0.001;
+        scale = Math.min(Math.max(1, scale), 3);
+        modalImg.style.transform = `scale(${scale})`;
+    }, { passive: false });
+
+</script>
 </body>
 </html>
