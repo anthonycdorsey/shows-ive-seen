@@ -45,11 +45,11 @@
         }
 
         /* --- STACKING ENGINE --- */
-        .show-archive { margin-top: 380px; padding-bottom: 100vh; }
+        .show-archive { margin-top: 400px; padding-bottom: 100vh; }
 
         .ticket-section {
             position: sticky;
-            top: 300px; /* Locked below the new subheadline height */
+            top: 320px; 
             height: 100vh; 
             display: flex;
             justify-content: center;
@@ -61,16 +61,20 @@
         .ticket-card {
             position: relative;
             width: 85%;
-            max-width: 450px; /* Slightly tighter for consistency */
-            aspect-ratio: 3 / 1.5; /* Forces all tickets to same footprint */
-            background: #fff;
-            padding: 12px;
+            max-width: 500px;
+            /* Aspect ratio adjusted to fit long-form tickets better */
+            aspect-ratio: 16 / 9; 
+            background: #fdfdfd; /* Subtle paper-white backer */
+            padding: 15px;
             box-shadow: 0 12px 45px rgba(0,0,0,0.08);
             cursor: pointer;
             pointer-events: auto;
             transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease;
             opacity: 0;
             transform: translateY(150px) rotate(var(--rotation));
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .ticket-section.active .ticket-card {
@@ -78,35 +82,35 @@
             transform: translateY(0) rotate(var(--rotation));
         }
 
-        /* Normalized Image Fitting */
+        /* THE FIX: object-fit: contain ensures the full image is seen */
         .ticket-card img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; /* Prevents stretching while filling the box */
+            max-width: 100%; 
+            max-height: 100%;
+            object-fit: contain; 
             display: block; 
-            border: 1px solid #f9f9f9; 
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.05));
         }
 
-        /* --- BIG STEREO LIGHT --- */
+        /* --- STEREO LIGHT --- */
         .record-light {
             position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 16px;
-            height: 16px;
+            bottom: 15px;
+            right: 15px;
+            width: 12px;
+            height: 12px;
             background-color: var(--accent);
             border-radius: 50%;
-            box-shadow: 0 0 12px var(--accent);
+            box-shadow: 0 0 10px var(--accent);
             animation: stereoPulse 1.8s infinite ease-in-out;
             z-index: 5;
         }
 
         @keyframes stereoPulse {
             0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(0.85); opacity: 0.6; }
+            50% { transform: scale(0.8); opacity: 0.5; }
         }
 
-        /* --- MODAL SYSTEM --- */
+        /* --- MODAL --- */
         #detail-modal {
             position: fixed;
             top: 0; left: 0;
@@ -118,41 +122,34 @@
             align-items: center;
             justify-content: center;
             padding: 5vh 5vw;
-            box-sizing: border-box;
-            overflow-y: auto;
         }
 
         .modal-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 900px;
+            max-width: 1000px;
             width: 100%;
         }
 
         #modal-img {
             max-width: 100%;
-            max-height: 65vh;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            max-height: 70vh;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
             margin-bottom: 30px;
         }
 
         .modal-text {
             text-align: center;
             font-family: 'Courier New', Courier, monospace;
-            max-width: 650px;
         }
 
-        .modal-text h2 { text-transform: uppercase; font-size: 1.5rem; margin: 0 0 5px 0; }
-        .modal-text h3 { font-size: 1rem; color: var(--text-grey); margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 0.05em; }
-        
-        .close-btn { margin-top: 30px; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-grey); cursor: pointer; border-bottom: 1px solid transparent; transition: 0.3s; }
-        .close-btn:hover { border-bottom: 1px solid var(--text-grey); color: var(--text-main); }
+        .close-btn { margin-top: 20px; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-grey); cursor: pointer; }
 
         @media (max-width: 600px) {
-            .show-archive { margin-top: 480px; }
-            .ticket-section { top: 400px; }
-            .ticket-card { aspect-ratio: 3 / 2; } /* Slightly taller for mobile legibility */
+            .show-archive { margin-top: 500px; }
+            .ticket-section { top: 420px; }
+            .ticket-card { aspect-ratio: 4 / 3; }
         }
     </style>
 </head>
@@ -199,11 +196,11 @@
 
 <div id="detail-modal">
     <div class="modal-content">
-        <img id="modal-img" src="" alt="Ticket Stub Zoom">
+        <img id="modal-img" src="">
         <div class="modal-text">
-            <h2 id="m-artist"></h2>
-            <h3 id="m-meta"></h3>
-            <p id="m-copy"></p>
+            <h2 id="m-artist" style="margin:0;"></h2>
+            <h3 id="m-meta" style="color:var(--text-grey); font-size:1rem; margin:10px 0;"></h3>
+            <p id="m-copy" style="max-width:600px;"></p>
             <div class="close-btn" onclick="closeModal()">Close Archive View</div>
         </div>
     </div>
@@ -215,7 +212,7 @@
             if (entry.isIntersecting) entry.target.classList.add('active');
             else entry.target.classList.remove('active');
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('.ticket-section').forEach(section => observer.observe(section));
 
@@ -229,7 +226,6 @@
             document.getElementById('m-meta').innerText = `${d.venue} | ${d.city}`;
             document.getElementById('m-copy').innerText = d.copy;
             mImg.src = d.img;
-            
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         });
@@ -239,10 +235,6 @@
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
-
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
 </script>
 
 </body>
