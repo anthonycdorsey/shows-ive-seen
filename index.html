@@ -17,7 +17,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            overflow: hidden; /* Locks vertical scroll to enable our script */
+            overflow: hidden;
         }
 
         header {
@@ -28,6 +28,31 @@
         h1 { font-size: 2.2rem; font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em; }
         .tagline { font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; color: var(--text-grey); text-transform: uppercase; margin-top: 5px; }
 
+        /* --- CLICKABLE ARROWS --- */
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #eee;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2000;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        .nav-arrow:hover { background: #fff; color: var(--accent); scale: 1.1; }
+        .prev-arrow { left: 20px; }
+        .next-arrow { right: 20px; }
+
         .scroller {
             display: flex;
             overflow-x: auto;
@@ -36,9 +61,7 @@
             width: 100vw;
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
-            cursor: grab;
         }
-        .scroller:active { cursor: grabbing; }
         .scroller::-webkit-scrollbar { display: none; }
 
         section {
@@ -58,7 +81,6 @@
             max-width: 480px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.06);
             border: 1px solid #eee;
-            user-select: none; /* Prevents text highlighting while dragging */
         }
 
         .content-card img, .content-card video {
@@ -68,7 +90,6 @@
             object-fit: contain;
             display: block;
             margin-bottom: 20px;
-            pointer-events: none; /* Prevents image dragging from breaking the scroll */
         }
 
         .label { font-family: 'Courier New', Courier, monospace; color: var(--text-grey); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 8px; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; }
@@ -87,14 +108,8 @@
         }
         .cta-btn:hover { background: var(--accent); color: #fff; }
 
-        .nav-hint {
-            position: fixed;
-            bottom: 30px;
-            left: 5%;
-            font-family: 'Courier New', monospace;
-            font-size: 0.65rem;
-            color: var(--text-grey);
-            text-transform: uppercase;
+        @media (max-width: 768px) {
+            .nav-arrow { display: none; } /* Hide arrows on mobile to keep it clean for swiping */
         }
     </style>
 </head>
@@ -105,9 +120,10 @@
     <div class="tagline">AN EDITED VIEW OF WHO I AM.</div>
 </header>
 
-<div class="nav-hint">Scroll wheel or Click & Drag →</div>
+<div class="nav-arrow prev-arrow" id="prevBtn">←</div>
+<div class="nav-arrow next-arrow" id="nextBtn">→</div>
 
-<main class="scroller">
+<main class="scroller" id="main-scroller">
     
     <section><div class="content-card"><div class="label">Austin</div><img src="Me_Mom_Dad.jpg"><div class="copy">I was born and raised in Austin, Texas.</div></div></section>
     <section><div class="content-card"><div class="label">Austin</div><img src="Mom_Brothers.png"><div class="copy">I’m the third of four boys.</div></div></section>
@@ -124,12 +140,12 @@
     <section><div class="content-card"><div class="label">Collecting</div><img src="Parker_Posey.png"><div class="copy">I collect objects and moments that hold meaning. And I adore Parker Posey.</div></div></section>
     <section><div class="content-card"><div class="label">Collecting</div><img src="Pal_Donkey.png"><div class="copy">Like this vintage NORCREST FURLAND Anthropomorphic Pal.</div></div></section>
     <section><div class="content-card"><div class="label">Collecting</div><img src="Italian_Jar.png"><div class="copy">Or this handmade jar I purchased in Montepulciano, IT.</div></div></section>
-    <section><div class="content-card"><div class="label">Collecting</div><video src="Auto_Video.mp4" autoplay muted loop playsinline></video><div class="copy">Or automata, like this!</div><a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta-btn">Check out the St.Leger store</a></div></section>
+    <section><div class="content-card"><div class="label">Collecting</div><video src="Auto_Video.mp4" autoplay muted loop playsinline></video><div class="copy">Or automata, like this!</div><a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta-btn">Check out their store</a></div></section>
     <section><div class="content-card"><div class="label">Collecting</div><img src="PS_OASIS.jpg"><div class="copy">I love fashion, my go-to brand is Paul Smith.</div><a href="https://www.paulsmith.com/" target="_blank" class="cta-btn">Checkout Paul Smith</a></div></section>
     <section><div class="content-card"><div class="label">Collecting</div><img src="Mitch_Painting.png"><div class="copy">I also collect art, including this painting by my friend Mitch Ferrin.</div><a href="https://www.mitchferrin.com/" target="_blank" class="cta-btn">Visit Mitch Ferrin</a></div></section>
     <section><div class="content-card"><div class="label">Collecting</div><img src="Joan_Rivers.png"><div class="copy">A more recent purchase is this painting by Joan Rivers.</div></div></section>
     <section><div class="content-card"><div class="label">Collecting</div><img src="Me_Cake.png"><div class="copy">My grandmother had a professional cake business. Gonzo Cake!</div></div></section>
-    <section><div class="content-card"><div class="label">Collecting</div><img src="Cookies.jpg"><div class="copy">That inspired my interest in both enjoying and creating things. I made these!</div><a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta-btn">Check out my Breakfast Taco Recipe</a></div></section>
+    <section><div class="content-card"><div class="label">Collecting</div><img src="Cookies.jpg"><div class="copy">That inspired my interest in both enjoying and creating things. I made these!</div><a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta-btn">Breakfast Taco Recipe</a></div></section>
     <section><div class="content-card"><div class="label">Collecting</div><img src="Bravo.jpeg"><div class="copy">I also collect a lot of Reality TV memories. Mostly Bravo.</div><a href="https://www.bravotv.com/" target="_blank" class="cta-btn">Visit Bravo</a></div></section>
 
     <section><div class="content-card"><div class="label">Travel</div><img src="83_Worlds_Fair.png"><div class="copy">We went to New Orleans often when I was growing up. I was at this fair!</div></div></section>
@@ -140,46 +156,31 @@
 </main>
 
 <script>
-    const scrollContainer = document.querySelector('.scroller');
+    const scroller = document.getElementById('main-scroller');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
 
-    // METHOD 1: Mouse Wheel Redirect (Desktop Fix)
+    // MOUSE WHEEL SCRIPT
     window.addEventListener('wheel', (evt) => {
         if (evt.deltaY !== 0) {
             evt.preventDefault();
-            scrollContainer.scrollLeft += evt.deltaY;
+            scroller.scrollLeft += evt.deltaY;
         }
     }, { passive: false });
 
-    // METHOD 2: Click and Drag (Safety Net)
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    scrollContainer.addEventListener('mousedown', (e) => {
-        isDown = true;
-        startX = e.pageX - scrollContainer.offsetLeft;
-        scrollLeft = scrollContainer.scrollLeft;
+    // ARROW CLICK SCRIPT
+    nextBtn.addEventListener('click', () => {
+        scroller.scrollBy({ left: window.innerWidth, behavior: 'smooth' });
     });
 
-    scrollContainer.addEventListener('mouseleave', () => {
-        isDown = false;
-    });
-
-    scrollContainer.addEventListener('mouseup', () => {
-        isDown = false;
-    });
-
-    scrollContainer.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - scrollContainer.offsetLeft;
-        const walk = (x - startX) * 2; // Scroll speed
-        scrollContainer.scrollLeft = scrollLeft - walk;
+    prevBtn.addEventListener('click', () => {
+        scroller.scrollBy({ left: -window.innerWidth, behavior: 'smooth' });
     });
 </script>
 
 </body>
 </html>
+
 
 
 
