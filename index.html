@@ -18,6 +18,7 @@
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             overflow-y: hidden;
+            overflow-x: hidden;
         }
 
         header {
@@ -30,6 +31,7 @@
         h1 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0; }
         .archive-note { font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; color: var(--text-grey); text-transform: uppercase; margin-top: 10px; }
 
+        /* --- SCROLL CONTAINER --- */
         .horizontal-scroller {
             display: flex;
             overflow-x: auto;
@@ -37,23 +39,30 @@
             height: 100vh;
             width: 100vw;
             scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
         }
+        .horizontal-scroller::-webkit-scrollbar { display: none; }
 
         .identity-frame {
             min-width: 100vw;
             height: 100vh;
             scroll-snap-align: start;
+            scroll-snap-stop: always;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
         }
 
+        /* Responsive Container to keep cards inside "Frame" */
         .card-stack {
             position: relative;
-            width: 85%;
-            max-width: 500px;
-            height: 70vh;
+            width: 90%;
+            max-width: 480px; /* Constrained to prevent bleeding */
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .card {
@@ -61,51 +70,56 @@
             width: 100%;
             background: #fff;
             padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             border: 1px solid #eee;
-            /* Start off-screen right */
             transform: translateX(120vw) rotate(var(--rotation));
             opacity: 0;
-            /* Smooth "landing" transition */
-            transition: transform 0.9s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s ease;
+            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease;
+            box-sizing: border-box;
         }
 
-        /* Trigger for the fly-in */
         .identity-frame.active .card {
-            transform: translateX(var(--offset-x)) translateY(var(--offset-y)) rotate(var(--rotation));
+            transform: translateX(var(--off-x)) translateY(var(--off-y)) rotate(var(--rotation));
             opacity: 1;
         }
 
-        /* --- STAGGERED DELAYS (THE FIX) --- */
-        /* Card 1 lands almost immediately */
-        .card:nth-child(1) { transition-delay: 0.1s; z-index: 10; --offset-x: 0px; --offset-y: 0px; }
-        /* Card 2 waits slightly longer */
-        .card:nth-child(2) { transition-delay: 0.4s; z-index: 11; --offset-x: 10px; --offset-y: 15px; }
-        /* Card 3 waits longer still */
-        .card:nth-child(3) { transition-delay: 0.7s; z-index: 12; --offset-x: -10px; --offset-y: 30px; }
-        /* Card 4 (if needed) */
-        .card:nth-child(4) { transition-delay: 1.0s; z-index: 13; --offset-x: 5px; --offset-y: 45px; }
+        /* Staggered Delays for Sequence */
+        .card:nth-child(1) { transition-delay: 0.1s; z-index: 10; --off-x: 0px; --off-y: 0px; }
+        .card:nth-child(2) { transition-delay: 0.4s; z-index: 11; --off-x: 8px; --off-y: 12px; }
+        .card:nth-child(3) { transition-delay: 0.7s; z-index: 12; --off-x: -8px; --off-y: 24px; }
+        .card:nth-child(4) { transition-delay: 1.0s; z-index: 13; --off-x: 4px; --off-y: 36px; }
+        .card:nth-child(5) { transition-delay: 1.3s; z-index: 14; --off-x: -4px; --off-y: 48px; }
 
         .card img, .card video {
             width: 100%;
             height: auto;
-            max-height: 45vh;
+            max-height: 40vh; /* Fits within frame */
             object-fit: contain;
             display: block;
             margin-bottom: 15px;
         }
 
         .card-content { font-family: 'Courier New', Courier, monospace; }
-        .card-content h2 { font-size: 1rem; text-transform: uppercase; margin: 0 0 10px 0; color: var(--text-grey); border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .card-content p { font-size: 0.85rem; line-height: 1.4; margin: 0; }
+        .card-content h2 { font-size: 0.9rem; text-transform: uppercase; margin: 0 0 8px 0; color: var(--text-grey); border-bottom: 1px solid #eee; padding-bottom: 4px; }
+        .card-content p { font-size: 0.85rem; line-height: 1.4; margin: 0 0 10px 0; }
 
+        .cta-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            border: 1px solid var(--accent);
+            padding: 4px 8px;
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Anthony C. Dorsey</h1>
-    <div class="archive-note">— AN EDITED VIEW OF WHO I AM. —</div>
+    <h1>Call me Tony</h1>
+    <div class="archive-note">— A CURATED VIEW OF WHO I AM. —</div>
 </header>
 
 <main class="horizontal-scroller" id="scroller">
@@ -121,15 +135,11 @@
             </div>
             <div class="card" style="--rotation: 3deg;">
                 <img src="Mom_Brothers.png">
-                <div class="card-content">
-                    <p>I’m the third of four boys.</p>
-                </div>
+                <div class="card-content"><p>I’m the third of four boys.</p></div>
             </div>
             <div class="card" style="--rotation: -1.5deg;">
                 <img src="Me_Cake.png">
-                <div class="card-content">
-                    <p>Gonzo Cake!</p>
-                </div>
+                <div class="card-content"><p>Gonzo Cake!</p></div>
             </div>
         </div>
     </section>
@@ -144,10 +154,93 @@
                 </div>
             </div>
             <div class="card" style="--rotation: -2.5deg;">
+                <img src="KNACK.png">
+                <div class="card-content">
+                    <p>Which eventually allowed me to blend that passion with community.</p>
+                    <a href="https://www.rocklottery.com/" target="_blank" class="cta-link">CHECK OUT ROCK LOTTERY</a>
+                </div>
+            </div>
+            <div class="card" style="--rotation: 1.8deg;">
                 <img src="Pixies.png">
                 <div class="card-content">
                     <p>Which shaped my lifelong interest in music.</p>
+                    <a href="shows-ive-seen.html" class="cta-link">SEE MY ARCHIVE OF LIVE SHOWS</a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="identity-frame">
+        <div class="card-stack">
+            <div class="card" style="--rotation: 2deg;">
+                <img src="Mickey_Me.jpg">
+                <div class="card-content">
+                    <h2>New York</h2>
+                    <p>I moved to NYC in 2008.</p>
+                    <p><i>My favorite halloween, ever</i></p>
+                </div>
+            </div>
+            <div class="card" style="--rotation: -3deg;">
+                <img src="Snap.jpg">
+                <div class="card-content"><p>Where I began the majority of my career.</p></div>
+            </div>
+            <div class="card" style="--rotation: 1.2deg;">
+                <img src="Me_Seanie.jpg">
+                <div class="card-content"><p>And where I met my husband.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="identity-frame">
+        <div class="card-stack">
+            <div class="card" style="--rotation: -2deg;">
+                <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
+                <div class="card-content">
+                    <h2>Collecting</h2>
+                    <p>Or automata, like this!</p>
+                </div>
+            </div>
+            <div class="card" style="--rotation: 2.5deg;">
+                <img src="Italian_Jar.png">
+                <div class="card-content"><p>Or this handmade jar I purchased in Montepulciano, IT.</p></div>
+            </div>
+            <div class="card" style="--rotation: -1deg;">
+                <img src="Joan_Rivers.png">
+                <div class="card-content">
+                    <p>A more recent purchase is this painting by Joan Rivers.</p>
+                    <a href="https://en.wikipedia.org/wiki/Joan_Rivers" target="_blank" class="cta-link">THIS IS W.C. FIELDS</a>
+                </div>
+            </div>
+            <div class="card" style="--rotation: 3deg;">
+                <img src="PS_OASIS.jpg">
+                <div class="card-content">
+                    <p>I love fashion, my go-to brand is Paul Smith.</p>
+                    <a href="https://www.paulsmith.com/" target="_blank" class="cta-link">Checkout Paul Smith</a>
+                </div>
+            </div>
+            <div class="card" style="--rotation: -2.5deg;">
+                <img src="Parker_Posey.png">
+                <div class="card-content"><p>And I adore Parker Posey.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="identity-frame">
+        <div class="card-stack">
+            <div class="card" style="--rotation: -1deg;">
+                <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
+                <div class="card-content">
+                    <h2>Travel</h2>
+                    <p>Now I’ve lost count of how many places I’ve been!</p>
+                </div>
+            </div>
+            <div class="card" style="--rotation: 3deg;">
+                <img src="Mexico_City.jpg">
+                <div class="card-content"><p>The first country I visited was Mexico.</p></div>
+            </div>
+            <div class="card" style="--rotation: -2deg;">
+                <img src="83_Worlds_Fair.png">
+                <div class="card-content"><p>We went to New Orleans often growing up.</p></div>
             </div>
         </div>
     </section>
@@ -159,8 +252,8 @@
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+                entry.target.querySelectorAll('video').forEach(v => v.play());
             } else {
-                // Optional: remove the class to reset the animation when scrolling back
                 entry.target.classList.remove('active');
             }
         });
@@ -177,6 +270,7 @@
 
 </body>
 </html>
+
 
 
 
