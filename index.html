@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anthony C. Dorsey | Personal Archive</title>
+    <title>Call me Tony</title>
     <style>
         :root {
             --bg-color: #FAFAF8;
@@ -20,7 +20,19 @@
             overflow-y: hidden;
         }
 
-        /* --- HORIZONTAL STACKING CONTAINER --- */
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            left: 5%; top: 40px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0; }
+        /* Updated Header Language */
+        .archive-note { font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; color: var(--text-grey); text-transform: uppercase; margin-top: 10px; }
+
+        /* --- HORIZONTAL SCROLLER --- */
         .horizontal-scroller {
             display: flex;
             overflow-x: auto;
@@ -31,17 +43,8 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        header {
-            position: fixed;
-            left: 5%; top: 40px;
-            z-index: 1000;
-            pointer-events: none;
-        }
-
-        h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0; }
-        .archive-note { font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; color: var(--text-grey); text-transform: uppercase; margin-top: 10px; }
-
-        .identity-block {
+        /* --- IDENTITY FRAME (The Grouping) --- */
+        .identity-frame {
             min-width: 100vw;
             height: 100vh;
             scroll-snap-align: start;
@@ -51,10 +54,20 @@
             position: relative;
         }
 
-        .card {
+        /* Support for overlapping cards within one frame */
+        .card-stack {
             position: relative;
             width: 80%;
             max-width: 500px;
+            height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
             background: #fff;
             padding: 20px;
             box-shadow: 0 15px 45px rgba(0,0,0,0.1);
@@ -63,110 +76,145 @@
             transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease-out;
         }
 
-        .identity-block.active .card {
+        /* Each card inside a frame enters in sequence based on its index */
+        .identity-frame.active .card {
             transform: translateX(0) rotate(var(--rotation));
             opacity: 1;
         }
 
+        /* Manual z-indexing for the stack */
+        .card:nth-child(1) { z-index: 5; transition-delay: 0.1s; }
+        .card:nth-child(2) { z-index: 6; transition-delay: 0.3s; }
+        .card:nth-child(3) { z-index: 7; transition-delay: 0.5s; }
+
         .card img, .card video {
             width: 100%;
             height: auto;
+            max-height: 50vh;
+            object-fit: contain;
             display: block;
             margin-bottom: 20px;
         }
 
         .card-content { font-family: 'Courier New', Courier, monospace; }
         .card-content h2 { font-size: 1.1rem; text-transform: uppercase; margin: 0 0 8px 0; color: var(--text-grey); }
-        .card-content p { font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px; }
+        .card-content p { font-size: 0.9rem; line-height: 1.4; margin-bottom: 10px; }
 
         .cta-link {
             display: inline-block;
-            margin-right: 15px;
             color: var(--accent);
             text-decoration: none;
             font-weight: bold;
             font-size: 0.75rem;
             text-transform: uppercase;
-            border-bottom: 1px solid transparent;
-            transition: 0.3s;
-        }
-        .cta-link:hover { border-bottom: 1px solid var(--accent); }
-
-        .record-light {
-            position: absolute;
-            top: 20px; right: 20px;
-            width: 10px; height: 10px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            animation: radioBlink 2s infinite step-end;
         }
 
-        @keyframes radioBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Anthony C. Dorsey</h1>
-    <div class="archive-note">— Identity Archive —</div>
+    <div class="archive-note">— AN EDITED VIEW OF WHO I AM. —</div>
 </header>
 
 <main class="horizontal-scroller" id="scroller">
     
-    <section class="identity-block">
-        <div class="card" style="--rotation: -2deg;">
-            <img src="Me_Mom_Dad.jpg" alt="Austin Roots">
-            <div class="card-content">
-                <h2>Austin</h2>
-                <p>I was born and raised in Austin, Texas.</p>
+    <section class="identity-frame">
+        <div class="card-stack">
+            <div class="card" style="--rotation: -2deg;">
+                <img src="Me_Mom_Dad.jpg">
+                <div class="card-content">
+                    <h2>Austin</h2>
+                    <p>I was born and raised in Austin, Texas.</p>
+                </div>
             </div>
-            <div class="record-light"></div>
+            <div class="card" style="--rotation: 3deg;">
+                <img src="Mom_Brothers.png">
+                <div class="card-content">
+                    <p>I’m the third of four boys.</p>
+                </div>
+            </div>
+            <div class="card" style="--rotation: -1.5deg;">
+                <img src="Me_Cake.png">
+                <div class="card-content">
+                    <p>Gonzo Cake!</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="identity-block">
-        <div class="card" style="--rotation: 1.5deg;">
-            <img src="Pixies.png" alt="Musical Interests">
-            <div class="card-content">
-                <h2>Music</h2>
-                <p>Which shaped my lifelong interest in music.</p>
-                <a href="shows-ive-seen.html" class="cta-link">See my Running Archive</a>
+    <section class="identity-frame">
+        <div class="card-stack">
+            <div class="card" style="--rotation: 1deg;">
+                <img src="Dad_Singing.jpg">
+                <div class="card-content">
+                    <h2>Music</h2>
+                    <p>My dad was a working musician in Austin.</p>
+                </div>
             </div>
-            <div class="record-light"></div>
+            <div class="card" style="--rotation: -2.5deg;">
+                <img src="Pixies.png">
+                <div class="card-content">
+                    <p>Which shaped my lifelong interest in music.</p>
+                    <a href="shows-ive-seen.html" class="cta-link">See Archive</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="identity-block">
-        <div class="card" style="--rotation: -1deg;">
-            <img src="Mickey_Me.jpg" alt="New York Life">
-            <div class="card-content">
-                <h2>New York</h2>
-                <p>I moved to NYC in 2008 and began the majority of my career there.</p>
+    <section class="identity-frame">
+        <div class="card-stack">
+            <div class="card" style="--rotation: 2deg;">
+                <img src="Mickey_Me.jpg">
+                <div class="card-content">
+                    <h2>New York</h2>
+                    <p>I moved to NYC in 2008.</p>
+                </div>
             </div>
-            <div class="record-light"></div>
+            <div class="card" style="--rotation: -3deg;">
+                <img src="Me_Seanie.jpg">
+                <div class="card-content">
+                    <p>Where I met my husband.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="identity-block">
-        <div class="card" style="--rotation: 2deg;">
-            <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
-            <div class="card-content">
-                <h2>Collecting</h2>
-                <p>I collect objects and moments that hold meaning, like automata!</p>
-                <a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta-link">Visit Store</a>
+    <section class="identity-frame">
+        <div class="card-stack">
+            <div class="card" style="--rotation: -2deg;">
+                <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
+                <div class="card-content">
+                    <h2>Collecting</h2>
+                    <p>Or automata, like this!</p>
+                    <a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta-link">Visit Store</a>
+                </div>
             </div>
-            <div class="record-light"></div>
+            <div class="card" style="--rotation: 1.5deg;">
+                <img src="Mitch_Painting.png">
+                <div class="card-content">
+                    <p>I collect art, including this painting by my friend Mitch Ferrin.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="identity-block">
-        <div class="card" style="--rotation: -2.5deg;">
-            <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
-            <div class="card-content">
-                <h2>Travel</h2>
-                <p>Now I’ve lost count of how many places I’ve been since my first trip to Mexico.</p>
+    <section class="identity-frame">
+        <div class="card-stack">
+            <div class="card" style="--rotation: -1deg;">
+                <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
+                <div class="card-content">
+                    <h2>Travel</h2>
+                    <p>Now I’ve lost count of how many places I’ve been!</p>
+                </div>
             </div>
-            <div class="record-light"></div>
+            <div class="card" style="--rotation: 2.5deg;">
+                <img src="Mexico_City.jpg">
+                <div class="card-content">
+                    <p>The first country I visited was Mexico.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -177,13 +225,15 @@
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                const video = entry.target.querySelector('video');
-                if (video) video.play();
+                const videos = entry.target.querySelectorAll('video');
+                videos.forEach(v => v.play());
+            } else {
+                entry.target.classList.remove('active');
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.4 });
 
-    document.querySelectorAll('.identity-block').forEach(block => observer.observe(block));
+    document.querySelectorAll('.identity-frame').forEach(frame => observer.observe(frame));
 
     const scrollContainer = document.getElementById('scroller');
     scrollContainer.addEventListener('wheel', (evt) => {
@@ -194,3 +244,4 @@
 
 </body>
 </html>
+
