@@ -17,15 +17,17 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            overflow-y: hidden; /* Prevent vertical jitter */
+            overflow-y: hidden;
+            overflow-x: hidden;
         }
 
-        /* --- FIXED HEADER (Pinned above everything) --- */
+        /* --- FIXED HEADER (FORCED TO TOP) --- */
         header {
             position: fixed;
             left: 5%; top: 40px;
-            z-index: 9999; /* Ensure it stays above the cards */
+            z-index: 9999; /* Higher than any card */
             pointer-events: none;
+            width: 90%;
         }
 
         h1 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0; }
@@ -43,7 +45,7 @@
         }
         .horizontal-scroller::-webkit-scrollbar { display: none; }
 
-        /* --- INDIVIDUAL IDENTITY FRAME --- */
+        /* --- FRAME CONTAINER --- */
         .identity-frame {
             min-width: 100vw;
             height: 100vh;
@@ -53,18 +55,15 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            background-color: var(--bg-color); /* This hides the previous frame */
-            outline: none;
+            background-color: var(--bg-color);
         }
 
         .card-stack {
             position: relative;
             width: 85%;
             max-width: 500px;
-            height: 70vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            height: 65vh;
+            margin-top: 5vh;
         }
 
         .card {
@@ -74,43 +73,42 @@
             padding: 24px;
             box-shadow: 0 15px 45px rgba(0,0,0,0.1);
             border: 1px solid #eee;
-            /* Start hidden to the right */
+            /* Animation Starts: Off-screen right */
             transform: translateX(120vw) rotate(var(--rotation));
             opacity: 0;
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
         }
 
-        /* TRIGGER ANIMATION */
+        /* ANIMATION TRIGGER */
         .identity-frame.active .card {
             transform: translateX(var(--off-x)) translateY(var(--off-y)) rotate(var(--rotation));
             opacity: 1;
         }
 
-        /* STAGGERED LANDING & OFFSETS */
+        /* STAGGERED LANDING LOGIC */
         .card:nth-child(1) { transition-delay: 0.1s; z-index: 10; --off-x: 0px; --off-y: 0px; }
-        .card:nth-child(2) { transition-delay: 0.4s; z-index: 11; --off-x: 10px; --off-y: 10px; }
-        .card:nth-child(3) { transition-delay: 0.7s; z-index: 12; --off-x: -10px; --off-y: 20px; }
-        .card:nth-child(4) { transition-delay: 1.0s; z-index: 13; --off-x: 5px; --off-y: 30px; }
+        .card:nth-child(2) { transition-delay: 0.4s; z-index: 11; --off-x: 10px; --off-y: 15px; }
+        .card:nth-child(3) { transition-delay: 0.7s; z-index: 12; --off-x: -10px; --off-y: 30px; }
+        .card:nth-child(4) { transition-delay: 1.0s; z-index: 13; --off-x: 5px; --off-y: 45px; }
 
         .card img, .card video {
-            width: 100%;
-            height: auto;
-            max-height: 45vh;
+            width: 100%; height: auto;
+            max-height: 40vh;
             object-fit: contain;
             display: block;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .card-content { font-family: 'Courier New', Courier, monospace; }
-        .card-content h2 { font-size: 1rem; text-transform: uppercase; margin: 0 0 10px 0; color: var(--text-grey); border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .card-content p { font-size: 0.9rem; line-height: 1.4; margin-bottom: 12px; }
+        .card-content h2 { font-size: 0.9rem; text-transform: uppercase; margin: 0 0 8px 0; color: var(--text-grey); border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .card-content p { font-size: 0.85rem; line-height: 1.4; margin: 0 0 10px 0; }
 
         .cta-link {
             display: inline-block;
             color: var(--accent);
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
         }
     </style>
@@ -118,7 +116,7 @@
 <body>
 
 <header>
-    <h1>Anthony C. Dorsey</h1>
+    <h1>Call me Tony</h1>
     <div class="archive-note">— AN EDITED VIEW OF WHO I AM. —</div>
 </header>
 
@@ -158,6 +156,13 @@
                 </div>
             </div>
             <div class="card" style="--rotation: -3deg;">
+                <img src="KNACK.png">
+                <div class="card-content">
+                    <p>Which eventually allowed me to blend that passion with community.</p>
+                    <a href="https://www.rocklottery.com/" class="cta-link">Rock Lottery</a>
+                </div>
+            </div>
+            <div class="card" style="--rotation: 1.5deg;">
                 <img src="Pixies.png">
                 <div class="card-content">
                     <p>Which shaped my lifelong interest in music.</p>
@@ -167,7 +172,31 @@
         </div>
     </section>
 
-    </main>
+    <section class="identity-frame">
+        <div class="card-stack">
+            <div class="card" style="--rotation: 2deg;">
+                <img src="Mickey_Me.jpg">
+                <div class="card-content">
+                    <h2>New York</h2>
+                    <p>I moved to NYC in 2008. My favorite Halloween, ever.</p>
+                </div>
+            </div>
+            <div class="card" style="--rotation: -3deg;">
+                <img src="Snap.jpg">
+                <div class="card-content">
+                    <p>Where I began the majority of my career.</p>
+                </div>
+            </div>
+            <div class="card" style="--rotation: 1deg;">
+                <img src="Me_Seanie.jpg">
+                <div class="card-content">
+                    <p>And where I met my husband.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
 
 <script>
     const observer = new IntersectionObserver((entries) => {
@@ -191,7 +220,6 @@
 
 </body>
 </html>
-
 
 
 
