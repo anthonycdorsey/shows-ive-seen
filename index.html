@@ -10,6 +10,7 @@
             --text-main: #1A1A1A;
             --text-grey: #A0A09A;
             --accent: #E63946;
+            --card-white: #FFFFFF;
         }
 
         body, html {
@@ -17,106 +18,115 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            overflow: hidden;
+            overflow-y: hidden;
         }
 
-        /* --- HEADER --- */
         header {
             position: fixed;
             left: 5%; top: 40px;
-            z-index: 1000;
+            z-index: 2000;
             pointer-events: none;
         }
+
         h1 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0; }
         .archive-note { font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; color: var(--text-grey); text-transform: uppercase; margin-top: 10px; }
 
-        /* --- HORIZONTAL SNAP CONTAINER --- */
-        .main-container {
+        /* --- HORIZONTAL SCROLLER --- */
+        .horizontal-scroller {
             display: flex;
             overflow-x: auto;
+            overflow-y: hidden;
             scroll-snap-type: x mandatory;
             height: 100vh;
             width: 100vw;
             scrollbar-width: none;
         }
-        .main-container::-webkit-scrollbar { display: none; }
+        .horizontal-scroller::-webkit-scrollbar { display: none; }
 
         /* --- IDENTITY FRAME --- */
         .identity-frame {
             min-width: 100vw;
             height: 100vh;
             scroll-snap-align: start;
+            scroll-snap-stop: always;
             position: relative;
-            overflow-y: auto; /* Allow vertical scrolling within the frame */
-            scroll-snap-type: y mandatory;
-            scrollbar-width: none;
-        }
-        .identity-frame::-webkit-scrollbar { display: none; }
-
-        /* --- FRAME TITLE --- */
-        .frame-title {
-            position: sticky;
-            top: 150px;
-            left: 5%;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            color: var(--text-grey);
-            z-index: 5;
-            margin-bottom: -40px;
-        }
-
-        /* --- CARD STYLING --- */
-        .card-wrapper {
-            height: 100vh;
-            width: 100vw;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            scroll-snap-align: center;
+        }
+
+        /* STATIONARY BOLD TITLE */
+        .frame-title {
+            margin-top: 180px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            z-index: 1500;
+        }
+
+        /* INNER CARD STACK (SCROLLABLE AREA) */
+        .card-container {
+            position: relative;
+            width: 85%;
+            max-width: 500px;
+            height: 60vh;
+            margin-top: 20px;
         }
 
         .card {
-            width: 85%;
-            max-width: 500px;
-            background: #fff;
-            padding: 25px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            position: absolute;
+            width: 100%;
+            background: var(--card-white);
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             border: 1px solid #EEE;
+            box-sizing: border-box;
+            
+            /* Entry Animation */
+            transform: translateX(100vw) rotate(var(--rotation));
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease;
         }
+
+        .identity-frame.active .card {
+            transform: translateX(0) rotate(var(--rotation));
+            opacity: 1;
+        }
+
+        /* Manual Vertical Stacking to ensure all are seen */
+        .card:nth-child(1) { top: 0; z-index: 10; transition-delay: 0.1s; }
+        .card:nth-child(2) { top: 30px; z-index: 11; transition-delay: 0.2s; }
+        .card:nth-child(3) { top: 60px; z-index: 12; transition-delay: 0.3s; }
+        .card:nth-child(4) { top: 90px; z-index: 13; transition-delay: 0.4s; }
+        .card:nth-child(5) { top: 120px; z-index: 14; transition-delay: 0.5s; }
+        .card:nth-child(n+6) { top: 150px; z-index: 15; transition-delay: 0.6s; }
 
         .card img, .card video {
             width: 100%;
             height: auto;
-            max-height: 50vh;
+            max-height: 40vh;
             object-fit: contain;
             display: block;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .card-content { font-family: 'Courier New', Courier, monospace; }
-        .card-content p { font-size: 1rem; line-height: 1.5; margin: 0 0 15px 0; }
+        .card-content p { font-size: 0.9rem; line-height: 1.4; margin: 0 0 10px 0; font-weight: bold; }
+        .caption-line { font-size: 0.8rem; color: #666; display: block; margin-bottom: 8px; }
+
         .cta-link {
+            display: inline-block;
             color: var(--accent);
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             border: 1px solid var(--accent);
-            padding: 6px 12px;
-            display: inline-block;
+            padding: 4px 8px;
+            margin-right: 10px;
         }
 
-        /* --- NAVIGATION HINT --- */
-        .scroll-hint {
-            position: absolute;
-            bottom: 30px;
-            right: 5%;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.7rem;
-            color: var(--text-grey);
-            text-transform: uppercase;
-        }
     </style>
 </head>
 <body>
@@ -126,154 +136,152 @@
     <div class="archive-note">— AN EDITED VIEW OF WHO I AM. —</div>
 </header>
 
-<main class="main-container">
+<main class="horizontal-scroller" id="scroller">
     
-    <section class="identity-frame" id="austin">
-        <div class="frame-title">01. Austin</div>
-        
-        <div class="card-wrapper">
-            <div class="card">
+    <section class="identity-frame">
+        <div class="frame-title"><b>Austin</b></div>
+        <div class="card-container">
+            <div class="card" style="--rotation: -1deg;">
                 <img src="Me_Mom_Dad.jpg">
-                <div class="card-content"><p>I was born and raised in Austin, Texas.</p></div>
+                <div class="card-content"><p>I was born and raised in Austin, Texas</p></div>
             </div>
-        </div>
-
-        <div class="card-wrapper">
-            <div class="card">
+            <div class="card" style="--rotation: 2deg;">
                 <img src="Mom_Brothers.png">
-                <div class="card-content"><p>I’m the third of four boys.</p></div>
+                <div class="card-content"><p>I’m the third of four boys</p></div>
             </div>
         </div>
-        <div class="scroll-hint">Scroll down for more / Scroll right for Music →</div>
     </section>
 
-    <section class="identity-frame" id="music">
-        <div class="frame-title">02. Music</div>
-        
-        <div class="card-wrapper">
-            <div class="card">
+    <section class="identity-frame">
+        <div class="frame-title"><b>Music</b></div>
+        <div class="card-container">
+            <div class="card" style="--rotation: -2deg;">
                 <img src="Dad_Singing.jpg">
-                <div class="card-content"><p>My dad was a working musician in Austin. He played in several bands.</p></div>
+                <div class="card-content"><p>My dad was a working musician in Austin</p><span class="caption-line">He played in several bands</span></div>
             </div>
-        </div>
-
-        <div class="card-wrapper">
-            <div class="card">
+            <div class="card" style="--rotation: 1.5deg;">
                 <img src="Pixies.png">
                 <div class="card-content">
-                    <p>Which shaped my lifelong interest in music.</p>
+                    <p>Which shaped my lifelong interest in music</p>
                     <a href="https://www.anthonycdorsey.com/shows-ive-seen" class="cta-link">See my Running Archive</a>
                 </div>
             </div>
-        </div>
-
-        <div class="card-wrapper">
-            <div class="card">
+            <div class="card" style="--rotation: -1deg;">
                 <img src="KNACK.png">
                 <div class="card-content">
-                    <p>Which eventually allowed me to blend that passion with community.</p>
+                    <p>Which eventually allowed me to blend that passion with community</p>
                     <a href="https://www.rocklottery.com/" class="cta-link">Rock Lottery</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="identity-frame" id="new-york">
-        <div class="frame-title">03. New York</div>
-        
-        <div class="card-wrapper">
-            <div class="card">
+    <section class="identity-frame">
+        <div class="frame-title"><b>New York</b></div>
+        <div class="card-container">
+            <div class="card" style="--rotation: 2deg;">
                 <img src="Mickey_Me.jpg">
-                <div class="card-content">
-                    <p>I moved to NYC in 2008.</p>
-                    <p style="font-style:italic; font-size: 0.8rem;">My favorite halloween, ever</p>
-                </div>
+                <div class="card-content"><p>I moved to NYC in 2008</p><span class="caption-line">My favorite halloween, ever</span></div>
             </div>
-        </div>
-
-        <div class="card-wrapper">
-            <div class="card">
+            <div class="card" style="--rotation: -1.5deg;">
                 <img src="Snap.jpg">
-                <div class="card-content"><p>Where I began the majority of my career.</p></div>
+                <div class="card-content"><p>Where I began the majority of my career</p></div>
             </div>
-        </div>
-
-        <div class="card-wrapper">
-            <div class="card">
+            <div class="card" style="--rotation: 1deg;">
                 <img src="WC_Fields.png">
                 <div class="card-content">
-                    <p>where I moderately excel as an amateur indoor plant hobbyist.</p>
+                    <p>where I moderately excel as an amateur indoor plant hobbyist</p>
                     <a href="https://en.wikipedia.org/wiki/W._C._Fields" class="cta-link">This is W.C. Fields</a>
                 </div>
             </div>
-        </div>
-
-        <div class="card-wrapper">
-            <div class="card">
+            <div class="card" style="--rotation: -2deg;">
                 <img src="Me_Seanie.jpg">
-                <div class="card-content"><p>and where I met my husband.</p></div>
+                <div class="card-content"><p>and where I met my husband</p></div>
             </div>
         </div>
     </section>
 
-    <section class="identity-frame" id="collecting">
-        <div class="frame-title">04. Collecting</div>
-        
-        <div class="card-wrapper">
-            <div class="card">
+    <section class="identity-frame">
+        <div class="frame-title"><b>Collecting</b></div>
+        <div class="card-container">
+            <div class="card" style="--rotation: 1deg;">
+                <img src="Parker_Posey.png">
+                <div class="card-content">
+                    <p>I collect objects and moments that hold meaning</p>
+                    <a href="https://en.wikipedia.org/wiki/Parker_Posey" class="cta-link">And I adore Parker Posey</a>
+                </div>
+            </div>
+            <div class="card" style="--rotation: -2deg;">
+                <img src="Italian_Jar.png">
+                <div class="card-content"><p>Or this handmade jar I purchased in Montepulciano, IT</p></div>
+            </div>
+            <div class="card" style="--rotation: 1.5deg;">
                 <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
                 <div class="card-content">
                     <p>Or automata, like this!</p>
                     <a href="https://www.laurenceandangelastleger.com/" class="cta-link">Check out their store</a>
                 </div>
             </div>
-        </div>
-
-        <div class="card-wrapper">
-            <div class="card">
+            <div class="card" style="--rotation: -1deg;">
                 <img src="PS_OASIS.jpg">
                 <div class="card-content">
-                    <p>I love fashion, my go-to brand is Paul Smith.</p>
+                    <p>I love fashion, my go-to brand is Paul Smith</p>
                     <a href="https://www.paulsmith.com/" class="cta-link">Checkout Paul Smith</a>
                 </div>
             </div>
-        </div>
-
-        <div class="card-wrapper">
-            <div class="card">
+            <div class="card" style="--rotation: 2deg;">
                 <img src="Mitch_Painting.png">
                 <div class="card-content">
-                    <p>I also collect art, including this painting by my friend.</p>
+                    <p>I also collect art, including this painting by my friend</p>
                     <a href="https://www.mitchferrin.com/" class="cta-link">By Mitch Ferrin</a>
                 </div>
             </div>
-        </div>
-
-        <div class="card-wrapper">
-            <div class="card">
+            <div class="card" style="--rotation: -1.5deg;">
+                <img src="Joan_Rivers.png">
+                <div class="card-content">
+                    <p>A more recent purchase is this painting by Joan Rivers</p>
+                    <a href="https://en.wikipedia.org/wiki/Joan_Rivers" class="cta-link">By Joan Rivers</a>
+                </div>
+            </div>
+            <div class="card" style="--rotation: 1deg;">
                 <img src="Me_Cake.png">
-                <div class="card-content"><p>My grandmother had a professional cake business. Gonzo Cake!</p></div>
+                <div class="card-content"><p>My grandmother had a professional cake business</p><span class="caption-line">Gonzo Cake!</span></div>
+            </div>
+            <div class="card" style="--rotation: -2deg;">
+                <img src="Cookies.jpg">
+                <div class="card-content">
+                    <p>That inspired my interest in both enjoying and creating things</p>
+                    <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" class="cta-link">Breakfast Taco Recipe</a>
+                </div>
+            </div>
+            <div class="card" style="--rotation: 1deg;">
+                <img src="Bravo.jpeg">
+                <div class="card-content">
+                    <p>I collect a lot of Reality TV memories</p>
+                    <a href="https://www.bravotv.com/" class="cta-link">Mostly Bravo</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="identity-frame" id="travel">
-        <div class="frame-title">05. Travel</div>
-        
-        <div class="card-wrapper">
-            <div class="card">
+    <section class="identity-frame">
+        <div class="frame-title"><b>Travel</b></div>
+        <div class="card-container">
+            <div class="card" style="--rotation: -1.5deg;">
+                <img src="83_Worlds_Fair.png">
+                <div class="card-content"><p>New Orleans often when I was growing up</p><span class="caption-line">I was at this fair!</span></div>
+            </div>
+            <div class="card" style="--rotation: 2deg;">
                 <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
                 <div class="card-content"><p>Now I’ve lost count of how many places I’ve been!</p></div>
             </div>
-        </div>
-
-        <div class="card-wrapper">
-            <div class="card">
-                <img src="83_Worlds_Fair.png">
-                <div class="card-content">
-                    <p>We went to New Orleans often when I was growing up.</p>
-                    <p style="font-style:italic; font-size: 0.8rem;">I was at this fair!</p>
-                </div>
+            <div class="card" style="--rotation: -1deg;">
+                <img src="Mexico_City.jpg">
+                <div class="card-content"><p>The first country I visited was Mexico</p></div>
+            </div>
+            <div class="card" style="--rotation: 1.5deg;">
+                <img src="Paris_2000.png">
+                <div class="card-content"><p>The next was France</p></div>
             </div>
         </div>
     </section>
@@ -281,21 +289,29 @@
 </main>
 
 <script>
-    // Ensure videos play when the card is visible
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const video = entry.target.querySelector('video');
-                if (video) video.play();
+                entry.target.classList.add('active');
+                entry.target.querySelectorAll('video').forEach(v => v.play());
+            } else {
+                entry.target.classList.remove('active');
             }
         });
     }, { threshold: 0.5 });
 
-    document.querySelectorAll('.card').forEach(card => observer.observe(card));
+    document.querySelectorAll('.identity-frame').forEach(frame => observer.observe(frame));
+
+    const scrollContainer = document.getElementById('scroller');
+    scrollContainer.addEventListener('wheel', (evt) => {
+        evt.preventDefault();
+        scrollContainer.scrollLeft += evt.deltaY;
+    }, { passive: false });
 </script>
 
 </body>
 </html>
+
 
 
 
