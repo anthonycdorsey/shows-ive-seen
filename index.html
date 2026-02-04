@@ -17,19 +17,17 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            overflow: hidden; /* Stops chaotic jumping */
+            overflow: hidden;
         }
 
-        /* FIXED HEADER - Always visible, never moves */
         header {
             position: fixed;
             left: 5%; top: 40px;
             z-index: 1000;
         }
-        h1 { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin: 0; }
-        .tagline { font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; color: var(--text-grey); text-transform: uppercase; margin-top: 5px; }
+        h1 { font-size: 2.2rem; font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em; }
+        .tagline { font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; color: var(--text-grey); text-transform: uppercase; margin-top: 5px; }
 
-        /* THE SCROLLER */
         .scroller {
             display: flex;
             overflow-x: auto;
@@ -41,7 +39,6 @@
         }
         .scroller::-webkit-scrollbar { display: none; }
 
-        /* EACH CARD IS ITS OWN FULL SCREEN SECTION */
         section {
             min-width: 100vw;
             height: 100vh;
@@ -49,47 +46,49 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-shrink: 0;
         }
 
         .content-card {
             background: #fff;
-            padding: 25px;
+            padding: 30px;
             width: 85%;
-            max-width: 450px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 480px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
             border: 1px solid #eee;
         }
 
         .content-card img, .content-card video {
             width: 100%;
             height: auto;
-            max-height: 50vh;
+            max-height: 48vh;
             object-fit: contain;
             display: block;
             margin-bottom: 20px;
         }
 
-        .label { font-family: 'Courier New', Courier, monospace; color: var(--text-grey); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px; }
-        .copy { font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px; }
+        .label { font-family: 'Courier New', Courier, monospace; color: var(--text-grey); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 8px; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; }
+        .copy { font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px; font-weight: 400; }
         
-        .cta {
+        .cta-btn {
             display: inline-block;
             color: var(--accent);
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            border-bottom: 1px solid var(--accent);
+            border: 1px solid var(--accent);
+            padding: 6px 12px;
+            transition: 0.2s;
         }
+        .cta-btn:hover { background: var(--accent); color: #fff; }
 
-        /* NAVIGATION HINT */
         .nav-hint {
             position: fixed;
             bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 5%;
             font-family: 'Courier New', monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-grey);
             text-transform: uppercase;
         }
@@ -108,7 +107,7 @@
     
     <section>
         <div class="content-card">
-            <div class="label">Austin</div>
+            <div class="label">Austin / Card 1</div>
             <img src="Me_Mom_Dad.jpg">
             <div class="copy">I was born and raised in Austin, Texas.</div>
         </div>
@@ -116,7 +115,7 @@
 
     <section>
         <div class="content-card">
-            <div class="label">Austin</div>
+            <div class="label">Austin / Card 2</div>
             <img src="Mom_Brothers.png">
             <div class="copy">I’m the third of four boys.</div>
         </div>
@@ -124,7 +123,7 @@
 
     <section>
         <div class="content-card">
-            <div class="label">Music</div>
+            <div class="label">Music / Card 1</div>
             <img src="Dad_Singing.jpg">
             <div class="copy">My dad was a working musician in Austin. He played in several bands.</div>
         </div>
@@ -132,34 +131,134 @@
 
     <section>
         <div class="content-card">
-            <div class="label">Music</div>
+            <div class="label">Music / Card 2</div>
             <img src="Pixies.png">
             <div class="copy">Which shaped my lifelong interest in music.</div>
-            <a href="shows-ive-seen.html" class="cta">See my Ticket Archive</a>
+            <a href="https://www.anthonycdorsey.com/shows-ive-seen/" class="cta-btn">See my Running Archive</a>
         </div>
     </section>
 
     <section>
         <div class="content-card">
-            <div class="label">Collecting</div>
+            <div class="label">Music / Card 3</div>
+            <img src="KNACK.png">
+            <div class="copy">Which eventually allowed me to blend that passion with community.</div>
+            <a href="https://www.rocklottery.com/" target="_blank" class="cta-btn">Rock Lottery</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="label">New York / Card 1</div>
+            <img src="Mickey_Me.jpg">
+            <div class="copy">I moved to NYC in 2008. My favorite Halloween, ever.</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="label">New York / Card 2</div>
+            <img src="Snap.jpg">
+            <div class="copy">Where I began the majority of my career.</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="label">New York / Card 3</div>
+            <img src="Me_Seanie.jpg">
+            <div class="copy">And where I met my husband.</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="label">Collecting / Card 1</div>
             <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
             <div class="copy">Or automata, like this!</div>
-            <a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta">Check out their store</a>
+            <a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta-btn">Check out their store</a>
         </div>
     </section>
 
     <section>
         <div class="content-card">
-            <div class="label">Travel</div>
+            <div class="label">Collecting / Card 2</div>
+            <img src="PS_OASIS.jpg">
+            <div class="copy">I love fashion, my go-to brand is Paul Smith.</div>
+            <a href="https://www.paulsmith.com/" target="_blank" class="cta-btn">Checkout Paul Smith</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="label">Collecting / Card 3</div>
+            <img src="Mitch_Painting.png">
+            <div class="copy">I collect art, including this painting by my friend Mitch Ferrin.</div>
+            <a href="https://www.mitchferrin.com/" target="_blank" class="cta-btn">Visit Mitch Ferrin</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="label">Collecting / Card 4</div>
+            <img src="Joan_Rivers.png">
+            <div class="copy">A more recent purchase is this painting by Joan Rivers.</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="label">Collecting / Card 5</div>
+            <img src="Me_Cake.png">
+            <div class="copy">My grandmother had a professional cake business. Gonzo Cake!</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="label">Collecting / Card 6</div>
+            <img src="Cookies.jpg">
+            <div class="copy">That inspired my interest in both enjoying and creating things.</div>
+            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta-btn">My Breakfast Taco Recipe</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="label">Collecting / Card 7</div>
+            <img src="Bravo.jpeg">
+            <div class="copy">I collect a lot of Reality TV memories.</div>
+            <a href="https://www.bravotv.com/" target="_blank" class="cta-btn">Mostly Bravo</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="label">Travel / Card 1</div>
             <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
             <div class="copy">Now I’ve lost count of how many places I’ve been since!</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="label">Travel / Card 2</div>
+            <img src="83_Worlds_Fair.png">
+            <div class="copy">We went to New Orleans often when I was growing up. I was at this fair!</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="label">Travel / Card 3</div>
+            <img src="Mexico_City.jpg">
+            <div class="copy">The first country I visited was Mexico.</div>
         </div>
     </section>
 
 </main>
 
 <script>
-    // Converts vertical mouse wheel to horizontal scroll for desktop
     const scroller = document.getElementById('main-scroller');
     scroller.addEventListener('wheel', (evt) => {
         evt.preventDefault();
