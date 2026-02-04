@@ -10,7 +10,6 @@
             --text-main: #1A1A1A;
             --text-grey: #A0A09A;
             --accent: #E63946;
-            --frame-border: #D1D1CB;
         }
 
         body, html {
@@ -18,32 +17,28 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            overflow: hidden;
+            overflow-y: hidden;
         }
 
         header {
             position: fixed;
-            left: 5%; top: 30px;
-            z-index: 3000;
+            left: 5%; top: 40px;
+            z-index: 2000;
             pointer-events: none;
         }
 
-        h1 { font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0; }
-        .archive-note { font-family: 'Courier New', Courier, monospace; font-size: 0.7rem; color: var(--text-grey); text-transform: uppercase; margin-top: 5px; }
+        h1 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0; }
+        .archive-note { font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; color: var(--text-grey); text-transform: uppercase; margin-top: 10px; }
 
-        /* MAIN HORIZONTAL CONTAINER */
-        .master-scroller {
+        .horizontal-scroller {
             display: flex;
             overflow-x: auto;
-            overflow-y: hidden;
             scroll-snap-type: x mandatory;
             height: 100vh;
             width: 100vw;
             scrollbar-width: none;
         }
-        .master-scroller::-webkit-scrollbar { display: none; }
 
-        /* THE STATIONARY BORDERED FRAME */
         .identity-frame {
             min-width: 100vw;
             height: 100vh;
@@ -54,105 +49,56 @@
             position: relative;
         }
 
-        .frame-border {
-            width: 90vw;
-            height: 75vh;
-            border: 2px solid var(--frame-border);
+        .card-stack {
             position: relative;
-            display: flex;
-            flex-direction: column;
-            margin-top: 50px;
+            width: 85%;
+            max-width: 500px;
+            height: 70vh;
         }
-
-        .frame-title {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--bg-color);
-            padding: 0 20px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-size: 1rem;
-            white-space: nowrap;
-        }
-
-        /* INTERNAL CARD SCROLLER */
-        .card-scroller {
-            display: flex;
-            overflow-x: auto;
-            overflow-y: hidden;
-            height: 100%;
-            align-items: center;
-            padding: 0 40px;
-            gap: 60px;
-            scrollbar-width: none;
-        }
-        .card-scroller::-webkit-scrollbar { display: none; }
 
         .card {
-            min-width: 320px;
-            max-width: 400px;
-            background: #FFF;
+            position: absolute;
+            width: 100%;
+            background: #fff;
             padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid #EEE;
-            flex-shrink: 0;
-            transform: translateY(20px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+            /* Start off-screen right */
+            transform: translateX(120vw) rotate(var(--rotation));
             opacity: 0;
-            transition: all 0.8s ease;
+            /* Smooth "landing" transition */
+            transition: transform 0.9s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s ease;
         }
 
+        /* Trigger for the fly-in */
         .identity-frame.active .card {
-            transform: translateY(0);
+            transform: translateX(var(--offset-x)) translateY(var(--offset-y)) rotate(var(--rotation));
             opacity: 1;
         }
+
+        /* --- STAGGERED DELAYS (THE FIX) --- */
+        /* Card 1 lands almost immediately */
+        .card:nth-child(1) { transition-delay: 0.1s; z-index: 10; --offset-x: 0px; --offset-y: 0px; }
+        /* Card 2 waits slightly longer */
+        .card:nth-child(2) { transition-delay: 0.4s; z-index: 11; --offset-x: 10px; --offset-y: 15px; }
+        /* Card 3 waits longer still */
+        .card:nth-child(3) { transition-delay: 0.7s; z-index: 12; --offset-x: -10px; --offset-y: 30px; }
+        /* Card 4 (if needed) */
+        .card:nth-child(4) { transition-delay: 1.0s; z-index: 13; --offset-x: 5px; --offset-y: 45px; }
 
         .card img, .card video {
             width: 100%;
             height: auto;
-            max-height: 40vh;
+            max-height: 45vh;
             object-fit: contain;
             display: block;
             margin-bottom: 15px;
         }
 
         .card-content { font-family: 'Courier New', Courier, monospace; }
-        .card-content p { font-size: 0.85rem; line-height: 1.4; margin: 0 0 8px 0; font-weight: bold; }
-        .caption { font-size: 0.75rem; color: var(--text-grey); display: block; }
+        .card-content h2 { font-size: 1rem; text-transform: uppercase; margin: 0 0 10px 0; color: var(--text-grey); border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .card-content p { font-size: 0.85rem; line-height: 1.4; margin: 0; }
 
-        .cta-link {
-            display: inline-block;
-            margin-top: 10px;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--accent);
-        }
-
-        /* SCROLL INDICATOR ARROW */
-        .scroll-guide {
-            position: fixed;
-            bottom: 40px;
-            right: 5vw;
-            display: flex;
-            align-items: center;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.7rem;
-            color: var(--text-grey);
-            z-index: 4000;
-            animation: bounceRight 2s infinite;
-        }
-        .arrow { margin-left: 10px; font-size: 1.2rem; }
-
-        @keyframes bounceRight {
-            0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
-            40% {transform: translateX(-10px);}
-            60% {transform: translateX(-5px);}
-        }
     </style>
 </head>
 <body>
@@ -162,94 +108,45 @@
     <div class="archive-note">— AN EDITED VIEW OF WHO I AM. —</div>
 </header>
 
-<div class="scroll-guide">SCROLL LEFT <span class="arrow">→</span></div>
-
-<main class="master-scroller" id="scroller">
+<main class="horizontal-scroller" id="scroller">
     
     <section class="identity-frame">
-        <div class="frame-border">
-            <div class="frame-title">Austin</div>
-            <div class="card-scroller">
-                <div class="card">
-                    <img src="Me_Mom_Dad.jpg">
-                    <div class="card-content"><p>I was born and raised in Austin, Texas</p></div>
+        <div class="card-stack">
+            <div class="card" style="--rotation: -2deg;">
+                <img src="Me_Mom_Dad.jpg">
+                <div class="card-content">
+                    <h2>Austin</h2>
+                    <p>I was born and raised in Austin, Texas.</p>
                 </div>
-                <div class="card">
-                    <img src="Mom_Brothers.png">
-                    <div class="card-content"><p>I’m the third of four boys</p></div>
+            </div>
+            <div class="card" style="--rotation: 3deg;">
+                <img src="Mom_Brothers.png">
+                <div class="card-content">
+                    <p>I’m the third of four boys.</p>
+                </div>
+            </div>
+            <div class="card" style="--rotation: -1.5deg;">
+                <img src="Me_Cake.png">
+                <div class="card-content">
+                    <p>Gonzo Cake!</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="identity-frame">
-        <div class="frame-border">
-            <div class="frame-title">Music</div>
-            <div class="card-scroller">
-                <div class="card">
-                    <img src="Dad_Singing.jpg">
-                    <div class="card-content"><p>My dad was a working musician in Austin</p><span class="caption">He played in several bands</span></div>
-                </div>
-                <div class="card">
-                    <img src="Pixies.png">
-                    <div class="card-content">
-                        <p>Which shaped my lifelong interest in music</p>
-                        <a href="https://www.anthonycdorsey.com/shows-ive-seen" class="cta-link">Running Archive</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="KNACK.png">
-                    <div class="card-content">
-                        <p>Which eventually allowed me to blend that passion with community</p>
-                        <a href="https://www.rocklottery.com/" class="cta-link">Rock Lottery</a>
-                    </div>
+        <div class="card-stack">
+            <div class="card" style="--rotation: 1deg;">
+                <img src="Dad_Singing.jpg">
+                <div class="card-content">
+                    <h2>Music</h2>
+                    <p>My dad was a working musician in Austin.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="identity-frame">
-        <div class="frame-border">
-            <div class="frame-title">New York</div>
-            <div class="card-scroller">
-                <div class="card">
-                    <img src="Mickey_Me.jpg">
-                    <div class="card-content"><p>I moved to NYC in 2008</p><span class="caption">My favorite halloween, ever</span></div>
-                </div>
-                <div class="card">
-                    <img src="Snap.jpg">
-                    <div class="card-content"><p>Where I began the majority of my career</p></div>
-                </div>
-                <div class="card">
-                    <img src="WC_Fields.png">
-                    <div class="card-content">
-                        <p>Where I moderately excel as an amateur indoor plant hobbyist</p>
-                        <a href="https://en.wikipedia.org/wiki/W._C._Fields" class="cta-link">W.C. Fields</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="Me_Seanie.jpg">
-                    <div class="card-content"><p>And where I met my husband</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="identity-frame">
-        <div class="frame-border">
-            <div class="frame-title">Collecting</div>
-            <div class="card-scroller">
-                <div class="card">
-                    <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
-                    <div class="card-content"><p>Or automata, like this!</p></div>
-                </div>
-                <div class="card">
-                    <img src="PS_OASIS.jpg">
-                    <div class="card-content"><p>I love fashion, my go-to brand is Paul Smith</p></div>
-                </div>
-                <div class="card">
-                    <img src="Joan_Rivers.png">
-                    <div class="card-content"><p>Recent purchase: Painting by Joan Rivers</p></div>
+            <div class="card" style="--rotation: -2.5deg;">
+                <img src="Pixies.png">
+                <div class="card-content">
+                    <p>Which shaped my lifelong interest in music.</p>
                 </div>
             </div>
         </div>
@@ -262,13 +159,15 @@
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+            } else {
+                // Optional: remove the class to reset the animation when scrolling back
+                entry.target.classList.remove('active');
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.6 });
 
     document.querySelectorAll('.identity-frame').forEach(frame => observer.observe(frame));
 
-    // Convert Vertical scroll to Horizontal
     const scrollContainer = document.getElementById('scroller');
     scrollContainer.addEventListener('wheel', (evt) => {
         evt.preventDefault();
@@ -278,6 +177,7 @@
 
 </body>
 </html>
+
 
 
 
