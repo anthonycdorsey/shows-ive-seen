@@ -137,15 +137,21 @@
 </main>
 
 <script>
-    const scroller = document.getElementById('main-scroller');
-    scroller.addEventListener('wheel', (evt) => {
+    const scroller = document.querySelector('.scroller');
+
+    // Listens for the mouse wheel on desktop
+    window.addEventListener('wheel', (evt) => {
+        // Prevent the default vertical scroll
         evt.preventDefault();
+        
+        // Move the scroller horizontally by the amount the user scrolled vertically
         scroller.scrollLeft += evt.deltaY;
     }, { passive: false });
 </script>
 
 </body>
 </html>
+
 
 
 
