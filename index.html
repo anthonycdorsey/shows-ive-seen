@@ -17,7 +17,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            overflow: hidden; /* This locks the page so we can use the custom script below */
+            overflow: hidden; /* Locks vertical scroll to enable our script */
         }
 
         header {
@@ -36,7 +36,9 @@
             width: 100vw;
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
+            cursor: grab;
         }
+        .scroller:active { cursor: grabbing; }
         .scroller::-webkit-scrollbar { display: none; }
 
         section {
@@ -56,6 +58,7 @@
             max-width: 480px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.06);
             border: 1px solid #eee;
+            user-select: none; /* Prevents text highlighting while dragging */
         }
 
         .content-card img, .content-card video {
@@ -65,6 +68,7 @@
             object-fit: contain;
             display: block;
             margin-bottom: 20px;
+            pointer-events: none; /* Prevents image dragging from breaking the scroll */
         }
 
         .label { font-family: 'Courier New', Courier, monospace; color: var(--text-grey); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 8px; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; }
@@ -101,9 +105,10 @@
     <div class="tagline">AN EDITED VIEW OF WHO I AM.</div>
 </header>
 
-<div class="nav-hint">Use mouse wheel or swipe →</div>
+<div class="nav-hint">Scroll wheel or Click & Drag →</div>
 
 <main class="scroller">
+    
     <section><div class="content-card"><div class="label">Austin</div><img src="Me_Mom_Dad.jpg"><div class="copy">I was born and raised in Austin, Texas.</div></div></section>
     <section><div class="content-card"><div class="label">Austin</div><img src="Mom_Brothers.png"><div class="copy">I’m the third of four boys.</div></div></section>
 
@@ -119,7 +124,7 @@
     <section><div class="content-card"><div class="label">Collecting</div><img src="Parker_Posey.png"><div class="copy">I collect objects and moments that hold meaning. And I adore Parker Posey.</div></div></section>
     <section><div class="content-card"><div class="label">Collecting</div><img src="Pal_Donkey.png"><div class="copy">Like this vintage NORCREST FURLAND Anthropomorphic Pal.</div></div></section>
     <section><div class="content-card"><div class="label">Collecting</div><img src="Italian_Jar.png"><div class="copy">Or this handmade jar I purchased in Montepulciano, IT.</div></div></section>
-    <section><div class="content-card"><div class="label">Collecting</div><video src="Auto_Video.mp4" autoplay muted loop playsinline></video><div class="copy">Or automata, like this!</div><a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta-btn">Check out their store</a></div></section>
+    <section><div class="content-card"><div class="label">Collecting</div><video src="Auto_Video.mp4" autoplay muted loop playsinline></video><div class="copy">Or automata, like this!</div><a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta-btn">Check out the St.Leger store</a></div></section>
     <section><div class="content-card"><div class="label">Collecting</div><img src="PS_OASIS.jpg"><div class="copy">I love fashion, my go-to brand is Paul Smith.</div><a href="https://www.paulsmith.com/" target="_blank" class="cta-btn">Checkout Paul Smith</a></div></section>
     <section><div class="content-card"><div class="label">Collecting</div><img src="Mitch_Painting.png"><div class="copy">I also collect art, including this painting by my friend Mitch Ferrin.</div><a href="https://www.mitchferrin.com/" target="_blank" class="cta-btn">Visit Mitch Ferrin</a></div></section>
     <section><div class="content-card"><div class="label">Collecting</div><img src="Joan_Rivers.png"><div class="copy">A more recent purchase is this painting by Joan Rivers.</div></div></section>
@@ -131,23 +136,50 @@
     <section><div class="content-card"><div class="label">Travel</div><img src="Mexico_City.jpg"><div class="copy">The first country I visited was Mexico. We spent time in Mexico City.</div></div></section>
     <section><div class="content-card"><div class="label">Travel</div><img src="Paris_2000.png"><div class="copy">The next was France.</div></div></section>
     <section><div class="content-card"><div class="label">Travel</div><video src="Map_Video.mp4" autoplay muted loop playsinline></video><div class="copy">Now I’ve lost count of how many places I’ve been since!</div></div></section>
+
 </main>
 
 <script>
-    // This is the specific fix for desktop scrolling
-    const container = document.querySelector('.scroller');
+    const scrollContainer = document.querySelector('.scroller');
 
+    // METHOD 1: Mouse Wheel Redirect (Desktop Fix)
     window.addEventListener('wheel', (evt) => {
-        // Stop the normal vertical scroll
-        evt.preventDefault();
-        // Convert vertical scroll distance into horizontal movement
-        container.scrollLeft += evt.deltaY;
+        if (evt.deltaY !== 0) {
+            evt.preventDefault();
+            scrollContainer.scrollLeft += evt.deltaY;
+        }
     }, { passive: false });
+
+    // METHOD 2: Click and Drag (Safety Net)
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    scrollContainer.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - scrollContainer.offsetLeft;
+        scrollLeft = scrollContainer.scrollLeft;
+    });
+
+    scrollContainer.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+
+    scrollContainer.addEventListener('mouseup', () => {
+        isDown = false;
+    });
+
+    scrollContainer.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - scrollContainer.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll speed
+        scrollContainer.scrollLeft = scrollLeft - walk;
+    });
 </script>
 
 </body>
 </html>
-
 
 
 
