@@ -18,36 +18,22 @@
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             overflow: hidden;
-            overscroll-behavior-x: none;
+            overscroll-behavior: none;
         }
 
-        /* --- HEADER AREA --- */
+        /* --- FIXED HEADER --- */
         header {
             position: fixed;
             left: 0; top: 0;
             width: 100%;
-            padding: 40px 5% 20px;
+            padding: 30px 5% 15px;
             z-index: 1000;
-            background: var(--bg-color); /* Shields cards from going behind text */
+            background: var(--bg-color);
             pointer-events: none;
         }
 
-        h1 { 
-            font-size: clamp(1.8rem, 5vw, 2.5rem); 
-            font-weight: 900; 
-            text-transform: uppercase; 
-            margin: 0; 
-            line-height: 1;
-        }
-
-        .tagline { 
-            font-family: 'Courier New', Courier, monospace; 
-            font-size: 0.75rem; 
-            color: var(--text-grey); 
-            text-transform: uppercase; 
-            margin-top: 8px; 
-            letter-spacing: 0.05em;
-        }
+        h1 { font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 900; text-transform: uppercase; margin: 0; line-height: 1; }
+        .tagline { font-family: 'Courier New', Courier, monospace; font-size: 0.7rem; color: var(--text-grey); text-transform: uppercase; margin-top: 6px; letter-spacing: 0.02em; }
 
         /* --- THE SCROLLER --- */
         .scroller {
@@ -68,55 +54,55 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-top: 120px; /* Safety zone for mobile header */
+            padding: 100px 20px 60px; /* Top and Bottom Safe Zones */
             box-sizing: border-box;
         }
 
-        /* --- THE CARD --- */
+        /* --- THE UNIFORM CARD --- */
         .content-card {
             background: #fff;
             padding: 20px;
-            width: 85%;
-            max-width: 420px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 380px; /* Fixed uniform width */
+            height: auto;
+            max-height: 75vh; /* Prevents bleeding off bottom */
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
             border: 1px solid #eee;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centers all items inside */
-            text-align: center;   /* Centers all text inside */
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
         }
 
         .content-card img, .content-card video {
             width: 100%;
             height: auto;
-            max-height: 40vh;
+            max-height: 35vh; /* Keeps images compact to save vertical space */
             object-fit: contain;
             display: block;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
-        /* Centered & Bold Bucket Title */
         .bucket-title { 
-            font-size: 1.4rem; 
+            font-size: 1.2rem; 
             font-weight: 700; 
             text-transform: uppercase; 
-            margin-bottom: 10px;
-            letter-spacing: -0.02em;
+            margin-bottom: 8px;
         }
 
         .copy { 
-            font-size: 0.95rem; 
-            line-height: 1.5; 
-            margin-bottom: 10px; 
+            font-size: 0.9rem; 
+            line-height: 1.4; 
+            margin-bottom: 8px; 
         }
 
-        /* Centered Caption */
         .caption {
             font-family: 'Courier New', monospace;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-grey);
             font-style: italic;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         
         .cta {
@@ -124,25 +110,21 @@
             color: var(--accent);
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             border: 1px solid var(--accent);
-            padding: 6px 12px;
-            transition: 0.2s;
+            padding: 5px 10px;
         }
-        .cta:hover { background: var(--accent); color: white; }
 
-        /* Navigation Hint */
         .hint {
             position: fixed;
-            bottom: 30px;
+            bottom: 20px;
             width: 100%;
             text-align: center;
             font-family: 'Courier New', monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-grey);
             text-transform: uppercase;
-            letter-spacing: 0.2em;
         }
     </style>
 </head>
@@ -167,11 +149,69 @@
 
     <section>
         <div class="content-card">
+            <div class="bucket-title">Austin</div>
+            <img src="Mom_Brothers.png">
+            <div class="copy">I’m the third of four boys.</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="bucket-title">Austin</div>
+            <img src="Me_Cake.png">
+            <div class="caption">Gonzo Cake!</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="bucket-title">Music</div>
+            <img src="Dad_Singing.jpg">
+            <div class="copy">My dad was a working musician in Austin. He played in several bands.</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="bucket-title">Music</div>
+            <img src="KNACK.png">
+            <div class="copy">Which eventually allowed me to blend that passion with community.</div>
+            <div class="caption">Rock Lottery</div>
+            <a href="https://www.rocklottery.com/" target="_blank" class="cta">Visit Rock Lottery</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
             <div class="bucket-title">Music</div>
             <img src="Pixies.png">
             <div class="copy">Which shaped my lifelong interest in music.</div>
-            <div class="caption">The first show that changed everything</div>
             <a href="shows-ive-seen.html" class="cta">See my Archive</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="bucket-title">New York</div>
+            <img src="Mickey_Me.jpg">
+            <div class="copy">I moved to NYC in 2008.</div>
+            <div class="caption">My favorite halloween, ever</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="bucket-title">New York</div>
+            <img src="Snap.jpg">
+            <div class="copy">Where I began the majority of my career.</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="bucket-title">New York</div>
+            <img src="Me_Seanie.jpg">
+            <div class="copy">And where I met my husband.</div>
         </div>
     </section>
 
@@ -186,9 +226,26 @@
 
     <section>
         <div class="content-card">
+            <div class="bucket-title">Collecting</div>
+            <img src="Mitch_Painting.png">
+            <div class="copy">I collect art, including this painting by my friend.</div>
+            <div class="caption">By Mitch Ferrin</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
             <div class="bucket-title">Travel</div>
             <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
             <div class="copy">Now I’ve lost count of how many places I’ve been!</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-card">
+            <div class="bucket-title">Travel</div>
+            <img src="Mexico_City.jpg">
+            <div class="copy">The first country I visited was Mexico. We spent time in Mexico City.</div>
         </div>
     </section>
 
@@ -204,6 +261,8 @@
 
 </body>
 </html>
+
+
 
 
 
