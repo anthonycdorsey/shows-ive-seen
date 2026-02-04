@@ -10,6 +10,7 @@
             --text-main: #1A1A1A;
             --text-grey: #A0A09A;
             --accent: #E63946;
+            --border-color: #E0E0DA;
         }
 
         body, html {
@@ -17,19 +18,16 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            overflow-y: hidden;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        /* --- FIXED HEADER (FORCED TO TOP) --- */
+        /* --- HEADER --- */
         header {
             position: fixed;
             left: 5%; top: 40px;
-            z-index: 9999; /* Higher than any card */
+            z-index: 9999;
             pointer-events: none;
-            width: 90%;
         }
-
         h1 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0; }
         .archive-note { font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; color: var(--text-grey); text-transform: uppercase; margin-top: 10px; }
 
@@ -45,12 +43,11 @@
         }
         .horizontal-scroller::-webkit-scrollbar { display: none; }
 
-        /* --- FRAME CONTAINER --- */
+        /* --- IDENTITY FRAME --- */
         .identity-frame {
             min-width: 100vw;
             height: 100vh;
             scroll-snap-align: start;
-            scroll-snap-stop: always;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -58,38 +55,46 @@
             background-color: var(--bg-color);
         }
 
+        /* The Frame Border */
+        .frame-border {
+            position: absolute;
+            width: 90vw;
+            height: 80vh;
+            border: 1px solid var(--border-color);
+            pointer-events: none;
+            z-index: 1;
+        }
+
         .card-stack {
             position: relative;
-            width: 85%;
-            max-width: 500px;
-            height: 65vh;
-            margin-top: 5vh;
+            width: 80%;
+            max-width: 480px;
+            height: 60vh;
+            z-index: 5;
         }
 
         .card {
             position: absolute;
             width: 100%;
             background: #fff;
-            padding: 24px;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             border: 1px solid #eee;
-            /* Animation Starts: Off-screen right */
             transform: translateX(120vw) rotate(var(--rotation));
             opacity: 0;
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
         }
 
-        /* ANIMATION TRIGGER */
         .identity-frame.active .card {
             transform: translateX(var(--off-x)) translateY(var(--off-y)) rotate(var(--rotation));
             opacity: 1;
         }
 
-        /* STAGGERED LANDING LOGIC */
+        /* Sequential Delays */
         .card:nth-child(1) { transition-delay: 0.1s; z-index: 10; --off-x: 0px; --off-y: 0px; }
-        .card:nth-child(2) { transition-delay: 0.4s; z-index: 11; --off-x: 10px; --off-y: 15px; }
-        .card:nth-child(3) { transition-delay: 0.7s; z-index: 12; --off-x: -10px; --off-y: 30px; }
-        .card:nth-child(4) { transition-delay: 1.0s; z-index: 13; --off-x: 5px; --off-y: 45px; }
+        .card:nth-child(2) { transition-delay: 0.4s; z-index: 11; --off-x: 12px; --off-y: 12px; }
+        .card:nth-child(3) { transition-delay: 0.7s; z-index: 12; --off-x: -12px; --off-y: 24px; }
+        .card:nth-child(4) { transition-delay: 1.0s; z-index: 13; --off-x: 6px; --off-y: 36px; }
 
         .card img, .card video {
             width: 100%; height: auto;
@@ -100,16 +105,36 @@
         }
 
         .card-content { font-family: 'Courier New', Courier, monospace; }
-        .card-content h2 { font-size: 0.9rem; text-transform: uppercase; margin: 0 0 8px 0; color: var(--text-grey); border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .card-content p { font-size: 0.85rem; line-height: 1.4; margin: 0 0 10px 0; }
+        .card-content h2 { font-size: 0.9rem; text-transform: uppercase; color: var(--text-grey); margin: 0 0 8px 0; border-bottom: 1px solid #eee; }
+        .card-content p { font-size: 0.85rem; line-height: 1.4; margin: 0; }
 
-        .cta-link {
-            display: inline-block;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: bold;
+        /* --- SCROLL NOTIFICATION --- */
+        .scroll-hint {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            font-family: 'Courier New', Courier, monospace;
             font-size: 0.7rem;
+            color: var(--text-grey);
             text-transform: uppercase;
+            letter-spacing: 0.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .scroll-hint::after {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--text-grey);
+            animation: slideHint 1.5s infinite;
+        }
+        @keyframes slideHint {
+            0% { transform: scaleX(0.2); transform-origin: left; }
+            50% { transform: scaleX(1); transform-origin: left; }
+            100% { transform: scaleX(0); transform-origin: right; }
         }
     </style>
 </head>
@@ -120,78 +145,88 @@
     <div class="archive-note">— AN EDITED VIEW OF WHO I AM. —</div>
 </header>
 
+<div class="scroll-hint">Scroll to explore</div>
+
 <main class="horizontal-scroller" id="scroller">
     
     <section class="identity-frame">
+        <div class="frame-border"></div>
         <div class="card-stack">
             <div class="card" style="--rotation: -2deg;">
                 <img src="Me_Mom_Dad.jpg">
-                <div class="card-content">
-                    <h2>Austin</h2>
-                    <p>I was born and raised in Austin, Texas.</p>
-                </div>
+                <div class="card-content"><h2>Austin</h2><p>Born and raised in Austin, Texas.</p></div>
             </div>
-            <div class="card" style="--rotation: 2deg;">
+            <div class="card" style="--rotation: 3deg;">
                 <img src="Mom_Brothers.png">
-                <div class="card-content">
-                    <p>I’m the third of four boys.</p>
-                </div>
+                <div class="card-content"><p>I’m the third of four boys.</p></div>
             </div>
-            <div class="card" style="--rotation: -1deg;">
+            <div class="card" style="--rotation: -1.5deg;">
                 <img src="Me_Cake.png">
-                <div class="card-content">
-                    <p>Gonzo Cake!</p>
-                </div>
+                <div class="card-content"><p>Gonzo Cake!</p></div>
             </div>
         </div>
     </section>
 
     <section class="identity-frame">
+        <div class="frame-border"></div>
         <div class="card-stack">
             <div class="card" style="--rotation: 1deg;">
                 <img src="Dad_Singing.jpg">
-                <div class="card-content">
-                    <h2>Music</h2>
-                    <p>My dad was a working musician in Austin.</p>
-                </div>
+                <div class="card-content"><h2>Music</h2><p>My dad was a working musician in Austin.</p></div>
             </div>
-            <div class="card" style="--rotation: -3deg;">
+            <div class="card" style="--rotation: -2deg;">
                 <img src="KNACK.png">
-                <div class="card-content">
-                    <p>Which eventually allowed me to blend that passion with community.</p>
-                    <a href="https://www.rocklottery.com/" class="cta-link">Rock Lottery</a>
-                </div>
+                <div class="card-content"><p>Blending passion with community.</p></div>
             </div>
-            <div class="card" style="--rotation: 1.5deg;">
+            <div class="card" style="--rotation: 2.5deg;">
                 <img src="Pixies.png">
-                <div class="card-content">
-                    <p>Which shaped my lifelong interest in music.</p>
-                    <a href="shows-ive-seen.html" class="cta-link">See Archive</a>
-                </div>
+                <div class="card-content"><p>Lifelong interest in music.</p></div>
             </div>
         </div>
     </section>
 
     <section class="identity-frame">
+        <div class="frame-border"></div>
         <div class="card-stack">
             <div class="card" style="--rotation: 2deg;">
                 <img src="Mickey_Me.jpg">
-                <div class="card-content">
-                    <h2>New York</h2>
-                    <p>I moved to NYC in 2008. My favorite Halloween, ever.</p>
-                </div>
+                <div class="card-content"><h2>New York</h2><p>Moved to NYC in 2008.</p></div>
             </div>
             <div class="card" style="--rotation: -3deg;">
                 <img src="Snap.jpg">
-                <div class="card-content">
-                    <p>Where I began the majority of my career.</p>
-                </div>
+                <div class="card-content"><p>Majority of my career happened here.</p></div>
             </div>
             <div class="card" style="--rotation: 1deg;">
                 <img src="Me_Seanie.jpg">
-                <div class="card-content">
-                    <p>And where I met my husband.</p>
-                </div>
+                <div class="card-content"><p>Where I met my husband.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="identity-frame">
+        <div class="frame-border"></div>
+        <div class="card-stack">
+            <div class="card" style="--rotation: -2deg;">
+                <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
+                <div class="card-content"><h2>Collecting</h2><p>Or automata, like this!</p></div>
+            </div>
+            <div class="card" style="--rotation: 3deg;">
+                <img src="Mitch_Painting.png">
+                <div class="card-content"><p>Collecting art by friends like Mitch Ferrin.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="identity-frame">
+        <div class="frame-border"></div>
+        <div class="card-stack">
+            <div class="card" style="--rotation: -1deg;">
+                <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
+                <div class="card-content"><h2>Travel</h2><p>I’ve lost count of how many places I’ve been.</p></div>
+            </div>
+            <div class="card" style="--rotation: 2deg;">
+                <img src="Mexico_City.jpg">
+                <div class="card-content"><p>First country: Mexico.</p></div>
             </div>
         </div>
     </section>
