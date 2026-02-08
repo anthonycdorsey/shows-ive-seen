@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Call me Tony</title>
     <style>
         :root {
@@ -17,114 +17,116 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            overflow: hidden;
-            overscroll-behavior: none;
+            scroll-behavior: smooth;
         }
 
-        /* --- FIXED HEADER --- */
+        /* --- FIXED GLOBAL HEADER --- */
         header {
             position: fixed;
-            left: 0; top: 0;
-            width: 100%;
-            padding: 30px 5% 15px;
-            z-index: 2000;
-            background: var(--bg-color);
+            left: 5%; top: 40px;
+            z-index: 5000;
             pointer-events: none;
         }
+        h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900; text-transform: uppercase; margin: 0; }
+        .tagline { font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; color: var(--text-grey); text-transform: uppercase; margin-top: 5px; }
 
-        h1 { font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 900; text-transform: uppercase; margin: 0; line-height: 1; }
-        .tagline { font-family: 'Courier New', Courier, monospace; font-size: 0.7rem; color: var(--text-grey); text-transform: uppercase; margin-top: 6px; letter-spacing: 0.02em; }
+        /* --- PARALLAX SECTION --- */
+        .bucket-section {
+            position: relative;
+            /* Height determines how long the hero stays visible */
+            height: auto; 
+            padding-bottom: 10vh;
+        }
 
-        /* --- THE SCROLLER --- */
-        .scroller {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
+        /* STICKY HERO BACKGROUND */
+        .hero-bg {
+            position: sticky;
+            top: 0;
             height: 100vh;
             width: 100vw;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-        }
-        .scroller::-webkit-scrollbar { display: none; }
-
-        section {
-            min-width: 100vw;
-            height: 100vh;
-            scroll-snap-align: start;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 100px 20px 60px;
-            box-sizing: border-box;
-            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            background: #000;
         }
 
-        /* --- CARD CONTAINER (Holds Arrows and Card) --- */
-        .card-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .hero-bg img {
             width: 100%;
-            max-width: 600px; /* Space for card + arrows */
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5; /* Dims photo so text and cards pop */
+            filter: grayscale(100%);
+            transition: transform 0.5s ease-out;
         }
 
-        .content-card {
-            background: transparent;
-            padding: 20px;
-            width: 380px; /* Fixed uniform width */
-            max-height: 75vh;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
-            border: 1px solid #eee;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            overflow-y: auto;
-            z-index: 10;
-        }
-
-        /* --- ARROWS (Moved next to card) --- */
-        .nav-arrow {
+        .hero-label {
             position: absolute;
-            width: 40px;
-            height: 40px;
-            background: #fff;
+            font-size: 15vw;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.15);
+            text-transform: uppercase;
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        /* --- FLYING CARDS LAYER --- */
+        .cards-container {
+            position: relative;
+            z-index: 10;
+            margin-top: -50vh; /* Pulls cards up over the hero */
+            padding-bottom: 20vh;
+        }
+
+        .story-card {
+            background: white;
+            width: 85%;
+            max-width: 400px;
+            margin: 0 auto 60vh auto; /* Vertical spacing between cards */
+            padding: 25px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
             border: 1px solid #eee;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 3000;
-            font-size: 1rem;
-            transition: 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        .nav-arrow:hover { background: #f0f0f0; }
-        .arrow-left { left: -60px; }
-        .arrow-right { right: -60px; }
-
-        @media (max-width: 768px) {
-            .nav-arrow { display: none; }
-            .content-card { width: 85vw; }
+            text-align: center;
+            /* FLY-UP ANIMATION BASE */
+            transform: translateY(150px);
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
-        .content-card img, .content-card video {
-            width: 100%; height: auto;
-            max-height: 35vh;
+        .story-card.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .story-card img, .story-card video {
+            width: 100%;
+            height: auto;
+            max-height: 40vh;
             object-fit: contain;
-            display: block;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
-        .bucket-title { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
-        .copy { font-size: 0.9rem; line-height: 1.4; margin-bottom: 8px; }
-        .caption { font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--text-grey); font-style: italic; margin-bottom: 12px; }
-        .cta-group { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-        .cta { display: inline-block; color: var(--accent); text-decoration: none; font-weight: bold; font-size: 0.7rem; text-transform: uppercase; border: 1px solid var(--accent); padding: 5px 10px; }
+        .bucket-name { font-size: 1.4rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+        .card-copy { font-size: 0.95rem; line-height: 1.5; margin-bottom: 10px; }
+        .card-caption { font-family: 'Courier New', monospace; font-size: 0.8rem; color: var(--text-grey); font-style: italic; margin-bottom: 15px; }
+        
+        .cta {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            border: 1px solid var(--accent);
+            padding: 8px 16px;
+        }
 
-        .hint { position: fixed; bottom: 20px; width: 100%; text-align: center; font-family: 'Courier New', monospace; font-size: 0.65rem; color: var(--text-grey); text-transform: uppercase; }
+        /* Mobile specific adjustments */
+        @media (max-width: 600px) {
+            .hero-label { font-size: 20vw; }
+            .story-card { width: 90%; margin-bottom: 40vh; }
+        }
     </style>
 </head>
 <body>
@@ -134,290 +136,74 @@
     <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
 </header>
 
-<div class="hint">Scroll or Swipe →</div>
-
-<main class="scroller" id="main-scroller">
+<div class="bucket-section">
+    <div class="hero-bg">
+        <div class="hero-label">AUSTIN</div>
+        <img src="Me_Mom_Dad.jpg">
+    </div>
     
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Austin</div>
-                <img src="Me_Mom_Dad.jpg">
-                <div class="copy">I was born and raised in Austin, Texas.</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
+    <div class="cards-container">
+        <div class="story-card">
+            <div class="bucket-name">Austin</div>
+            <img src="Me_Mom_Dad.jpg">
+            <div class="card-copy">I was born and raised in Austin, Texas.</div>
         </div>
-    </section>
+        <div class="story-card">
+            <div class="bucket-name">Austin</div>
+            <img src="Mom_Brothers.png">
+            <div class="card-copy">I’m the third of four boys.</div>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Austin</div>
+            <img src="Me_Cake.png">
+            <div class="card-caption">Gonzo Cake!</div>
+        </div>
+    </div>
+</div>
 
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Austin</div>
-                <img src="Mom_Brothers.png">
-                <div class="copy">I’m the third of four boys.</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Music</div>
-                <img src="Dad_Singing.jpg">
-                <div class="copy">My dad was a working musician in Austin. He played in several bands.</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Music</div>
-                <img src="Pixies.png">
-                <div class="copy">Which shaped my lifelong interest in music, especially live music.</div>
-                <a href="https://www.anthonycdorsey.com/shows-ive-seen" target="_blank" class="cta">See my Live Music Archive</a>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Music</div>
-                <img src="BKRL.jpg">
-                <div class="copy">Which eventually allowed me to blend that passion with community.</div>
-                <a href="https://www.rocklottery.com/" target="_blank" class="cta">Check out our charity event ROCK LOTTERY</a>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">New York</div>
-                <img src="Mickey_Me.jpg">
-                <div class="copy">I moved to NYC in 2008.</div>
-                <div class="caption">This was my favorite halloween, ever</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">New York</div>
-                <img src="Snap_NY.jpg">
-                <div class="copy">Where I began the majority of my career.</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">New York</div>
-                <img src="Me_Seanie.jpg">
-                <div class="copy">And where I met my husband.</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-   <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Collecting</div>
-                <img src="Parker_Posey.png">
-                <div class="copy">I collect objects and moments that hold meaning.</div>
-                <div class="cta-group">
-                    <a href="https://en.wikipedia.org/wiki/Parker_Posey" target="_blank" class="cta">I <3 Parker Posey</a>
-                </div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Collecting</div>
-                <img src="Pal_Donkey.png">
-                <div class="copy">Like this vintage NORCREST FURLAND Anthropomorphic Pal.</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Collecting</div>
-                <img src="Italian_Jar.png">
-                <div class="copy">Or this handmade jar I purchased in Montepulciano, IT.</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-        
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Collecting</div>
-                <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
-                <div class="copy">Or automata, like this!</div>
-                <a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta">Check out the St.Leger store</a>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
+<div class="bucket-section">
+    <div class="hero-bg">
+        <div class="hero-label">MUSIC</div>
+        <img src="Dad_Singing.jpg">
+    </div>
     
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Collecting</div>
-                <img src="PS_OASIS.jpg">
-                <div class="copy">I love fashion, my go-to brand is Paul Smith.</div>
-                <a href="https://www.paulsmith.com/" target="_blank" class="cta">Checkout Paul Smith</a>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
+    <div class="cards-container">
+        <div class="story-card">
+            <div class="bucket-name">Music</div>
+            <img src="Dad_Singing.jpg">
+            <div class="card-copy">My dad was a working musician in Austin.</div>
         </div>
-    </section>
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Collecting</div>
-                <img src="Mitch_Painting.png">
-                <div class="copy">I also collect art, including this painting by my friend Mitch Ferrin.</div>
-                <a href="https://www.mitchferrin.com/" target="_blank" class="cta">See more of Mitch's paintings here</a>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
+        <div class="story-card">
+            <div class="bucket-name">Music</div>
+            <img src="KNACK.png">
+            <div class="card-copy">Which eventually allowed me to blend that passion with community.</div>
+            <div class="card-caption">Rock Lottery</div>
+            <a href="https://www.rocklottery.com/" target="_blank" class="cta">Visit Rock Lottery</a>
         </div>
-    </section>
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Collecting</div>
-                <img src="Joan_Rivers.png">
-                <div class="copy">A more recent purchase is this painting by Joan Rivers.</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-    
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Creating</div>
-                <img src="Me_Cake.png">
-                <div class="caption">My grandmother had a professional cake business in Austin.</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Creating</div>
-                <img src="Cookies.jpg">
-                <div class="copy">That inspired my interest in both enjoying and creating things, like these cookies.</div>
-                <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta">Check out my Breakfast Taco Recipe</a>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Travel</div>
-                <img src="83_Worlds_Fair.png">
-                <div class="copy">We went to New Orleans often when I was growing up (it's where my grandfather was born).</div>
-                <div class="caption">I was at this fair!</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Travel</div>
-                <img src="Mexico_City.jpg">
-                <div class="copy">The first country I visited was Mexico. We spent time in Mexico City.</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Travel</div>
-                <img src="Paris_2000.png">
-                <div class="copy">The next was France.</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-    
-    <section>
-        <div class="card-wrapper">
-            <div class="nav-arrow arrow-left" onclick="scrollPrev()">←</div>
-            <div class="content-card">
-                <div class="bucket-title">Travel</div>
-                <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
-                <div class="copy">Now I’ve lost count of how many places I’ve been since!</div>
-            </div>
-            <div class="nav-arrow arrow-right" onclick="scrollNext()">→</div>
-        </div>
-    </section>
-
-
-</main>
+    </div>
+</div>
 
 <script>
-    const scroller = document.getElementById('main-scroller');
-    scroller.addEventListener('wheel', (evt) => {
-        evt.preventDefault();
-        scroller.scrollLeft += evt.deltaY;
-    }, { passive: false });
+    // Fly-up logic: triggers when card enters 20% of the screen
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px"
+    };
 
-    function scrollNext() { scroller.scrollBy({ left: window.innerWidth, behavior: 'smooth' }); }
-    function scrollPrev() { scroller.scrollBy({ left: -window.innerWidth, behavior: 'smooth' }); }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.story-card').forEach(card => observer.observe(card));
 </script>
 
 </body>
 </html>
+
 
 
 
