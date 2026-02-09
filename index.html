@@ -18,52 +18,51 @@
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             overflow-x: hidden;
-            touch-action: pan-y;
         }
 
-        /* --- FIXED HEADER ON SOLID WHITE --- */
+        /* --- STATIC WHITE HEADER --- */
         header {
             position: fixed;
             left: 0; top: 0;
             width: 100%;
             padding: 40px 5% 25px;
-            z-index: 5000;
+            z-index: 9999; /* Highest priority */
             background: white;
             border-bottom: 1px solid #f0f0f0;
         }
         h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900; text-transform: uppercase; margin: 0; }
         .tagline { font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; color: var(--text-grey); text-transform: uppercase; margin-top: 5px; }
 
-        /* --- PARALLAX STRUCTURE --- */
+        /* --- PARALLAX TRACK --- */
         .bucket-section {
             position: relative;
-            min-height: 250vh; /* Provides runway for cards to slide over pinned BG */
+            min-height: 300vh; /* This creates the scroll "length" for the cards */
             background-color: #000;
         }
 
-        /* Locks the background asset behind the scrolling cards */
-        .hero-bg-container {
+        /* This container stays pinned while you scroll the section */
+        .sticky-bg {
             position: sticky;
-            top: 140px; /* Positions it right under the fixed header */
-            height: calc(100vh - 140px);
+            top: 0;
+            height: 100vh;
             width: 100vw;
             overflow: hidden;
             z-index: 1;
-            pointer-events: none; /* Prevents clicking or dragging the background */
+            pointer-events: none; /* Background cannot be dragged or clicked */
         }
 
-        .hero-bg-container img, .hero-bg-container video {
-            width: 100%; height: 100%;
+        .sticky-bg img, .sticky-bg video {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             opacity: 0.45;
             filter: grayscale(100%);
-            user-select: none;
-            -webkit-user-drag: none;
         }
 
         .hero-label {
             position: absolute;
-            top: 50%; left: 50%;
+            top: 55%; /* Centered below the fixed header area */
+            left: 50%;
             transform: translate(-50%, -50%);
             font-size: 15vw;
             font-weight: 900;
@@ -73,26 +72,25 @@
             white-space: nowrap;
         }
 
-        /* --- CARDS CONTAINER --- */
-        .cards-container {
+        /* --- SCROLLING CARDS --- */
+        .cards-layer {
             position: relative;
             z-index: 10;
-            margin-top: -85vh; /* Pulls cards up over the pinned background */
-            padding-bottom: 20vh;
+            margin-top: -100vh; /* Pulls cards onto the sticky background */
+            padding-bottom: 10vh;
         }
 
         .story-card {
             background: white;
             width: 85%;
             max-width: 400px;
-            margin: 0 auto 90vh auto;
+            margin: 0 auto 100vh auto; /* Space between cards as they glide past */
             padding: 30px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
-            border: 1px solid #eee;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
             text-align: center;
             opacity: 0;
             transform: translateY(100px);
-            transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
+            transition: all 0.8s ease-out;
         }
 
         .story-card.active {
@@ -101,8 +99,9 @@
         }
 
         .story-card img, .story-card video {
-            width: 100%; height: auto;
-            max-height: 45vh;
+            width: 100%;
+            height: auto;
+            max-height: 40vh;
             object-fit: contain;
             margin-bottom: 20px;
         }
@@ -123,10 +122,8 @@
         .cta:hover { background: var(--accent); color: white; }
 
         @media (max-width: 600px) {
-            header { padding: 25px 5% 15px; }
-            .hero-bg-container { top: 110px; height: calc(100vh - 110px); }
             .hero-label { font-size: 20vw; }
-            .cards-container { margin-top: -75vh; }
+            .story-card { margin-bottom: 80vh; }
         }
     </style>
 </head>
@@ -137,169 +134,169 @@
     <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
 </header>
 
-<div style="height: 140px;"></div> <div class="bucket-section">
-    <div class="hero-bg-container">
+<div class="bucket-section">
+    <div class="sticky-bg">
         <div class="hero-label">AUSTIN</div>
         <img src="Austin.jpg">
     </div>
-    <div class="cards-container">
+    <div class="cards-layer">
         <div class="story-card">
             <img src="Me_Mom_Dad.jpg">
             <div class="card-copy">I was born and raised in Austin, Texas,</div>
         </div>
         <div class="story-card">
             <img src="Mom_Brothers.png">
-            <div class="card-copy">I’m the third of four boys. [cite: 3]</div>
+            <div class="card-copy">I’m the third of four boys.</div>
         </div>
     </div>
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg-container">
+    <div class="sticky-bg">
         <div class="hero-label">MUSIC</div>
         <video src="Music.mp4" autoplay muted loop playsinline></video>
     </div>
-    <div class="cards-container">
+    <div class="cards-layer">
         <div class="story-card">
             <img src="Dad_Singing.jpg">
-            <div class="card-copy">My dad was a working musician in Austin. He played in several bands. [cite: 3]</div>
+            <div class="card-copy">My dad was a working musician in Austin. He played in several bands.</div>
         </div>
         <div class="story-card">
             <img src="Pixies.png">
             <div class="card-copy">Which shaped my lifelong interest in music, especially live music.</div>
-            <a href="https://www.anthonycdorsey.com/shows-ive-seen" target="_blank" class="cta">See my Live Music Archive</a> [cite: 3]
+            <a href="https://www.anthonycdorsey.com/shows-ive-seen" target="_blank" class="cta">See my Live Music Archive</a>
         </div>
         <div class="story-card">
             <img src="BKRL.jpg">
             <div class="card-copy">Which eventually allowed me to blend that passion with community.</div>
-            <a href="https://www.rocklottery.com/" target="_blank" class="cta">Check out our charity event ROCK LOTTERY</a> [cite: 3]
+            <a href="https://www.rocklottery.com/" target="_blank" class="cta">Check out our charity event ROCK LOTTERY</a>
         </div>
     </div>
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg-container">
+    <div class="sticky-bg">
         <div class="hero-label">NEW YORK</div>
         <img src="NY.jpg">
     </div>
-    <div class="cards-container">
+    <div class="cards-layer">
         <div class="story-card">
             <img src="Mickey_Me.jpg">
             <div class="card-copy">I moved to NYC in 2008.</div>
-            <div class="card-copy" style="font-size:0.85rem; color:var(--text-grey); font-style:italic;">This was my favorite halloween, ever. [cite: 3]</div>
+            <div class="card-copy" style="font-size:0.85rem; color:var(--text-grey); font-style:italic;">This was my favorite halloween, ever.</div>
         </div>
         <div class="story-card">
             <img src="Snap_NY.jpg">
-            <div class="card-copy">NY is where I began the majority of my career. [cite: 3]</div>
+            <div class="card-copy">NY is where I began the majority of my career.</div>
         </div>
         <div class="story-card">
             <img src="WC_Fields.png">
             <div class="card-copy">Where I moderately excel as an amateur indoor plant hobbyist</div>
-            <a href="https://en.wikipedia.org/wiki/W._C._Fields" target="_blank" class="cta">This is W.C. Fields</a> [cite: 3]
+            <a href="https://en.wikipedia.org/wiki/W._C._Fields" target="_blank" class="cta">This is W.C. Fields</a>
         </div>
         <div class="story-card">
             <img src="Me_Seanie.jpg">
-            <div class="card-copy">and where I met my husband [cite: 3]</div>
+            <div class="card-copy">and where I met my husband</div>
         </div>
     </div>
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg-container">
+    <div class="sticky-bg">
         <div class="hero-label">COLLECTING</div>
         <img src="Collecting.jpg">
     </div>
-    <div class="cards-container">
+    <div class="cards-layer">
         <div class="story-card">
             <img src="Parker_Posey.png">
             <div class="card-copy">I collect objects and moments that hold meaning.</div>
-            <a href="https://en.wikipedia.org/wiki/Parker_Posey" target="_blank" class="cta">I <3 Parker Posey</a> [cite: 3]
+            <a href="https://en.wikipedia.org/wiki/Parker_Posey" target="_blank" class="cta">I <3 Parker Posey</a>
         </div>
         <div class="story-card">
             <img src="Pal_Donkey.png">
-            <div class="card-copy">Like this vintage NORCREST FURLAND Anthropomorphic Pal. [cite: 3]</div>
+            <div class="card-copy">Like this vintage NORCREST FURLAND Anthropomorphic Pal.</div>
         </div>
         <div class="story-card">
             <img src="Italian_Jar.png">
-            <div class="card-copy">Or this handmade jar I purchased in Montepulciano, IT. [cite: 3]</div>
+            <div class="card-copy">Or this handmade jar I purchased in Montepulciano, IT.</div>
         </div>
         <div class="story-card">
             <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
             <div class="card-copy">Or automata, like this!</div>
-            <a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta">Check out the St.Leger store</a> [cite: 3]
+            <a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta">Check out the St.Leger store</a>
         </div>
         <div class="story-card">
             <img src="PS_OASIS.jpg">
             <div class="card-copy">I love fashion, my go-to brand is Paul Smith.</div>
-            <a href="https://www.paulsmith.com/" target="_blank" class="cta">Check out Paul Smith</a> [cite: 3]
+            <a href="https://www.paulsmith.com/" target="_blank" class="cta">Check out Paul Smith</a>
         </div>
         <div class="story-card">
             <img src="Mitch_Painting.png">
             <div class="card-copy">I also collect art, including this painting of my husband and me, by my friend Mitch Ferrin.</div>
-            <a href="https://www.mitchferrin.com/" target="_blank" class="cta">See more of Mitch's paintings here</a> [cite: 3]
+            <a href="https://www.mitchferrin.com/" target="_blank" class="cta">See more of Mitch's paintings here</a>
         </div>
         <div class="story-card">
             <img src="Joan_Rivers.png">
-            <div class="card-copy">A more recent purchase is this painting by Joan Rivers. [cite: 3]</div>
+            <div class="card-copy">A more recent purchase is this painting by Joan Rivers.</div>
         </div>
         <div class="story-card">
             <img src="Me_Cake.png">
             <div class="card-copy">My grandmother had a professional cake business in Austin.</div>
-            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta">Check out my Breakfast Taco Recipe</a> [cite: 3]
+            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta">Check out my Breakfast Taco Recipe</a>
         </div>
         <div class="story-card">
             <img src="Cookies.jpg">
-            <div class="card-copy">That inspired my interest in both enjoying and creating things, like these cookies. [cite: 3]</div>
+            <div class="card-copy">That inspired my interest in both enjoying and creating things, like these cookies.</div>
         </div>
         <div class="story-card">
             <img src="Bravo.jpeg">
             <div class="card-copy">I also collect a lot of Reality TV memories</div>
-            <a href="https://www.bravotv.com/" target="_blank" class="cta">Mostly Bravo</a> [cite: 3]
+            <a href="https://www.bravotv.com/" target="_blank" class="cta">Mostly Bravo</a>
         </div>
     </div>
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg-container">
+    <div class="sticky-bg">
         <div class="hero-label">TRAVEL</div>
         <img src="Travel.jpg">
     </div>
-    <div class="cards-container">
+    <div class="cards-layer">
         <div class="story-card">
             <img src="83_Worlds_Fair.png">
             <div class="card-copy">We went to New Orleans often when I was growing up (it's where my grandfather was born and raised).</div>
-            <div class="card-copy" style="font-size:0.85rem; color:var(--text-grey); font-style:italic;">I was at this fair! [cite: 3]</div>
+            <div class="card-copy" style="font-size:0.85rem; color:var(--text-grey); font-style:italic;">I was at this fair!</div>
         </div>
         <div class="story-card">
             <img src="Mexico_City.jpg">
-            <div class="card-copy">The first country I visited was Mexico. We spent time in Mexico City. [cite: 3]</div>
+            <div class="card-copy">The first country I visited was Mexico. We spent time in Mexico City.</div>
         </div>
         <div class="story-card">
             <img src="Paris_2000.png">
-            <div class="card-copy">The next was France. [cite: 3]</div>
+            <div class="card-copy">The next was France.</div>
         </div>
         <div class="story-card">
             <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
-            <div class="card-copy">Now I’ve lost count of how many places I’ve been since! [cite: 3]</div>
+            <div class="card-copy">Now I’ve lost count of how many places I’ve been since!</div>
         </div>
     </div>
 </div>
 
 <script>
-    // Triggers card appearance as you scroll
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('.story-card').forEach(card => observer.observe(card));
 </script>
 
 </body>
 </html>
+
 
 
 
