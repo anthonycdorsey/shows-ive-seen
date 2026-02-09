@@ -17,97 +17,93 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
             overflow-x: hidden;
         }
 
-        /* --- STATIC WHITE HEADER --- */
+        /* --- FIXED HEADER ON SOLID WHITE --- */
         header {
             position: fixed;
             left: 0; top: 0;
             width: 100%;
             padding: 40px 5% 25px;
-            z-index: 9999; /* Highest priority */
-            background: white;
+            z-index: 9999;
+            background: white; /* Prevents background asset bleed */
             border-bottom: 1px solid #f0f0f0;
         }
         h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900; text-transform: uppercase; margin: 0; }
         .tagline { font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; color: var(--text-grey); text-transform: uppercase; margin-top: 5px; }
 
-        /* --- PARALLAX TRACK --- */
         .bucket-section {
             position: relative;
-            min-height: 300vh; /* This creates the scroll "length" for the cards */
-            background-color: #000;
+            background: #000;
+            min-height: 300vh; /* Track length for cards to glide */
         }
 
-        /* This container stays pinned while you scroll the section */
-        .sticky-bg {
+        /* Sticky Background Logic */
+        .hero-bg {
             position: sticky;
             top: 0;
             height: 100vh;
             width: 100vw;
-            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             z-index: 1;
-            pointer-events: none; /* Background cannot be dragged or clicked */
+            overflow: hidden;
+            pointer-events: none; /* Disables interaction/dragging */
         }
 
-        .sticky-bg img, .sticky-bg video {
-            width: 100%;
-            height: 100%;
+        .hero-bg img, .hero-bg video {
+            width: 100%; height: 100%;
             object-fit: cover;
             opacity: 0.45;
             filter: grayscale(100%);
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         .hero-label {
             position: absolute;
-            top: 55%; /* Centered below the fixed header area */
-            left: 50%;
-            transform: translate(-50%, -50%);
             font-size: 15vw;
             font-weight: 900;
             color: rgba(255, 255, 255, 0.2);
             text-transform: uppercase;
             z-index: 2;
-            white-space: nowrap;
         }
 
-        /* --- SCROLLING CARDS --- */
-        .cards-layer {
+        /* Card Container Logic */
+        .cards-container {
             position: relative;
             z-index: 10;
-            margin-top: -100vh; /* Pulls cards onto the sticky background */
-            padding-bottom: 10vh;
+            margin-top: -100vh; /* Pulls cards onto the sticky background area */
+            padding-bottom: 20vh;
         }
 
         .story-card {
             background: white;
             width: 85%;
             max-width: 400px;
-            margin: 0 auto 100vh auto; /* Space between cards as they glide past */
+            margin: 0 auto 100vh auto; /* Vertical distance between card glides */
             padding: 30px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.3);
             text-align: center;
             opacity: 0;
-            transform: translateY(100px);
-            transition: all 0.8s ease-out;
+            transform: translateY(150px);
+            transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
-        .story-card.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .story-card.active { transform: translateY(0); opacity: 1; }
 
         .story-card img, .story-card video {
-            width: 100%;
-            height: auto;
-            max-height: 40vh;
+            width: 100%; height: auto;
+            max-height: 45vh;
             object-fit: contain;
             margin-bottom: 20px;
         }
 
-        .card-copy { font-size: 1rem; line-height: 1.5; margin-bottom: 15px; }
-
+        .card-copy { font-size: 1rem; line-height: 1.5; margin-bottom: 12px; }
+        
         .cta {
             display: inline-block;
             color: var(--accent);
@@ -123,7 +119,7 @@
 
         @media (max-width: 600px) {
             .hero-label { font-size: 20vw; }
-            .story-card { margin-bottom: 80vh; }
+            .story-card { width: 90%; margin-bottom: 80vh; }
         }
     </style>
 </head>
@@ -135,11 +131,11 @@
 </header>
 
 <div class="bucket-section">
-    <div class="sticky-bg">
+    <div class="hero-bg">
         <div class="hero-label">AUSTIN</div>
         <img src="Austin.jpg">
     </div>
-    <div class="cards-layer">
+    <div class="cards-container">
         <div class="story-card">
             <img src="Me_Mom_Dad.jpg">
             <div class="card-copy">I was born and raised in Austin, Texas,</div>
@@ -152,11 +148,11 @@
 </div>
 
 <div class="bucket-section">
-    <div class="sticky-bg">
+    <div class="hero-bg">
         <div class="hero-label">MUSIC</div>
         <video src="Music.mp4" autoplay muted loop playsinline></video>
     </div>
-    <div class="cards-layer">
+    <div class="cards-container">
         <div class="story-card">
             <img src="Dad_Singing.jpg">
             <div class="card-copy">My dad was a working musician in Austin. He played in several bands.</div>
@@ -175,11 +171,11 @@
 </div>
 
 <div class="bucket-section">
-    <div class="sticky-bg">
+    <div class="hero-bg">
         <div class="hero-label">NEW YORK</div>
         <img src="NY.jpg">
     </div>
-    <div class="cards-layer">
+    <div class="cards-container">
         <div class="story-card">
             <img src="Mickey_Me.jpg">
             <div class="card-copy">I moved to NYC in 2008.</div>
@@ -202,11 +198,11 @@
 </div>
 
 <div class="bucket-section">
-    <div class="sticky-bg">
+    <div class="hero-bg">
         <div class="hero-label">COLLECTING</div>
         <img src="Collecting.jpg">
     </div>
-    <div class="cards-layer">
+    <div class="cards-container">
         <div class="story-card">
             <img src="Parker_Posey.png">
             <div class="card-copy">I collect objects and moments that hold meaning.</div>
@@ -257,11 +253,11 @@
 </div>
 
 <div class="bucket-section">
-    <div class="sticky-bg">
+    <div class="hero-bg">
         <div class="hero-label">TRAVEL</div>
         <img src="Travel.jpg">
     </div>
-    <div class="cards-layer">
+    <div class="cards-container">
         <div class="story-card">
             <img src="83_Worlds_Fair.png">
             <div class="card-copy">We went to New Orleans often when I was growing up (it's where my grandfather was born and raised).</div>
@@ -289,13 +285,14 @@
                 entry.target.classList.add('active');
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
 
     document.querySelectorAll('.story-card').forEach(card => observer.observe(card));
 </script>
 
 </body>
 </html>
+
 
 
 
