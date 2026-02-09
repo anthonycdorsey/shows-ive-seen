@@ -20,16 +20,16 @@
             margin: 0;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             overflow-x: hidden;
-            padding-top: 100px; /* Space for the new unified header */
+            padding-top: 110px; /* Space for the unified header */
         }
 
-        /* --- UNIFIED MODERN NAV --- */
+        /* --- UNIFIED NAVIGATION --- */
         #tony-header {
             position: fixed;
             left: 0; top: 0;
             width: 100%;
             padding: 25px 5%;
-            z-index: 5000; /* High z-index to stay above ticket cards */
+            z-index: 9999;
             background: white;
             border-bottom: 1px solid var(--border);
             display: flex;
@@ -60,14 +60,12 @@
         }
         .dropdown-menu a:hover { background: #f4f4f2; color: var(--accent); }
 
-        /* Hover for Desktop */
         @media (min-width: 1025px) {
             .nav-wrapper:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
         }
-        /* Mobile State */
         .dropdown-menu.mobile-open { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
 
-        /* --- TICKET GRID STYLES --- */
+        /* --- RESTORED HORIZONTAL SCROLL ENGINE --- */
         .ticket-grid {
             display: flex;
             flex-direction: column;
@@ -75,7 +73,46 @@
             padding: 40px 0;
         }
 
-        /* Rest of your horizontal scrolling and card styles... */
+        .ticket-section {
+            width: 100%;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.2;
+            transition: all 0.8s ease;
+            cursor: pointer;
+        }
+
+        .ticket-section.active { opacity: 1; }
+
+        .ticket-card {
+            width: 80%;
+            max-width: 450px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: scale(0.9);
+            transition: transform 0.8s ease;
+        }
+
+        .ticket-section.active .ticket-card { transform: scale(1); }
+
+        .ticket-card img { width: 100%; height: auto; display: block; filter: grayscale(100%); transition: 0.5s; }
+        .ticket-section.active .ticket-card img { filter: grayscale(0%); }
+
+        /* Modal Styles */
+        #detail-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.98);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>
@@ -100,12 +137,14 @@
 </header>
 
 <div class="ticket-grid">
+    <div class="ticket-section" data-artist="Example" data-year="2024" data-venue="Example Venue" data-city="Example City" data-copy="Description here" data-img="your-image.jpg">
+        <div class="ticket-card">
+            <img src="your-image.jpg">
+        </div>
     </div>
-
-<div id="detail-modal"> ... </div>
+</div>
 
 <script>
-    // Unified Menu Logic
     const burger = document.getElementById('burgerBtn');
     const menu = document.getElementById('dropdownMenu');
 
@@ -120,17 +159,15 @@
         }
     });
 
-    // Your existing Intersection Observer for ticket activation
+    // Restore the Scroll Observer
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) entry.target.classList.add('active');
             else entry.target.classList.remove('active');
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.5 });
 
     document.querySelectorAll('.ticket-section').forEach(section => observer.observe(section));
-
-    // Your existing Modal logic...
 </script>
 
 </body>
