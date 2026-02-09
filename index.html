@@ -99,7 +99,7 @@
         .cards-container {
             position: relative;
             z-index: 10;
-            margin-top: -100vh; /* Re-aligned to allow full-screen bg first */
+            margin-top: -100vh;
             padding-bottom: 5vh;
         }
 
@@ -116,10 +116,6 @@
             transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
-        /* This ensures that EVERY time a new section starts, 
-           the first card waits for a full viewport height 
-           to let the title breathe. 
-        */
         .cards-container .story-card:first-child {
             margin-top: 130vh;
         }
@@ -133,9 +129,18 @@
             margin-bottom: 20px;
         }
 
+        /* Rule for the painting requested in #7 */
+        .painting-asset {
+            max-height: 60vh !important;
+            width: 110% !important;
+            margin-left: -5%;
+        }
+
         .card-copy { font-size: 1rem; line-height: 1.5; margin-bottom: 12px; }
         .card-caption { font-size: 0.85rem; color: var(--text-grey); font-style: italic; margin-bottom: 15px; }
         
+        /* Elevated CTA Style */
+        .cta-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
         .cta {
             display: inline-block;
             background: var(--accent);
@@ -148,6 +153,7 @@
             padding: 12px 24px;
             border-radius: 2px;
             transition: all 0.3s ease;
+            margin: 5px;
         }
         .cta:hover { transform: translateY(-2px); background: #333; }
 
@@ -189,7 +195,7 @@
         <div class="story-card">
             <img src="Pixies.png">
             <div class="card-copy">Which shaped my lifelong interest in music, especially live music.</div>
-            <a href="https://www.anthonycdorsey.com/shows-ive-seen" target="_blank" class="cta">Live Music Archive</a>
+            <a href="https://www.anthonycdorsey.com/shows-ive-seen" target="_blank" class="cta">CHECK OUT MY LIVE MUSIC ARCHIVE</a>
         </div>
         <div class="story-card">
             <img src="BKRL.jpg">
@@ -216,7 +222,7 @@
             <div class="card-copy">...it is also where I moderately excel as an amateur indoor plant hobbyist</div>
             <a href="https://en.wikipedia.org/wiki/W._C._Fields" target="_blank" class="cta">Meet W.C. Fields</a>
         </div>
-        <div class="story-card"><img src="Me_Seanie.jpg"><div class="card-copy">and where I met my husband</div></div>
+        <div class="story-card"><img src="Me_Seanie.jpg"><div class="card-copy">NY is where I met my husband</div></div>
     </div>
 </div>
 
@@ -229,13 +235,13 @@
         <div class="story-card">
             <img src="Parker_Posey.png">
             <div class="card-copy">I collect objects and moments that hold meaning.</div>
-            <a href="https://en.wikipedia.org/wiki/Parker_Posey" target="_blank" class="cta">Parker Posey Archive</a>
+            <a href="https://en.wikipedia.org/wiki/Parker_Posey" target="_blank" class="cta">I ADORE PARKER POSEY!</a>
         </div>
-        <div class="story-card"><img src="Pal_Donkey.png"><div class="card-copy">Like this vintage NORCREST FURLAND Anthropomorphic Pal.</div></div>
-        <div class="story-card"><img src="Italian_Jar.png"><div class="card-copy">Or this handmade jar I purchased in Montepulciano, IT.</div></div>
+        <div class="story-card"><img src="Pal_Donkey.png"><div class="card-copy">This vintage NORCREST FURLAND Anthropomorphic Pal is one of my most prized possessions.</div></div>
+        <div class="story-card"><img src="Italian_Jar.png"><div class="card-copy">So is this handmade jar I purchased in Montepulciano, Italy.</div></div>
         <div class="story-card">
             <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
-            <div class="card-copy">Or automata, like this!</div>
+            <div class="card-copy">I'm obsessed with automata, like this!</div>
             <a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta">St.Leger Store</a>
         </div>
         <div class="story-card">
@@ -244,7 +250,7 @@
             <a href="https://www.paulsmith.com/" target="_blank" class="cta">Visit Paul Smith</a>
         </div>
         <div class="story-card">
-            <img src="Mitch_Painting.png">
+            <img src="Mitch_Painting.png" class="painting-asset">
             <div class="card-copy">I also collect art, including this painting of my husband and me, by my friend Mitch Ferrin.</div>
             <a href="https://www.mitchferrin.com/" target="_blank" class="cta">Mitch Ferrin Art</a>
         </div>
@@ -252,13 +258,16 @@
         <div class="story-card">
             <img src="Me_Cake.png">
             <div class="card-copy">My grandmother had a professional cake business in Austin.</div>
-            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta">Breakfast Taco Recipe</a>
+            </div>
+        <div class="story-card">
+            <img src="Cookies.jpg">
+            <div class="card-copy">That inspired my interest in both enjoying and creating things, like these cookies.</div>
+            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta">CHECK OUT MY BREAKFAST TACO RECIPE</a>
         </div>
-        <div class="story-card"><img src="Cookies.jpg"><div class="card-copy">That inspired my interest in both enjoying and creating things, like these cookies.</div></div>
         <div class="story-card">
             <img src="Bravo.jpeg">
-            <div class="card-copy">I collect a lot of Reality TV memories</div>
-            <a href="https://www.bravotv.com/" target="_blank" class="cta">The Bravo World</a>
+            <div class="card-copy">I also collect a lot of Reality TV memories</div>
+            <a href="https://www.bravotv.com/" target="_blank" class="cta">MOSTLY FROM THE BRAVO WORLD</a>
         </div>
     </div>
 </div>
@@ -279,6 +288,13 @@
         <div class="story-card">
             <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
             <div class="card-copy">Now I’ve lost count of how many places I’ve been since!</div>
+        </div>
+        <div class="story-card">
+            <div class="card-copy" style="font-weight: 700; text-transform: uppercase;">MORE THAN ANYTHING, I LOVE CAPTURING MEMORIES AND MAKING MEANINGFUL CONNECTIONS</div>
+            <div class="cta-group">
+                <a href="https://www.instagram.com/anthonycdorsey/" target="_blank" class="cta">Instagram</a>
+                <a href="https://www.linkedin.com/in/tony-dorsey/" target="_blank" class="cta">LinkedIn</a>
+            </div>
         </div>
     </div>
 </div>
