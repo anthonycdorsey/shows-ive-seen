@@ -20,7 +20,6 @@
             scroll-behavior: smooth;
         }
 
-        /* --- FIXED GLOBAL HEADER --- */
         header {
             position: fixed;
             left: 5%; top: 40px;
@@ -30,15 +29,11 @@
         h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900; text-transform: uppercase; margin: 0; }
         .tagline { font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; color: var(--text-grey); text-transform: uppercase; margin-top: 5px; }
 
-        /* --- PARALLAX SECTION --- */
         .bucket-section {
             position: relative;
-            /* Height determines how long the hero stays visible */
-            height: auto; 
-            padding-bottom: 10vh;
+            background: #000;
         }
 
-        /* STICKY HERO BACKGROUND */
         .hero-bg {
             position: sticky;
             top: 0;
@@ -49,33 +44,28 @@
             align-items: center;
             z-index: 1;
             overflow: hidden;
-            background: #000;
         }
 
         .hero-bg img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
-            opacity: 0.5; /* Dims photo so text and cards pop */
+            opacity: 0.4;
             filter: grayscale(100%);
-            transition: transform 0.5s ease-out;
         }
 
         .hero-label {
             position: absolute;
             font-size: 15vw;
             font-weight: 900;
-            color: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.2);
             text-transform: uppercase;
-            white-space: nowrap;
             z-index: 2;
         }
 
-        /* --- FLYING CARDS LAYER --- */
         .cards-container {
             position: relative;
             z-index: 10;
-            margin-top: -50vh; /* Pulls cards up over the hero */
+            padding-top: 50vh;
             padding-bottom: 20vh;
         }
 
@@ -83,33 +73,28 @@
             background: white;
             width: 85%;
             max-width: 400px;
-            margin: 0 auto 60vh auto; /* Vertical spacing between cards */
-            padding: 25px;
+            margin: 0 auto 70vh auto;
+            padding: 30px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.2);
             border: 1px solid #eee;
             text-align: center;
-            /* FLY-UP ANIMATION BASE */
             transform: translateY(150px);
             opacity: 0;
             transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
-        .story-card.active {
-            transform: translateY(0);
-            opacity: 1;
-        }
+        .story-card.active { transform: translateY(0); opacity: 1; }
 
         .story-card img, .story-card video {
-            width: 100%;
-            height: auto;
+            width: 100%; height: auto;
             max-height: 40vh;
             object-fit: contain;
             margin-bottom: 20px;
         }
 
-        .bucket-name { font-size: 1.4rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
-        .card-copy { font-size: 0.95rem; line-height: 1.5; margin-bottom: 10px; }
-        .card-caption { font-family: 'Courier New', monospace; font-size: 0.8rem; color: var(--text-grey); font-style: italic; margin-bottom: 15px; }
+        .bucket-name { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; color: var(--text-grey); }
+        .card-copy { font-size: 1rem; line-height: 1.5; margin-bottom: 12px; }
+        .card-caption { font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--text-grey); margin-bottom: 15px; }
         
         .cta {
             display: inline-block;
@@ -119,13 +104,14 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             border: 1px solid var(--accent);
-            padding: 8px 16px;
+            padding: 10px 20px;
+            transition: 0.3s ease;
         }
+        .cta:hover { background: var(--accent); color: white; }
 
-        /* Mobile specific adjustments */
         @media (max-width: 600px) {
             .hero-label { font-size: 20vw; }
-            .story-card { width: 90%; margin-bottom: 40vh; }
+            .story-card { width: 90%; margin-bottom: 50vh; }
         }
     </style>
 </head>
@@ -141,22 +127,16 @@
         <div class="hero-label">AUSTIN</div>
         <img src="Me_Mom_Dad.jpg">
     </div>
-    
     <div class="cards-container">
         <div class="story-card">
             <div class="bucket-name">Austin</div>
             <img src="Me_Mom_Dad.jpg">
-            <div class="card-copy">I was born and raised in Austin, Texas.</div>
+            <div class="card-copy">I was born and raised in Austin, Texas,</div>
         </div>
         <div class="story-card">
             <div class="bucket-name">Austin</div>
             <img src="Mom_Brothers.png">
             <div class="card-copy">I’m the third of four boys.</div>
-        </div>
-        <div class="story-card">
-            <div class="bucket-name">Austin</div>
-            <img src="Me_Cake.png">
-            <div class="card-caption">Gonzo Cake!</div>
         </div>
     </div>
 </div>
@@ -166,37 +146,170 @@
         <div class="hero-label">MUSIC</div>
         <img src="Dad_Singing.jpg">
     </div>
-    
     <div class="cards-container">
         <div class="story-card">
             <div class="bucket-name">Music</div>
             <img src="Dad_Singing.jpg">
-            <div class="card-copy">My dad was a working musician in Austin.</div>
+            <div class="card-copy">My dad was a working musician in Austin. He played in several bands.</div>
         </div>
         <div class="story-card">
             <div class="bucket-name">Music</div>
-            <img src="KNACK.png">
+            <img src="Pixies.png">
+            <div class="card-copy">Which shaped my lifelong interest in music, especially live music.</div>
+            <div class="card-caption">See my Live Music Archive</div>
+            <a href="https://www.anthonycdorsey.com/shows-ive-seen" target="_blank" class="cta">Ticket Archive</a>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Music</div>
+            <img src="BKRL.jpg">
             <div class="card-copy">Which eventually allowed me to blend that passion with community.</div>
-            <div class="card-caption">Rock Lottery</div>
+            <div class="card-caption">Check out our charity event ROCK LOTTERY</div>
             <a href="https://www.rocklottery.com/" target="_blank" class="cta">Visit Rock Lottery</a>
         </div>
     </div>
 </div>
 
-<script>
-    // Fly-up logic: triggers when card enters 20% of the screen
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -100px 0px"
-    };
+<div class="bucket-section">
+    <div class="hero-bg">
+        <div class="hero-label">NEW YORK</div>
+        <img src="Mickey_Me.jpg">
+    </div>
+    <div class="cards-container">
+        <div class="story-card">
+            <div class="bucket-name">New York</div>
+            <img src="Mickey_Me.jpg">
+            <div class="card-copy">I moved to NYC in 2008.</div>
+            <div class="card-caption">This was my favorite halloween, ever.</div>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">New York</div>
+            <img src="Snap_NY.jpg">
+            <div class="card-copy">Where I began the majority of my career.</div>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">New York</div>
+            <img src="WC_Fields.png">
+            <div class="card-copy">where I moderately excel as an amateur indoor plant hobbyist</div>
+            <div class="card-caption">This is W.C. Fields</div>
+            <a href="https://en.wikipedia.org/wiki/W._C._Fields" target="_blank" class="cta">About W.C. Fields</a>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">New York</div>
+            <img src="Me_Seanie.jpg">
+            <div class="card-copy">and where I met my husband</div>
+        </div>
+    </div>
+</div>
 
+<div class="bucket-section">
+    <div class="hero-bg">
+        <div class="hero-label">COLLECTING</div>
+        <img src="Mitch_Painting.png">
+    </div>
+    <div class="cards-container">
+        <div class="story-card">
+            <div class="bucket-name">Collecting</div>
+            <img src="Parker_Posey.png">
+            <div class="card-copy">I collect objects and moments that hold meaning.</div>
+            <div class="card-caption">I <3 Parker Posey</div>
+            <a href="https://en.wikipedia.org/wiki/Parker_Posey" target="_blank" class="cta">Parker Posey Bio</a>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Collecting</div>
+            <img src="Pal_Donkey.png">
+            <div class="card-copy">Like this vintage NORCREST FURLAND Anthropomorphic Pal.</div>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Collecting</div>
+            <img src="Italian_Jar.png">
+            <div class="card-copy">Or this handmade jar I purchased in Montepulciano, IT.</div>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Collecting</div>
+            <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
+            <div class="card-copy">Or automata, like this!</div>
+            <div class="card-caption">Check out the St.Leger store</div>
+            <a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta">Visit Store</a>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Collecting</div>
+            <img src="PS_OASIS.jpg">
+            <div class="card-copy">I love fashion, my go-to brand is Paul Smith.</div>
+            <div class="card-caption">Check out Paul Smith</div>
+            <a href="https://www.paulsmith.com/" target="_blank" class="cta">Paul Smith Store</a>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Collecting</div>
+            <img src="Mitch_Painting.png">
+            <div class="card-copy">I also collect art, including this painting of my husband and I, by my friend Mitch Ferrin.</div>
+            <div class="card-caption">See more of Mitch's paintings here</div>
+            <a href="https://www.mitchferrin.com/" target="_blank" class="cta">Visit Mitch Ferrin</a>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Collecting</div>
+            <img src="Joan_Rivers.png">
+            <div class="card-copy">A more recent purchase is this painting by Joan Rivers.</div>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Collecting</div>
+            <img src="Me_Cake.png">
+            <div class="card-copy">My grandmother had a professional cake business in Austin.</div>
+            <div class="card-caption">Check out my Breakfast Taco Recipe</div>
+            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta">Taco Recipe</a>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Collecting</div>
+            <img src="Cookies.jpg">
+            <div class="card-copy">That inspired my interest in both enjoying and creating things, like these cookies.</div>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Collecting</div>
+            <img src="Bravo.jpeg">
+            <div class="card-copy">I collect a lot of Reality TV memories</div>
+            <div class="card-caption">Mostly Bravo</div>
+            <a href="https://www.bravotv.com/" target="_blank" class="cta">Visit Bravo</a>
+        </div>
+    </div>
+</div>
+
+<div class="bucket-section">
+    <div class="hero-bg">
+        <div class="hero-label">TRAVEL</div>
+        <img src="83_Worlds_Fair.png">
+    </div>
+    <div class="cards-container">
+        <div class="story-card">
+            <div class="bucket-name">Travel</div>
+            <img src="83_Worlds_Fair.png">
+            <div class="card-copy">We went to New Orleans often when I was growing up (it's where my grandfather was born and raised).</div>
+            <div class="card-caption">I was at this fair!</div>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Travel</div>
+            <img src="Mexico_City.jpg">
+            <div class="card-copy">The first country I visited was Mexico. We spent time in Mexico City.</div>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Travel</div>
+            <img src="Paris_2000.png">
+            <div class="card-copy">The next was France.</div>
+        </div>
+        <div class="story-card">
+            <div class="bucket-name">Travel</div>
+            <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
+            <div class="card-copy">Now I’ve lost count of how many places I’ve been since!</div>
+        </div>
+    </div>
+</div>
+
+<script>
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
 
     document.querySelectorAll('.story-card').forEach(card => observer.observe(card));
 </script>
