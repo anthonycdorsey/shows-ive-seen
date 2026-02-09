@@ -12,7 +12,6 @@
             --accent: #000000;
         }
 
-        /* Essential: Sticky will fail if these have overflow: hidden */
         body, html {
             margin: 0; padding: 0;
             background-color: var(--bg-color);
@@ -58,20 +57,19 @@
         /* --- STICKY ENGINE --- */
         .bucket-section {
             position: relative;
-            /* No overflow allowed here */
             width: 100%;
         }
 
         .hero-bg-container {
             position: -webkit-sticky;
             position: sticky;
-            top: 110px; /* Lock point */
+            top: 110px;
             height: calc(100vh - 110px);
             width: 100%;
             z-index: 1;
             background: #000;
             pointer-events: none;
-            overflow: hidden; /* This internal overflow is fine */
+            overflow: hidden;
         }
 
         .hero-bg-container img, .hero-bg-container video {
@@ -84,7 +82,7 @@
 
         .hero-label {
             position: absolute;
-            top: 15%; /* Top alignment as requested */
+            top: 15%; 
             left: 50%;
             transform: translateX(-50%);
             font-size: clamp(3rem, 10vw, 8.5rem);
@@ -101,8 +99,7 @@
         .cards-container {
             position: relative;
             z-index: 10;
-            /* Negative margin pulls the content track up over the sticky track */
-            margin-top: -90vh; 
+            margin-top: -100vh; /* Re-aligned to allow full-screen bg first */
             padding-bottom: 5vh;
         }
 
@@ -119,9 +116,12 @@
             transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
-        /* Forces first card below the viewport on load */
-        .bucket-section:first-of-type .story-card:first-child {
-            margin-top: 110vh;
+        /* This ensures that EVERY time a new section starts, 
+           the first card waits for a full viewport height 
+           to let the title breathe. 
+        */
+        .cards-container .story-card:first-child {
+            margin-top: 130vh;
         }
 
         .story-card.active { opacity: 1; transform: translateY(0); }
@@ -136,7 +136,6 @@
         .card-copy { font-size: 1rem; line-height: 1.5; margin-bottom: 12px; }
         .card-caption { font-size: 0.85rem; color: var(--text-grey); font-style: italic; margin-bottom: 15px; }
         
-        /* Elevated CTA Style */
         .cta {
             display: inline-block;
             background: var(--accent);
@@ -157,6 +156,7 @@
             .hero-bg-container { top: 95px; height: calc(100vh - 95px); }
             .hero-label { font-size: 13vw; width: 95vw; top: 12%; }
             .story-card { margin-bottom: 80vh; }
+            .cards-container .story-card:first-child { margin-top: 115vh; }
         }
     </style>
 </head>
@@ -297,6 +297,7 @@
 
 </body>
 </html>
+
 
 
 
