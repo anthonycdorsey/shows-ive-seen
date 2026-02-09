@@ -22,7 +22,101 @@
             line-height: 1.6;
             overflow-x: hidden;
         }
+<style>
+    :root {
+        --text-main: #1A1A1A;
+        --text-grey: #A0A09A;
+        --accent: #000000;
+        --nav-bg: rgba(255, 255, 255, 0.98);
+    }
 
+    /* --- FIXED HEADER --- */
+    #tony-header {
+        position: fixed;
+        left: 0; top: 0;
+        width: 100%;
+        padding: 25px 5%;
+        z-index: 9999; /* Ensure it stays above all cards/scrollers */
+        background: white;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    #tony-header h1 { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin: 0; color: var(--text-main); }
+    #tony-header .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
+
+    /* --- DROPDOWN LOGIC --- */
+    .nav-wrapper { position: relative; }
+    .burger-btn { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; }
+    .burger-bar { width: 22px; height: 2px; background-color: var(--accent); transition: 0.3s ease; }
+    
+    .dropdown-menu {
+        position: absolute; top: 100%; right: 0; width: 240px;
+        background: var(--nav-bg); backdrop-filter: blur(8px);
+        border: 1px solid #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        opacity: 0; visibility: hidden; transform: translateY(10px);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        display: flex; flex-direction: column; padding: 20px 0;
+    }
+
+    .dropdown-menu a {
+        padding: 12px 25px; font-size: 0.75rem; font-weight: 700;
+        text-decoration: none; color: var(--text-main);
+        text-transform: uppercase; letter-spacing: 1.5px; transition: 0.2s;
+    }
+    .dropdown-menu a:hover { background: #f9f9f9; color: var(--text-grey); }
+
+    /* Hover for Desktop */
+    @media (min-width: 1025px) {
+        .nav-wrapper:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    }
+    /* Click for Mobile */
+    .dropdown-menu.mobile-open { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
+
+    @media (max-width: 600px) {
+        .dropdown-menu { width: 100vw; position: fixed; top: 75px; left: 0; }
+    }
+</style>
+
+<header id="tony-header">
+    <div class="header-left">
+        <h1>Call me Tony</h1>
+        <div class="tagline">Senior Brand & Marketing Leader</div>
+    </div>
+    <div class="nav-wrapper" id="navWrapper">
+        <div class="burger-btn" id="burgerBtn">
+            <div class="burger-bar"></div>
+            <div class="burger-bar"></div>
+            <div class="burger-bar"></div>
+        </div>
+        <nav class="dropdown-menu" id="dropdownMenu">
+            <a href="https://www.anthonycdorsey.com/">HOME</a>
+            <a href="https://www.anthonycdorsey.com/shows-ive-seen/">LIVE MUSIC ARCHIVE</a>
+            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/">BREAKFAST TACO RECIPE</a>
+        </nav>
+    </div>
+</header>
+
+<script>
+    const burger = document.getElementById('burgerBtn');
+    const menu = document.getElementById('dropdownMenu');
+
+    // Toggle for mobile tap
+    burger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('mobile-open');
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && !burger.contains(e.target)) {
+            menu.classList.remove('mobile-open');
+        }
+    });
+</script>
         /* --- HERO & GRID --- */
         .hero-section { width: 100%; padding: 8vh 0 4vh 0; text-align: center; }
         h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0 0 40px 0; }
