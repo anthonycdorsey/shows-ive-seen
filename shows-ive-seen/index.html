@@ -5,26 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shows I've Seen | Anthony C. Dorsey</title>
     <style>
-        .archive-subheadline {
+    .archive-subheadline {
     font-family: 'Courier New', monospace;
     font-size: 0.9rem;
     color: var(--text-grey);
     line-height: 1.6;
     max-width: 600px;
-    margin: 20px auto 0 auto;
+    margin: 20px auto 0 auto; /* 'auto' centers the block itself */
     text-transform: uppercase;
+    text-align: center;      /* Centers the text lines within the block */
 }
 /* --- NEW NAVIGATION STYLES --- */
 #tony-header {
     position: fixed;
     left: 0; top: 0;
     width: 100%;
-    padding: 25px 5%;
+    padding: 25px 5%; /* 5% padding keeps it off the very edge */
     z-index: 5000;
     background: white;
     border-bottom: 1px solid var(--border);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* This pushes items to the opposite ends */
     align-items: center;
     box-sizing: border-box;
 }
@@ -247,7 +248,7 @@ main, .main-content, #ticket-container {
     </div>
 </header>
 
-<div style="max-width: 800px; margin: 0 auto; padding: 130px 5% 20px 5%; text-align: left;">
+<div style="max-width: 800px; margin: 0 auto; padding: 130px 5% 20px 5%; text-align: center;">
     <h1 style="font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em;">Shows I've Seen</h1>
     
     <p class="archive-subheadline">
