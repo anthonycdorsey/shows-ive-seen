@@ -20,14 +20,19 @@
     position: fixed;
     left: 0; top: 0;
     width: 100%;
-    padding: 25px 5%; /* 5% padding keeps it off the very edge */
+    padding: 25px 5%; 
     z-index: 5000;
     background: white;
     border-bottom: 1px solid var(--border);
     display: flex;
-    justify-content: space-between; /* This pushes items to the opposite ends */
+    justify-content: space-between; /* Pushes Name to left, Burger to right */
     align-items: center;
     box-sizing: border-box;
+}
+
+.header-left {
+    text-align: left; /* Forces text to the left inside its container */
+    margin: 0;       /* Removes any auto-centering margins */
 }
 #tony-header h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; text-transform: uppercase; margin: 0; line-height: 1; letter-spacing: -0.02em; }
 #tony-header .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
@@ -234,6 +239,7 @@ main, .main-content, #ticket-container {
         <h1>Call me Tony</h1>
         <div class="tagline">SCROLL THROUGH MY COLLECTION OF CONCERT TICKETS.</div>
     </div>
+    
     <div class="nav-wrapper">
         <div class="burger-btn" id="burgerBtn">
             <div class="burger-bar"></div>
@@ -248,15 +254,14 @@ main, .main-content, #ticket-container {
     </div>
 </header>
 
-<div style="max-width: 800px; margin: 0 auto; padding: 130px 5% 20px 5%; text-align: center;">
-    <h1 style="font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em;">Shows I've Seen</h1>
-    
+<div class="hero-container">
+    <h1 class="main-headline">Shows I've Seen</h1>
     <p class="archive-subheadline">
         I’ve kept a ticket stub from every concert I’ve attended.<br>
         This is a record of what I chose to spend time with, across years, genres, and cities.
     </p>
 </div>
-
+    
 <main class="show-archive">
     <section class="ticket-section" data-artist="The Wallflowers" data-year="1997" data-venue="Frank Erwin Center" data-city="Austin, TX" data-copy="First arena show. The scale of the sound felt massive at 14." data-img="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg">
         <div class="ticket-card" style="--rotation: -1.5deg;">
