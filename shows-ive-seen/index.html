@@ -5,6 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shows I've Seen | Anthony C. Dorsey</title>
     <style>
+/* --- NEW NAVIGATION STYLES --- */
+#tony-header {
+    position: fixed;
+    left: 0; top: 0;
+    width: 100%;
+    padding: 25px 5%;
+    z-index: 5000;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+#tony-header h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; text-transform: uppercase; margin: 0; line-height: 1; letter-spacing: -0.02em; }
+#tony-header .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
+
+.nav-wrapper { position: relative; }
+.burger-btn { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; }
+.burger-bar { width: 22px; height: 2px; background-color: var(--text-main); transition: 0.3s ease; }
+
+.dropdown-menu {
+    position: absolute; top: 100%; right: 0; width: 240px;
+    background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(8px);
+    border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    opacity: 0; visibility: hidden; transform: translateY(10px);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex; flex-direction: column; padding: 20px 0;
+}
+
+.dropdown-menu a {
+    padding: 12px 25px; font-size: 0.75rem; font-weight: 700;
+    text-decoration: none; color: var(--text-main);
+    text-transform: uppercase; letter-spacing: 1.5px; transition: 0.2s;
+}
+.dropdown-menu a:hover { background: #f4f4f2; color: var(--accent); }
+
+@media (min-width: 1025px) {
+    .nav-wrapper:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+}
+.dropdown-menu.mobile-open { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
+
+/* --- SPACING ADJUSTMENT FOR MAIN CONTENT --- */
+main, .main-content, #ticket-container {
+    padding-top: 110px;
+}
+        
         :root {
             --bg-color: #FAFAF8;
             --text-main: #1A1A1A;
@@ -155,14 +202,28 @@
 </head>
 <body>
 
-<header>
-    <h1>Shows I've Seen</h1>
-    <div class="subheadline">
-        I’ve kept a ticket stub from every concert I’ve attended.<br>
-        This is a record of what I chose to spend time with, across years, genres, and cities.
+<header id="tony-header">
+    <div class="header-left">
+        <h1>Call me Tony</h1>
+        <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
     </div>
-    <div class="archive-note">— Growing Archive —</div>
+    <div class="nav-wrapper">
+        <div class="burger-btn" id="burgerBtn">
+            <div class="burger-bar"></div>
+            <div class="burger-bar"></div>
+            <div class="burger-bar"></div>
+        </div>
+        <nav class="dropdown-menu" id="dropdownMenu">
+            <a href="https://www.anthonycdorsey.com/">HOME</a>
+            <a href="https://www.anthonycdorsey.com/shows-ive-seen/">LIVE MUSIC ARCHIVE</a>
+            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/">BREAKFAST TACO RECIPE</a>
+        </nav>
+    </div>
 </header>
+
+<div style="text-align:center; padding-top: 130px; margin-bottom: -60px;">
+    <h1 style="font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em;">Shows I've Seen</h1>
+</div>
 
 <main class="show-archive">
     <section class="ticket-section" data-artist="The Wallflowers" data-year="1997" data-venue="Frank Erwin Center" data-city="Austin, TX" data-copy="First arena show. The scale of the sound felt massive at 14." data-img="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg">
@@ -237,6 +298,24 @@
     }
 </script>
 
+    <script>
+    const burger = document.getElementById('burgerBtn');
+    const menu = document.getElementById('dropdownMenu');
+
+    if (burger && menu) {
+        burger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menu.classList.toggle('mobile-open');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!menu.contains(e.target) && !burger.contains(e.target)) {
+                menu.classList.remove('mobile-open');
+            }
+        });
+    }
+</script>
+    
 </body>
 </html>
 
