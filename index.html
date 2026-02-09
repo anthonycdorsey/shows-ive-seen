@@ -17,10 +17,10 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            overflow-x: hidden;
+            /* Critical: removed 'overflow: hidden' to allow sticky positioning to work */
         }
 
-        /* --- FIXED HEADER --- */
+        /* --- FIXED HEADER ON SOLID WHITE --- */
         header {
             position: fixed;
             left: 0; top: 0;
@@ -33,29 +33,30 @@
         h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900; text-transform: uppercase; margin: 0; }
         .tagline { font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; color: var(--text-grey); text-transform: uppercase; margin-top: 5px; }
 
-        /* --- PARALLAX CONTAINER --- */
+        /* --- PARALLAX TRACK --- */
         .bucket-section {
             position: relative;
-            min-height: 250vh; /* Sufficient height for cards to scroll past */
+            /* Height determines how long the background stays pinned */
+            min-height: 300vh; 
             background-color: #000;
         }
 
-        /* FIXED BACKGROUND LOGIC */
-        .hero-bg {
+        /* This container sticks to the top of the viewport */
+        .sticky-bg-container {
             position: sticky;
             top: 0;
             height: 100vh;
             width: 100vw;
-            z-index: 1; /* Sits behind cards */
             overflow: hidden;
+            z-index: 1;
             pointer-events: none;
         }
 
-        .hero-bg img, .hero-bg video {
+        .sticky-bg-container img, .sticky-bg-container video {
             width: 100%; height: 100%;
             object-fit: cover;
             opacity: 0.5;
-            filter: grayscale(50%); /* Reduced grayscale per request */
+            filter: grayscale(50%); /* 50% grayscale per request */
             user-select: none;
         }
 
@@ -71,19 +72,20 @@
             white-space: nowrap;
         }
 
-        /* SCROLLING CARDS LAYER */
-        .cards-container {
+        /* --- CARDS LAYER --- */
+        .cards-layer {
             position: relative;
-            z-index: 10; /* Sits on top of background */
-            margin-top: -100vh; /* Pulls cards onto the sticky area */
-            padding-bottom: 10vh;
+            z-index: 10;
+            /* Pulls the cards up so they start over the background */
+            margin-top: -100vh; 
+            padding-bottom: 20vh;
         }
 
         .story-card {
             background: white;
             width: 85%;
             max-width: 400px;
-            margin: 0 auto 100vh auto; /* Vertical spacing as you scroll */
+            margin: 0 auto 100vh auto; /* Spacing for the scroll effect */
             padding: 30px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.4);
             text-align: center;
@@ -118,7 +120,7 @@
 
         @media (max-width: 600px) {
             .hero-label { font-size: 20vw; }
-            .story-card { margin-bottom: 75vh; }
+            .story-card { margin-bottom: 80vh; }
         }
     </style>
 </head>
@@ -130,11 +132,11 @@
 </header>
 
 <div class="bucket-section">
-    <div class="hero-bg">
+    <div class="sticky-bg-container">
         <div class="hero-label">AUSTIN</div>
         <img src="Austin.jpg">
     </div>
-    <div class="cards-container">
+    <div class="cards-layer">
         <div class="story-card">
             <img src="Me_Mom_Dad.jpg">
             <div class="card-copy">I was born and raised in Austin, Texas,</div>
@@ -147,11 +149,11 @@
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg">
+    <div class="sticky-bg-container">
         <div class="hero-label">MUSIC</div>
         <video src="Music.mp4" autoplay muted loop playsinline></video>
     </div>
-    <div class="cards-container">
+    <div class="cards-layer">
         <div class="story-card">
             <img src="Dad_Singing.jpg">
             <div class="card-copy">My dad was a working musician in Austin. He played in several bands.</div>
@@ -161,20 +163,15 @@
             <div class="card-copy">Which shaped my lifelong interest in music, especially live music.</div>
             <a href="https://www.anthonycdorsey.com/shows-ive-seen" target="_blank" class="cta">See my Live Music Archive</a>
         </div>
-        <div class="story-card">
-            <img src="BKRL.jpg">
-            <div class="card-copy">Which eventually allowed me to blend that passion with community.</div>
-            <a href="https://www.rocklottery.com/" target="_blank" class="cta">Check out our charity event ROCK LOTTERY</a>
-        </div>
     </div>
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg">
+    <div class="sticky-bg-container">
         <div class="hero-label">NEW YORK</div>
         <img src="NY.jpg">
     </div>
-    <div class="cards-container">
+    <div class="cards-layer">
         <div class="story-card">
             <img src="Mickey_Me.jpg">
             <div class="card-copy">I moved to NYC in 2008.</div>
@@ -183,44 +180,24 @@
             <img src="Snap_NY.jpg">
             <div class="card-copy">NY is where I began the majority of my career.</div>
         </div>
-        <div class="story-card">
-            <img src="WC_Fields.png">
-            <div class="card-copy">Where I moderately excel as an amateur indoor plant hobbyist</div>
-            <a href="https://en.wikipedia.org/wiki/W._C._Fields" target="_blank" class="cta">This is W.C. Fields</a>
-        </div>
     </div>
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg">
+    <div class="sticky-bg-container">
         <div class="hero-label">COLLECTING</div>
         <video src="Collecting.mp4" autoplay muted loop playsinline></video>
     </div>
-    <div class="cards-container">
+    <div class="cards-layer">
         <div class="story-card">
             <img src="Parker_Posey.png">
             <div class="card-copy">I collect objects and moments that hold meaning.</div>
             <a href="https://en.wikipedia.org/wiki/Parker_Posey" target="_blank" class="cta">I <3 Parker Posey</a>
         </div>
         <div class="story-card">
-            <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
-            <div class="card-copy">Or automata, like this!</div>
-            <a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta">Check out the St.Leger store</a>
-        </div>
-        <div class="story-card">
             <img src="PS_OASIS.jpg">
             <div class="card-copy">I love fashion, my go-to brand is Paul Smith.</div>
             <a href="https://www.paulsmith.com/" target="_blank" class="cta">Check out Paul Smith</a>
-        </div>
-        <div class="story-card">
-            <img src="Me_Cake.png">
-            <div class="card-copy">My grandmother had a professional cake business in Austin.</div>
-            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta">Check out my Breakfast Taco Recipe</a>
-        </div>
-        <div class="story-card">
-            <img src="Bravo.jpeg">
-            <div class="card-copy">I also collect a lot of Reality TV memories</div>
-            <a href="https://www.bravotv.com/" target="_blank" class="cta">Mostly Bravo</a>
         </div>
     </div>
 </div>
@@ -239,6 +216,7 @@
 
 </body>
 </html>
+
 
 
 
