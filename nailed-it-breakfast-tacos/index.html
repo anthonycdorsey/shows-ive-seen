@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nailed It: Breakfast Tacos | Anthony C. Dorsey</title>
     <style>
+        /* --- ORIGINAL SITE STYLES --- */
         :root {
             --bg-color: #FAFAF8;
             --text-main: #1A1A1A;
             --text-secondary: #70706B;
             --accent: #E63946;
             --border: #E6E6E3;
-            --nav-bg: rgba(255, 255, 255, 0.98);
             --modal-bg: rgba(26, 26, 26, 0.7);
+            --nav-bg: rgba(255, 255, 255, 0.98); /* Added for nav */
         }
 
         body {
@@ -22,10 +23,10 @@
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
-            padding-top: 110px; /* Provides clear space for the new header */
+            padding-top: 100px; /* Added to make room for nav */
         }
 
-        /* --- FIXED NAVIGATION --- */
+        /* --- ADDED NAVIGATION STYLES --- */
         #tony-header {
             position: fixed;
             left: 0; top: 0;
@@ -62,19 +63,18 @@
         }
         .dropdown-menu a:hover { background: #f4f4f2; color: var(--accent); }
 
-        /* Desktop Hover Logic */
         @media (min-width: 1025px) {
             .nav-wrapper:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
         }
         .dropdown-menu.mobile-open { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
 
-        /* --- TACO SITE CONTENT STYLES --- */
+        /* --- REST OF YOUR ORIGINAL CSS (Container, Grid, Scroller, Modal, etc.) --- */
         .container { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
         .header-section { margin-bottom: 80px; text-align: left; }
         .site-title { font-size: clamp(3rem, 10vw, 7rem); font-weight: 900; line-height: 0.9; margin: 0; text-transform: uppercase; letter-spacing: -2px; }
         .site-subtitle { font-family: 'Courier New', monospace; font-size: 1rem; color: var(--accent); text-transform: uppercase; margin-top: 20px; font-weight: bold; }
 
-        /* Add your existing grid and modal styles here */
+        /* ... Include all your original .recipe-grid, .scroller-wrapper, .card, and #modal-overlay styles here ... */
     </style>
 </head>
 <body>
@@ -103,9 +103,11 @@
         <h1 class="site-title">Recipe<br>Book</h1>
         <p class="site-subtitle">Nailed It: Breakfast Tacos</p>
     </header>
+
     </div>
 
 <script>
+    /* --- NEW NAV LOGIC --- */
     const burger = document.getElementById('burgerBtn');
     const menu = document.getElementById('dropdownMenu');
 
@@ -120,7 +122,15 @@
         }
     });
 
-    // Existing scroll and modal logic...
+    /* --- YOUR ORIGINAL SCRIPTS (Scroll Hint, Modal functions, etc.) --- */
+    window.onscroll = () => {
+        const hint = document.getElementById('taco-hint');
+        if (hint) {
+            if (window.scrollY > 200) hint.style.opacity = "0";
+            else hint.style.opacity = "0.95";
+        }
+    };
+    // ... all your other original JS
 </script>
 
 </body>
