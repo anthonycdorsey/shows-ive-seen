@@ -17,7 +17,6 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            /* Prevents the background from being draggable/movable */
             overflow-x: hidden;
             touch-action: pan-y;
         }
@@ -27,40 +26,36 @@
             position: fixed;
             left: 0; top: 0;
             width: 100%;
-            padding: 40px 5% 20px;
+            padding: 40px 5% 25px;
             z-index: 5000;
-            background: white; /* Solid white to prevent image bleed */
+            background: white;
             border-bottom: 1px solid #f0f0f0;
         }
         h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 900; text-transform: uppercase; margin: 0; }
         .tagline { font-family: 'Courier New', Courier, monospace; font-size: 0.75rem; color: var(--text-grey); text-transform: uppercase; margin-top: 5px; }
 
-        /* --- PARALLAX BUCKET SECTION --- */
+        /* --- PARALLAX STRUCTURE --- */
         .bucket-section {
             position: relative;
-            background: #000;
-            /* Extra margin at the top of the first section to clear the fixed header */
-        }
-        
-        .bucket-section:first-of-type {
-            margin-top: 140px; 
+            /* Section must be tall enough to allow cards to scroll while BG stays pinned */
+            min-height: 250vh; 
+            background-color: #000;
         }
 
-        .hero-bg {
+        /* Fixed container for the sticky background */
+        .hero-bg-container {
             position: sticky;
-            top: 140px; /* Aligns with the bottom of the header */
+            top: 140px; /* Aligns with bottom of header */
             height: calc(100vh - 140px);
             width: 100vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
             overflow: hidden;
-            pointer-events: none; /* Disables interaction/dragging of background */
+            z-index: 1;
+            pointer-events: none;
         }
 
-        .hero-bg img, .hero-bg video {
-            width: 100%; height: 100%;
+        .hero-bg-container img, .hero-bg-container video {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             opacity: 0.45;
             filter: grayscale(100%);
@@ -70,47 +65,54 @@
 
         .hero-label {
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             font-size: 15vw;
             font-weight: 900;
             color: rgba(255, 255, 255, 0.2);
             text-transform: uppercase;
             z-index: 2;
-            user-select: none;
+            white-space: nowrap;
         }
 
-        /* --- CARDS --- */
+        /* --- CARDS CONTAINER --- */
         .cards-container {
             position: relative;
             z-index: 10;
-            padding-top: 30vh;
-            padding-bottom: 10vh;
+            margin-top: -90vh; /* Pulls cards over the sticky background */
+            padding-bottom: 20vh;
         }
 
         .story-card {
             background: white;
             width: 85%;
             max-width: 400px;
-            margin: 0 auto 80vh auto;
+            margin: 0 auto 100vh auto;
             padding: 30px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.25);
             border: 1px solid #eee;
             text-align: center;
-            transform: translateY(150px);
             opacity: 0;
+            transform: translateY(100px);
             transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
-        .story-card.active { transform: translateY(0); opacity: 1; }
+        .story-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         .story-card img, .story-card video {
-            width: 100%; height: auto;
+            width: 100%;
+            height: auto;
             max-height: 45vh;
             object-fit: contain;
             margin-bottom: 20px;
         }
 
         .card-copy { font-size: 1rem; line-height: 1.5; margin-bottom: 15px; }
-        
+
         .cta {
             display: inline-block;
             color: var(--accent);
@@ -125,11 +127,10 @@
         .cta:hover { background: var(--accent); color: white; }
 
         @media (max-width: 600px) {
-            .hero-label { font-size: 20vw; }
-            .story-card { width: 90%; margin-bottom: 60vh; }
             header { padding: 25px 5% 15px; }
-            .bucket-section:first-of-type { margin-top: 110px; }
-            .hero-bg { top: 110px; height: calc(100vh - 110px); }
+            .hero-bg-container { top: 110px; height: calc(100vh - 110px); }
+            .hero-label { font-size: 20vw; }
+            .cards-container { margin-top: -80vh; }
         }
     </style>
 </head>
@@ -140,8 +141,10 @@
     <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
 </header>
 
+<div style="height: 140px;"></div>
+
 <div class="bucket-section">
-    <div class="hero-bg">
+    <div class="hero-bg-container">
         <div class="hero-label">AUSTIN</div>
         <img src="Austin.jpg">
     </div>
@@ -152,20 +155,20 @@
         </div>
         <div class="story-card">
             <img src="Mom_Brothers.png">
-            <div class="card-copy">I’m the third of four boys.</div>
+            <div class="card-copy">I’m the third of four boys. [cite: 110]</div>
         </div>
     </div>
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg">
+    <div class="hero-bg-container">
         <div class="hero-label">MUSIC</div>
         <video src="Music.mp4" autoplay muted loop playsinline></video>
     </div>
     <div class="cards-container">
         <div class="story-card">
             <img src="Dad_Singing.jpg">
-            <div class="card-copy">My dad was a working musician in Austin. He played in several bands.</div>
+            <div class="card-copy">My dad was a working musician in Austin. He played in several bands. [cite: 110]</div>
         </div>
         <div class="story-card">
             <img src="Pixies.png">
@@ -181,7 +184,7 @@
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg">
+    <div class="hero-bg-container">
         <div class="hero-label">NEW YORK</div>
         <img src="NY.jpg">
     </div>
@@ -189,7 +192,7 @@
         <div class="story-card">
             <img src="Mickey_Me.jpg">
             <div class="card-copy">I moved to NYC in 2008.</div>
-            <div class="card-copy" style="font-size:0.85rem; color:var(--text-grey); font-style:italic;">This was my favorite halloween, ever.</div>
+            <div class="card-copy" style="font-size:0.85rem; color:var(--text-grey); font-style:italic;">This was my favorite halloween, ever. [cite: 110]</div>
         </div>
         <div class="story-card">
             <img src="Snap_NY.jpg">
@@ -202,15 +205,15 @@
         </div>
         <div class="story-card">
             <img src="Me_Seanie.jpg">
-            <div class="card-copy">and where I met my husband</div>
+            <div class="card-copy">and where I met my husband [cite: 110]</div>
         </div>
     </div>
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg">
+    <div class="hero-bg-container">
         <div class="hero-label">COLLECTING</div>
-        <img src="Collecting.jpg">
+        <video src="Collecting.mp4" autoplay muted loop playsinline></video>
     </div>
     <div class="cards-container">
         <div class="story-card">
@@ -238,7 +241,7 @@
         </div>
         <div class="story-card">
             <img src="Mitch_Painting.png">
-            <div class="card-copy">I also collect art, including this painting of my husband and me, by my friend Mitch Ferrin.</div>
+            <div class="card-copy">I also collect art, including this painting of my husband and me, by my friend Mitch Ferrin. [cite: 110]</div>
             <a href="https://www.mitchferrin.com/" target="_blank" class="cta">See more of Mitch's paintings here</a>
         </div>
         <div class="story-card">
@@ -247,12 +250,12 @@
         </div>
         <div class="story-card">
             <img src="Me_Cake.png">
-            <div class="card-copy">My grandmother had a professional cake business in Austin.</div>
+            <div class="card-copy">My grandmother had a professional cake business in Austin. [cite: 110]</div>
             <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta">Check out my Breakfast Taco Recipe</a>
         </div>
         <div class="story-card">
             <img src="Cookies.jpg">
-            <div class="card-copy">That inspired my interest in both enjoying and creating things, like these cookies.</div>
+            <div class="card-copy">That inspired my interest in both enjoying and creating things, like these cookies. [cite: 110]</div>
         </div>
         <div class="story-card">
             <img src="Bravo.jpeg">
@@ -263,7 +266,7 @@
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg">
+    <div class="hero-bg-container">
         <div class="hero-label">TRAVEL</div>
         <img src="Travel.jpg">
     </div>
@@ -271,19 +274,19 @@
         <div class="story-card">
             <img src="83_Worlds_Fair.png">
             <div class="card-copy">We went to New Orleans often when I was growing up (it's where my grandfather was born and raised).</div>
-            <div class="card-copy" style="font-size:0.85rem; color:var(--text-grey); font-style:italic;">I was at this fair!</div>
+            <div class="card-copy" style="font-size:0.85rem; color:var(--text-grey); font-style:italic;">I was at this fair! [cite: 110]</div>
         </div>
         <div class="story-card">
             <img src="Mexico_City.jpg">
-            <div class="card-copy">The first country I visited was Mexico. We spent time in Mexico City.</div>
+            <div class="card-copy">The first country I visited was Mexico. We spent time in Mexico City. [cite: 110]</div>
         </div>
         <div class="story-card">
             <img src="Paris_2000.png">
-            <div class="card-copy">The next was France.</div>
+            <div class="card-copy">The next was France. [cite: 110]</div>
         </div>
         <div class="story-card">
-            <img src="Map_Video.mp4" autoplay muted loop playsinline></video>
-            <div class="card-copy">Now I’ve lost count of how many places I’ve been since!</div>
+            <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
+            <div class="card-copy">Now I’ve lost count of how many places I’ve been since! [cite: 110]</div>
         </div>
     </div>
 </div>
@@ -295,7 +298,7 @@
                 entry.target.classList.add('active');
             }
         });
-    }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
+    }, { threshold: 0.15 });
 
     document.querySelectorAll('.story-card').forEach(card => observer.observe(card));
 </script>
