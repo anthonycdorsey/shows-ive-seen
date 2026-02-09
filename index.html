@@ -12,12 +12,12 @@
             --accent: #E63946;
         }
 
+        /* Essential for sticky: the body/html cannot have overflow:hidden */
         body, html {
             margin: 0; padding: 0;
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            overflow-x: hidden;
         }
 
         /* --- FIXED HEADER --- */
@@ -33,22 +33,23 @@
         h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 900; text-transform: uppercase; margin: 0; }
         .tagline { font-family: 'Courier New', monospace; font-size: 0.7rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
 
-        /* --- PARALLAX ENGINE --- */
+        /* --- STICKY ENGINE --- */
         .bucket-section {
             position: relative;
-            padding-bottom: 10vh;
+            width: 100%;
+            /* Ensure the section is visible and has no overflow restrictions */
         }
 
         .hero-bg-container {
             position: -webkit-sticky;
             position: sticky;
-            top: 110px; 
+            top: 110px; /* Lock height below header */
             height: calc(100vh - 110px);
             width: 100vw;
-            overflow: hidden;
             z-index: 1;
             background: #000;
-            pointer-events: none;
+            pointer-events: none; /* Background cannot be clicked/moved */
+            overflow: hidden;
         }
 
         .hero-bg-container img, .hero-bg-container video {
@@ -56,20 +57,21 @@
             object-fit: cover;
             opacity: 0.4;
             filter: grayscale(100%);
+            pointer-events: none;
+            user-select: none;
         }
 
         .hero-label {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            /* Prevents "COLLECTING" bleed */
-            font-size: clamp(3rem, 10vw, 9rem);
+            font-size: clamp(3rem, 10vw, 8.5rem); /* Prevents Collecting from bleeding */
             font-weight: 900;
             color: rgba(255, 255, 255, 0.25);
             text-transform: uppercase;
             z-index: 2;
             text-align: center;
-            width: 85vw;
+            width: 90vw;
             letter-spacing: -2px;
         }
 
@@ -77,14 +79,15 @@
         .cards-container {
             position: relative;
             z-index: 10;
-            margin-top: -90vh; 
+            margin-top: -90vh; /* Pull cards over the pinned background */
+            padding-bottom: 5vh;
         }
 
         .story-card {
             background: white;
             width: 85%;
             max-width: 380px;
-            margin: 0 auto 100vh auto;
+            margin: 0 auto 100vh auto; /* Vertical gap between cards */
             padding: 30px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.3);
             text-align: center;
@@ -95,16 +98,15 @@
 
         .story-card.active { opacity: 1; transform: translateY(0); }
 
-        .cards-container .story-card:first-child { margin-top: 20vh; }
-
         .story-card img, .story-card video {
             width: 100%; height: auto;
             max-height: 40vh;
             object-fit: contain;
             margin-bottom: 20px;
+            pointer-events: auto; /* Re-enable clicks for images if needed */
         }
 
-        .card-copy { font-size: 1rem; line-height: 1.5; margin-bottom: 12px; }
+        .card-copy { font-size: 1rem; line-height: 1.5; margin-bottom: 8px; }
         .card-caption { font-size: 0.85rem; color: var(--text-grey); font-style: italic; margin-bottom: 15px; }
         
         .cta {
@@ -116,14 +118,16 @@
             text-transform: uppercase;
             border: 1px solid var(--accent);
             padding: 10px 20px;
+            transition: 0.3s;
         }
+        .cta:hover { background: var(--accent); color: white; }
 
         @media (max-width: 600px) {
             header { padding: 20px 5% 15px; }
             .hero-bg-container { top: 95px; height: calc(100vh - 95px); }
-            .hero-label { font-size: 13vw; width: 90vw; }
-            .cards-container { margin-top: -85vh; }
-            .story-card { margin-bottom: 80vh; }
+            .hero-label { font-size: 13vw; width: 95vw; }
+            .cards-container { margin-top: -80vh; }
+            .story-card { margin-bottom: 75vh; }
         }
     </style>
 </head>
@@ -140,14 +144,8 @@
         <img src="Austin.jpg">
     </div>
     <div class="cards-container">
-        <div class="story-card">
-            <img src="Me_Mom_Dad.jpg">
-            <div class="card-copy">I was born and raised in Austin, Texas,</div>
-        </div>
-        <div class="story-card">
-            <img src="Mom_Brothers.png">
-            <div class="card-copy">I’m the third of four boys.</div>
-        </div>
+        <div class="story-card"><img src="Me_Mom_Dad.jpg"><div class="card-copy">I was born and raised in Austin, Texas,</div></div>
+        <div class="story-card"><img src="Mom_Brothers.png"><div class="card-copy">I’m the third of four boys.</div></div>
     </div>
 </div>
 
@@ -157,10 +155,7 @@
         <video src="Music.mp4" autoplay muted loop playsinline></video>
     </div>
     <div class="cards-container">
-        <div class="story-card">
-            <img src="Dad_Singing.jpg">
-            <div class="card-copy">My dad was a working musician in Austin. He played in several bands.</div>
-        </div>
+        <div class="story-card"><img src="Dad_Singing.jpg"><div class="card-copy">My dad was a working musician in Austin. He played in several bands.</div></div>
         <div class="story-card">
             <img src="Pixies.png">
             <div class="card-copy">Which shaped my lifelong interest in music, especially live music.</div>
@@ -185,19 +180,13 @@
             <div class="card-copy">I moved to NYC in 2008.</div>
             <div class="card-caption">This was my favorite halloween, ever.</div>
         </div>
-        <div class="story-card">
-            <img src="Snap_NY.jpg">
-            <div class="card-copy">NY is where I began the majority of my career.</div>
-        </div>
+        <div class="story-card"><img src="Snap_NY.jpg"><div class="card-copy">NY is where I began the majority of my career.</div></div>
         <div class="story-card">
             <img src="WC_Fields.png">
             <div class="card-copy">Where I moderately excel as an amateur indoor plant hobbyist</div>
             <a href="https://en.wikipedia.org/wiki/W._C._Fields" target="_blank" class="cta">This is W.C. Fields</a>
         </div>
-        <div class="story-card">
-            <img src="Me_Seanie.jpg">
-            <div class="card-copy">and where I met my husband</div>
-        </div>
+        <div class="story-card"><img src="Me_Seanie.jpg"><div class="card-copy">and where I met my husband</div></div>
     </div>
 </div>
 
@@ -212,14 +201,8 @@
             <div class="card-copy">I collect objects and moments that hold meaning.</div>
             <a href="https://en.wikipedia.org/wiki/Parker_Posey" target="_blank" class="cta">I <3 Parker Posey</a>
         </div>
-        <div class="story-card">
-            <img src="Pal_Donkey.png">
-            <div class="card-copy">Like this vintage NORCREST FURLAND Anthropomorphic Pal.</div>
-        </div>
-        <div class="story-card">
-            <img src="Italian_Jar.png">
-            <div class="card-copy">Or this handmade jar I purchased in Montepulciano, IT.</div>
-        </div>
+        <div class="story-card"><img src="Pal_Donkey.png"><div class="card-copy">Like this vintage NORCREST FURLAND Anthropomorphic Pal.</div></div>
+        <div class="story-card"><img src="Italian_Jar.png"><div class="card-copy">Or this handmade jar I purchased in Montepulciano, IT.</div></div>
         <div class="story-card">
             <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
             <div class="card-copy">Or automata, like this!</div>
@@ -235,19 +218,13 @@
             <div class="card-copy">I also collect art, including this painting of my husband and me, by my friend Mitch Ferrin.</div>
             <a href="https://www.mitchferrin.com/" target="_blank" class="cta">See more of Mitch's paintings here</a>
         </div>
-        <div class="story-card">
-            <img src="Joan_Rivers.png">
-            <div class="card-copy">A more recent purchase is this painting by Joan Rivers.</div>
-        </div>
+        <div class="story-card"><img src="Joan_Rivers.png"><div class="card-copy">A more recent purchase is this painting by Joan Rivers.</div></div>
         <div class="story-card">
             <img src="Me_Cake.png">
             <div class="card-copy">My grandmother had a professional cake business in Austin.</div>
             <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta">Check out my Breakfast Taco Recipe</a>
         </div>
-        <div class="story-card">
-            <img src="Cookies.jpg">
-            <div class="card-copy">That inspired my interest in both enjoying and creating things, like these cookies.</div>
-        </div>
+        <div class="story-card"><img src="Cookies.jpg"><div class="card-copy">That inspired my interest in both enjoying and creating things, like these cookies.</div></div>
         <div class="story-card">
             <img src="Bravo.jpeg">
             <div class="card-copy">I also collect a lot of Reality TV memories</div>
@@ -267,14 +244,8 @@
             <div class="card-copy">We went to New Orleans often when I was growing up (it's where my grandfather was born and raised).</div>
             <div class="card-caption">I was at this fair!</div>
         </div>
-        <div class="story-card">
-            <img src="Mexico_City.jpg">
-            <div class="card-copy">The first country I visited was Mexico. We spent time in Mexico City.</div>
-        </div>
-        <div class="story-card">
-            <img src="Paris_2000.png">
-            <div class="card-copy">The next was France.</div>
-        </div>
+        <div class="story-card"><img src="Mexico_City.jpg"><div class="card-copy">The first country I visited was Mexico. We spent time in Mexico City.</div></div>
+        <div class="story-card"><img src="Paris_2000.png"><div class="card-copy">The next was France.</div></div>
         <div class="story-card">
             <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
             <div class="card-copy">Now I’ve lost count of how many places I’ve been since!</div>
@@ -289,7 +260,7 @@
                 entry.target.classList.add('active');
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('.story-card').forEach(card => observer.observe(card));
 </script>
