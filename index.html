@@ -17,7 +17,6 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            /* Critical: removed 'overflow: hidden' to allow sticky positioning to work */
         }
 
         /* --- FIXED HEADER ON SOLID WHITE --- */
@@ -36,12 +35,11 @@
         /* --- PARALLAX TRACK --- */
         .bucket-section {
             position: relative;
-            /* Height determines how long the background stays pinned */
-            min-height: 300vh; 
+            min-height: 350vh; /* Extra height to ensure cards have room to scroll */
             background-color: #000;
         }
 
-        /* This container sticks to the top of the viewport */
+        /* STICKY BACKGROUND */
         .sticky-bg-container {
             position: sticky;
             top: 0;
@@ -56,7 +54,7 @@
             width: 100%; height: 100%;
             object-fit: cover;
             opacity: 0.5;
-            filter: grayscale(50%); /* 50% grayscale per request */
+            filter: grayscale(50%);
             user-select: none;
         }
 
@@ -76,25 +74,32 @@
         .cards-layer {
             position: relative;
             z-index: 10;
-            /* Pulls the cards up so they start over the background */
-            margin-top: -100vh; 
-            padding-bottom: 20vh;
+            /* Starts the first card lower down so it's not visible immediately */
+            margin-top: -60vh; 
+            padding-bottom: 30vh;
         }
 
         .story-card {
             background: white;
             width: 85%;
             max-width: 400px;
-            margin: 0 auto 100vh auto; /* Spacing for the scroll effect */
+            /* Large margin-bottom ensures cards don't overlap too early */
+            margin: 0 auto 110vh auto; 
             padding: 30px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.4);
             text-align: center;
+            
+            /* Initial State: Hidden and shifted down */
             opacity: 0;
-            transform: translateY(100px);
-            transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
+            transform: translateY(200px); 
+            transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
-        .story-card.active { transform: translateY(0); opacity: 1; }
+        /* Active State: Triggered when user scrolls to the card */
+        .story-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         .story-card img, .story-card video {
             width: 100%; height: auto;
@@ -120,7 +125,8 @@
 
         @media (max-width: 600px) {
             .hero-label { font-size: 20vw; }
-            .story-card { margin-bottom: 80vh; }
+            .story-card { margin-bottom: 90vh; }
+            .cards-layer { margin-top: -50vh; }
         }
     </style>
 </head>
@@ -203,19 +209,29 @@
 </div>
 
 <script>
+    // Intersection Observer settings
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -10% 0px" // Trigger slightly before the card hits the bottom
+    };
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+            } else {
+                // Optional: remove the class if you want cards to fade back out when scrolling up
+                // entry.target.classList.remove('active');
             }
         });
-    }, { threshold: 0.1 });
+    }, observerOptions);
 
     document.querySelectorAll('.story-card').forEach(card => observer.observe(card));
 </script>
 
 </body>
 </html>
+
 
 
 
