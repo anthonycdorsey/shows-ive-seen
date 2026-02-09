@@ -18,6 +18,8 @@
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             scroll-behavior: smooth;
+            /* Prevents bouncing past the content on some browsers */
+            overscroll-behavior-y: none; 
         }
 
         /* --- FIXED HEADER --- */
@@ -33,26 +35,28 @@
         h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 900; text-transform: uppercase; margin: 0; }
         .tagline { font-family: 'Courier New', monospace; font-size: 0.7rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
 
-        /* --- SCROLL INDICATOR --- */
+        /* --- SCROLL INDICATOR (Bigger as requested) --- */
         .scroll-prompt {
             position: absolute;
-            bottom: 30px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 100;
             text-align: center;
             font-family: 'Courier New', monospace;
-            font-size: 0.65rem;
-            letter-spacing: 2px;
-            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem; /* Increased size */
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.9);
             text-transform: uppercase;
             animation: bounce 2s infinite;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
-            40% {transform: translateX(-50%) translateY(-10px);}
-            60% {transform: translateX(-50%) translateY(-5px);}
+            40% {transform: translateX(-50%) translateY(-15px);}
+            60% {transform: translateX(-50%) translateY(-7px);}
         }
 
         /* --- STICKY ENGINE --- */
@@ -117,8 +121,14 @@
             transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
+        /* First card positioning */
         .cards-container .story-card:first-child {
             margin-top: 130vh;
+        }
+
+        /* Force stop for final card - removes the massive bottom margin */
+        .cards-container .story-card:last-child {
+            margin-bottom: 10vh; 
         }
 
         .story-card.active { opacity: 1; transform: translateY(0); }
@@ -174,6 +184,7 @@
             .hero-label { font-size: 13vw; width: 95vw; top: 12%; }
             .story-card { margin-bottom: 80vh; }
             .cards-container .story-card:first-child { margin-top: 115vh; }
+            .scroll-prompt { font-size: 0.75rem; bottom: 30px; }
         }
     </style>
 </head>
@@ -188,7 +199,7 @@
     <div class="hero-bg-container">
         <div class="hero-label">AUSTIN</div>
         <img src="Austin.jpg">
-        <div class="scroll-prompt">Scroll to begin<br>↓</div>
+        <div class="scroll-prompt">Scroll to see more<br>↓</div>
     </div>
     <div class="cards-container">
         <div class="story-card"><img src="Me_Mom_Dad.jpg"><div class="card-copy">I was born and raised in Austin, Texas,</div></div>
@@ -283,8 +294,7 @@
     </div>
 </div>
 
-<div class="bucket-section">
-    <div class="hero-bg-container">
+<div class="bucket-section" style="padding-bottom: 2vh;"> <div class="hero-bg-container">
         <div class="hero-label">TRAVEL</div>
         <img src="Travel.jpg">
     </div>
@@ -307,7 +317,7 @@
                 <a href="https://www.linkedin.com/in/tony-dorsey/" target="_blank" class="cta">LinkedIn</a>
             </div>
             <div style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px;">
-                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="cta jump-back">Back to Austin ↑</button>
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="cta jump-back">Back to the Top ↑</button>
             </div>
         </div>
     </div>
