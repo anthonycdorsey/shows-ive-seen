@@ -17,6 +17,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
         }
 
         /* --- FIXED HEADER --- */
@@ -129,7 +130,6 @@
             margin-bottom: 20px;
         }
 
-        /* Rule for the painting requested in #7 */
         .painting-asset {
             max-height: 60vh !important;
             width: 110% !important;
@@ -139,7 +139,6 @@
         .card-copy { font-size: 1rem; line-height: 1.5; margin-bottom: 12px; }
         .card-caption { font-size: 0.85rem; color: var(--text-grey); font-style: italic; margin-bottom: 15px; }
         
-        /* Elevated CTA Style */
         .cta-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
         .cta {
             display: inline-block;
@@ -154,8 +153,20 @@
             border-radius: 2px;
             transition: all 0.3s ease;
             margin: 5px;
+            cursor: pointer;
+            border: none;
         }
         .cta:hover { transform: translateY(-2px); background: #333; }
+
+        .jump-back {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        .jump-back:hover {
+            background: var(--accent);
+            color: white;
+        }
 
         @media (max-width: 600px) {
             header { padding: 20px 5% 15px; }
@@ -168,12 +179,12 @@
 </head>
 <body>
 
-<header>
+<header id="top">
     <h1>Call me Tony</h1>
     <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
 </header>
 
-<div class="bucket-section">
+<div class="bucket-section" id="austin-start">
     <div class="hero-bg-container">
         <div class="hero-label">AUSTIN</div>
         <img src="Austin.jpg">
@@ -258,7 +269,7 @@
         <div class="story-card">
             <img src="Me_Cake.png">
             <div class="card-copy">My grandmother had a professional cake business in Austin.</div>
-            </div>
+        </div>
         <div class="story-card">
             <img src="Cookies.jpg">
             <div class="card-copy">That inspired my interest in both enjoying and creating things, like these cookies.</div>
@@ -294,6 +305,9 @@
             <div class="cta-group">
                 <a href="https://www.instagram.com/anthonycdorsey/" target="_blank" class="cta">Instagram</a>
                 <a href="https://www.linkedin.com/in/tony-dorsey/" target="_blank" class="cta">LinkedIn</a>
+            </div>
+            <div style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px;">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="cta jump-back">Back to Austin ↑</button>
             </div>
         </div>
     </div>
