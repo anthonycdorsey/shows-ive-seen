@@ -5,6 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nailed It: Breakfast Tacos | Anthony C. Dorsey</title>
     <style>
+#tony-header {
+    position: fixed;
+    left: 0; top: 0;
+    width: 100%;
+    padding: 25px 5%;
+    z-index: 9999; /* Higher z-index ensures it stays on top */
+    background: white;
+    border-bottom: 1px solid #E6E6E3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.burger-btn { cursor: pointer; display: flex; flex-direction: column; gap: 5px; z-index: 10000; }
+.burger-bar { width: 22px; height: 2px; background-color: #1A1A1A; }
+
+.dropdown-menu {
+    position: absolute; top: 100%; right: 0; width: 240px;
+    background: white; border: 1px solid #E6E6E3;
+    opacity: 0; visibility: hidden; transition: 0.3s;
+    display: flex; flex-direction: column; padding: 20px 0;
+}
+
+.dropdown-menu.mobile-open { opacity: 1; visibility: visible; }
+        
         :root {
             --bg-color: #FAFAF8;
             --text-main: #1A1A1A;
@@ -169,6 +195,25 @@
 </head>
 <body>
 
+    <header id="tony-header">
+    <div class="header-left">
+        <h1>Call me Tony</h1>
+        <div class="tagline">SCROLL THROUGH MY COLLECTION OF CONCERT TICKETS.</div>
+    </div>
+    <div class="nav-wrapper">
+        <div class="burger-btn" id="burgerBtn">
+            <div class="burger-bar"></div>
+            <div class="burger-bar"></div>
+            <div class="burger-bar"></div>
+        </div>
+        <nav class="dropdown-menu" id="dropdownMenu">
+            <a href="https://www.anthonycdorsey.com/">HOME</a>
+            <a href="https://www.anthonycdorsey.com/shows-ive-seen/">LIVE MUSIC ARCHIVE</a>
+            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/">BREAKFAST TACO RECIPE</a>
+        </nav>
+    </div>
+</header>
+
 <div id="link-modal">
     <div class="modal-container">
         <div class="modal-header">
@@ -241,6 +286,19 @@
 </main>
 
 <script>
+    <script>
+    const burger = document.getElementById('burgerBtn');
+    const menu = document.getElementById('dropdownMenu');
+
+    burger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('mobile-open');
+    });
+
+    document.addEventListener('click', () => {
+        menu.classList.remove('mobile-open');
+    });
+</script>
     const modal = document.getElementById('link-modal');
     const modalFrame = document.getElementById('modal-frame');
     let currentUrl = "";
