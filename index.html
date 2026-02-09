@@ -18,7 +18,6 @@
             color: var(--text-main);
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             scroll-behavior: smooth;
-            /* Prevents bouncing past the content on some browsers */
             overscroll-behavior-y: none; 
         }
 
@@ -31,11 +30,60 @@
             z-index: 5000;
             background: white;
             border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
         }
-        h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 900; text-transform: uppercase; margin: 0; }
+        .header-left h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 900; text-transform: uppercase; margin: 0; }
         .tagline { font-family: 'Courier New', monospace; font-size: 0.7rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
 
-        /* --- SCROLL INDICATOR (Bigger as requested) --- */
+        /* --- BURGER MENU --- */
+        .menu-toggle {
+            cursor: pointer;
+            z-index: 6000;
+            padding: 10px;
+        }
+        .bar {
+            width: 25px;
+            height: 2px;
+            background-color: var(--accent);
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+        
+        .nav-overlay {
+            position: fixed;
+            top: 0; right: -100%;
+            width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 5500;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .nav-overlay.open { right: 0; }
+        .nav-overlay a {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-decoration: none;
+            color: var(--text-main);
+            text-transform: uppercase;
+            margin: 20px 0;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        .nav-overlay a:hover { color: var(--text-grey); }
+
+        /* Close icon state */
+        .open .bar:nth-child(1) { transform: rotate(-45deg) translate(-5px, 5px); }
+        .open .bar:nth-child(2) { opacity: 0; }
+        .open .bar:nth-child(3) { transform: rotate(45deg) translate(-5px, -5px); }
+
+        /* --- SCROLL INDICATOR --- */
         .scroll-prompt {
             position: absolute;
             bottom: 40px;
@@ -44,7 +92,7 @@
             z-index: 100;
             text-align: center;
             font-family: 'Courier New', monospace;
-            font-size: 0.9rem; /* Increased size */
+            font-size: 0.9rem;
             font-weight: bold;
             letter-spacing: 3px;
             color: rgba(255,255,255,0.9);
@@ -60,11 +108,7 @@
         }
 
         /* --- STICKY ENGINE --- */
-        .bucket-section {
-            position: relative;
-            width: 100%;
-        }
-
+        .bucket-section { position: relative; width: 100%; }
         .hero-bg-container {
             position: -webkit-sticky;
             position: sticky;
@@ -76,19 +120,15 @@
             pointer-events: none;
             overflow: hidden;
         }
-
         .hero-bg-container img, .hero-bg-container video {
             width: 100%; height: 100%;
             object-fit: cover;
             opacity: 0.5;
             filter: grayscale(50%);
-            pointer-events: none;
         }
-
         .hero-label {
             position: absolute;
-            top: 15%; 
-            left: 50%;
+            top: 15%; left: 50%;
             transform: translateX(-50%);
             font-size: clamp(3rem, 10vw, 8.5rem);
             font-weight: 900;
@@ -101,13 +141,7 @@
         }
 
         /* --- CARDS OVERLAY --- */
-        .cards-container {
-            position: relative;
-            z-index: 10;
-            margin-top: -100vh;
-            padding-bottom: 5vh;
-        }
-
+        .cards-container { position: relative; z-index: 10; margin-top: -100vh; padding-bottom: 5vh; }
         .story-card {
             background: white;
             width: 85%;
@@ -119,37 +153,22 @@
             opacity: 0;
             transform: translateY(100px);
             transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+            overflow: hidden;
         }
 
-        /* First card positioning */
-        .cards-container .story-card:first-child {
-            margin-top: 130vh;
-        }
+        /* Specific style for Mitch Ferrin card to remove whitespace */
+        .painting-card { padding: 0 !important; }
+        .painting-card .card-content-padding { padding: 30px; }
+        .painting-card img { width: 100%; margin: 0 !important; display: block; max-height: none !important; }
 
-        /* Force stop for final card - removes the massive bottom margin */
-        .cards-container .story-card:last-child {
-            margin-bottom: 10vh; 
-        }
-
+        .cards-container .story-card:first-child { margin-top: 130vh; }
+        .cards-container .story-card:last-child { margin-bottom: 10vh; }
         .story-card.active { opacity: 1; transform: translateY(0); }
 
-        .story-card img, .story-card video {
-            width: 100%; height: auto;
-            max-height: 40vh;
-            object-fit: contain;
-            margin-bottom: 20px;
-        }
-
-        .painting-asset {
-            max-height: 60vh !important;
-            width: 110% !important;
-            margin-left: -5%;
-        }
-
+        .story-card img, .story-card video { width: 100%; height: auto; max-height: 40vh; object-fit: contain; margin-bottom: 20px; }
         .card-copy { font-size: 1rem; line-height: 1.5; margin-bottom: 12px; }
         .card-caption { font-size: 0.85rem; color: var(--text-grey); font-style: italic; margin-bottom: 15px; }
         
-        .cta-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
         .cta {
             display: inline-block;
             background: var(--accent);
@@ -161,39 +180,38 @@
             letter-spacing: 1px;
             padding: 12px 24px;
             border-radius: 2px;
-            transition: all 0.3s ease;
             margin: 5px;
             cursor: pointer;
-            border: none;
         }
-        .cta:hover { transform: translateY(-2px); background: #333; }
-
-        .jump-back {
-            background: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-        }
-        .jump-back:hover {
-            background: var(--accent);
-            color: white;
-        }
+        .jump-back { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
 
         @media (max-width: 600px) {
             header { padding: 20px 5% 15px; }
             .hero-bg-container { top: 95px; height: calc(100vh - 95px); }
-            .hero-label { font-size: 13vw; width: 95vw; top: 12%; }
+            .hero-label { font-size: 13vw; top: 12%; }
             .story-card { margin-bottom: 80vh; }
-            .cards-container .story-card:first-child { margin-top: 115vh; }
-            .scroll-prompt { font-size: 0.75rem; bottom: 30px; }
         }
     </style>
 </head>
 <body>
 
 <header id="top">
-    <h1>Call me Tony</h1>
-    <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
+    <div class="header-left">
+        <h1>Call me Tony</h1>
+        <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
 </header>
+
+<nav class="nav-overlay" id="navOverlay">
+    <a href="https://www.anthonycdorsey.com/" onclick="toggleMenu()">HOME</a>
+    <a href="https://www.anthonycdorsey.com/shows-ive-seen/" onclick="toggleMenu()">LIVE MUSIC ARCHIVE</a>
+    <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" onclick="toggleMenu()">BREAKFAST TACO RECIPE</a>
+</nav>
 
 <div class="bucket-section" id="austin-start">
     <div class="hero-bg-container">
@@ -208,127 +226,75 @@
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg-container">
-        <div class="hero-label">MUSIC</div>
-        <video src="Music.mp4" autoplay muted loop playsinline></video>
-    </div>
+    <div class="hero-bg-container"><div class="hero-label">MUSIC</div><video src="Music.mp4" autoplay muted loop playsinline></video></div>
     <div class="cards-container">
-        <div class="story-card"><img src="Dad_Singing.jpg"><div class="card-copy">My dad was a working musician in Austin. He played in several bands.</div></div>
+        <div class="story-card"><img src="Dad_Singing.jpg"><div class="card-copy">My dad was a working musician in Austin.</div></div>
         <div class="story-card">
-            <img src="Pixies.png">
-            <div class="card-copy">Which shaped my lifelong interest in music, especially live music.</div>
+            <img src="Pixies.png"><div class="card-copy">Which shaped my lifelong interest in music.</div>
             <a href="https://www.anthonycdorsey.com/shows-ive-seen" target="_blank" class="cta">CHECK OUT MY LIVE MUSIC ARCHIVE</a>
         </div>
-        <div class="story-card">
-            <img src="BKRL.jpg">
-            <div class="card-copy">Which eventually allowed me to blend that passion with community.</div>
-            <a href="https://www.rocklottery.com/" target="_blank" class="cta">Rock Lottery Charity</a>
-        </div>
+        <div class="story-card"><img src="BKRL.jpg"><div class="card-copy">Which eventually allowed me to blend that passion with community.</div><a href="https://www.rocklottery.com/" target="_blank" class="cta">Rock Lottery Charity</a></div>
     </div>
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg-container">
-        <div class="hero-label">NEW YORK</div>
-        <img src="NY.jpg">
-    </div>
+    <div class="hero-bg-container"><div class="hero-label">NEW YORK</div><img src="NY.jpg"></div>
     <div class="cards-container">
-        <div class="story-card">
-            <img src="Mickey_Me.jpg">
-            <div class="card-copy">I moved to NYC in 2008.</div>
-            <div class="card-caption">This was my favorite halloween, ever.</div>
-        </div>
+        <div class="story-card"><img src="Mickey_Me.jpg"><div class="card-copy">I moved to NYC in 2008.</div><div class="card-caption">This was my favorite halloween, ever.</div></div>
         <div class="story-card"><img src="Snap_NY.jpg"><div class="card-copy">NY is where I began the majority of my career.</div></div>
-        <div class="story-card">
-            <img src="WC_Fields.png">
-            <div class="card-copy">...it is also where I moderately excel as an amateur indoor plant hobbyist</div>
-            <a href="https://en.wikipedia.org/wiki/W._C._Fields" target="_blank" class="cta">Meet W.C. Fields</a>
-        </div>
+        <div class="story-card"><img src="WC_Fields.png"><div class="card-copy">...it is also where I moderately excel as an amateur indoor plant hobbyist</div><a href="https://en.wikipedia.org/wiki/W._C._Fields" target="_blank" class="cta">Meet W.C. Fields</a></div>
         <div class="story-card"><img src="Me_Seanie.jpg"><div class="card-copy">NY is where I met my husband</div></div>
     </div>
 </div>
 
 <div class="bucket-section">
-    <div class="hero-bg-container">
-        <div class="hero-label">COLLECTING</div>
-        <video src="Collecting.mp4" autoplay muted loop playsinline></video>
-    </div>
+    <div class="hero-bg-container"><div class="hero-label">COLLECTING</div><video src="Collecting.mp4" autoplay muted loop playsinline></video></div>
     <div class="cards-container">
-        <div class="story-card">
-            <img src="Parker_Posey.png">
-            <div class="card-copy">I collect objects and moments that hold meaning.</div>
-            <a href="https://en.wikipedia.org/wiki/Parker_Posey" target="_blank" class="cta">I ADORE PARKER POSEY!</a>
-        </div>
-        <div class="story-card"><img src="Pal_Donkey.png"><div class="card-copy">This vintage NORCREST FURLAND Anthropomorphic Pal is one of my most prized possessions.</div></div>
+        <div class="story-card"><img src="Parker_Posey.png"><div class="card-copy">I collect objects and moments that hold meaning.</div><a href="https://en.wikipedia.org/wiki/Parker_Posey" target="_blank" class="cta">I ADORE PARKER POSEY!</a></div>
+        <div class="story-card"><img src="Pal_Donkey.png"><div class="card-copy">This vintage NORCREST FURLAND is one of my most prized possessions.</div></div>
         <div class="story-card"><img src="Italian_Jar.png"><div class="card-copy">So is this handmade jar I purchased in Montepulciano, Italy.</div></div>
-        <div class="story-card">
-            <video src="Auto_Video.mp4" autoplay muted loop playsinline></video>
-            <div class="card-copy">I'm obsessed with automata, like this!</div>
-            <a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta">St.Leger Store</a>
+        <div class="story-card"><video src="Auto_Video.mp4" autoplay muted loop playsinline></video><div class="card-copy">I'm obsessed with automata, like this!</div><a href="https://www.laurenceandangelastleger.com/" target="_blank" class="cta">St.Leger Store</a></div>
+        <div class="story-card"><img src="PS_OASIS.jpg"><div class="card-copy">I love fashion, my go-to brand is Paul Smith.</div><a href="https://www.paulsmith.com/" target="_blank" class="cta">Visit Paul Smith</a></div>
+        
+        <div class="story-card painting-card">
+            <img src="Mitch_Painting.png">
+            <div class="card-content-padding">
+                <div class="card-copy">I also collect art, including this painting of my husband and me, by my friend Mitch Ferrin.</div>
+                <a href="https://www.mitchferrin.com/" target="_blank" class="cta">Mitch Ferrin Art</a>
+            </div>
         </div>
-        <div class="story-card">
-            <img src="PS_OASIS.jpg">
-            <div class="card-copy">I love fashion, my go-to brand is Paul Smith.</div>
-            <a href="https://www.paulsmith.com/" target="_blank" class="cta">Visit Paul Smith</a>
-        </div>
-        <div class="story-card">
-            <img src="Mitch_Painting.png" class="painting-asset">
-            <div class="card-copy">I also collect art, including this painting of my husband and me, by my friend Mitch Ferrin.</div>
-            <a href="https://www.mitchferrin.com/" target="_blank" class="cta">Mitch Ferrin Art</a>
-        </div>
+
         <div class="story-card"><img src="Joan_Rivers.png"><div class="card-copy">A more recent purchase is this painting by Joan Rivers.</div></div>
-        <div class="story-card">
-            <img src="Me_Cake.png">
-            <div class="card-copy">My grandmother had a professional cake business in Austin.</div>
-        </div>
-        <div class="story-card">
-            <img src="Cookies.jpg">
-            <div class="card-copy">That inspired my interest in both enjoying and creating things, like these cookies.</div>
-            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta">CHECK OUT MY BREAKFAST TACO RECIPE</a>
-        </div>
-        <div class="story-card">
-            <img src="Bravo.jpeg">
-            <div class="card-copy">I also collect a lot of Reality TV memories</div>
-            <a href="https://www.bravotv.com/" target="_blank" class="cta">MOSTLY FROM THE BRAVO WORLD</a>
-        </div>
+        <div class="story-card"><img src="Me_Cake.png"><div class="card-copy">My grandmother had a professional cake business in Austin.</div></div>
+        <div class="story-card"><img src="Cookies.jpg"><div class="card-copy">That inspired my interest in both enjoying and creating things.</div><a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/" target="_blank" class="cta">CHECK OUT MY BREAKFAST TACO RECIPE</a></div>
+        <div class="story-card"><img src="Bravo.jpeg"><div class="card-copy">I also collect a lot of Reality TV memories</div><a href="https://www.bravotv.com/" target="_blank" class="cta">MOSTLY FROM THE BRAVO WORLD</a></div>
     </div>
 </div>
 
-<div class="bucket-section" style="padding-bottom: 2vh;"> <div class="hero-bg-container">
-        <div class="hero-label">TRAVEL</div>
-        <img src="Travel.jpg">
-    </div>
+<div class="bucket-section">
+    <div class="hero-bg-container"><div class="hero-label">TRAVEL</div><img src="Travel.jpg"></div>
     <div class="cards-container">
-        <div class="story-card">
-            <img src="83_Worlds_Fair.png">
-            <div class="card-copy">We went to New Orleans often when I was growing up (it's where my grandfather was born and raised).</div>
-            <div class="card-caption">I was at this fair!</div>
-        </div>
-        <div class="story-card"><img src="Mexico_City.jpg"><div class="card-copy">The first country I visited was Mexico. We spent time in Mexico City.</div></div>
+        <div class="story-card"><img src="83_Worlds_Fair.png"><div class="card-copy">We went to New Orleans often when I was growing up.</div><div class="card-caption">I was at this fair!</div></div>
+        <div class="story-card"><img src="Mexico_City.jpg"><div class="card-copy">The first country I visited was Mexico.</div></div>
         <div class="story-card"><img src="Paris_2000.png"><div class="card-copy">The next was France.</div></div>
-        <div class="story-card">
-            <video src="Map_Video.mp4" autoplay muted loop playsinline></video>
-            <div class="card-copy">Now I’ve lost count of how many places I’ve been since!</div>
-        </div>
+        <div class="story-card"><video src="Map_Video.mp4" autoplay muted loop playsinline></video><div class="card-copy">Now I’ve lost count of how many places I’ve been!</div></div>
         <div class="story-card">
             <div class="card-copy" style="font-weight: 700; text-transform: uppercase;">MORE THAN ANYTHING, I LOVE CAPTURING MEMORIES AND MAKING MEANINGFUL CONNECTIONS</div>
-            <div class="cta-group">
-                <a href="https://www.instagram.com/anthonycdorsey/" target="_blank" class="cta">Instagram</a>
-                <a href="https://www.linkedin.com/in/tony-dorsey/" target="_blank" class="cta">LinkedIn</a>
-            </div>
-            <div style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px;">
-                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="cta jump-back">Back to the Top ↑</button>
-            </div>
+            <div style="display:flex; justify-content: center;"><a href="https://www.instagram.com/anthonycdorsey/" class="cta">Instagram</a><a href="https://www.linkedin.com/in/tony-dorsey/" class="cta">LinkedIn</a></div>
+            <div style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px;"><button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="cta jump-back">Back to the Top ↑</button></div>
         </div>
     </div>
 </div>
 
 <script>
+    function toggleMenu() {
+        document.getElementById('navOverlay').classList.toggle('open');
+        document.querySelector('.menu-toggle').classList.toggle('open');
+    }
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('active');
         });
     }, { threshold: 0.1 });
 
@@ -337,6 +303,7 @@
 
 </body>
 </html>
+
 
 
 
