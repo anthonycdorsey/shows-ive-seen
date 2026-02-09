@@ -20,19 +20,19 @@
     position: fixed;
     left: 0; top: 0;
     width: 100%;
-    padding: 25px 5%; 
+    padding: 25px 5%;
     z-index: 5000;
     background: white;
     border-bottom: 1px solid var(--border);
     display: flex;
-    justify-content: space-between; /* Pushes Name to left, Burger to right */
+    justify-content: space-between; /* Pushes Name to far left, Burger to far right */
     align-items: center;
     box-sizing: border-box;
 }
 
 .header-left {
-    text-align: left; /* Forces text to the left inside its container */
-    margin: 0;       /* Removes any auto-centering margins */
+    text-align: left; /* Ensures the text inside the logo block stays left-aligned */
+    margin: 0;       /* Prevents any centering margins from taking over */
 }
 #tony-header h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; text-transform: uppercase; margin: 0; line-height: 1; letter-spacing: -0.02em; }
 #tony-header .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
@@ -254,8 +254,9 @@ main, .main-content, #ticket-container {
     </div>
 </header>
 
-<div class="hero-container">
-    <h1 class="main-headline">Shows I've Seen</h1>
+<div style="max-width: 800px; margin: 0 auto; padding: 130px 5% 20px 5%; text-align: center;">
+    <h1 style="font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em;">Shows I've Seen</h1>
+    
     <p class="archive-subheadline">
         I’ve kept a ticket stub from every concert I’ve attended.<br>
         This is a record of what I chose to spend time with, across years, genres, and cities.
