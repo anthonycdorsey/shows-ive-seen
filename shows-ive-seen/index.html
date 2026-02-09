@@ -5,91 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shows I've Seen | Anthony C. Dorsey</title>
     <style>
-    .archive-subheadline {
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    color: var(--text-grey);
-    line-height: 1.6;
-    max-width: 600px;
-    margin: 20px auto 0 auto; /* 'auto' centers the block itself */
-    text-transform: uppercase;
-    text-align: center;      /* Centers the text lines within the block */
-}
-/* --- NEW NAVIGATION STYLES --- */
-#tony-header {
-    position: fixed;
-    left: 0; top: 0;
-    width: 100%;
-    padding: 25px 5%;
-    z-index: 5000;
-    background: white;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between; /* Pushes Name to far left, Burger to far right */
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.header-left {
-    text-align: left; /* Ensures the text inside the logo block stays left-aligned */
-    margin: 0;       /* Prevents any centering margins from taking over */
-}
-#tony-header h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; text-transform: uppercase; margin: 0; line-height: 1; letter-spacing: -0.02em; }
-#tony-header .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
-
-.nav-wrapper { position: relative; }
-.burger-btn { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; }
-.burger-bar { width: 22px; height: 2px; background-color: var(--text-main); transition: 0.3s ease; }
-
-.dropdown-menu {
-    position: absolute; 
-    top: 100%; 
-    right: 0; 
-    width: 240px;
-    background: rgba(255, 255, 255, 0.98); 
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--border); 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    opacity: 0; 
-    visibility: hidden; 
-    transform: translateY(10px);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    display: flex; 
-    flex-direction: column; 
-    padding: 20px 0;
-    text-align: left; /* Aligns the container content to the left */
-}
-
-.dropdown-menu a {
-    padding: 12px 25px; 
-    font-size: 0.75rem; 
-    font-weight: 700;
-    text-decoration: none; 
-    color: var(--text-main);
-    text-transform: uppercase; 
-    letter-spacing: 1.5px; 
-    transition: 0.2s;
-    display: block;    /* Ensures the link fills the width for better alignment */
-    text-align: left;  /* Forces the text within the link to the left */
-}
-.dropdown-menu a:hover { background: #f4f4f2; color: var(--accent); }
-
-@media (min-width: 1025px) {
-    .nav-wrapper:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-}
-.dropdown-menu.mobile-open { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
-
-/* --- SPACING ADJUSTMENT FOR MAIN CONTENT --- */
-main, .main-content, #ticket-container {
-    padding-top: 110px;
-}
-        
         :root {
             --bg-color: #FAFAF8;
             --text-main: #1A1A1A;
             --text-grey: #A0A09A;
             --border: #E6E6E3;
             --accent: #E63946;
+            --nav-bg: rgba(255, 255, 255, 0.98);
         }
 
         body {
@@ -100,136 +22,133 @@ main, .main-content, #ticket-container {
             overflow-x: hidden;
         }
 
-        /* --- HEADER --- */
-        header {
+        /* --- FIXED HEADER --- */
+        #tony-header {
             position: fixed;
-            top: 0;
+            left: 0; top: 0;
             width: 100%;
-            background-color: var(--bg-color);
-            z-index: 2000;
-            text-align: center;
-            padding: 40px 10% 20px 10%;
-            box-sizing: border-box;
+            padding: 25px 5%;
+            z-index: 5000;
+            background: white;
             border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            text-align: left;
         }
 
-        h1 { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em; }
-        
-        .subheadline { 
-            font-family: 'Courier New', Courier, monospace; 
-            font-size: 0.95rem; 
-            max-width: 700px; 
-            margin: 15px auto; 
-            line-height: 1.6; 
+        .header-left h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; text-transform: uppercase; margin: 0; line-height: 1; letter-spacing: -0.02em; }
+        .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
+
+        .nav-wrapper { position: relative; }
+        .burger-btn { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; }
+        .burger-bar { width: 22px; height: 2px; background-color: var(--text-main); transition: 0.3s ease; }
+
+        .dropdown-menu {
+            position: absolute; top: 100%; right: 0; width: 240px;
+            background: var(--nav-bg); backdrop-filter: blur(8px);
+            border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex; flex-direction: column; padding: 20px 0;
         }
 
-        /* --- STACKING ENGINE --- */
-        .show-archive { margin-top: 400px; padding-bottom: 100vh; }
+        .dropdown-menu a {
+            padding: 12px 25px; font-size: 0.75rem; font-weight: 700;
+            text-decoration: none; color: var(--text-main);
+            text-transform: uppercase; letter-spacing: 1.5px; transition: 0.2s;
+            text-align: left;
+        }
+        .dropdown-menu a:hover { background: #f4f4f2; color: var(--accent); }
+
+        @media (min-width: 1025px) {
+            .nav-wrapper:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        }
+        .dropdown-menu.mobile-open { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
+
+        /* --- HERO SECTION --- */
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 130px 5% 20px 5%;
+            text-align: center;
+        }
+
+        .archive-subheadline {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--text-grey);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 20px auto 0 auto;
+            text-transform: uppercase;
+        }
+
+        /* --- TICKET SCROLLER --- */
+        .ticket-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0 100px 0;
+        }
 
         .ticket-section {
-            position: sticky;
-            top: 320px; 
-            height: 100vh; 
+            width: 100%;
+            height: 80vh; /* Reduced height to help first ticket show sooner */
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            padding-top: 20px;
-            pointer-events: none;
+            align-items: center;
+            opacity: 0.2;
+            transition: all 0.8s ease;
+            cursor: pointer;
         }
+
+        .ticket-section.active { opacity: 1; }
 
         .ticket-card {
-            position: relative;
-            width: 85%;
-            max-width: 500px;
-            /* Aspect ratio adjusted to fit long-form tickets better */
-            aspect-ratio: 16 / 9; 
-            background: #fdfdfd; /* Subtle paper-white backer */
-            padding: 15px;
-            box-shadow: 0 12px 45px rgba(0,0,0,0.08);
-            cursor: pointer;
-            pointer-events: auto;
-            transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease;
-            opacity: 0;
-            transform: translateY(150px) rotate(var(--rotation));
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 80%;
+            max-width: 450px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: scale(0.9);
+            transition: transform 0.8s ease;
         }
 
-        .ticket-section.active .ticket-card {
-            opacity: 1;
-            transform: translateY(0) rotate(var(--rotation));
+        /* FIX 1: Mobile ticket sizing constraint */
+        @media (max-width: 768px) {
+            .ticket-card {
+                width: 70%; /* Prevents the blur ticket from becoming too large on mobile */
+                padding: 15px;
+            }
+            .ticket-section {
+                height: 60vh; /* Shorter sections for mobile devices */
+            }
         }
 
-        /* THE FIX: object-fit: contain ensures the full image is seen */
-        .ticket-card img { 
-            max-width: 100%; 
-            max-height: 100%;
-            object-fit: contain; 
-            display: block; 
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.05));
+        .ticket-section.active .ticket-card { transform: scale(1); }
+
+        .ticket-card img {
+            width: 100%;
+            height: auto;
+            filter: grayscale(100%) contrast(1.1);
+            transition: filter 0.5s ease;
         }
 
-        /* --- STEREO LIGHT --- */
-        .record-light {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            width: 12px;
-            height: 12px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent);
-            animation: stereoPulse 1.8s infinite ease-in-out;
-            z-index: 5;
-        }
-
-        @keyframes stereoPulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(0.8); opacity: 0.5; }
-        }
+        .ticket-section.active .ticket-card img { filter: grayscale(0%) contrast(1); }
 
         /* --- MODAL --- */
         #detail-modal {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(250, 250, 248, 0.99);
-            z-index: 4000;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 5vh 5vw;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.98); z-index: 10000;
+            display: none; justify-content: center; align-items: center; padding: 5%;
+            box-sizing: border-box; overflow-y: auto;
         }
 
-        .modal-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 1000px;
-            width: 100%;
-        }
-
-        #modal-img {
-            max-width: 100%;
-            max-height: 70vh;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .modal-text {
-            text-align: center;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .close-btn { margin-top: 20px; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-grey); cursor: pointer; }
-
-        @media (max-width: 600px) {
-            .show-archive { margin-top: 500px; }
-            .ticket-section { top: 420px; }
-            .ticket-card { aspect-ratio: 4 / 3; }
-        }
+        .modal-content { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 800px; }
+        #modal-img { max-width: 100%; max-height: 60vh; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .close-btn { margin-top: 40px; cursor: pointer; font-weight: 900; text-transform: uppercase; border-bottom: 2px solid var(--text-main); }
     </style>
 </head>
 <body>
@@ -239,7 +158,6 @@ main, .main-content, #ticket-container {
         <h1>Call me Tony</h1>
         <div class="tagline">SCROLL THROUGH MY COLLECTION OF CONCERT TICKETS.</div>
     </div>
-    
     <div class="nav-wrapper">
         <div class="burger-btn" id="burgerBtn">
             <div class="burger-bar"></div>
@@ -254,67 +172,63 @@ main, .main-content, #ticket-container {
     </div>
 </header>
 
-<div style="max-width: 800px; margin: 0 auto; padding: 130px 5% 20px 5%; text-align: center;">
+<div class="hero-container">
     <h1 style="font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em;">Shows I've Seen</h1>
-    
     <p class="archive-subheadline">
         I’ve kept a ticket stub from every concert I’ve attended.<br>
         This is a record of what I chose to spend time with, across years, genres, and cities.
     </p>
 </div>
-    
-<main class="show-archive">
-    <section class="ticket-section" data-artist="The Wallflowers" data-year="1997" data-venue="Frank Erwin Center" data-city="Austin, TX" data-copy="First arena show. The scale of the sound felt massive at 14." data-img="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg">
-        <div class="ticket-card" style="--rotation: -1.5deg;">
-            <img src="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg">
-            <div class="record-light"></div>
-        </div>
-    </section>
 
-    <section class="ticket-section" data-artist="Blur" data-year="1997" data-venue="Liberty Lunch" data-city="Austin, TX" data-copy="Liberty Lunch was at its peak. Small club energy for a world-class band." data-img="Blur_Smashmouth_Liberty Lunch_1997.jpg">
-        <div class="ticket-card" style="--rotation: 2deg;">
-            <img src="Blur_Smashmouth_Liberty Lunch_1997.jpg">
-            <div class="record-light"></div>
-        </div>
-    </section>
-
-    <section class="ticket-section" data-artist="Aerosmith" data-year="1997" data-venue="Frank Erwin Center" data-city="Austin, TX" data-copy="A masterclass in stage presence. The scarves on the mic stand were iconic." data-img="Aerosmith__Frank Erwin Center_1997.jpg">
-        <div class="ticket-card" style="--rotation: -2.5deg;">
-            <img src="Aerosmith__Frank Erwin Center_1997.jpg">
-            <div class="record-light"></div>
-        </div>
-    </section>
-
-    <section class="ticket-section" data-artist="Third Eye Blind" data-year="1998" data-venue="Austin Music Hall" data-city="Austin, TX" data-copy="The venue is gone now, but the heat of that April night remains vivid." data-img="Third Eye Blind_Austin Music Hall_1998.jpg">
-        <div class="ticket-card" style="--rotation: 1.8deg;">
-            <img src="Third Eye Blind_Austin Music Hall_1998.jpg">
-            <div class="record-light"></div>
-        </div>
-    </section>
-</main>
+<div class="ticket-grid">
+    </div>
 
 <div id="detail-modal">
     <div class="modal-content">
-        <img id="modal-img" src="">
-        <div class="modal-text">
-            <h2 id="m-artist" style="margin:0;"></h2>
-            <h3 id="m-meta" style="color:var(--text-grey); font-size:1rem; margin:10px 0;"></h3>
-            <p id="m-copy" style="max-width:600px;"></p>
-            <div class="close-btn" onclick="closeModal()">Close Archive View</div>
-        </div>
+        <img id="modal-img" src="" alt="">
+        <h2 id="m-artist" style="margin:0; text-transform: uppercase;"></h2>
+        <h3 id="m-meta" style="color:var(--text-grey); font-size:1rem; margin:10px 0; font-family:'Courier New', monospace;"></h3>
+        <p id="m-copy" style="max-width:600px; line-height:1.6;"></p>
+        <div class="close-btn" onclick="closeModal()">Close Archive View</div>
     </div>
 </div>
 
 <script>
+    // Navigation Toggle
+    const burger = document.getElementById('burgerBtn');
+    const menu = document.getElementById('dropdownMenu');
+
+    burger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('mobile-open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && !burger.contains(e.target)) {
+            menu.classList.remove('mobile-open');
+        }
+    });
+
+    // FIX 2: Scroll to first ticket and activate it on load
+    window.addEventListener('load', () => {
+        const firstTicket = document.querySelector('.ticket-section');
+        if (firstTicket) {
+            firstTicket.classList.add('active'); // Forces immediate visibility
+            firstTicket.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Centers it
+        }
+    });
+
+    // Original Intersection Observer
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) entry.target.classList.add('active');
             else entry.target.classList.remove('active');
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 });
 
     document.querySelectorAll('.ticket-section').forEach(section => observer.observe(section));
 
+    // Modal Logic
     const modal = document.getElementById('detail-modal');
     const mImg = document.getElementById('modal-img');
 
@@ -336,24 +250,6 @@ main, .main-content, #ticket-container {
     }
 </script>
 
-    <script>
-    const burger = document.getElementById('burgerBtn');
-    const menu = document.getElementById('dropdownMenu');
-
-    if (burger && menu) {
-        burger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            menu.classList.toggle('mobile-open');
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!menu.contains(e.target) && !burger.contains(e.target)) {
-                menu.classList.remove('mobile-open');
-            }
-        });
-    }
-</script>
-    
 </body>
 </html>
 
