@@ -110,13 +110,36 @@
         }
 
         /* --- SIDEBAR & CONTENT --- */
-@@ -66,50 +128,52 @@
+        .sidebar h2, .main-content h2 {
+            font-family: 'Courier New', Courier, monospace;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            border-bottom: 2px solid var(--text-main);
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .ingredients-list { list-style: none; padding: 0; font-size: 0.95rem; }
+        .ingredients-list li { margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px dashed var(--border); position: relative; }
+        
+        .nailed-it-alert { 
+            color: var(--accent); 
             font-weight: bold; 
             font-size: 0.75rem; 
             text-transform: uppercase; 
             display: block; 
             margin-top: 5px; 
             white-space: nowrap; 
+
+        .nailed-it-alert {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 5px;
+            white-space: nowrap;
         }
 
         /* --- HOVER IMAGES --- */
@@ -132,6 +155,17 @@
             display: none; 
             z-index: 100; 
             pointer-events: none; 
+        .preview-img {
+            position: absolute;
+            bottom: 110%;
+            left: 0;
+            width: 160px;
+            height: auto;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 100;
+            pointer-events: none;
         }
 
         @media (max-width: 800px) {
@@ -143,28 +177,100 @@
         .hover-link:hover .preview-img, 
         .hover-link.is-active .preview-img { 
             display: block; 
+        .hover-link:hover .preview-img,
+        .hover-link.is-active .preview-img {
+            display: block;
         }
 
         /* --- MODAL WINDOW --- */
         #link-modal { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: var(--modal-bg); display: none; justify-content: center; align-items: center; z-index: 2000; 
+        #link-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--modal-bg); display: none; justify-content: center; align-items: center; z-index: 7000;
         }
         .modal-container { 
             width: 95%; height: 90%; background: #fff; border-radius: 20px; 
             overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.5); 
+        .modal-container {
+            width: 95%; height: 90%; background: #fff; border-radius: 20px;
+            overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         }
         
         .modal-header { 
             padding: 30px; background: #fff; border-bottom: 2px solid var(--border); 
             display: flex; justify-content: space-between; align-items: center; 
+
+        .modal-header {
+            padding: 30px; background: #fff; border-bottom: 2px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
             min-height: 250px; /* Accommodate massive badge */
         }
         
+
         /* MASSIVE BLINKING Tex-Mex Approved Badge */
         .tex-mex-badge-header { 
-@@ -166,50 +230,69 @@
+        .tex-mex-badge-header {
+            height: 250px; /* 5x increase */
+            width: auto; 
+            animation: slowBlink 1.5s infinite; 
+            width: auto;
+            animation: slowBlink 1.5s infinite;
+        }
+
+        .header-controls { display: flex; align-items: center; gap: 20px; }
+        
+
+        .oval-btn {
+            background: #fff; border: 2px solid #000; color: #000;
+            padding: 12px 28px; border-radius: 50px; font-family: 'Courier New', monospace;
+            font-size: 0.9rem; font-weight: bold; text-transform: uppercase; cursor: pointer;
+            transition: background 0.2s;
+        }
+        .oval-btn:hover { background: #000; color: #fff; }
+        
+
+        .round-close {
+            width: 50px; height: 50px; border-radius: 50%; background: #f2f2f2;
+            border: 2px solid #ddd; display: flex; justify-content: center; align-items: center;
+            cursor: pointer; color: #000; font-size: 1.5rem; font-weight: bold;
+        }
+
+        #iframe-wrapper { position: relative; flex-grow: 1; display: flex; flex-direction: column; }
+        
+
+        iframe { width: 100%; flex-grow: 1; border: none; background: #fff; }
+
+        /* Fallback for sites that won't load in iFrames */
+        #iframe-fallback {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #f9f9f9; display: none; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center; padding: 40px;
+        }
+
+        /* --- TACO HINT --- */
+        #taco-hint {
+            position: fixed; bottom: 20px; left: 5%; z-index: 1000;
+            display: flex; flex-direction: column; align-items: center;
+            pointer-events: none; transition: opacity 0.5s ease;
+            animation: pingPong 20s infinite ease-in-out;
+        }
+        .sun-animation-box { position: relative; width: 130px; height: 130px; display: flex; justify-content: center; align-items: center; }
+        .sun-gif { width: 120px; height: auto; z-index: 5; }
+        .taco-box {
+            position: absolute; bottom: 5px; width: 90px; height: 48px; background: #FFD93D;
+            border: 4px solid #4a3703; border-radius: 50px 50px 10px 10px; z-index: 10;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .blink-txt { color: #FF0000; font-family: 'Courier New', monospace; font-weight: 900; font-size: 0.7rem; animation: fastBlink 0.5s infinite; }
+        
+
+        .label-pill {
+            background: rgba(250, 250, 248, 0.95); color: #1A1A1A; padding: 8px 16px; 
             border-radius: 10px; border: 1px solid var(--border); margin-top: 5px; 
+            background: rgba(250, 250, 248, 0.95); color: #1A1A1A; padding: 8px 16px;
+            border-radius: 10px; border: 1px solid var(--border); margin-top: 5px;
             font-family: 'Courier New', monospace; font-size: 0.75rem; font-weight: bold;
             text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
@@ -180,6 +286,7 @@
         @keyframes pingPong { 0% { left: 5%; } 50% { left: 80%; } 100% { left: 5%; } }
 
         @media (max-width: 800px) { 
+        @media (max-width: 800px) {
             .recipe-grid { grid-template-columns: 1fr; }
             .modal-header { padding: 15px; min-height: 180px; flex-direction: column; gap: 10px; }
             .tex-mex-badge-header { height: 150px; }
@@ -233,7 +340,7 @@
         <img src="sun_wiggle.webp" alt="Smiling Sun" class="sun-gif">
         <div class="taco-box"><div class="blink-txt">TACO TIME!</div></div>
     </div>
-@@ -245,50 +328,64 @@
+@@ -245,82 +328,95 @@
             <li>1 Tbsp <a href="https://www.fiestaspices.com/product/fancy-light-chili-powder/" class="preview-trigger" style="color:inherit">Fiesta Chili Powder</a></li>
             <li>1 Tsp <a href="https://www.fiestaspices.com/product/ground-comino/" class="preview-trigger" style="color:inherit">Fiesta Cumin</a></li>
             <li>1 Tsp <a href="https://www.fiestaspices.com/product/oregano-mexican/" class="preview-trigger" style="color:inherit">Fiesta Oregano</a></li>
@@ -283,6 +390,7 @@
             e.preventDefault();
             currentUrl = link.href;
             
+
             // Check if site is restricted (like Jimmy Dean)
             if (link.getAttribute('data-restricted') === "true") {
                 modalFrame.style.display = 'none';
@@ -293,12 +401,19 @@
                 modalFrame.src = currentUrl;
             }
             
+
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; 
+            document.body.style.overflow = 'hidden';
         });
     });
 
-@@ -301,26 +398,25 @@
+    document.getElementById('close-modal-btn').onclick = () => {
+        modal.style.display = 'none';
+        modalFrame.src = "";
+        document.body.style.overflow = 'auto';
+    };
+
     const openAction = () => { window.open(currentUrl, '_blank'); };
     document.getElementById('open-tab').onclick = openAction;
     document.getElementById('fallback-btn').onclick = openAction;
