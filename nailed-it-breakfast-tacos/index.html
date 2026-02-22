@@ -8,6 +8,7 @@
         :root {
             --bg-color: #FAFAF8;
             --text-main: #1A1A1A;
+            --text-grey: #A0A09A;
             --text-secondary: #70706B;
             --accent: #E63946;
             --border: #E6E6E3;
@@ -23,9 +24,51 @@
             overflow-x: hidden;
         }
 
+        /* --- FIXED HEADER (FROM MAIN) --- */
+        header {
+            position: fixed;
+            left: 0; top: 0;
+            width: 100%;
+            padding: 25px 5%;
+            z-index: 5000;
+            background: white;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        .header-left h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; text-transform: uppercase; margin: 0 !important; border: none !important; }
+        .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
+
+        .nav-container { position: relative; }
+        .menu-toggle { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; z-index: 6001; }
+        .bar { width: 22px; height: 2px; background-color: #000; transition: 0.3s ease; }
+        
+        .nav-dropdown {
+            position: absolute; top: 100%; right: 0; width: 240px;
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(8px);
+            border: 1px solid #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex; flex-direction: column; padding: 20px 0; z-index: 5500;
+        }
+
+        .nav-dropdown a {
+            padding: 12px 25px; font-size: 0.75rem; font-weight: 700;
+            text-decoration: none; color: var(--text-main);
+            text-transform: uppercase; letter-spacing: 1.5px; transition: 0.2s;
+        }
+        .nav-dropdown a:hover { background: #f9f9f9; color: var(--text-grey); }
+
+        @media (min-width: 1025px) {
+            .nav-container:hover .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        }
+        .nav-dropdown.is-open { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
+
         /* --- HERO & GRID --- */
-        .hero-section { width: 100%; padding: 8vh 0 4vh 0; text-align: center; }
-        h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0 0 40px 0; }
+        .hero-section { width: 100%; padding: 120px 0 4vh 0; text-align: center; } /* Adjusted padding for header */
+        .hero-section h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0 0 40px 0; }
         .hero-image-container { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
         .hero-image-container img { width: 100%; height: auto; border: 1px solid var(--border); }
 
@@ -74,26 +117,13 @@
         /* --- HOVER IMAGES --- */
         .hover-link { color: var(--text-secondary); text-decoration: underline; cursor: help; position: relative; -webkit-tap-highlight-color: transparent; }
         .preview-img { 
-            position: absolute; 
-            bottom: 110%; 
-            left: 0; 
-            width: 160px; 
-            height: auto; 
-            border: 5px solid white; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
-            display: none; 
-            z-index: 100; 
-            pointer-events: none; 
-        }
-
-        @media (max-width: 800px) {
-            .preview-img { left: 50%; transform: translateX(-50%); width: 140px; }
+            position: absolute; bottom: 110%; left: 0; width: 160px; 
+            height: auto; border: 5px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            display: none; z-index: 100; pointer-events: none; 
         }
 
         .hover-link:hover .preview-img, 
-        .hover-link.is-active .preview-img { 
-            display: block; 
-        }
+        .hover-link.is-active .preview-img { display: block; }
 
         /* --- MODAL WINDOW --- */
         #link-modal { 
@@ -108,16 +138,10 @@
         .modal-header { 
             padding: 30px; background: #fff; border-bottom: 2px solid var(--border); 
             display: flex; justify-content: space-between; align-items: center; 
-            min-height: 250px; /* Accommodate massive badge */
+            min-height: 250px; 
         }
         
-        /* MASSIVE BLINKING Tex-Mex Approved Badge */
-        .tex-mex-badge-header { 
-            height: 250px; /* 5x increase */
-            width: auto; 
-            animation: slowBlink 1.5s infinite; 
-        }
-
+        .tex-mex-badge-header { height: 250px; width: auto; animation: slowBlink 1.5s infinite; }
         .header-controls { display: flex; align-items: center; gap: 20px; }
         
         .oval-btn {
@@ -135,10 +159,8 @@
         }
 
         #iframe-wrapper { position: relative; flex-grow: 1; display: flex; flex-direction: column; }
-        
         iframe { width: 100%; flex-grow: 1; border: none; background: #fff; }
 
-        /* Fallback for sites that won't load in iFrames */
         #iframe-fallback {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: #f9f9f9; display: none; flex-direction: column;
@@ -184,9 +206,32 @@
             .tex-mex-badge-header { height: 150px; }
             @keyframes pingPong { 0% { left: 2%; } 50% { left: 60%; } 100% { left: 2%; } }
         }
+
+        @media (max-width: 600px) {
+            .nav-dropdown { width: 100vw; position: fixed; top: 75px; left: 0; }
+        }
     </style>
 </head>
 <body>
+
+<header id="top">
+    <div class="header-left">
+        <h1>Call me Tony</h1>
+        <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
+    </div>
+    <div class="nav-container" id="navContainer">
+        <div class="menu-toggle" id="menuToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav class="nav-dropdown" id="navDropdown">
+            <a href="https://www.anthonycdorsey.com/">HOME</a>
+            <a href="https://www.anthonycdorsey.com/shows-ive-seen/">LIVE MUSIC ARCHIVE</a>
+            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/">BREAKFAST TACO RECIPE</a>
+        </nav>
+    </div>
+</header>
 
 <div id="link-modal">
     <div class="modal-container">
@@ -267,6 +312,22 @@
 </main>
 
 <script>
+    // Header Toggle Logic
+    const menuToggle = document.getElementById('menuToggle');
+    const navDropdown = document.getElementById('navDropdown');
+
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navDropdown.classList.toggle('is-open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!navDropdown.contains(e.target) && !menuToggle.contains(e.target)) {
+            navDropdown.classList.remove('is-open');
+        }
+    });
+
+    // Original Taco Page Logic
     const modal = document.getElementById('link-modal');
     const modalFrame = document.getElementById('modal-frame');
     const fallback = document.getElementById('iframe-fallback');
@@ -276,8 +337,6 @@
         link.addEventListener('click', (e) => {
             e.preventDefault();
             currentUrl = link.href;
-            
-            // Check if site is restricted (like Jimmy Dean)
             if (link.getAttribute('data-restricted') === "true") {
                 modalFrame.style.display = 'none';
                 fallback.style.display = 'flex';
@@ -286,7 +345,6 @@
                 fallback.style.display = 'none';
                 modalFrame.src = currentUrl;
             }
-            
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; 
         });
