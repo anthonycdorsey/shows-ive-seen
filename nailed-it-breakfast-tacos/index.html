@@ -23,8 +23,71 @@
             overflow-x: hidden;
         }
 
+
+        /* --- GLOBAL HEADER --- */
+        .global-header {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            padding: 25px 5%;
+            z-index: 5000;
+            background: white;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .header-left h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; text-transform: uppercase; margin: 0; }
+        .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: #A0A09A; text-transform: uppercase; margin-top: 4px; }
+
+        .nav-container { position: relative; }
+        .menu-toggle { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; z-index: 6001; }
+        .bar { width: 22px; height: 2px; background-color: #000; transition: 0.3s ease; }
+
+        .nav-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 240px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            border: 1px solid #eee;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            z-index: 5500;
+        }
+
+        .nav-dropdown a {
+            padding: 12px 25px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: 0.2s;
+        }
+
+        .nav-dropdown a:hover { background: #f9f9f9; color: #A0A09A; }
+
+        @media (min-width: 1025px) {
+            .nav-container:hover .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        }
+
+        .nav-dropdown.is-open { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
+
         /* --- HERO & GRID --- */
         .hero-section { width: 100%; padding: 8vh 0 4vh 0; text-align: center; }
+        .hero-section { width: 100%; padding: 150px 0 4vh 0; text-align: center; }
         h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0 0 40px 0; }
         .hero-image-container { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
         .hero-image-container img { width: 100%; height: auto; border: 1px solid var(--border); }
@@ -50,19 +113,7 @@
         /* --- SIDEBAR & CONTENT --- */
         .sidebar h2, .main-content h2 {
             font-family: 'Courier New', Courier, monospace;
-            text-transform: uppercase;
-            font-size: 1rem;
-            letter-spacing: 0.1em;
-            border-bottom: 2px solid var(--text-main);
-            display: inline-block;
-            margin-bottom: 30px;
-        }
-
-        .ingredients-list { list-style: none; padding: 0; font-size: 0.95rem; }
-        .ingredients-list li { margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px dashed var(--border); position: relative; }
-        
-        .nailed-it-alert { 
-            color: var(--accent); 
+@@ -66,50 +128,53 @@
             font-weight: bold; 
             font-size: 0.75rem; 
             text-transform: uppercase; 
@@ -88,6 +139,9 @@
 
         @media (max-width: 800px) {
             .preview-img { left: 50%; transform: translateX(-50%); width: 140px; }
+            .global-header { padding-top: 18px; padding-bottom: 18px; }
+            .nav-dropdown { width: 100vw; position: fixed; top: 75px; left: 0; }
+            .hero-section { padding-top: 125px; }
         }
 
         .hover-link:hover .preview-img, 
@@ -113,56 +167,7 @@
         
         /* MASSIVE BLINKING Tex-Mex Approved Badge */
         .tex-mex-badge-header { 
-            height: 250px; /* 5x increase */
-            width: auto; 
-            animation: slowBlink 1.5s infinite; 
-        }
-
-        .header-controls { display: flex; align-items: center; gap: 20px; }
-        
-        .oval-btn {
-            background: #fff; border: 2px solid #000; color: #000;
-            padding: 12px 28px; border-radius: 50px; font-family: 'Courier New', monospace;
-            font-size: 0.9rem; font-weight: bold; text-transform: uppercase; cursor: pointer;
-            transition: background 0.2s;
-        }
-        .oval-btn:hover { background: #000; color: #fff; }
-        
-        .round-close {
-            width: 50px; height: 50px; border-radius: 50%; background: #f2f2f2;
-            border: 2px solid #ddd; display: flex; justify-content: center; align-items: center;
-            cursor: pointer; color: #000; font-size: 1.5rem; font-weight: bold;
-        }
-
-        #iframe-wrapper { position: relative; flex-grow: 1; display: flex; flex-direction: column; }
-        
-        iframe { width: 100%; flex-grow: 1; border: none; background: #fff; }
-
-        /* Fallback for sites that won't load in iFrames */
-        #iframe-fallback {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: #f9f9f9; display: none; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center; padding: 40px;
-        }
-
-        /* --- TACO HINT --- */
-        #taco-hint {
-            position: fixed; bottom: 20px; left: 5%; z-index: 1000;
-            display: flex; flex-direction: column; align-items: center;
-            pointer-events: none; transition: opacity 0.5s ease;
-            animation: pingPong 20s infinite ease-in-out;
-        }
-        .sun-animation-box { position: relative; width: 130px; height: 130px; display: flex; justify-content: center; align-items: center; }
-        .sun-gif { width: 120px; height: auto; z-index: 5; }
-        .taco-box {
-            position: absolute; bottom: 5px; width: 90px; height: 48px; background: #FFD93D;
-            border: 4px solid #4a3703; border-radius: 50px 50px 10px 10px; z-index: 10;
-            display: flex; justify-content: center; align-items: center;
-        }
-        .blink-txt { color: #FF0000; font-family: 'Courier New', monospace; font-weight: 900; font-size: 0.7rem; animation: fastBlink 0.5s infinite; }
-        
-        .label-pill {
-            background: rgba(250, 250, 248, 0.95); color: #1A1A1A; padding: 8px 16px; 
+@@ -166,50 +231,69 @@
             border-radius: 10px; border: 1px solid var(--border); margin-top: 5px; 
             font-family: 'Courier New', monospace; font-size: 0.75rem; font-weight: bold;
             text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -187,6 +192,25 @@
     </style>
 </head>
 <body>
+
+<header class="global-header" id="top">
+    <div class="header-left">
+        <h1>Call me Tony</h1>
+        <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
+    </div>
+    <div class="nav-container" id="navContainer">
+        <div class="menu-toggle" id="menuToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav class="nav-dropdown" id="navDropdown">
+            <a href="https://www.anthonycdorsey.com/">HOME</a>
+            <a href="https://www.anthonycdorsey.com/shows-ive-seen/">LIVE MUSIC ARCHIVE</a>
+            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/">BREAKFAST TACO RECIPE</a>
+        </nav>
+    </div>
+</header>
 
 <div id="link-modal">
     <div class="modal-container">
@@ -213,35 +237,7 @@
         <img src="sun_wiggle.webp" alt="Smiling Sun" class="sun-gif">
         <div class="taco-box"><div class="blink-txt">TACO TIME!</div></div>
     </div>
-    <div class="label-pill">THIS WAY TO<br>NAIL IT</div>
-    <div class="down-arrow-heavy"></div>
-</div>
-
-<div class="hero-section">
-    <h1>Nailed It Breakfast Tacos</h1>
-    <div class="hero-image-container">
-        <img src="taco-engineer.jpg" alt="Breakfast Tacos">
-    </div>
-</div>
-
-<main class="recipe-grid">
-    <div class="intro-text">
-        Do you like breakfast tacos? Do you like when people look at you and say, "Wow! You really NAILED-it!"? (Note: these are <a href="https://www.differencebetween.net/object/difference-between-taco-and-burrito/" class="preview-trigger">tacos, not burritos</a>).
-    </div>
-
-    <aside class="sidebar">
-        <h2>Ingredients</h2>
-        <ul class="ingredients-list">
-            <li>1 lb <a href="https://www.jimmydean.com/products/fresh-sausage/" class="preview-trigger" data-restricted="true" style="color:inherit">Jimmy Dean Sausage</a>
-                <span class="nailed-it-alert">Key: Ensure meat is fresh and loose (no casings).</span>
-            </li>
-            <li>6 Slices Smoked Bacon</li>
-            <li>2 Cloves Garlic, Minced</li>
-            <li>2 Small <span class="hover-link">White Potatoes<img src="white-potatoes.jpg" class="preview-img"></span></li>
-            <li>1 Small Onion, Chopped</li>
-            <li>1 Small Red Bell Pepper (or <span class="hover-link">Poblano<img src="poblano-pepper.jpg" class="preview-img"></span>)</li>
-            <li>1 Large Jalapeño, Chopped</li>
-            <li>1/2 Cup Cilantro, Chopped</li>
+@@ -245,50 +329,64 @@
             <li>1 Tbsp <a href="https://www.fiestaspices.com/product/fancy-light-chili-powder/" class="preview-trigger" style="color:inherit">Fiesta Chili Powder</a></li>
             <li>1 Tsp <a href="https://www.fiestaspices.com/product/ground-comino/" class="preview-trigger" style="color:inherit">Fiesta Cumin</a></li>
             <li>1 Tsp <a href="https://www.fiestaspices.com/product/oregano-mexican/" class="preview-trigger" style="color:inherit">Fiesta Oregano</a></li>
@@ -267,6 +263,20 @@
 </main>
 
 <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navDropdown = document.getElementById('navDropdown');
+
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navDropdown.classList.toggle('is-open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!navDropdown.contains(e.target) && !menuToggle.contains(e.target)) {
+            navDropdown.classList.remove('is-open');
+        }
+    });
+
     const modal = document.getElementById('link-modal');
     const modalFrame = document.getElementById('modal-frame');
     const fallback = document.getElementById('iframe-fallback');
@@ -292,35 +302,295 @@
         });
     });
 
-    document.getElementById('close-modal-btn').onclick = () => {
-        modal.style.display = 'none';
-        modalFrame.src = "";
-        document.body.style.overflow = 'auto';
-    };
+shows-ive-seen/index.html
+shows-ive-seen/index.html
++103
+-12
 
-    const openAction = () => { window.open(currentUrl, '_blank'); };
-    document.getElementById('open-tab').onclick = openAction;
-    document.getElementById('fallback-btn').onclick = openAction;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shows I've Seen | Anthony C. Dorsey</title>
+    <style>
+        :root {
+            --bg-color: #FAFAF8;
+            --text-main: #1A1A1A;
+            --text-grey: #A0A09A;
+            --border: #E6E6E3;
+            --accent: #E63946;
+        }
 
-    const hoverLinks = document.querySelectorAll('.hover-link');
-    hoverLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault(); e.stopPropagation();
-            const wasActive = link.classList.contains('is-active');
-            hoverLinks.forEach(l => l.classList.remove('is-active'));
-            if (!wasActive) link.classList.add('is-active');
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER --- */
+        header {
+        /* --- GLOBAL HEADER --- */
+        .global-header {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-color: var(--bg-color);
+            z-index: 2000;
+            padding: 25px 5%;
+            z-index: 5000;
+            background: white;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .header-left h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; text-transform: uppercase; margin: 0; }
+        .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
+
+        .nav-container { position: relative; }
+        .menu-toggle { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; z-index: 6001; }
+        .bar { width: 22px; height: 2px; background-color: #000; transition: 0.3s ease; }
+
+        .nav-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 240px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            border: 1px solid #eee;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            z-index: 5500;
+        }
+
+        .nav-dropdown a {
+            padding: 12px 25px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: 0.2s;
+        }
+
+        .nav-dropdown a:hover { background: #f9f9f9; color: var(--text-grey); }
+
+        @media (min-width: 1025px) {
+            .nav-container:hover .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        }
+
+        .nav-dropdown.is-open { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
+
+        .archive-intro {
+            margin: 130px auto 0;
+            max-width: 900px;
+            text-align: center;
+            padding: 40px 10% 20px 10%;
+            padding: 40px 10% 20px;
+            box-sizing: border-box;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em; }
+        .archive-intro h1 { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em; }
+        
+        .subheadline { 
+            font-family: 'Courier New', Courier, monospace; 
+            font-size: 0.95rem; 
+            max-width: 700px; 
+            margin: 15px auto; 
+            line-height: 1.6; 
+        }
+
+        /* --- STACKING ENGINE --- */
+        .show-archive { margin-top: 400px; padding-bottom: 100vh; }
+        .show-archive { margin-top: 80px; padding-bottom: 100vh; }
+
+        .ticket-section {
+            position: sticky;
+            top: 320px; 
+            height: 100vh; 
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 20px;
+            pointer-events: none;
+        }
+
+        .ticket-card {
+            position: relative;
+            width: 85%;
+            max-width: 500px;
+            /* Aspect ratio adjusted to fit long-form tickets better */
+            aspect-ratio: 16 / 9; 
+            background: #fdfdfd; /* Subtle paper-white backer */
+            padding: 15px;
+            box-shadow: 0 12px 45px rgba(0,0,0,0.08);
+            cursor: pointer;
+            pointer-events: auto;
+            transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease;
+            opacity: 0;
+@@ -125,110 +181,145 @@
+        }
+
+        .modal-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        #modal-img {
+            max-width: 100%;
+            max-height: 70vh;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .modal-text {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .close-btn { margin-top: 20px; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-grey); cursor: pointer; }
+
+        @media (max-width: 600px) {
+            .show-archive { margin-top: 500px; }
+            .ticket-section { top: 420px; }
+            .nav-dropdown { width: 100vw; position: fixed; top: 75px; left: 0; }
+            .archive-intro { margin-top: 105px; }
+            .show-archive { margin-top: 40px; }
+            .ticket-section { top: 360px; }
+            .ticket-card { aspect-ratio: 4 / 3; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+<header class="global-header" id="top">
+    <div class="header-left">
+        <h1>Call me Tony</h1>
+        <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
+    </div>
+    <div class="nav-container" id="navContainer">
+        <div class="menu-toggle" id="menuToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav class="nav-dropdown" id="navDropdown">
+            <a href="https://www.anthonycdorsey.com/">HOME</a>
+            <a href="https://www.anthonycdorsey.com/shows-ive-seen/">LIVE MUSIC ARCHIVE</a>
+            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/">BREAKFAST TACO RECIPE</a>
+        </nav>
+    </div>
+</header>
+
+<section class="archive-intro">
+    <h1>Shows I've Seen</h1>
+    <div class="subheadline">
+        I’ve kept a ticket stub from every concert I’ve attended.<br>
+        This is a record of what I chose to spend time with, across years, genres, and cities.
+    </div>
+    <div class="archive-note">— Growing Archive —</div>
+</header>
+</section>
+
+<main class="show-archive">
+    <section class="ticket-section" data-artist="The Wallflowers" data-year="1997" data-venue="Frank Erwin Center" data-city="Austin, TX" data-copy="First arena show. The scale of the sound felt massive at 14." data-img="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg">
+        <div class="ticket-card" style="--rotation: -1.5deg;">
+            <img src="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg">
+            <div class="record-light"></div>
+        </div>
+    </section>
+
+    <section class="ticket-section" data-artist="Blur" data-year="1997" data-venue="Liberty Lunch" data-city="Austin, TX" data-copy="Liberty Lunch was at its peak. Small club energy for a world-class band." data-img="Blur_Smashmouth_Liberty Lunch_1997.jpg">
+        <div class="ticket-card" style="--rotation: 2deg;">
+            <img src="Blur_Smashmouth_Liberty Lunch_1997.jpg">
+            <div class="record-light"></div>
+        </div>
+    </section>
+
+    <section class="ticket-section" data-artist="Aerosmith" data-year="1997" data-venue="Frank Erwin Center" data-city="Austin, TX" data-copy="A masterclass in stage presence. The scarves on the mic stand were iconic." data-img="Aerosmith__Frank Erwin Center_1997.jpg">
+        <div class="ticket-card" style="--rotation: -2.5deg;">
+            <img src="Aerosmith__Frank Erwin Center_1997.jpg">
+            <div class="record-light"></div>
+        </div>
+    </section>
+
+    <section class="ticket-section" data-artist="Third Eye Blind" data-year="1998" data-venue="Austin Music Hall" data-city="Austin, TX" data-copy="The venue is gone now, but the heat of that April night remains vivid." data-img="Third Eye Blind_Austin Music Hall_1998.jpg">
+        <div class="ticket-card" style="--rotation: 1.8deg;">
+            <img src="Third Eye Blind_Austin Music Hall_1998.jpg">
+            <div class="record-light"></div>
+        </div>
+    </section>
+</main>
+
+<div id="detail-modal">
+    <div class="modal-content">
+        <img id="modal-img" src="">
+        <div class="modal-text">
+            <h2 id="m-artist" style="margin:0;"></h2>
+            <h3 id="m-meta" style="color:var(--text-grey); font-size:1rem; margin:10px 0;"></h3>
+            <p id="m-copy" style="max-width:600px;"></p>
+            <div class="close-btn" onclick="closeModal()">Close Archive View</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navDropdown = document.getElementById('navDropdown');
+
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navDropdown.classList.toggle('is-open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!navDropdown.contains(e.target) && !menuToggle.contains(e.target)) {
+            navDropdown.classList.remove('is-open');
+        }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+            else entry.target.classList.remove('active');
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.ticket-section').forEach(section => observer.observe(section));
+
+    const modal = document.getElementById('detail-modal');
+    const mImg = document.getElementById('modal-img');
+
+    document.querySelectorAll('.ticket-section').forEach(section => {
+        section.addEventListener('click', () => {
+            const d = section.dataset;
+            document.getElementById('m-artist').innerText = `${d.artist} (${d.year})`;
+            document.getElementById('m-meta').innerText = `${d.venue} | ${d.city}`;
+            document.getElementById('m-copy').innerText = d.copy;
+            mImg.src = d.img;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         });
     });
 
-    document.addEventListener('click', () => { hoverLinks.forEach(link => link.classList.remove('is-active')); });
-
-    window.onscroll = () => {
-        const hint = document.getElementById('taco-hint');
-        if (window.scrollY > 200) hint.style.opacity = "0";
-        else hint.style.opacity = "0.95";
-    };
-</script>
-
-</body>
-</html>
-
+    function closeModal() {
