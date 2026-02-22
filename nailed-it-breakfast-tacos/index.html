@@ -24,7 +24,6 @@
         }
 
 
-
         /* --- GLOBAL HEADER --- */
         .global-header {
             position: fixed;
@@ -111,7 +110,7 @@
         }
 
         /* --- SIDEBAR & CONTENT --- */
-@@ -66,50 +129,52 @@
+@@ -66,50 +128,52 @@
             font-weight: bold; 
             font-size: 0.75rem; 
             text-transform: uppercase; 
@@ -164,7 +163,7 @@
         
         /* MASSIVE BLINKING Tex-Mex Approved Badge */
         .tex-mex-badge-header { 
-@@ -166,50 +231,70 @@
+@@ -166,50 +230,69 @@
             border-radius: 10px; border: 1px solid var(--border); margin-top: 5px; 
             font-family: 'Courier New', monospace; font-size: 0.75rem; font-weight: bold;
             text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -190,14 +189,13 @@
 </head>
 <body>
 
-
 <header class="global-header" id="top">
     <div class="header-left">
         <h1>Call me Tony</h1>
         <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
     </div>
     <div class="nav-container" id="navContainer">
-        <div class="menu-toggle" id="menuToggle" aria-label="Open navigation" role="button" tabindex="0">
+        <div class="menu-toggle" id="menuToggle">
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
@@ -235,7 +233,7 @@
         <img src="sun_wiggle.webp" alt="Smiling Sun" class="sun-gif">
         <div class="taco-box"><div class="blink-txt">TACO TIME!</div></div>
     </div>
-@@ -245,50 +330,64 @@
+@@ -245,50 +328,64 @@
             <li>1 Tbsp <a href="https://www.fiestaspices.com/product/fancy-light-chili-powder/" class="preview-trigger" style="color:inherit">Fiesta Chili Powder</a></li>
             <li>1 Tsp <a href="https://www.fiestaspices.com/product/ground-comino/" class="preview-trigger" style="color:inherit">Fiesta Cumin</a></li>
             <li>1 Tsp <a href="https://www.fiestaspices.com/product/oregano-mexican/" class="preview-trigger" style="color:inherit">Fiesta Oregano</a></li>
@@ -300,7 +298,7 @@
         });
     });
 
-@@ -301,26 +400,25 @@
+@@ -301,26 +398,25 @@
     const openAction = () => { window.open(currentUrl, '_blank'); };
     document.getElementById('open-tab').onclick = openAction;
     document.getElementById('fallback-btn').onclick = openAction;
