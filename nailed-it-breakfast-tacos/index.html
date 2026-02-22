@@ -23,68 +23,6 @@
             overflow-x: hidden;
         }
 
-
-        /* --- GLOBAL HEADER --- */
-        .global-header {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            padding: 25px 5%;
-            z-index: 5000;
-            background: white;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-sizing: border-box;
-        }
-
-        .header-left h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; text-transform: uppercase; margin: 0; }
-        .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: #A0A09A; text-transform: uppercase; margin-top: 4px; }
-
-        .nav-container { position: relative; }
-        .menu-toggle { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; z-index: 6001; }
-        .bar { width: 22px; height: 2px; background-color: #000; transition: 0.3s ease; }
-
-        .nav-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            width: 240px;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(8px);
-            border: 1px solid #eee;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            display: flex;
-            flex-direction: column;
-            padding: 20px 0;
-            z-index: 5500;
-        }
-
-        .nav-dropdown a {
-            padding: 12px 25px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-decoration: none;
-            color: var(--text-main);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: 0.2s;
-        }
-
-        .nav-dropdown a:hover { background: #f9f9f9; color: #A0A09A; }
-
-        @media (min-width: 1025px) {
-            .nav-container:hover .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
-        }
-
-        .nav-dropdown.is-open { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
-
         /* --- HERO & GRID --- */
         .hero-section { width: 100%; padding: 8vh 0 4vh 0; text-align: center; }
         h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; margin: 0 0 40px 0; }
@@ -131,15 +69,6 @@
             display: block; 
             margin-top: 5px; 
             white-space: nowrap; 
-
-        .nailed-it-alert {
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            display: block;
-            margin-top: 5px;
-            white-space: nowrap;
         }
 
         /* --- HOVER IMAGES --- */
@@ -155,73 +84,42 @@
             display: none; 
             z-index: 100; 
             pointer-events: none; 
-        .preview-img {
-            position: absolute;
-            bottom: 110%;
-            left: 0;
-            width: 160px;
-            height: auto;
-            border: 5px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            display: none;
-            z-index: 100;
-            pointer-events: none;
         }
 
         @media (max-width: 800px) {
             .preview-img { left: 50%; transform: translateX(-50%); width: 140px; }
-            .global-header { padding-top: 18px; padding-bottom: 18px; }
-            .nav-dropdown { width: 100vw; position: fixed; top: 75px; left: 0; }
         }
 
         .hover-link:hover .preview-img, 
         .hover-link.is-active .preview-img { 
             display: block; 
-        .hover-link:hover .preview-img,
-        .hover-link.is-active .preview-img {
-            display: block;
         }
 
         /* --- MODAL WINDOW --- */
         #link-modal { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: var(--modal-bg); display: none; justify-content: center; align-items: center; z-index: 2000; 
-        #link-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--modal-bg); display: none; justify-content: center; align-items: center; z-index: 7000;
         }
         .modal-container { 
             width: 95%; height: 90%; background: #fff; border-radius: 20px; 
             overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.5); 
-        .modal-container {
-            width: 95%; height: 90%; background: #fff; border-radius: 20px;
-            overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         }
         
         .modal-header { 
             padding: 30px; background: #fff; border-bottom: 2px solid var(--border); 
             display: flex; justify-content: space-between; align-items: center; 
-
-        .modal-header {
-            padding: 30px; background: #fff; border-bottom: 2px solid var(--border);
-            display: flex; justify-content: space-between; align-items: center;
             min-height: 250px; /* Accommodate massive badge */
         }
         
-
         /* MASSIVE BLINKING Tex-Mex Approved Badge */
         .tex-mex-badge-header { 
-        .tex-mex-badge-header {
             height: 250px; /* 5x increase */
             width: auto; 
             animation: slowBlink 1.5s infinite; 
-            width: auto;
-            animation: slowBlink 1.5s infinite;
         }
 
         .header-controls { display: flex; align-items: center; gap: 20px; }
         
-
         .oval-btn {
             background: #fff; border: 2px solid #000; color: #000;
             padding: 12px 28px; border-radius: 50px; font-family: 'Courier New', monospace;
@@ -230,7 +128,6 @@
         }
         .oval-btn:hover { background: #000; color: #fff; }
         
-
         .round-close {
             width: 50px; height: 50px; border-radius: 50%; background: #f2f2f2;
             border: 2px solid #ddd; display: flex; justify-content: center; align-items: center;
@@ -239,7 +136,6 @@
 
         #iframe-wrapper { position: relative; flex-grow: 1; display: flex; flex-direction: column; }
         
-
         iframe { width: 100%; flex-grow: 1; border: none; background: #fff; }
 
         /* Fallback for sites that won't load in iFrames */
@@ -265,12 +161,9 @@
         }
         .blink-txt { color: #FF0000; font-family: 'Courier New', monospace; font-weight: 900; font-size: 0.7rem; animation: fastBlink 0.5s infinite; }
         
-
         .label-pill {
             background: rgba(250, 250, 248, 0.95); color: #1A1A1A; padding: 8px 16px; 
             border-radius: 10px; border: 1px solid var(--border); margin-top: 5px; 
-            background: rgba(250, 250, 248, 0.95); color: #1A1A1A; padding: 8px 16px;
-            border-radius: 10px; border: 1px solid var(--border); margin-top: 5px;
             font-family: 'Courier New', monospace; font-size: 0.75rem; font-weight: bold;
             text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
@@ -286,7 +179,6 @@
         @keyframes pingPong { 0% { left: 5%; } 50% { left: 80%; } 100% { left: 5%; } }
 
         @media (max-width: 800px) { 
-        @media (max-width: 800px) {
             .recipe-grid { grid-template-columns: 1fr; }
             .modal-header { padding: 15px; min-height: 180px; flex-direction: column; gap: 10px; }
             .tex-mex-badge-header { height: 150px; }
@@ -295,25 +187,6 @@
     </style>
 </head>
 <body>
-
-<header class="global-header" id="top">
-    <div class="header-left">
-        <h1>Call me Tony</h1>
-        <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
-    </div>
-    <div class="nav-container" id="navContainer">
-        <div class="menu-toggle" id="menuToggle">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-        <nav class="nav-dropdown" id="navDropdown">
-            <a href="https://www.anthonycdorsey.com/">HOME</a>
-            <a href="https://www.anthonycdorsey.com/shows-ive-seen/">LIVE MUSIC ARCHIVE</a>
-            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/">BREAKFAST TACO RECIPE</a>
-        </nav>
-    </div>
-</header>
 
 <div id="link-modal">
     <div class="modal-container">
@@ -340,7 +213,35 @@
         <img src="sun_wiggle.webp" alt="Smiling Sun" class="sun-gif">
         <div class="taco-box"><div class="blink-txt">TACO TIME!</div></div>
     </div>
-@@ -245,82 +328,95 @@
+    <div class="label-pill">THIS WAY TO<br>NAIL IT</div>
+    <div class="down-arrow-heavy"></div>
+</div>
+
+<div class="hero-section">
+    <h1>Nailed It Breakfast Tacos</h1>
+    <div class="hero-image-container">
+        <img src="taco-engineer.jpg" alt="Breakfast Tacos">
+    </div>
+</div>
+
+<main class="recipe-grid">
+    <div class="intro-text">
+        Do you like breakfast tacos? Do you like when people look at you and say, "Wow! You really NAILED-it!"? (Note: these are <a href="https://www.differencebetween.net/object/difference-between-taco-and-burrito/" class="preview-trigger">tacos, not burritos</a>).
+    </div>
+
+    <aside class="sidebar">
+        <h2>Ingredients</h2>
+        <ul class="ingredients-list">
+            <li>1 lb <a href="https://www.jimmydean.com/products/fresh-sausage/" class="preview-trigger" data-restricted="true" style="color:inherit">Jimmy Dean Sausage</a>
+                <span class="nailed-it-alert">Key: Ensure meat is fresh and loose (no casings).</span>
+            </li>
+            <li>6 Slices Smoked Bacon</li>
+            <li>2 Cloves Garlic, Minced</li>
+            <li>2 Small <span class="hover-link">White Potatoes<img src="white-potatoes.jpg" class="preview-img"></span></li>
+            <li>1 Small Onion, Chopped</li>
+            <li>1 Small Red Bell Pepper (or <span class="hover-link">Poblano<img src="poblano-pepper.jpg" class="preview-img"></span>)</li>
+            <li>1 Large Jalapeño, Chopped</li>
+            <li>1/2 Cup Cilantro, Chopped</li>
             <li>1 Tbsp <a href="https://www.fiestaspices.com/product/fancy-light-chili-powder/" class="preview-trigger" style="color:inherit">Fiesta Chili Powder</a></li>
             <li>1 Tsp <a href="https://www.fiestaspices.com/product/ground-comino/" class="preview-trigger" style="color:inherit">Fiesta Cumin</a></li>
             <li>1 Tsp <a href="https://www.fiestaspices.com/product/oregano-mexican/" class="preview-trigger" style="color:inherit">Fiesta Oregano</a></li>
@@ -366,20 +267,6 @@
 </main>
 
 <script>
-    const menuToggle = document.getElementById('menuToggle');
-    const navDropdown = document.getElementById('navDropdown');
-
-    menuToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        navDropdown.classList.toggle('is-open');
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!navDropdown.contains(e.target) && !menuToggle.contains(e.target)) {
-            navDropdown.classList.remove('is-open');
-        }
-    });
-
     const modal = document.getElementById('link-modal');
     const modalFrame = document.getElementById('modal-frame');
     const fallback = document.getElementById('iframe-fallback');
@@ -390,7 +277,6 @@
             e.preventDefault();
             currentUrl = link.href;
             
-
             // Check if site is restricted (like Jimmy Dean)
             if (link.getAttribute('data-restricted') === "true") {
                 modalFrame.style.display = 'none';
@@ -401,10 +287,8 @@
                 modalFrame.src = currentUrl;
             }
             
-
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; 
-            document.body.style.overflow = 'hidden';
         });
     });
 
