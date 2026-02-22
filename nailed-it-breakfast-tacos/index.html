@@ -21,7 +21,6 @@
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
-            padding-top: 88px;
         }
 
 
@@ -33,7 +32,7 @@
             top: 0;
             width: 100%;
             padding: 25px 5%;
-            z-index: 1500;
+            z-index: 5000;
             background: white;
             border-bottom: 1px solid #eee;
             display: flex;
@@ -46,7 +45,7 @@
         .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: #A0A09A; text-transform: uppercase; margin-top: 4px; }
 
         .nav-container { position: relative; }
-        .menu-toggle { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; z-index: 1600; }
+        .menu-toggle { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; z-index: 6001; }
         .bar { width: 22px; height: 2px; background-color: #000; transition: 0.3s ease; }
 
         .nav-dropdown {
@@ -65,7 +64,7 @@
             display: flex;
             flex-direction: column;
             padding: 20px 0;
-            z-index: 1550;
+            z-index: 5500;
         }
 
         .nav-dropdown a {
@@ -112,7 +111,7 @@
         }
 
         /* --- SIDEBAR & CONTENT --- */
-@@ -66,50 +130,53 @@
+@@ -66,50 +129,52 @@
             font-weight: bold; 
             font-size: 0.75rem; 
             text-transform: uppercase; 
@@ -138,7 +137,6 @@
 
         @media (max-width: 800px) {
             .preview-img { left: 50%; transform: translateX(-50%); width: 140px; }
-            body { padding-top: 75px; }
             .global-header { padding-top: 18px; padding-bottom: 18px; }
             .nav-dropdown { width: 100vw; position: fixed; top: 75px; left: 0; }
         }
@@ -166,7 +164,7 @@
         
         /* MASSIVE BLINKING Tex-Mex Approved Badge */
         .tex-mex-badge-header { 
-@@ -166,50 +233,70 @@
+@@ -166,50 +231,70 @@
             border-radius: 10px; border: 1px solid var(--border); margin-top: 5px; 
             font-family: 'Courier New', monospace; font-size: 0.75rem; font-weight: bold;
             text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -237,7 +235,7 @@
         <img src="sun_wiggle.webp" alt="Smiling Sun" class="sun-gif">
         <div class="taco-box"><div class="blink-txt">TACO TIME!</div></div>
     </div>
-@@ -245,50 +332,69 @@
+@@ -245,50 +330,64 @@
             <li>1 Tbsp <a href="https://www.fiestaspices.com/product/fancy-light-chili-powder/" class="preview-trigger" style="color:inherit">Fiesta Chili Powder</a></li>
             <li>1 Tsp <a href="https://www.fiestaspices.com/product/ground-comino/" class="preview-trigger" style="color:inherit">Fiesta Cumin</a></li>
             <li>1 Tsp <a href="https://www.fiestaspices.com/product/oregano-mexican/" class="preview-trigger" style="color:inherit">Fiesta Oregano</a></li>
@@ -266,14 +264,9 @@
     const menuToggle = document.getElementById('menuToggle');
     const navDropdown = document.getElementById('navDropdown');
 
-    const toggleMenu = (e) => {
+    menuToggle.addEventListener('click', (e) => {
         e.stopPropagation();
         navDropdown.classList.toggle('is-open');
-    };
-
-    menuToggle.addEventListener('click', toggleMenu);
-    menuToggle.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') toggleMenu(e);
     });
 
     document.addEventListener('click', (e) => {
@@ -306,3 +299,30 @@
             document.body.style.overflow = 'hidden'; 
         });
     });
+
+@@ -301,26 +400,25 @@
+    const openAction = () => { window.open(currentUrl, '_blank'); };
+    document.getElementById('open-tab').onclick = openAction;
+    document.getElementById('fallback-btn').onclick = openAction;
+
+    const hoverLinks = document.querySelectorAll('.hover-link');
+    hoverLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); e.stopPropagation();
+            const wasActive = link.classList.contains('is-active');
+            hoverLinks.forEach(l => l.classList.remove('is-active'));
+            if (!wasActive) link.classList.add('is-active');
+        });
+    });
+
+    document.addEventListener('click', () => { hoverLinks.forEach(link => link.classList.remove('is-active')); });
+
+    window.onscroll = () => {
+        const hint = document.getElementById('taco-hint');
+        if (window.scrollY > 200) hint.style.opacity = "0";
+        else hint.style.opacity = "0.95";
+    };
+</script>
+
+</body>
+</html>
