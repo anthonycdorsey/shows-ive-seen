@@ -9,7 +9,7 @@
             --bg-color: #FAFAF8;
             --text-main: #1A1A1A;
             --text-grey: #A0A09A;
-            --border: #E6E6E3;
+           --border: #E6E6E3;
             --accent: #E63946;
         }
 
@@ -23,29 +23,20 @@
 
         /* --- HEADER --- */
         header {
-        /* --- GLOBAL HEADER --- */
-        .global-header {
             position: fixed;
-            left: 0;
             top: 0;
             width: 100%;
             background-color: var(--bg-color);
             z-index: 2000;
-            padding: 25px 5%;
-            z-index: 5000;
-            background: white;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            text-align: center;
+            padding: 40px 10% 20px 10%;
             box-sizing: border-box;
+            border-bottom: 1px solid var(--border);
         }
 
-        .header-left h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; text-transform: uppercase; margin: 0; }
-        .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
 
-        .nav-container { position: relative; }
-        .menu-toggle { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; z-index: 6001; }
+        .nav-container { position: absolute; right: 5%; top: 28px; text-align: left; }
+        .menu-toggle { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; z-index: 2100; }
         .bar { width: 22px; height: 2px; background-color: #000; transition: 0.3s ease; }
 
         .nav-dropdown {
@@ -64,7 +55,7 @@
             display: flex;
             flex-direction: column;
             padding: 20px 0;
-            z-index: 5500;
+            z-index: 2050;
         }
 
         .nav-dropdown a {
@@ -77,7 +68,6 @@
             letter-spacing: 1.5px;
             transition: 0.2s;
         }
-
         .nav-dropdown a:hover { background: #f9f9f9; color: var(--text-grey); }
 
         @media (min-width: 1025px) {
@@ -86,18 +76,7 @@
 
         .nav-dropdown.is-open { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
 
-        .archive-intro {
-            margin: 130px auto 0;
-            max-width: 900px;
-            text-align: center;
-            padding: 40px 10% 20px 10%;
-            padding: 40px 10% 20px;
-            box-sizing: border-box;
-            border-bottom: 1px solid var(--border);
-        }
-
         h1 { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em; }
-        .archive-intro h1 { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em; }
         
         .subheadline { 
             font-family: 'Courier New', Courier, monospace; 
@@ -109,7 +88,6 @@
 
         /* --- STACKING ENGINE --- */
         .show-archive { margin-top: 400px; padding-bottom: 100vh; }
-        .show-archive { margin-top: 80px; padding-bottom: 100vh; }
 
         .ticket-section {
             position: sticky;
@@ -123,19 +101,7 @@
         }
 
         .ticket-card {
-            position: relative;
-            width: 85%;
-            max-width: 500px;
-            /* Aspect ratio adjusted to fit long-form tickets better */
-            aspect-ratio: 16 / 9; 
-            background: #fdfdfd; /* Subtle paper-white backer */
-            padding: 15px;
-            box-shadow: 0 12px 45px rgba(0,0,0,0.08);
-            cursor: pointer;
-            pointer-events: auto;
-            transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease;
-            opacity: 0;
-@@ -125,110 +181,145 @@
+@@ -125,110 +167,143 @@
         }
 
         .modal-content {
@@ -161,12 +127,10 @@
         .close-btn { margin-top: 20px; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-grey); cursor: pointer; }
 
         @media (max-width: 600px) {
+            .nav-container { top: 22px; right: 4%; }
+            .nav-dropdown { width: 100vw; position: fixed; top: 75px; left: 0; }
             .show-archive { margin-top: 500px; }
             .ticket-section { top: 420px; }
-            .nav-dropdown { width: 100vw; position: fixed; top: 75px; left: 0; }
-            .archive-intro { margin-top: 105px; }
-            .show-archive { margin-top: 40px; }
-            .ticket-section { top: 360px; }
             .ticket-card { aspect-ratio: 4 / 3; }
         }
     </style>
@@ -174,13 +138,14 @@
 <body>
 
 <header>
-<header class="global-header" id="top">
-    <div class="header-left">
-        <h1>Call me Tony</h1>
-        <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
+    <h1>Shows I've Seen</h1>
+    <div class="subheadline">
+        I’ve kept a ticket stub from every concert I’ve attended.<br>
+        This is a record of what I chose to spend time with, across years, genres, and cities.
     </div>
+    <div class="archive-note">— Growing Archive —</div>
     <div class="nav-container" id="navContainer">
-        <div class="menu-toggle" id="menuToggle">
+        <div class="menu-toggle" id="menuToggle" aria-label="Open navigation" role="button" tabindex="0">
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
@@ -192,16 +157,6 @@
         </nav>
     </div>
 </header>
-
-<section class="archive-intro">
-    <h1>Shows I've Seen</h1>
-    <div class="subheadline">
-        I’ve kept a ticket stub from every concert I’ve attended.<br>
-        This is a record of what I chose to spend time with, across years, genres, and cities.
-    </div>
-    <div class="archive-note">— Growing Archive —</div>
-</header>
-</section>
 
 <main class="show-archive">
     <section class="ticket-section" data-artist="The Wallflowers" data-year="1997" data-venue="Frank Erwin Center" data-city="Austin, TX" data-copy="First arena show. The scale of the sound felt massive at 14." data-img="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg">
@@ -249,9 +204,14 @@
     const menuToggle = document.getElementById('menuToggle');
     const navDropdown = document.getElementById('navDropdown');
 
-    menuToggle.addEventListener('click', (e) => {
+    const toggleMenu = (e) => {
         e.stopPropagation();
         navDropdown.classList.toggle('is-open');
+    };
+
+    menuToggle.addEventListener('click', toggleMenu);
+    menuToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') toggleMenu(e);
     });
 
     document.addEventListener('click', (e) => {
