@@ -22,6 +22,7 @@
         }
 
         /* --- HEADER --- */
+        /* --- FIXED HEADER --- */
         header {
         /* --- GLOBAL HEADER --- */
         .global-header {
@@ -44,9 +45,11 @@
         .header-left h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; text-transform: uppercase; margin: 0; }
         .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
 
+        /* --- MODERN NAVIGATION --- */
         .nav-container { position: relative; }
         .menu-toggle { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; z-index: 6001; }
         .bar { width: 22px; height: 2px; background-color: #000; transition: 0.3s ease; }
+        .bar { width: 22px; height: 2px; background-color: var(--accent); transition: 0.3s ease; }
 
         .nav-dropdown {
             position: absolute;
@@ -88,10 +91,12 @@
 
         .archive-intro {
             margin: 130px auto 0;
+            margin: 0 auto;
             max-width: 900px;
             text-align: center;
             padding: 40px 10% 20px 10%;
             padding: 40px 10% 20px;
+            padding: 100px 10% 20px;
             box-sizing: border-box;
             border-bottom: 1px solid var(--border);
         }
@@ -136,6 +141,57 @@
             transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease;
             opacity: 0;
 @@ -125,110 +181,145 @@
+            transform: translateY(150px) rotate(var(--rotation));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ticket-section.active .ticket-card {
+            opacity: 1;
+            transform: translateY(0) rotate(var(--rotation));
+        }
+
+        /* THE FIX: object-fit: contain ensures the full image is seen */
+        .ticket-card img { 
+            max-width: 100%; 
+            max-height: 100%;
+            object-fit: contain; 
+            display: block; 
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.05));
+        }
+
+        /* --- STEREO LIGHT --- */
+        .record-light {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+            animation: stereoPulse 1.8s infinite ease-in-out;
+            z-index: 5;
+        }
+
+        @keyframes stereoPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(0.8); opacity: 0.5; }
+        }
+
+        /* --- MODAL --- */
+        #detail-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(250, 250, 248, 0.99);
+            z-index: 4000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 5vh 5vw;
         }
 
         .modal-content {
@@ -165,6 +221,7 @@
             .ticket-section { top: 420px; }
             .nav-dropdown { width: 100vw; position: fixed; top: 75px; left: 0; }
             .archive-intro { margin-top: 105px; }
+            .archive-intro { padding-top: 105px; }
             .show-archive { margin-top: 40px; }
             .ticket-section { top: 360px; }
             .ticket-card { aspect-ratio: 4 / 3; }
@@ -175,6 +232,7 @@
 
 <header>
 <header class="global-header" id="top">
+<header id="top">
     <div class="header-left">
         <h1>Call me Tony</h1>
         <div class="tagline">SCROLL THROUGH AN EDITED VIEW OF WHO I AM.</div>
@@ -226,40 +284,7 @@
     </section>
 
     <section class="ticket-section" data-artist="Third Eye Blind" data-year="1998" data-venue="Austin Music Hall" data-city="Austin, TX" data-copy="The venue is gone now, but the heat of that April night remains vivid." data-img="Third Eye Blind_Austin Music Hall_1998.jpg">
-        <div class="ticket-card" style="--rotation: 1.8deg;">
-            <img src="Third Eye Blind_Austin Music Hall_1998.jpg">
-            <div class="record-light"></div>
-        </div>
-    </section>
-</main>
-
-<div id="detail-modal">
-    <div class="modal-content">
-        <img id="modal-img" src="">
-        <div class="modal-text">
-            <h2 id="m-artist" style="margin:0;"></h2>
-            <h3 id="m-meta" style="color:var(--text-grey); font-size:1rem; margin:10px 0;"></h3>
-            <p id="m-copy" style="max-width:600px;"></p>
-            <div class="close-btn" onclick="closeModal()">Close Archive View</div>
-        </div>
-    </div>
-</div>
-
-<script>
-    const menuToggle = document.getElementById('menuToggle');
-    const navDropdown = document.getElementById('navDropdown');
-
-    menuToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        navDropdown.classList.toggle('is-open');
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!navDropdown.contains(e.target) && !menuToggle.contains(e.target)) {
-            navDropdown.classList.remove('is-open');
-        }
-    });
-
+@@ -263,25 +301,32 @@
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) entry.target.classList.add('active');
@@ -285,3 +310,10 @@
     });
 
     function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+</script>
+
+</body>
+</html>
