@@ -99,6 +99,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         .archive-note { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-grey); }
 
+        .archive-stats {
+    padding: 40px 10%;
+    border-bottom: 1px solid var(--border);
+}
+
+.archive-stats__inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.archive-stat {
+    text-align: center;
+}
+
+.archive-stat__label {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-grey);
+    margin-bottom: 6px;
+}
+
+.archive-stat__value {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
         /* --- STACKING ENGINE --- */
         .show-archive { margin-top: 50px; padding-bottom: 50vh; }
 
@@ -203,6 +236,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="archive-note">— Growing Archive —</div>
 </section>
 
+<section class="archive-stats" aria-label="Concert archive stats">
+    <div class="archive-stats__inner">
+        <div class="archive-stat">
+            <span class="archive-stat__label">Shows</span>
+            <span class="archive-stat__value" id="stat-shows">0</span>
+        </div>
+
+        <div class="archive-stat">
+            <span class="archive-stat__label">Artists</span>
+            <span class="archive-stat__value" id="stat-artists">0</span>
+        </div>
+
+        <div class="archive-stat">
+            <span class="archive-stat__label">Cities</span>
+            <span class="archive-stat__value" id="stat-cities">0</span>
+        </div>
+
+        <div class="archive-stat">
+            <span class="archive-stat__label">Years</span>
+            <span class="archive-stat__value" id="stat-years">0</span>
+        </div>
+
+        <div class="archive-stat">
+            <span class="archive-stat__label">Most Seen</span>
+            <span class="archive-stat__value" id="stat-most-seen">—</span>
+        </div>
+    </div>
+</section>
+
 <main class="show-archive">
     <div id="tickets-container"></div>
 </main>
@@ -290,18 +352,69 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         document.body.style.overflow = 'auto';
     }
 
-    function escapeHtml(value) {
-        return String(value)
-            .replaceAll('&', '&amp;')
-            .replaceAll('"', '&quot;')
-            .replaceAll("'", '&#39;')
-            .replaceAll('<', '&lt;')
-            .replaceAll('>', '&gt;');
+function escapeHtml(value) {
+    return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;');
+}
+
+function renderStats() {
+    const totalShows = tickets.length;
+
+    const uniqueArtists = new Set(
+        tickets.map(ticket => ticket.artist.trim())
+    ).size;
+
+    const uniqueCities = new Set(
+        tickets.map(ticket => ticket.city.trim())
+    ).size;
+
+    const years = tickets
+        .map(ticket => parseInt(ticket.year, 10))
+        .filter(year => !isNaN(year));
+
+    let yearsCovered = '—';
+    if (years.length > 0) {
+        const minYear = Math.min(...years);
+        const maxYear = Math.max(...years);
+        yearsCovered = minYear === maxYear ? `${minYear}` : `${minYear}–${maxYear}`;
     }
 
-    renderTickets();
-    setupObserver();
-    setupTicketClicks();
+    const artistCounts = {};
+
+    tickets.forEach(ticket => {
+        const artist = ticket.artist.trim();
+        artistCounts[artist] = (artistCounts[artist] || 0) + 1;
+    });
+
+    let mostSeenArtist = '—';
+    let highestCount = 0;
+
+    for (const artist in artistCounts) {
+        if (artistCounts[artist] > highestCount) {
+            highestCount = artistCounts[artist];
+            mostSeenArtist = artist;
+        }
+    }
+
+    if (highestCount > 1) {
+        mostSeenArtist = `${mostSeenArtist} (${highestCount})`;
+    }
+
+    document.getElementById('stat-shows').textContent = totalShows;
+    document.getElementById('stat-artists').textContent = uniqueArtists;
+    document.getElementById('stat-cities').textContent = uniqueCities;
+    document.getElementById('stat-years').textContent = yearsCovered;
+    document.getElementById('stat-most-seen').textContent = mostSeenArtist;
+}
+
+renderTickets();
+renderStats();
+setupObserver();
+setupTicketClicks();
 </script>
 
 </body>
