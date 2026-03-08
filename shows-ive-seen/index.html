@@ -224,22 +224,77 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         @keyframes stereoPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.8); opacity: 0.5; } }
 
         /* --- MODAL --- */
-        #detail-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(250, 250, 248, 0.99); z-index: 6000;
-            display: none; flex-direction: column; align-items: center; justify-content: center;
-            padding: 5vh 5vw;
-        }
+        /* --- MODAL --- */
+#detail-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(250, 250, 248, 0.99);
+    z-index: 6000;
+    display: none;
+    padding: 5vh 5vw;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
 
-        .modal-content { display: flex; flex-direction: column; align-items: center; max-width: 1000px; width: 100%; }
-        #modal-img { max-width: 100%; max-height: 60vh; box-shadow: 0 20px 60px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        .modal-text { text-align: center; font-family: 'Courier New', Courier, monospace; }
-        .close-btn { margin-top: 30px; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-grey); cursor: pointer; }
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
 
-        @media (max-width: 600px) {
-            .nav-dropdown { width: 100vw; position: fixed; top: 75px; left: 0; }
-            .ticket-section { top: 120px; }
-        }
+#modal-img {
+    max-width: 100%;
+    max-height: 60vh;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.modal-text {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+}
+
+#m-gallery {
+    margin-top: 20px;
+}
+
+.modal-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.modal-gallery-grid img {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+#m-video-wrap iframe {
+    width: min(100%, 700px);
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 0;
+}
+
+.close-btn {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-grey);
+    cursor: pointer;
+}
     </style>
 </head>
 <body>
@@ -326,13 +381,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div id="detail-modal">
     <div class="modal-content">
-        <img id="modal-img" src="">
+
+        <img id="modal-img" src="" alt="Ticket image">
+
         <div class="modal-text">
+
             <h2 id="m-artist" style="margin-bottom:5px;"></h2>
+
             <div id="m-meta" style="color:var(--text-grey); margin-bottom:15px;"></div>
-            <p id="m-copy" style="max-width:600px; margin:0 auto;"></p>
+
+            <p id="m-copy" style="max-width:600px; margin:0 auto 20px;"></p>
+
+            <!-- companions -->
+            <div id="m-companions" style="display:none; margin-bottom:15px;"></div>
+
+            <!-- extended notes -->
+            <p id="m-notes"
+               style="display:none; max-width:700px; margin:0 auto 20px; line-height:1.6;">
+            </p>
+
+            <!-- photo gallery -->
+            <div id="m-gallery" style="display:none;"></div>
+
+            <!-- youtube video -->
+            <div id="m-video-wrap" style="display:none; margin-top:20px;">
+                <iframe
+                    id="m-video"
+                    width="560"
+                    height="315"
+                    src=""
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
         </div>
+
         <div class="close-btn" onclick="closeModal()">Close [X]</div>
+
     </div>
 </div>
 
@@ -356,11 +444,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     
 
-    const modal = document.getElementById('detail-modal');
-    const mImg = document.getElementById('modal-img');
-    const ticketsContainer = document.getElementById('tickets-container');
+const modal = document.getElementById('detail-modal');
+const mImg = document.getElementById('modal-img');
+const ticketsContainer = document.getElementById('tickets-container');
 
-    const artistSearch = document.getElementById('artist-search');
+const mArtist = document.getElementById('m-artist');
+const mMeta = document.getElementById('m-meta');
+const mCopy = document.getElementById('m-copy');
+const mCompanions = document.getElementById('m-companions');
+const mNotes = document.getElementById('m-notes');
+const mGallery = document.getElementById('m-gallery');
+const mVideoWrap = document.getElementById('m-video-wrap');
+const mVideo = document.getElementById('m-video');
+
+const artistSearch = document.getElementById('artist-search');
 const yearFilter = document.getElementById('year-filter');
 const resultsCount = document.getElementById('results-count');
 
@@ -377,24 +474,73 @@ let filteredTickets = [...tickets];
         document.querySelectorAll('.ticket-section').forEach(section => observer.observe(section));
     }
 
-    function setupTicketClicks() {
-        document.querySelectorAll('.ticket-section').forEach(section => {
-            section.addEventListener('click', () => {
-                const d = section.dataset;
-                document.getElementById('m-artist').innerText = `${d.artist} (${d.year})`;
-                document.getElementById('m-meta').innerText = `${d.venue} | ${d.city}`;
-                document.getElementById('m-copy').innerText = d.copy;
-                mImg.src = d.img;
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            });
-        });
+function populateModal(ticket) {
+    mArtist.innerText = `${ticket.artist} (${ticket.year})`;
+    mMeta.innerText = `${ticket.venue} | ${ticket.city}`;
+    mCopy.innerText = ticket.copy || "";
+    mImg.src = ticket.img || "";
+    mImg.alt = `${ticket.artist} ticket`;
+
+    if (ticket.companions && ticket.companions.length > 0) {
+        mCompanions.style.display = "block";
+        mCompanions.innerText = `With: ${ticket.companions.join(", ")}`;
+    } else {
+        mCompanions.style.display = "none";
+        mCompanions.innerText = "";
     }
 
-    function closeModal() {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+    if (ticket.notes && ticket.notes.trim() !== "") {
+        mNotes.style.display = "block";
+        mNotes.innerText = ticket.notes;
+    } else {
+        mNotes.style.display = "none";
+        mNotes.innerText = "";
     }
+
+    if (ticket.photos && ticket.photos.length > 0) {
+        mGallery.style.display = "block";
+        mGallery.innerHTML = `
+            <div class="modal-gallery-grid">
+                ${ticket.photos.map(photo => `
+                    <img src="${escapeHtml(photo)}" alt="${escapeHtml(ticket.artist)} memory photo">
+                `).join("")}
+            </div>
+        `;
+    } else {
+        mGallery.style.display = "none";
+        mGallery.innerHTML = "";
+    }
+
+    if (ticket.youtube && ticket.youtube.trim() !== "") {
+        mVideoWrap.style.display = "block";
+        mVideo.src = ticket.youtube;
+    } else {
+        mVideoWrap.style.display = "none";
+        mVideo.src = "";
+    }
+
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+
+function setupTicketClicks() {
+    document.querySelectorAll('.ticket-section').forEach(section => {
+        section.addEventListener('click', () => {
+            const ticketIndex = Number(section.dataset.ticketIndex);
+            const ticket = filteredTickets[ticketIndex];
+
+            if (!ticket) return;
+
+            populateModal(ticket);
+        });
+    });
+}
+
+function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    mVideo.src = "";
+}
 
 function escapeHtml(value) {
     return String(value)
@@ -503,20 +649,21 @@ function renderTickets(ticketList = tickets) {
     `;
     return;
 }
-    ticketsContainer.innerHTML = ticketList.map(ticket => `
-        <section class="ticket-section"
-            data-artist="${escapeHtml(ticket.artist)}"
-            data-year="${escapeHtml(ticket.year)}"
-            data-venue="${escapeHtml(ticket.venue)}"
-            data-city="${escapeHtml(ticket.city)}"
-            data-copy="${escapeHtml(ticket.copy)}"
-            data-img="${escapeHtml(ticket.img)}">
-            <div class="ticket-card" style="--rotation: ${escapeHtml(ticket.rotation)};">
-                <img src="${escapeHtml(ticket.img)}" alt="${escapeHtml(ticket.artist)} ticket">
-                <div class="record-light"></div>
-            </div>
-        </section>
-    `).join('');
+ticketsContainer.innerHTML = ticketList.map((ticket, index) => `
+    <section class="ticket-section"
+        data-ticket-index="${index}"
+        data-artist="${escapeHtml(ticket.artist)}"
+        data-year="${escapeHtml(ticket.year)}"
+        data-venue="${escapeHtml(ticket.venue)}"
+        data-city="${escapeHtml(ticket.city)}"
+        data-copy="${escapeHtml(ticket.copy)}"
+        data-img="${escapeHtml(ticket.img)}">
+        <div class="ticket-card" style="--rotation: ${escapeHtml(ticket.rotation)};">
+            <img src="${escapeHtml(ticket.img)}" alt="${escapeHtml(ticket.artist)} ticket">
+            <div class="record-light"></div>
+        </div>
+    </section>
+`).join('');
 
     setupObserver();
     setupTicketClicks();
