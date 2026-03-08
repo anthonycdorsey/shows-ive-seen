@@ -463,6 +463,34 @@ const resultsCount = document.getElementById('results-count');
 
 let filteredTickets = [...tickets];
 
+function getSlugFromHash() {
+    return decodeURIComponent(window.location.hash.replace('#', '').trim());
+}
+
+function findTicketBySlug(slug) {
+    return tickets.find(ticket => ticket.slug === slug);
+}
+
+function updateHashForTicket(ticket) {
+    if (!ticket || !ticket.slug) return;
+    history.replaceState(null, '', `#${encodeURIComponent(ticket.slug)}`);
+}
+
+function clearTicketHash() {
+    if (!window.location.hash) return;
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+}
+
+function openTicketBySlug(slug, shouldUpdateHash = false) {
+    if (!slug) return;
+
+    const ticket = findTicketBySlug(slug);
+
+    if (!ticket) return;
+
+    populateModal(ticket, shouldUpdateHash);
+}
+
     function setupObserver() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -474,7 +502,7 @@ let filteredTickets = [...tickets];
         document.querySelectorAll('.ticket-section').forEach(section => observer.observe(section));
     }
 
-function populateModal(ticket) {
+function populateModal(ticket, shouldUpdateHash = true) {
     const displayCity = [ticket.city, ticket.state, ticket.country]
         .filter(Boolean)
         .join(", ");
@@ -528,25 +556,32 @@ function populateModal(ticket) {
 
     modal.style.display = "block";
     document.body.style.overflow = "hidden";
+
+    if (shouldUpdateHash) {
+        updateHashForTicket(ticket);
+    }
 }
 
 function setupTicketClicks() {
     document.querySelectorAll('.ticket-section').forEach(section => {
         section.addEventListener('click', () => {
-            const ticketIndex = Number(section.dataset.ticketIndex);
-            const ticket = filteredTickets[ticketIndex];
+            const ticketSlug = section.dataset.ticketSlug;
 
-            if (!ticket) return;
+            if (!ticketSlug) return;
 
-            populateModal(ticket);
+            openTicketBySlug(ticketSlug, true);
         });
     });
 }
 
-function closeModal() {
+function closeModal(shouldClearHash = true) {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
     mVideo.src = "";
+
+    if (shouldClearHash) {
+        clearTicketHash();
+    }
 }
 
 function escapeHtml(value) {
@@ -664,6 +699,7 @@ function renderTickets(ticketList = tickets) {
 ticketsContainer.innerHTML = ticketList.map((ticket, index) => `
     <section class="ticket-section"
         data-ticket-index="${index}"
+        data-ticket-slug="${escapeHtml(ticket.slug || '')}"
         data-artist="${escapeHtml(ticket.artist)}"
         data-year="${escapeHtml(ticket.year)}"
         data-venue="${escapeHtml(ticket.venue)}"
@@ -681,8 +717,18 @@ ticketsContainer.innerHTML = ticketList.map((ticket, index) => `
     setupTicketClicks();
 }
 
-artistSearch.addEventListener("input",applyFilters);
-yearFilter.addEventListener("change",applyFilters);
+artistSearch.addEventListener("input", applyFilters);
+yearFilter.addEventListener("change", applyFilters);
+
+window.addEventListener("hashchange", () => {
+    const slug = getSlugFromHash();
+
+    if (slug) {
+        openTicketBySlug(slug, false);
+    } else if (modal.style.display === "block") {
+        closeModal(false);
+    }
+});
 
 populateYearFilter();
 
@@ -690,6 +736,11 @@ renderTickets();
 renderStats();
 
 resultsCount.textContent = `${tickets.length} results`;
+
+const initialSlug = getSlugFromHash();
+if (initialSlug) {
+    openTicketBySlug(initialSlug, false);
+}
 
 </script>
 
