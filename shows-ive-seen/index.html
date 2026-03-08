@@ -475,10 +475,17 @@ let filteredTickets = [...tickets];
     }
 
 function populateModal(ticket) {
+    const displayCity = [ticket.city, ticket.state, ticket.country]
+        .filter(Boolean)
+        .join(", ");
+
+    const modalNotes = ticket.extendedNotes || ticket.notes || "";
+    const modalYoutube = ticket.youtubeUrl || ticket.youtube || "";
+
     mArtist.innerText = `${ticket.artist} (${ticket.year})`;
-    mMeta.innerText = `${ticket.venue} | ${ticket.city}`;
+    mMeta.innerText = [ticket.venue, displayCity].filter(Boolean).join(" | ");
     mCopy.innerText = ticket.copy || "";
-    mImg.src = ticket.img || "";
+    mImg.src = ticket.img || ticket.shareImage || "";
     mImg.alt = `${ticket.artist} ticket`;
 
     if (ticket.companions && ticket.companions.length > 0) {
@@ -489,9 +496,9 @@ function populateModal(ticket) {
         mCompanions.innerText = "";
     }
 
-    if (ticket.notes && ticket.notes.trim() !== "") {
+    if (modalNotes && modalNotes.trim() !== "") {
         mNotes.style.display = "block";
-        mNotes.innerText = ticket.notes;
+        mNotes.innerText = modalNotes;
     } else {
         mNotes.style.display = "none";
         mNotes.innerText = "";
@@ -511,9 +518,9 @@ function populateModal(ticket) {
         mGallery.innerHTML = "";
     }
 
-    if (ticket.youtube && ticket.youtube.trim() !== "") {
+    if (modalYoutube && modalYoutube.trim() !== "") {
         mVideoWrap.style.display = "block";
-        mVideo.src = ticket.youtube;
+        mVideo.src = modalYoutube;
     } else {
         mVideoWrap.style.display = "none";
         mVideo.src = "";
@@ -621,8 +628,13 @@ function applyFilters(){
 
     filteredTickets = tickets.filter(ticket=>{
 
+        const searchableArtist = [
+            ticket.artist,
+            ticket.artistSlug
+        ].filter(Boolean).join(" ").toLowerCase();
+
         const matchesArtist =
-            ticket.artist.toLowerCase().includes(artistQuery);
+            searchableArtist.includes(artistQuery);
 
         const matchesYear =
             selectedYear === "all" ||
