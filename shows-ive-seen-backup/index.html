@@ -204,7 +204,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <main class="show-archive">
-    <div id="tickets-container"></div>
+    <section class="ticket-section" data-artist="The Wallflowers" data-year="1997" data-venue="Frank Erwin Center" data-city="Austin, TX" data-copy="First arena show. The scale of the sound felt massive at 14." data-img="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg">
+        <div class="ticket-card" style="--rotation: -1.5deg;">
+            <img src="Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg">
+            <div class="record-light"></div>
+        </div>
+    </section>
+
+    <section class="ticket-section" data-artist="Blur" data-year="1997" data-venue="Liberty Lunch" data-city="Austin, TX" data-copy="Liberty Lunch was at its peak. Small club energy for a world-class band." data-img="Blur_Smashmouth_Liberty Lunch_1997.jpg">
+        <div class="ticket-card" style="--rotation: 2deg;">
+            <img src="Blur_Smashmouth_Liberty Lunch_1997.jpg">
+            <div class="record-light"></div>
+        </div>
+    </section>
+
+    <section class="ticket-section" data-artist="Aerosmith" data-year="1997" data-venue="Frank Erwin Center" data-city="Austin, TX" data-copy="A masterclass in stage presence. The scarves on the mic stand were iconic." data-img="Aerosmith__Frank Erwin Center_1997.jpg">
+        <div class="ticket-card" style="--rotation: -2.5deg;">
+            <img src="Aerosmith__Frank Erwin Center_1997.jpg">
+            <div class="record-light"></div>
+        </div>
+    </section>
+
+    <section class="ticket-section" data-artist="Third Eye Blind" data-year="1998" data-venue="Austin Music Hall" data-city="Austin, TX" data-copy="The venue is gone now, but the heat of that April night remains vivid." data-img="Third Eye Blind_Austin Music Hall_1998.jpg">
+        <div class="ticket-card" style="--rotation: 1.8deg;">
+            <img src="Third Eye Blind_Austin Music Hall_1998.jpg">
+            <div class="record-light"></div>
+        </div>
+    </section>
 </main>
 
 <div id="detail-modal">
@@ -235,109 +261,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
     });
 
-    // Ticket Data
-    const tickets = [
-        {
-            artist: "The Wallflowers",
-            year: "1997",
-            venue: "Frank Erwin Center",
-            city: "Austin, TX",
-            copy: "First arena show. The scale of the sound felt massive at 14.",
-            img: "Counting Crows_Wallflowers_Frank Erwin Center_1997.jpg",
-            rotation: "-1.5deg"
-        },
-        {
-            artist: "Blur",
-            year: "1997",
-            venue: "Liberty Lunch",
-            city: "Austin, TX",
-            copy: "Liberty Lunch was at its peak. Small club energy for a world-class band.",
-            img: "Blur_Smashmouth_Liberty Lunch_1997.jpg",
-            rotation: "2deg"
-        },
-        {
-            artist: "Aerosmith",
-            year: "1997",
-            venue: "Frank Erwin Center",
-            city: "Austin, TX",
-            copy: "A masterclass in stage presence. The scarves on the mic stand were iconic.",
-            img: "Aerosmith__Frank Erwin Center_1997.jpg",
-            rotation: "-2.5deg"
-        },
-        {
-            artist: "Third Eye Blind",
-            year: "1998",
-            venue: "Austin Music Hall",
-            city: "Austin, TX",
-            copy: "The venue is gone now, but the heat of that April night remains vivid.",
-            img: "Third Eye Blind_Austin Music Hall_1998.jpg",
-            rotation: "1.8deg"
-        }
-    ];
+    // Stacking Animation Logic
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+            else entry.target.classList.remove('active');
+        });
+    }, { threshold: 0.1 });
 
+    document.querySelectorAll('.ticket-section').forEach(section => observer.observe(section));
+
+    // Modal Logic
     const modal = document.getElementById('detail-modal');
     const mImg = document.getElementById('modal-img');
-    const ticketsContainer = document.getElementById('tickets-container');
 
-    function renderTickets() {
-        ticketsContainer.innerHTML = tickets.map(ticket => `
-            <section class="ticket-section"
-                data-artist="${escapeHtml(ticket.artist)}"
-                data-year="${escapeHtml(ticket.year)}"
-                data-venue="${escapeHtml(ticket.venue)}"
-                data-city="${escapeHtml(ticket.city)}"
-                data-copy="${escapeHtml(ticket.copy)}"
-                data-img="${escapeHtml(ticket.img)}">
-                <div class="ticket-card" style="--rotation: ${escapeHtml(ticket.rotation)};">
-                    <img src="${escapeHtml(ticket.img)}" alt="${escapeHtml(ticket.artist)} ticket">
-                    <div class="record-light"></div>
-                </div>
-            </section>
-        `).join('');
-    }
-
-    function setupObserver() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-                else entry.target.classList.remove('active');
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.ticket-section').forEach(section => observer.observe(section));
-    }
-
-    function setupTicketClicks() {
-        document.querySelectorAll('.ticket-section').forEach(section => {
-            section.addEventListener('click', () => {
-                const d = section.dataset;
-                document.getElementById('m-artist').innerText = `${d.artist} (${d.year})`;
-                document.getElementById('m-meta').innerText = `${d.venue} | ${d.city}`;
-                document.getElementById('m-copy').innerText = d.copy;
-                mImg.src = d.img;
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            });
+    document.querySelectorAll('.ticket-section').forEach(section => {
+        section.addEventListener('click', () => {
+            const d = section.dataset;
+            document.getElementById('m-artist').innerText = `${d.artist} (${d.year})`;
+            document.getElementById('m-meta').innerText = `${d.venue} | ${d.city}`;
+            document.getElementById('m-copy').innerText = d.copy;
+            mImg.src = d.img;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         });
-    }
+    });
 
     function closeModal() {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
-
-    function escapeHtml(value) {
-        return String(value)
-            .replaceAll('&', '&amp;')
-            .replaceAll('"', '&quot;')
-            .replaceAll("'", '&#39;')
-            .replaceAll('<', '&lt;')
-            .replaceAll('>', '&gt;');
-    }
-
-    renderTickets();
-    setupObserver();
-    setupTicketClicks();
 </script>
 
 </body>
