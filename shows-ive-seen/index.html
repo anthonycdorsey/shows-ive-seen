@@ -132,6 +132,45 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     font-weight: 800;
 }
 
+/* SEARCH + FILTER CONTROLS */
+
+.archive-controls{
+    padding:30px 10%;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    gap:20px;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.archive-controls input,
+.archive-controls select{
+    padding:10px 14px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    font-family:inherit;
+    font-size:0.9rem;
+}
+
+#results-count{
+    font-family:'Courier New', monospace;
+    font-size:0.75rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--text-grey);
+}
+
+.no-results{
+    padding:80px 20px;
+    text-align:center;
+    font-family:'Courier New', monospace;
+    font-size:0.8rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--text-grey);
+}
+
         /* --- STACKING ENGINE --- */
         .show-archive { margin-top: 50px; padding-bottom: 50vh; }
 
@@ -265,6 +304,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 </section>
 
+<section class="archive-controls">
+
+    <input
+        type="text"
+        id="artist-search"
+        placeholder="Search artist..."
+    >
+
+    <select id="year-filter">
+        <option value="all">All Years</option>
+    </select>
+
+    <div id="results-count">0 results</div>
+
+</section>
+
 <main class="show-archive">
     <div id="tickets-container"></div>
 </main>
@@ -305,22 +360,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const mImg = document.getElementById('modal-img');
     const ticketsContainer = document.getElementById('tickets-container');
 
-    function renderTickets() {
-        ticketsContainer.innerHTML = tickets.map(ticket => `
-            <section class="ticket-section"
-                data-artist="${escapeHtml(ticket.artist)}"
-                data-year="${escapeHtml(ticket.year)}"
-                data-venue="${escapeHtml(ticket.venue)}"
-                data-city="${escapeHtml(ticket.city)}"
-                data-copy="${escapeHtml(ticket.copy)}"
-                data-img="${escapeHtml(ticket.img)}">
-                <div class="ticket-card" style="--rotation: ${escapeHtml(ticket.rotation)};">
-                    <img src="${escapeHtml(ticket.img)}" alt="${escapeHtml(ticket.artist)} ticket">
-                    <div class="record-light"></div>
-                </div>
-            </section>
-        `).join('');
-    }
+    const artistSearch = document.getElementById('artist-search');
+const yearFilter = document.getElementById('year-filter');
+const resultsCount = document.getElementById('results-count');
+
+let filteredTickets = [...tickets];
 
     function setupObserver() {
         const observer = new IntersectionObserver((entries) => {
@@ -411,10 +455,83 @@ function renderStats() {
     document.getElementById('stat-most-seen').textContent = mostSeenArtist;
 }
 
+function populateYearFilter(){
+
+    const years = [...new Set(tickets.map(t => t.year))]
+        .sort((a,b)=>b-a);
+
+    years.forEach(year=>{
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        yearFilter.appendChild(option);
+    });
+
+}
+function applyFilters(){
+
+    const artistQuery = artistSearch.value.toLowerCase().trim();
+    const selectedYear = yearFilter.value;
+
+    filteredTickets = tickets.filter(ticket=>{
+
+        const matchesArtist =
+            ticket.artist.toLowerCase().includes(artistQuery);
+
+        const matchesYear =
+            selectedYear === "all" ||
+            ticket.year === selectedYear;
+
+        return matchesArtist && matchesYear;
+
+    });
+
+    renderTickets(filteredTickets);
+
+    resultsCount.textContent =
+        `${filteredTickets.length} results`;
+
+}
+
+function renderTickets(ticketList = tickets) {
+
+    if (ticketList.length === 0) {
+    ticketsContainer.innerHTML = `
+        <div class="no-results">
+            No shows match your search.
+        </div>
+    `;
+    return;
+}
+    ticketsContainer.innerHTML = ticketList.map(ticket => `
+        <section class="ticket-section"
+            data-artist="${escapeHtml(ticket.artist)}"
+            data-year="${escapeHtml(ticket.year)}"
+            data-venue="${escapeHtml(ticket.venue)}"
+            data-city="${escapeHtml(ticket.city)}"
+            data-copy="${escapeHtml(ticket.copy)}"
+            data-img="${escapeHtml(ticket.img)}">
+            <div class="ticket-card" style="--rotation: ${escapeHtml(ticket.rotation)};">
+                <img src="${escapeHtml(ticket.img)}" alt="${escapeHtml(ticket.artist)} ticket">
+                <div class="record-light"></div>
+            </div>
+        </section>
+    `).join('');
+
+    setupObserver();
+    setupTicketClicks();
+}
+
+artistSearch.addEventListener("input",applyFilters);
+yearFilter.addEventListener("change",applyFilters);
+
+populateYearFilter();
+
 renderTickets();
 renderStats();
-setupObserver();
-setupTicketClicks();
+
+resultsCount.textContent = `${tickets.length} results`;
+
 </script>
 
 </body>
