@@ -744,6 +744,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div id="m-meta" style="color:var(--text-grey); margin-bottom:15px;"></div>
 
+            <div id="m-price" style="display:none; margin:0 auto 15px; font-family:'Courier New', monospace; text-transform:uppercase; letter-spacing:1px; color:var(--text-grey);"></div>
+
             <p id="m-copy" style="max-width:600px; margin:0 auto 20px;"></p>
 
             <!-- companions -->
@@ -804,6 +806,7 @@ const ticketsContainer = document.getElementById('tickets-container');
 
 const mArtist = document.getElementById('m-artist');
 const mMeta = document.getElementById('m-meta');
+const mPrice = document.getElementById('m-price');
 const mCopy = document.getElementById('m-copy');
 const mCompanions = document.getElementById('m-companions');
 const mNotes = document.getElementById('m-notes');
@@ -857,16 +860,28 @@ function openTicketBySlug(slug, shouldUpdateHash = false) {
     }
 
 function populateModal(ticket, shouldUpdateHash = true) {
-    const displayCity = [ticket.city, ticket.state, ticket.country]
-        .filter(Boolean)
-        .join(", ");
+const displayCity = [ticket.city, ticket.state, ticket.country]
+    .filter(Boolean)
+    .join(", ");
 
-    const modalNotes = ticket.extendedNotes || ticket.notes || "";
-    const modalYoutube = ticket.youtubeUrl || ticket.youtube || "";
+const modalNotes = ticket.extendedNotes || ticket.notes || "";
+const modalYoutube = ticket.youtubeUrl || ticket.youtube || "";
+const displayDate = ticket.exactDate || ticket.year || "";
+const displayMeta = [displayDate, ticket.venue, displayCity]
+    .filter(Boolean)
+    .join(" | ");
 
-    mArtist.innerText = `${ticket.artist} (${ticket.year})`;
-    mMeta.innerText = [ticket.venue, displayCity].filter(Boolean).join(" | ");
-    mCopy.innerText = ticket.copy || "";
+mArtist.innerText = `${ticket.artist} (${ticket.year})`;
+mMeta.innerText = displayMeta;
+mCopy.innerText = ticket.copy || "";
+
+if (ticket.price && ticket.price.trim() !== "") {
+    mPrice.style.display = "block";
+    mPrice.innerText = `Ticket Price: ${ticket.price}`;
+} else {
+    mPrice.style.display = "none";
+    mPrice.innerText = "";
+}
     mImg.src = ticket.img || ticket.shareImage || "";
     mImg.alt = `${ticket.artist} ticket`;
 
