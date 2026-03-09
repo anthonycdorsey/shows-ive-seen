@@ -208,7 +208,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     background:rgba(255,255,255,0.72);
     border:1px solid rgba(230,230,227,0.9);
     border-radius:18px;
-    padding:20px 14px;
+    padding:16px 14px;
     box-shadow:0 8px 24px rgba(0,0,0,0.035);
 }
 
@@ -219,14 +219,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     letter-spacing:2px;
     text-transform:uppercase;
     color:var(--text-grey);
-    margin-bottom:8px;
+    margin-bottom:10px;
 }
 
 .archive-stat__value{
-    display:block;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:56px;
     font-size:1.55rem;
     font-weight:800;
     letter-spacing:-0.02em;
+    text-align:center;
+    line-height:1.15;
 }
 
 /* controls */
@@ -321,6 +326,56 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     display:block;
     border-radius:18px;
     background:#fff;
+}
+
+.ticket-card__meta{
+    position:absolute;
+    left:18px;
+    right:18px;
+    bottom:18px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
+    z-index:2;
+    pointer-events:none;
+}
+
+.ticket-card__artist-badge{
+    display:inline-block;
+    max-width:100%;
+    padding:7px 12px;
+    border:1px solid rgba(255,255,255,0.7);
+    border-radius:999px;
+    background:rgba(255,255,255,0.88);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    box-shadow:0 8px 24px rgba(0,0,0,0.08);
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:0.72rem;
+    font-weight:800;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--text-main);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.ticket-card__venue-line{
+    display:inline-block;
+    max-width:100%;
+    padding:6px 10px;
+    border-radius:999px;
+    background:rgba(26,26,26,0.68);
+    font-family:'Courier New', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:#fff;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 /* modal polish */
@@ -489,6 +544,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         border-radius:24px;
         padding:14px;
     }
+
+    .ticket-card__meta{
+    left:14px;
+    right:14px;
+    bottom:14px;
+    gap:6px;
+}
+
+.ticket-card__artist-badge{
+    font-size:0.66rem;
+    padding:6px 10px;
+}
+
+.ticket-card__venue-line{
+    font-size:0.62rem;
+    padding:5px 9px;
+}
 
     .ticket-card img{
         border-radius:14px;
@@ -1103,10 +1175,16 @@ ticketsContainer.innerHTML = ticketList.map((ticket, index) => `
         data-img="${escapeHtml(ticket.img)}">
         <div class="ticket-card" style="--rotation: ${escapeHtml(ticket.rotation)};">
             <img
-    src="${escapeHtml(ticket.img)}"
-    alt="${escapeHtml(ticket.artist)} ticket"
-    loading="lazy"
-    decoding="async">
+                src="${escapeHtml(ticket.img)}"
+                alt="${escapeHtml(ticket.artist)} ticket"
+                loading="lazy"
+                decoding="async">
+
+            <div class="ticket-card__meta">
+                <div class="ticket-card__artist-badge">${escapeHtml(ticket.artist)}</div>
+                <div class="ticket-card__venue-line">${escapeHtml(ticket.venue)} · ${escapeHtml(ticket.year)}</div>
+            </div>
+
             <div class="record-light"></div>
         </div>
     </section>
