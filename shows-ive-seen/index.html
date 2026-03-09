@@ -860,13 +860,34 @@ function openTicketBySlug(slug, shouldUpdateHash = false) {
         document.querySelectorAll('.ticket-section').forEach(section => observer.observe(section));
     }
 
+    function getYouTubeEmbedUrl(url) {
+    if (!url) return "";
+
+    // already embed
+    if (url.includes("/embed/")) return url;
+
+    // watch URL
+    const watchMatch = url.match(/v=([^&]+)/);
+    if (watchMatch) {
+        return `https://www.youtube.com/embed/${watchMatch[1]}`;
+    }
+
+    // short youtu.be URL
+    const shortMatch = url.match(/youtu\.be\/([^?]+)/);
+    if (shortMatch) {
+        return `https://www.youtube.com/embed/${shortMatch[1]}`;
+    }
+
+    return url;
+}
+
 function populateModal(ticket, shouldUpdateHash = true) {
 const displayCity = [ticket.city, ticket.state, ticket.country]
     .filter(Boolean)
     .join(", ");
 
 const modalNotes = ticket.extendedNotes || ticket.notes || "";
-const modalYoutube = ticket.youtubeUrl || ticket.youtube || "";
+const modalYoutube = getYouTubeEmbedUrl(ticket.youtubeUrl || ticket.youtube || "");
 const displayDate = ticket.exactDate || ticket.year || "";
 const displayMeta = [displayDate, ticket.venue, displayCity]
     .filter(Boolean)
