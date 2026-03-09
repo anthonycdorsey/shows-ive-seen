@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-25625CG95B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-25625CG95B');
+</script>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W7HLWXCZ');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shows I've Seen | Anthony C. Dorsey</title>
+    <style>
+        :root {
+            --bg-color: #FAFAF8;
+            --text-main: #1A1A1A;
+            --text-grey: #A0A09A;
+            --border: #E6E6E3;
+            --accent: #E63946;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- FIXED HEADER --- */
+        header {
+            position: fixed;
+            left: 0; top: 0;
+            width: 100%;
+            padding: 25px 5%;
+            z-index: 5000;
+            background: white;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        .header-left h1 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 900; text-transform: uppercase; margin: 0 !important; }
+        .tagline { font-family: 'Courier New', monospace; font-size: 0.65rem; color: var(--text-grey); text-transform: uppercase; margin-top: 4px; }
+
+        /* --- NAVIGATION --- */
+        .nav-container { position: relative; }
+        .menu-toggle { cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; z-index: 6001; }
+        .bar { width: 22px; height: 2px; background-color: #000; transition: 0.3s ease; }
+        
+        .nav-dropdown {
+            position: absolute; top: 100%; right: 0; width: 240px;
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(8px);
+            border: 1px solid #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex; flex-direction: column; padding: 20px 0; z-index: 5500;
+        }
+        .nav-dropdown a {
+            padding: 12px 25px; font-size: 0.75rem; font-weight: 700;
+            text-decoration: none; color: var(--text-main);
+            text-transform: uppercase; letter-spacing: 1.5px; transition: 0.2s;
+        }
+        .nav-dropdown a:hover { background: #f9f9f9; color: var(--text-grey); }
+
+        @media (min-width: 1025px) {
+            .nav-container:hover .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        }
+        .nav-dropdown.is-open { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
+
+        /* --- PAGE CONTENT --- */
+        .archive-intro {
+            margin-top: 120px;
+            text-align: center;
+            padding: 60px 10% 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .archive-intro h1 { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -0.02em; }
+        
+        .subheadline { 
+            font-family: 'Courier New', Courier, monospace; 
+            font-size: 0.95rem; 
+            max-width: 700px; 
+            margin: 15px auto; 
+            line-height: 1.6; 
+        }
+
+        .archive-note { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-grey); }
+
+        .archive-stats {
+    padding: 40px 10%;
+    border-bottom: 1px solid var(--border);
+}
+
+.archive-stats__inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.archive-stat {
+    text-align: center;
+}
+
+.archive-stat__label {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-grey);
+    margin-bottom: 6px;
+}
+
+.archive-stat__value {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+/* SEARCH + FILTER CONTROLS */
+
+.archive-controls{
+    padding:30px 10%;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    gap:20px;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.archive-controls input,
+.archive-controls select{
+    padding:10px 14px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    font-family:inherit;
+    font-size:0.9rem;
+}
+
+#results-count{
+    font-family:'Courier New', monospace;
+    font-size:0.75rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--text-grey);
+}
+
+.no-results{
+    padding:80px 20px;
+    text-align:center;
+    font-family:'Courier New', monospace;
+    font-size:0.8rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--text-grey);
+}
+
+        /* --- STACKING ENGINE --- */
+        .show-archive { margin-top: 50px; padding-bottom: 50vh; }
+
+        .ticket-section {
+            position: sticky;
+            top: 150px; 
+            height: 100vh; 
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            pointer-events: none;
+        }
+
+        .ticket-card {
+            position: relative;
+            width: 85%;
+            max-width: 500px;
+            aspect-ratio: 16 / 9; 
+            background: #fdfdfd;
+            padding: 15px;
+            box-shadow: 0 12px 45px rgba(0,0,0,0.08);
+            cursor: pointer;
+            pointer-events: auto;
+            transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease;
+            opacity: 0;
+            transform: translateY(150px) rotate(var(--rotation));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ticket-section.active .ticket-card {
+            opacity: 1;
+            transform: translateY(0) rotate(var(--rotation));
+        }
+
+        .ticket-card img { 
+            max-width: 100%; 
+            max-height: 100%;
+            object-fit: contain; 
+            display: block; 
+        }
+
+        .record-light {
+            position: absolute; bottom: 15px; right: 15px;
+            width: 12px; height: 12px; background-color: var(--accent);
+            border-radius: 50%; box-shadow: 0 0 10px var(--accent);
+            animation: stereoPulse 1.8s infinite ease-in-out;
+        }
+
+        @keyframes stereoPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.8); opacity: 0.5; } }
+
+        /* --- MODAL --- */
+        /* --- MODAL --- */
+#detail-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(250, 250, 248, 0.99);
+    z-index: 6000;
+    display: none;
+    padding: 5vh 5vw;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#modal-img {
+    max-width: 100%;
+    max-height: 60vh;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.modal-text {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+}
+
+#m-gallery {
+    margin-top: 20px;
+}
+
+.modal-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.modal-gallery-grid img {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+#m-video-wrap iframe {
+    width: min(100%, 700px);
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 0;
+}
+
+.close-btn {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-grey);
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W7HLWXCZ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header id="top">
+    <div class="header-left">
+        <h1>Call me Tony</h1>
+        <div class="tagline">SCROLL THROUGH MY LIVE MUSIC OBSESSION.</div>
+    </div>
+    <div class="nav-container" id="navContainer">
+        <div class="menu-toggle" id="menuToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav class="nav-dropdown" id="navDropdown">
+            <a href="https://www.anthonycdorsey.com/">HOME</a>
+            <a href="https://www.anthonycdorsey.com/shows-ive-seen/">LIVE MUSIC ARCHIVE</a>
+            <a href="https://www.anthonycdorsey.com/nailed-it-breakfast-tacos/">BREAKFAST TACO RECIPE</a>
+        </nav>
+    </div>
+</header>
+
+<section class="archive-intro">
+    <h1>Shows I've Seen</h1>
+    <div class="subheadline">
+        I’ve kept a ticket stub from every concert I’ve attended.<br>
+        This is a record of what I chose to spend time with, across years, genres, and cities.
+    </div>
+    <div class="archive-note">— Growing Archive —</div>
+</section>
+
+<section class="archive-stats" aria-label="Concert archive stats">
+    <div class="archive-stats__inner">
+        <div class="archive-stat">
+            <span class="archive-stat__label">Shows</span>
+            <span class="archive-stat__value" id="stat-shows">0</span>
+        </div>
+
+        <div class="archive-stat">
+            <span class="archive-stat__label">Artists</span>
+            <span class="archive-stat__value" id="stat-artists">0</span>
+        </div>
+
+        <div class="archive-stat">
+            <span class="archive-stat__label">Cities</span>
+            <span class="archive-stat__value" id="stat-cities">0</span>
+        </div>
+
+        <div class="archive-stat">
+            <span class="archive-stat__label">Years</span>
+            <span class="archive-stat__value" id="stat-years">0</span>
+        </div>
+
+        <div class="archive-stat">
+            <span class="archive-stat__label">Most Seen</span>
+            <span class="archive-stat__value" id="stat-most-seen">—</span>
+        </div>
+    </div>
+</section>
+
+<section class="archive-controls">
+
+    <input
+        type="text"
+        id="artist-search"
+        placeholder="Search artist..."
+    >
+
+    <select id="year-filter">
+        <option value="all">All Years</option>
+    </select>
+
+    <div id="results-count">0 results</div>
+
+</section>
+
+<main class="show-archive">
+    <div id="tickets-container"></div>
+</main>
+
+<div id="detail-modal">
+    <div class="modal-content">
+
+        <img id="modal-img" src="" alt="Ticket image">
+
+        <div class="modal-text">
+
+            <h2 id="m-artist" style="margin-bottom:5px;"></h2>
+
+            <div id="m-meta" style="color:var(--text-grey); margin-bottom:15px;"></div>
+
+            <p id="m-copy" style="max-width:600px; margin:0 auto 20px;"></p>
+
+            <!-- companions -->
+            <div id="m-companions" style="display:none; margin-bottom:15px;"></div>
+
+            <!-- extended notes -->
+            <p id="m-notes"
+               style="display:none; max-width:700px; margin:0 auto 20px; line-height:1.6;">
+            </p>
+
+            <!-- photo gallery -->
+            <div id="m-gallery" style="display:none;"></div>
+
+            <!-- youtube video -->
+            <div id="m-video-wrap" style="display:none; margin-top:20px;">
+                <iframe
+                    id="m-video"
+                    width="560"
+                    height="315"
+                    src=""
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+        </div>
+
+        <div class="close-btn" onclick="closeModal()">Close [X]</div>
+
+    </div>
+</div>
+
+<script src="tickets.js"></script>
+
+<script>
+    // Header Toggle Logic
+    const menuToggle = document.getElementById('menuToggle');
+    const navDropdown = document.getElementById('navDropdown');
+
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navDropdown.classList.toggle('is-open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!navDropdown.contains(e.target) && !menuToggle.contains(e.target)) {
+            navDropdown.classList.remove('is-open');
+        }
+    });
+
+    
+
+const modal = document.getElementById('detail-modal');
+const mImg = document.getElementById('modal-img');
+const ticketsContainer = document.getElementById('tickets-container');
+
+const mArtist = document.getElementById('m-artist');
+const mMeta = document.getElementById('m-meta');
+const mCopy = document.getElementById('m-copy');
+const mCompanions = document.getElementById('m-companions');
+const mNotes = document.getElementById('m-notes');
+const mGallery = document.getElementById('m-gallery');
+const mVideoWrap = document.getElementById('m-video-wrap');
+const mVideo = document.getElementById('m-video');
+
+const artistSearch = document.getElementById('artist-search');
+const yearFilter = document.getElementById('year-filter');
+const resultsCount = document.getElementById('results-count');
+
+let filteredTickets = [...tickets];
+
+function getSlugFromHash() {
+    return decodeURIComponent(window.location.hash.replace('#', '').trim());
+}
+
+function findTicketBySlug(slug) {
+    return tickets.find(ticket => ticket.slug === slug);
+}
+
+function updateHashForTicket(ticket) {
+    if (!ticket || !ticket.slug) return;
+    history.replaceState(null, '', `#${encodeURIComponent(ticket.slug)}`);
+}
+
+function clearTicketHash() {
+    if (!window.location.hash) return;
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+}
+
+function openTicketBySlug(slug, shouldUpdateHash = false) {
+    if (!slug) return;
+
+    const ticket = findTicketBySlug(slug);
+
+    if (!ticket) return;
+
+    populateModal(ticket, shouldUpdateHash);
+}
+
+    function setupObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+                else entry.target.classList.remove('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.ticket-section').forEach(section => observer.observe(section));
+    }
+
+function populateModal(ticket, shouldUpdateHash = true) {
+    const displayCity = [ticket.city, ticket.state, ticket.country]
+        .filter(Boolean)
+        .join(", ");
+
+    const modalNotes = ticket.extendedNotes || ticket.notes || "";
+    const modalYoutube = ticket.youtubeUrl || ticket.youtube || "";
+
+    mArtist.innerText = `${ticket.artist} (${ticket.year})`;
+    mMeta.innerText = [ticket.venue, displayCity].filter(Boolean).join(" | ");
+    mCopy.innerText = ticket.copy || "";
+    mImg.src = ticket.img || ticket.shareImage || "";
+    mImg.alt = `${ticket.artist} ticket`;
+
+    if (ticket.companions && ticket.companions.length > 0) {
+        mCompanions.style.display = "block";
+        mCompanions.innerText = `With: ${ticket.companions.join(", ")}`;
+    } else {
+        mCompanions.style.display = "none";
+        mCompanions.innerText = "";
+    }
+
+    if (modalNotes && modalNotes.trim() !== "") {
+        mNotes.style.display = "block";
+        mNotes.innerText = modalNotes;
+    } else {
+        mNotes.style.display = "none";
+        mNotes.innerText = "";
+    }
+
+    if (ticket.photos && ticket.photos.length > 0) {
+        mGallery.style.display = "block";
+        mGallery.innerHTML = `
+            <div class="modal-gallery-grid">
+                ${ticket.photos.map(photo => `
+                    <img src="${escapeHtml(photo)}" alt="${escapeHtml(ticket.artist)} memory photo">
+                `).join("")}
+            </div>
+        `;
+    } else {
+        mGallery.style.display = "none";
+        mGallery.innerHTML = "";
+    }
+
+    if (modalYoutube && modalYoutube.trim() !== "") {
+        mVideoWrap.style.display = "block";
+        mVideo.src = modalYoutube;
+    } else {
+        mVideoWrap.style.display = "none";
+        mVideo.src = "";
+    }
+
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden";
+
+    if (shouldUpdateHash) {
+        updateHashForTicket(ticket);
+    }
+}
+
+function setupTicketClicks() {
+    document.querySelectorAll('.ticket-section').forEach(section => {
+        section.addEventListener('click', () => {
+            const ticketSlug = section.dataset.ticketSlug;
+
+            if (!ticketSlug) return;
+
+            openTicketBySlug(ticketSlug, true);
+        });
+    });
+}
+
+function closeModal(shouldClearHash = true) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    mVideo.src = "";
+
+    if (shouldClearHash) {
+        clearTicketHash();
+    }
+}
+
+function escapeHtml(value) {
+    return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;');
+}
+
+function renderStats() {
+    const totalShows = tickets.length;
+
+    const uniqueArtists = new Set(
+        tickets.map(ticket => ticket.artist.trim())
+    ).size;
+
+    const uniqueCities = new Set(
+        tickets.map(ticket => ticket.city.trim())
+    ).size;
+
+    const years = tickets
+        .map(ticket => parseInt(ticket.year, 10))
+        .filter(year => !isNaN(year));
+
+    let yearsCovered = '—';
+    if (years.length > 0) {
+        const minYear = Math.min(...years);
+        const maxYear = Math.max(...years);
+        yearsCovered = minYear === maxYear ? `${minYear}` : `${minYear}–${maxYear}`;
+    }
+
+    const artistCounts = {};
+
+    tickets.forEach(ticket => {
+        const artist = ticket.artist.trim();
+        artistCounts[artist] = (artistCounts[artist] || 0) + 1;
+    });
+
+    let mostSeenArtist = '—';
+    let highestCount = 0;
+
+    for (const artist in artistCounts) {
+        if (artistCounts[artist] > highestCount) {
+            highestCount = artistCounts[artist];
+            mostSeenArtist = artist;
+        }
+    }
+
+    if (highestCount > 1) {
+        mostSeenArtist = `${mostSeenArtist} (${highestCount})`;
+    }
+
+    document.getElementById('stat-shows').textContent = totalShows;
+    document.getElementById('stat-artists').textContent = uniqueArtists;
+    document.getElementById('stat-cities').textContent = uniqueCities;
+    document.getElementById('stat-years').textContent = yearsCovered;
+    document.getElementById('stat-most-seen').textContent = mostSeenArtist;
+}
+
+function populateYearFilter(){
+
+    const years = [...new Set(tickets.map(t => t.year))]
+        .sort((a,b)=>b-a);
+
+    years.forEach(year=>{
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        yearFilter.appendChild(option);
+    });
+
+}
+function applyFilters(){
+
+    const artistQuery = artistSearch.value.toLowerCase().trim();
+    const selectedYear = yearFilter.value;
+
+    filteredTickets = tickets.filter(ticket=>{
+
+        const searchableArtist = [
+            ticket.artist,
+            ticket.artistSlug
+        ].filter(Boolean).join(" ").toLowerCase();
+
+        const matchesArtist =
+            searchableArtist.includes(artistQuery);
+
+        const matchesYear =
+            selectedYear === "all" ||
+            ticket.year === selectedYear;
+
+        return matchesArtist && matchesYear;
+
+    });
+
+    renderTickets(filteredTickets);
+
+    resultsCount.textContent =
+        `${filteredTickets.length} results`;
+
+}
+
+function renderTickets(ticketList = tickets) {
+
+    if (ticketList.length === 0) {
+    ticketsContainer.innerHTML = `
+        <div class="no-results">
+            No shows match your search.
+        </div>
+    `;
+    return;
+}
+ticketsContainer.innerHTML = ticketList.map((ticket, index) => `
+    <section class="ticket-section"
+        data-ticket-index="${index}"
+        data-ticket-slug="${escapeHtml(ticket.slug || '')}"
+        data-artist="${escapeHtml(ticket.artist)}"
+        data-year="${escapeHtml(ticket.year)}"
+        data-venue="${escapeHtml(ticket.venue)}"
+        data-city="${escapeHtml(ticket.city)}"
+        data-copy="${escapeHtml(ticket.copy)}"
+        data-img="${escapeHtml(ticket.img)}">
+        <div class="ticket-card" style="--rotation: ${escapeHtml(ticket.rotation)};">
+            <img src="${escapeHtml(ticket.img)}" alt="${escapeHtml(ticket.artist)} ticket">
+            <div class="record-light"></div>
+        </div>
+    </section>
+`).join('');
+
+    setupObserver();
+    setupTicketClicks();
+}
+
+artistSearch.addEventListener("input", applyFilters);
+yearFilter.addEventListener("change", applyFilters);
+
+window.addEventListener("hashchange", () => {
+    const slug = getSlugFromHash();
+
+    if (slug) {
+        openTicketBySlug(slug, false);
+    } else if (modal.style.display === "block") {
+        closeModal(false);
+    }
+});
+
+populateYearFilter();
+
+renderTickets();
+renderStats();
+
+resultsCount.textContent = `${tickets.length} results`;
+
+const initialSlug = getSlugFromHash();
+if (initialSlug) {
+    openTicketBySlug(initialSlug, false);
+}
+
+</script>
+
+</body>
+</html>
