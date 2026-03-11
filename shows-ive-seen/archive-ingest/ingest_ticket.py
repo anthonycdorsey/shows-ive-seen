@@ -1,7 +1,7 @@
-from pathlib import Path
-import shutil
+﻿from pathlib import Path
 import json
 import re
+import shutil
 from datetime import datetime
 
 import cv2
@@ -9,7 +9,9 @@ import numpy as np
 from PIL import Image
 import pytesseract
 
-# Point directly to your Tesseract install
+from research_enrichment import build_provenance_map, build_research_enrichment
+
+# Point directly to your Tesseract install.
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
@@ -103,7 +105,7 @@ def slugify(text: str) -> str:
 
 
 def js_escape(text: str) -> str:
-    return text.replace("\\", "\\\\").replace('"', '\\"')
+    return text.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n")
 
 
 def normalize_city(value: str) -> str:
@@ -219,7 +221,7 @@ def clean_line(line: str) -> str:
     return line
 
 
-def get_lines(text: str):
+def get_lines(text: str) -> list[str]:
     lines = [clean_line(line) for line in text.splitlines()]
     return [line for line in lines if line]
 
@@ -233,21 +235,21 @@ def extract_exact_date(text: str) -> str:
     text_upper = text.upper()
     month_pattern = "|".join(MONTHS.keys())
 
-    m = re.search(
+    match = re.search(
         rf"\b(?:MONDAY|TUESDAY|WEDNESDAY|THURSDAY|FRIDAY|SATURDAY|SUNDAY|MON|TUE|WED|THU|THUR|FRI|SAT|SUN)?\s*({month_pattern})\s+(\d{{1,2}}),?\s+(19[6-9]\d|20[0-4]\d)\b",
         text_upper
     )
-    if m:
-        month = MONTHS[m.group(1)]
-        day = m.group(2).zfill(2)
-        year = m.group(3)
+    if match:
+        month = MONTHS[match.group(1)]
+        day = match.group(2).zfill(2)
+        year = match.group(3)
         return f"{year}-{month}-{day}"
 
-    m2 = re.search(r"\b(\d{1,2})[/-](\d{1,2})[/-](19[6-9]\d|20[0-4]\d)\b", text_upper)
-    if m2:
-        month = m2.group(1).zfill(2)
-        day = m2.group(2).zfill(2)
-        year = m2.group(3)
+    numeric_match = re.search(r"\b(\d{1,2})[/-](\d{1,2})[/-](19[6-9]\d|20[0-4]\d)\b", text_upper)
+    if numeric_match:
+        month = numeric_match.group(1).zfill(2)
+        day = numeric_match.group(2).zfill(2)
+        year = numeric_match.group(3)
         return f"{year}-{month}-{day}"
 
     return ""
@@ -257,33 +259,31 @@ def extract_price(text: str) -> str:
     candidates = re.findall(r"\$\s?\d+(?:\.\d{2})?", text)
     numeric_candidates = []
 
-    for c in candidates:
-        clean = c.replace(" ", "")
+    for candidate in candidates:
+        clean = candidate.replace(" ", "")
         try:
             numeric_candidates.append((float(clean.replace("$", "")), clean))
         except ValueError:
-            pass
+            continue
 
     if not numeric_candidates:
-        # fallback for OCR oddities like 60.00 without dollar sign near price areas
         plain = re.findall(r"\b(\d{2,3}\.\d{2})\b", text)
         if plain:
             try:
-                highest = max(float(x) for x in plain)
+                highest = max(float(value) for value in plain)
                 return f"${highest:.2f}"
             except ValueError:
-                pass
+                return ""
         return ""
 
     non_zero = [item for item in numeric_candidates if item[0] > 0]
-    best = max(non_zero or numeric_candidates, key=lambda x: x[0])
+    best = max(non_zero or numeric_candidates, key=lambda item: item[0])
 
-    # fix OCR cases where $6 appears but 60.00 also exists
     if best[0] < 10:
         plain = re.findall(r"\b(\d{2,3}\.\d{2})\b", text)
         if plain:
             try:
-                highest = max(float(x) for x in plain)
+                highest = max(float(value) for value in plain)
                 if highest > best[0]:
                     return f"${highest:.2f}"
             except ValueError:
@@ -295,7 +295,6 @@ def extract_price(text: str) -> str:
 def extract_state(text: str) -> str:
     text_upper = text.upper()
 
-    # stronger city/state pattern first
     city_state_matches = re.findall(r"\b(?:NEW YORK|BROOKLYN|AUSTIN|BOSTON|CHICAGO|LOS ANGELES|SAN FRANCISCO|NASHVILLE|ATLANTA|SEATTLE|PHILADELPHIA|WASHINGTON)[,\s]+([A-Z]{2})\b", text_upper)
     if city_state_matches:
         return city_state_matches[0]
@@ -317,9 +316,9 @@ def extract_city(text: str) -> str:
         if alias in text_lower:
             return canonical
 
-    m = re.search(r"\b(New York|Brooklyn|Austin|Boston|Chicago|Los Angeles|San Francisco|Nashville|Atlanta|Seattle|Philadelphia|Washington)\b", text, flags=re.IGNORECASE)
-    if m:
-        return normalize_city(m.group(1))
+    match = re.search(r"\b(New York|Brooklyn|Austin|Boston|Chicago|Los Angeles|San Francisco|Nashville|Atlanta|Seattle|Philadelphia|Washington)\b", text, flags=re.IGNORECASE)
+    if match:
+        return normalize_city(match.group(1))
     return ""
 
 
@@ -351,8 +350,8 @@ def looks_like_artist(line: str) -> bool:
     if "$" in line:
         return False
 
-    alpha_chars = sum(c.isalpha() for c in line)
-    upper_chars = sum(c.isupper() for c in line)
+    alpha_chars = sum(char.isalpha() for char in line)
+    upper_chars = sum(char.isupper() for char in line)
 
     if "&" in line:
         return True
@@ -363,20 +362,20 @@ def looks_like_artist(line: str) -> bool:
     return False
 
 
-def extract_venue(lines) -> str:
+def extract_venue(lines: list[str]) -> str:
     candidates = []
     for line in lines:
         if looks_like_venue(line) and not looks_like_address(line):
             candidates.append(line)
 
     if candidates:
-        candidates = sorted(candidates, key=lambda x: (len(x), x))
+        candidates = sorted(candidates, key=lambda value: (len(value), value))
         return normalize_venue(candidates[0])
 
     return ""
 
 
-def extract_artist(lines, venue="", city="", year="") -> str:
+def extract_artist(lines: list[str], venue: str = "", city: str = "", year: str = "") -> str:
     candidates = []
 
     for line in lines:
@@ -412,7 +411,7 @@ def extract_artist(lines, venue="", city="", year="") -> str:
     if not candidates:
         return ""
 
-    candidates.sort(key=lambda x: (-x[0], abs(len(x[1]) - 20)))
+    candidates.sort(key=lambda item: (-item[0], abs(len(item[1]) - 20)))
     best = candidates[0][1]
     return best.title() if best.isupper() else best
 
@@ -439,27 +438,17 @@ def prompt_role(label: str, default: str = "primary") -> str:
         print("Role must be one of: primary, headliner, opener, support, guest")
 
 
-def parse_collaboration_display_artist(display_artist: str):
-    """
-    Split true collaborations like:
-    PJ Harvey & John Parish
-    Simon and Garfunkel
-    Band A / Band B
-    """
+def parse_collaboration_display_artist(display_artist: str) -> list[str]:
     text = display_artist.strip()
 
-    # preserve display label exactly, but split internal artist records
     if " & " in text:
-        parts = [p.strip() for p in text.split(" & ") if p.strip()]
-        return parts
+        return [part.strip() for part in text.split(" & ") if part.strip()]
 
     if " and " in text.lower():
-        parts = [p.strip() for p in re.split(r"\band\b", text, flags=re.IGNORECASE) if p.strip()]
-        return parts
+        return [part.strip() for part in re.split(r"\band\b", text, flags=re.IGNORECASE) if part.strip()]
 
     if " / " in text:
-        parts = [p.strip() for p in text.split(" / ") if p.strip()]
-        return parts
+        return [part.strip() for part in text.split(" / ") if part.strip()]
 
     return [text]
 
@@ -473,7 +462,6 @@ def build_artist_fields(display_artist: str, display_role: str, additional_artis
 
     display_parts = parse_collaboration_display_artist(display_artist)
 
-    # If the display artist is a true collaboration, split into multiple primary artists
     if len(display_parts) > 1 and display_role == "primary":
         for part in display_parts:
             artists.append({
@@ -503,11 +491,10 @@ def build_artist_fields(display_artist: str, display_role: str, additional_artis
         })
         searchable.append(item_slug)
 
-    # Deduplicate searchable slugs while preserving order
     searchable_unique = []
-    for slug in searchable:
-        if slug not in searchable_unique:
-            searchable_unique.append(slug)
+    for item_slug in searchable:
+        if item_slug not in searchable_unique:
+            searchable_unique.append(item_slug)
 
     return display_artist_slug, artists, searchable_unique
 
@@ -521,36 +508,36 @@ def build_share_page(ticket: dict, site_base_url: str) -> str:
     deep_link_url = f"{site_base_url}/#{slug}"
 
     return f"""<!DOCTYPE html>
-<html lang="en">
+<html lang=\"en\">
 <head>
-  <meta charset="UTF-8">
+  <meta charset=\"UTF-8\">
   <title>{share_title}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
 
-  <meta name="description" content="{share_description}">
+  <meta name=\"description\" content=\"{share_description}\">
 
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="{share_title}">
-  <meta property="og:description" content="{share_description}">
-  <meta property="og:url" content="{share_url}">
-  <meta property="og:site_name" content="Anthony C. Dorsey">
+  <meta property=\"og:type\" content=\"website\">
+  <meta property=\"og:title\" content=\"{share_title}\">
+  <meta property=\"og:description\" content=\"{share_description}\">
+  <meta property=\"og:url\" content=\"{share_url}\">
+  <meta property=\"og:site_name\" content=\"Anthony C. Dorsey\">
 
-  <meta property="og:image" content="{share_image_url}">
-  <meta property="og:image:secure_url" content="{share_image_url}">
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="{ticket['artist']} concert ticket from {ticket['venue']} in {ticket['year']}">
+  <meta property=\"og:image\" content=\"{share_image_url}\">
+  <meta property=\"og:image:secure_url\" content=\"{share_image_url}\">
+  <meta property=\"og:image:type\" content=\"image/jpeg\">
+  <meta property=\"og:image:width\" content=\"1200\">
+  <meta property=\"og:image:height\" content=\"630\">
+  <meta property=\"og:image:alt\" content=\"{ticket['artist']} concert ticket from {ticket['venue']} in {ticket['year']}\">
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{share_title}">
-  <meta name="twitter:description" content="{share_description}">
-  <meta name="twitter:image" content="{share_image_url}">
+  <meta name=\"twitter:card\" content=\"summary_large_image\">
+  <meta name=\"twitter:title\" content=\"{share_title}\">
+  <meta name=\"twitter:description\" content=\"{share_description}\">
+  <meta name=\"twitter:image\" content=\"{share_image_url}\">
 
-  <link rel="canonical" href="{share_url}">
+  <link rel=\"canonical\" href=\"{share_url}\">
 
   <script>
-    window.location.replace("{deep_link_url}");
+    window.location.replace(\"{deep_link_url}\");
   </script>
 </head>
 <body>
@@ -560,7 +547,181 @@ def build_share_page(ticket: dict, site_base_url: str) -> str:
 """
 
 
-def main():
+def reserve_output_path(path: Path) -> Path:
+    if not path.exists():
+        return path
+
+    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    return path.with_name(f"{path.stem}-{timestamp}{path.suffix}")
+
+
+def build_ticket_object(ticket: dict) -> str:
+    ordered_keys = [
+        "artist",
+        "artistSlug",
+        "artists",
+        "searchableArtistSlugs",
+        "exactDate",
+        "year",
+        "venue",
+        "city",
+        "state",
+        "country",
+        "copy",
+        "extendedNotes",
+        "companions",
+        "photos",
+        "youtubeUrl",
+        "price",
+        "tags",
+        "shareTitle",
+        "shareDescription",
+        "shareImage",
+        "slug",
+        "img",
+        "rotation",
+    ]
+
+    lines = ["{"]
+    for key in ordered_keys:
+        value = ticket.get(key)
+        lines.append(f"  {key}: {to_js_literal(value)},")
+    lines.append("},")
+    return "\n".join(lines)
+
+
+def to_js_literal(value, indent: int = 2) -> str:
+    if isinstance(value, str):
+        return f'"{js_escape(value)}"'
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if value is None:
+        return "null"
+    if isinstance(value, (int, float)):
+        return str(value)
+    if isinstance(value, list):
+        if not value:
+            return "[]"
+        if all(isinstance(item, str) for item in value):
+            return "[" + ", ".join(to_js_literal(item, indent) for item in value) + "]"
+        child_indent = indent + 2
+        item_lines = ["["]
+        for item in value:
+            item_literal = to_js_literal(item, child_indent)
+            indented = indent_multiline(item_literal, child_indent)
+            item_lines.append(f"{' ' * child_indent}{indented},")
+        item_lines.append(" " * indent + "]")
+        return "\n".join(item_lines)
+    if isinstance(value, dict):
+        if not value:
+            return "{}"
+        child_indent = indent + 2
+        object_lines = ["{"]
+        for key, item in value.items():
+            item_literal = to_js_literal(item, child_indent)
+            indented = indent_multiline(item_literal, child_indent)
+            object_lines.append(f"{' ' * child_indent}{key}: {indented},")
+        object_lines.append(" " * indent + "}")
+        return "\n".join(object_lines)
+    return json.dumps(value, ensure_ascii=False)
+
+
+def indent_multiline(value: str, indent: int) -> str:
+    prefix = " " * indent
+    return value.replace("\n", f"\n{prefix}")
+
+
+def build_notes_text(
+    source_file: Path,
+    copied_original_path: Path,
+    draft_json_path: Path,
+    share_page_path: Path,
+    final_image_filename: str,
+    share_image_filename: str,
+    slug: str,
+    ocr_lines: list[str],
+    ticket_object: str,
+    ticket: dict,
+    provenance: dict,
+    research: dict,
+) -> str:
+    provenance_text = json.dumps(provenance, indent=2, ensure_ascii=False)
+    research_text = json.dumps(research, indent=2, ensure_ascii=False)
+
+    return f"""SHOWS I SAW - INGEST REVIEW PACKAGE
+
+1. SELECTED INCOMING FILE
+{source_file.name}
+
+2. ORIGINAL FILE COPIED TO
+{copied_original_path}
+
+3. DRAFT JSON FILE
+{draft_json_path}
+
+4. SHARE PAGE DRAFT
+{share_page_path}
+
+5. FINAL ROOT IMAGE FILENAME
+{final_image_filename}
+
+6. FINAL SHARE IMAGE FILENAME
+{share_image_filename}
+
+7. SUGGESTED SHARE FOLDER PATH
+share/{slug}/
+
+8. SUGGESTED LIVE SHARE PAGE FILE
+share/{slug}/index.html
+
+9. NORMALIZED TICKET SUMMARY
+Artist: {ticket['artist']}
+Artist Slug: {ticket['artistSlug']}
+Venue: {ticket['venue']}
+City: {ticket['city']}
+State: {ticket['state']}
+Country: {ticket['country']}
+Year: {ticket['year']}
+Exact Date: {ticket['exactDate']}
+Price: {ticket['price']}
+Slug: {ticket['slug']}
+
+10. OCR TEXT PREVIEW
+
+{chr(10).join(ocr_lines[:40])}
+
+11. PROVENANCE / CONFIDENCE MAP
+
+{provenance_text}
+
+12. RESEARCH ENRICHMENT PLACEHOLDERS
+
+{research_text}
+
+13. PASTE-READY TICKET OBJECT FOR tickets.js
+
+{ticket_object}
+
+14. HUMAN REVIEW CHECKLIST
+
+- Review OCR output in the draft JSON.
+- Review provenance labels before trusting any value.
+- Treat every research suggestion as a draft until you confirm it manually.
+- Confirm headliner and opener roles.
+- Confirm venue naming and exact date.
+- Confirm any setlist references before using them.
+- Create the final root ticket image: {final_image_filename}
+- Create the final share image: {share_image_filename}
+- Paste the approved ticket object into tickets.js manually.
+- Copy the approved share page draft into share/{slug}/index.html manually.
+- Test the hash link locally.
+- Deploy only after manual review.
+
+This tool only creates review artifacts. It never updates the live site automatically.
+"""
+
+
+def main() -> None:
     script_path = Path(__file__).resolve()
     archive_ingest_dir = script_path.parent
     project_root = archive_ingest_dir.parent
@@ -576,7 +737,8 @@ def main():
 
     site_base_url = "https://www.anthonycdorsey.com/shows-ive-seen"
 
-    print("\nShows I Saw - OCR Ingest Helper v1.1B\n")
+    print("\nShows I Saw - OCR Ingest Helper v2.0\n")
+    print("This tool creates review artifacts only. It never updates the live site automatically.\n")
 
     source_file = choose_incoming_file(incoming_dir)
     print(f"\nSelected file: {source_file.name}")
@@ -612,7 +774,7 @@ def main():
     artist_slug, artists, searchable_artist_slugs = build_artist_fields(
         display_artist=display_artist,
         display_role=display_role,
-        additional_artists_raw=additional_artists_raw
+        additional_artists_raw=additional_artists_raw,
     )
 
     venue = normalize_venue(prompt_with_default("Venue", guessed_venue, required=True))
@@ -642,7 +804,7 @@ def main():
 
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     copied_original_name = f"{timestamp}-{source_file.name}"
-    copied_original_path = originals_dir / copied_original_name
+    copied_original_path = reserve_output_path(originals_dir / copied_original_name)
     shutil.copy2(source_file, copied_original_path)
 
     companions = [item.strip() for item in companions_raw.split(",") if item.strip()]
@@ -676,98 +838,60 @@ def main():
         "slug": slug,
         "img": final_image_filename,
         "rotation": rotation,
-        "sourceOriginal": str(copied_original_path.relative_to(project_root)).replace("\\", "/"),
-        "selectedIncomingFile": source_file.name,
-        "ocrTextPreview": ocr_lines[:30],
-        "suggestedShareFolder": f"share/{slug}/",
-        "suggestedSharePage": f"share/{slug}/index.html"
     }
 
-    draft_json_path = draft_json_dir / json_filename
-    with open(draft_json_path, "w", encoding="utf-8") as f:
-        json.dump(ticket, f, indent=2, ensure_ascii=False)
+    provenance = build_provenance_map(ticket, ocr_text)
+    research = build_research_enrichment(ticket, ocr_text, ocr_lines)
 
-    ticket_object = f"""{{
-  artist: "{js_escape(ticket['artist'])}",
-  artistSlug: "{ticket['artistSlug']}",
-  artists: {json.dumps(ticket['artists'], ensure_ascii=False)},
-  searchableArtistSlugs: {json.dumps(ticket['searchableArtistSlugs'], ensure_ascii=False)},
-  exactDate: "{ticket['exactDate']}",
-  year: "{ticket['year']}",
-  venue: "{js_escape(ticket['venue'])}",
-  city: "{js_escape(ticket['city'])}",
-  state: "{ticket['state']}",
-  country: "{js_escape(ticket['country'])}",
-  copy: "{js_escape(ticket['copy'])}",
-  extendedNotes: "{js_escape(ticket['extendedNotes'])}",
-  companions: {json.dumps(ticket['companions'], ensure_ascii=False)},
-  photos: {json.dumps(ticket['photos'], ensure_ascii=False)},
-  youtubeUrl: "{js_escape(ticket['youtubeUrl'])}",
-  price: "{js_escape(ticket['price'])}",
-  tags: {json.dumps(ticket['tags'], ensure_ascii=False)},
-  shareTitle: "{js_escape(ticket['shareTitle'])}",
-  shareDescription: "{js_escape(ticket['shareDescription'])}",
-  shareImage: "{ticket['shareImage']}",
-  slug: "{ticket['slug']}",
-  img: "{ticket['img']}",
-  rotation: "{js_escape(ticket['rotation'])}"
-}},"""
+    review_payload = {
+        "reviewStatus": "pending_human_review",
+        "generatedAt": datetime.now().isoformat(timespec="seconds"),
+        "ticket": ticket,
+        "provenance": provenance,
+        "research": research,
+        "source": {
+            "selectedIncomingFile": source_file.name,
+            "sourceOriginal": str(copied_original_path.relative_to(project_root)).replace("\\", "/"),
+            "ocrTextPreview": ocr_lines[:40],
+        },
+        "reviewArtifacts": {
+            "suggestedShareFolder": f"share/{slug}/",
+            "suggestedSharePage": f"share/{slug}/index.html",
+            "finalImageFilename": final_image_filename,
+            "finalShareImageFilename": share_image_filename,
+        },
+    }
+
+    ticket_object = build_ticket_object(ticket)
+    review_payload["ticketObjectForTicketsJs"] = ticket_object
+
+    draft_json_path = reserve_output_path(draft_json_dir / json_filename)
+    with open(draft_json_path, "w", encoding="utf-8") as file_handle:
+        json.dump(review_payload, file_handle, indent=2, ensure_ascii=False)
 
     share_page_html = build_share_page(ticket, site_base_url)
-    share_page_path = share_pages_dir / share_page_filename
-    with open(share_page_path, "w", encoding="utf-8") as f:
-        f.write(share_page_html)
+    share_page_path = reserve_output_path(share_pages_dir / share_page_filename)
+    with open(share_page_path, "w", encoding="utf-8") as file_handle:
+        file_handle.write(share_page_html)
 
-    notes_text = f"""SHOWS I SAW - OCR INGEST OUTPUT
+    notes_text = build_notes_text(
+        source_file=source_file,
+        copied_original_path=copied_original_path,
+        draft_json_path=draft_json_path,
+        share_page_path=share_page_path,
+        final_image_filename=final_image_filename,
+        share_image_filename=share_image_filename,
+        slug=slug,
+        ocr_lines=ocr_lines,
+        ticket_object=ticket_object,
+        ticket=ticket,
+        provenance=provenance,
+        research=research,
+    )
 
-1. SELECTED INCOMING FILE
-{source_file.name}
-
-2. ORIGINAL FILE COPIED TO
-{str(copied_original_path)}
-
-3. DRAFT JSON FILE
-{str(draft_json_path)}
-
-4. SHARE PAGE DRAFT
-{str(share_page_path)}
-
-5. FINAL ROOT IMAGE FILENAME
-{final_image_filename}
-
-6. FINAL SHARE IMAGE FILENAME
-{share_image_filename}
-
-7. SUGGESTED SHARE FOLDER PATH
-share/{slug}/
-
-8. SUGGESTED LIVE SHARE PAGE FILE
-share/{slug}/index.html
-
-9. OCR TEXT PREVIEW
-
-{chr(10).join(ocr_lines[:40])}
-
-10. PASTE-READY TICKET OBJECT FOR tickets.js
-
-{ticket_object}
-
-11. PUBLISH CHECKLIST
-
-- Review OCR output in draft JSON
-- Review artist roles carefully
-- Review location fields carefully
-- Create final root ticket image: {final_image_filename}
-- Create final share image: {share_image_filename}
-- Paste ticket object into tickets.js
-- Copy share page draft into share/{slug}/index.html
-- Test the hash link locally
-- Deploy only after manual review
-"""
-
-    notes_path = notes_dir / notes_filename
-    with open(notes_path, "w", encoding="utf-8") as f:
-        f.write(notes_text)
+    notes_path = reserve_output_path(notes_dir / notes_filename)
+    with open(notes_path, "w", encoding="utf-8") as file_handle:
+        file_handle.write(notes_text)
 
     print("\nDone.\n")
     print(f"Selected file:      {source_file.name}")
@@ -790,6 +914,9 @@ share/{slug}/index.html
     print(f"- slug:             {slug}")
     print(f"- img:              {final_image_filename}")
     print(f"- shareImage:       {share_image_filename}")
+    print("\nResearch enrichment provider:")
+    print(f"- name:             {research['provider']['name']}")
+    print(f"- liveLookupUsed:   {research['provider']['liveLookupUsed']}")
     print("\nThis script does NOT modify the live site automatically.\n")
 
 
