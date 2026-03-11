@@ -9,7 +9,7 @@ import numpy as np
 from PIL import Image
 import pytesseract
 
-# Point directly to your confirmed Tesseract install
+# Point directly to your Tesseract install
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
@@ -52,17 +52,36 @@ KNOWN_VENUE_KEYWORDS = [
     "stadium", "theatre", "theater", "center", "centre", "arena", "hall",
     "garden", "club", "pavilion", "ballroom", "bowl", "lounge", "auditorium",
     "amphitheatre", "amphitheater", "room", "palace", "barclays", "beacon",
-    "hammerstein", "bowery", "garden", "lunch"
+    "hammerstein", "bowery", "lunch", "forest hills"
+]
+
+ADDRESS_WORDS = [
+    "broadway", "street", "st.", "st ", "avenue", "ave", "road", "rd", "blvd",
+    "boulevard", "lane", "ln", "drive", "dr", "highway", "hwy", "west", "east",
+    "north", "south", "nyc"
 ]
 
 EXCLUDE_ARTIST_WORDS = {
     "admission", "section", "row", "seat", "price", "event", "code", "barcode",
     "ticket", "tickets", "adult", "general", "standing", "orch", "mezz", "loge",
-    "balcony", "no refunds", "refund", "exchange", "service", "handling",
-    "facility", "charge", "includes", "admit", "pm", "am", "doors", "open",
-    "website", "com", "ticketmaster", "livenation", "barclays", "center",
-    "theatre", "theater", "stadium", "arena", "garden", "hall", "presents",
-    "productions", "world", "tour", "subject", "time", "date"
+    "balcony", "refund", "exchange", "service", "handling", "facility", "charge",
+    "includes", "admit", "pm", "am", "doors", "open", "website", "com",
+    "ticketmaster", "livenation", "barclays", "center", "theatre", "theater",
+    "stadium", "arena", "garden", "hall", "presents", "productions", "subject",
+    "time", "date", "broadway", "street", "avenue"
+}
+
+VENUE_NORMALIZATION = {
+    "BEACON THEATRE": "Beacon Theatre",
+    "BEACON THEATER": "Beacon Theatre",
+    "FOREST HILLS STADIUM": "Forest Hills Stadium",
+    "BARCLAYS CENTER": "Barclays Center",
+    "HAMMERSTEIN BALLROOM": "Hammerstein Ballroom",
+    "BOWERY BALLROOM": "Bowery Ballroom",
+    "MADISON SQUARE GARDEN": "Madison Square Garden",
+    "FRANK ERWIN CENTER": "Frank Erwin Center",
+    "LIBERTY LUNCH": "Liberty Lunch",
+    "RADIO CITY MUSIC HALL": "Radio City Music Hall",
 }
 
 MONTHS = {
@@ -70,10 +89,13 @@ MONTHS = {
     "JUL": "07", "AUG": "08", "SEP": "09", "SEPT": "09", "OCT": "10", "NOV": "11", "DEC": "12"
 }
 
+ROLE_OPTIONS = {"primary", "headliner", "opener", "support", "guest"}
+
 
 def slugify(text: str) -> str:
     text = text.lower().strip()
     text = text.replace("&", " and ")
+    text = text.replace("/", " ")
     text = re.sub(r"[^a-z0-9\s-]", "", text)
     text = re.sub(r"\s+", "-", text)
     text = re.sub(r"-+", "-", text)
@@ -128,6 +150,16 @@ def normalize_youtube_url(value: str) -> str:
     return raw
 
 
+def normalize_venue(value: str) -> str:
+    raw = value.strip()
+    if not raw:
+        return ""
+    upper = raw.upper()
+    if upper in VENUE_NORMALIZATION:
+        return VENUE_NORMALIZATION[upper]
+    return raw.title() if raw.isupper() else raw
+
+
 def choose_incoming_file(incoming_dir: Path) -> Path:
     files = sorted(
         [p for p in incoming_dir.iterdir() if p.is_file() and p.suffix.lower() in SUPPORTED_EXTENSIONS],
@@ -156,21 +188,15 @@ def preprocess_for_ocr(image_path: Path) -> np.ndarray:
         raise ValueError(f"Could not read image: {image_path}")
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-    # Gentle denoise while preserving ticket structure
     gray = cv2.GaussianBlur(gray, (3, 3), 0)
-
-    # Contrast boost for faded text
     gray = cv2.convertScaleAbs(gray, alpha=1.25, beta=5)
 
-    # Adaptive threshold tends to help old ticket stock
     thresh = cv2.adaptiveThreshold(
         gray, 255,
         cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
         cv2.THRESH_BINARY,
         31, 11
     )
-
     return thresh
 
 
@@ -184,7 +210,6 @@ def run_ocr(image_path: Path) -> str:
     combined = f"{text_1}\n{text_2}"
     combined = combined.replace("\r", "\n")
     combined = re.sub(r"\n{3,}", "\n\n", combined)
-
     return combined.strip()
 
 
@@ -206,17 +231,18 @@ def extract_year(text: str) -> str:
 
 def extract_exact_date(text: str) -> str:
     text_upper = text.upper()
-
-    # Examples: FRI OCT 27 2017 / TUE MAR 21, 2017 / THURSDAY JAN 24 2008
     month_pattern = "|".join(MONTHS.keys())
-    m = re.search(rf"\b(?:MONDAY|TUESDAY|WEDNESDAY|THURSDAY|FRIDAY|SATURDAY|SUNDAY|MON|TUE|WED|THU|THUR|FRI|SAT|SUN)?\s*({month_pattern})\s+(\d{{1,2}}),?\s+(19[6-9]\d|20[0-4]\d)\b", text_upper)
+
+    m = re.search(
+        rf"\b(?:MONDAY|TUESDAY|WEDNESDAY|THURSDAY|FRIDAY|SATURDAY|SUNDAY|MON|TUE|WED|THU|THUR|FRI|SAT|SUN)?\s*({month_pattern})\s+(\d{{1,2}}),?\s+(19[6-9]\d|20[0-4]\d)\b",
+        text_upper
+    )
     if m:
         month = MONTHS[m.group(1)]
         day = m.group(2).zfill(2)
         year = m.group(3)
         return f"{year}-{month}-{day}"
 
-    # Numeric dates like 10/27/2017 or 10-27-2017
     m2 = re.search(r"\b(\d{1,2})[/-](\d{1,2})[/-](19[6-9]\d|20[0-4]\d)\b", text_upper)
     if m2:
         month = m2.group(1).zfill(2)
@@ -228,37 +254,58 @@ def extract_exact_date(text: str) -> str:
 
 
 def extract_price(text: str) -> str:
-    prices = re.findall(r"\$\s?\d+(?:\.\d{2})?", text)
-    if not prices:
-        return ""
-    # Prefer the largest non-zero price
-    cleaned = []
-    for p in prices:
-        value = p.replace(" ", "")
+    candidates = re.findall(r"\$\s?\d+(?:\.\d{2})?", text)
+    numeric_candidates = []
+
+    for c in candidates:
+        clean = c.replace(" ", "")
         try:
-            amt = float(value.replace("$", ""))
-            cleaned.append((amt, value))
+            numeric_candidates.append((float(clean.replace("$", "")), clean))
         except ValueError:
             pass
 
-    if not cleaned:
-        return prices[0].replace(" ", "")
+    if not numeric_candidates:
+        # fallback for OCR oddities like 60.00 without dollar sign near price areas
+        plain = re.findall(r"\b(\d{2,3}\.\d{2})\b", text)
+        if plain:
+            try:
+                highest = max(float(x) for x in plain)
+                return f"${highest:.2f}"
+            except ValueError:
+                pass
+        return ""
 
-    non_zero = [item for item in cleaned if item[0] > 0]
-    target = max(non_zero, default=max(cleaned, key=lambda x: x[0]), key=lambda x: x[0])
-    return target[1]
+    non_zero = [item for item in numeric_candidates if item[0] > 0]
+    best = max(non_zero or numeric_candidates, key=lambda x: x[0])
+
+    # fix OCR cases where $6 appears but 60.00 also exists
+    if best[0] < 10:
+        plain = re.findall(r"\b(\d{2,3}\.\d{2})\b", text)
+        if plain:
+            try:
+                highest = max(float(x) for x in plain)
+                if highest > best[0]:
+                    return f"${highest:.2f}"
+            except ValueError:
+                pass
+
+    return best[1] if "." in best[1] else f"${best[0]:.2f}"
 
 
 def extract_state(text: str) -> str:
     text_upper = text.upper()
 
-    # Exact 2-letter state abbreviations near common city patterns
-    for abbr in sorted(set(STATE_MAP.values())):
-        if re.search(rf"\b{abbr}\b", text_upper):
-            return abbr
+    # stronger city/state pattern first
+    city_state_matches = re.findall(r"\b(?:NEW YORK|BROOKLYN|AUSTIN|BOSTON|CHICAGO|LOS ANGELES|SAN FRANCISCO|NASHVILLE|ATLANTA|SEATTLE|PHILADELPHIA|WASHINGTON)[,\s]+([A-Z]{2})\b", text_upper)
+    if city_state_matches:
+        return city_state_matches[0]
 
     for name, abbr in STATE_MAP.items():
         if re.search(rf"\b{re.escape(name.upper())}\b", text_upper):
+            return abbr
+
+    for abbr in sorted(set(STATE_MAP.values())):
+        if re.search(rf"\b{abbr}\b", text_upper):
             return abbr
 
     return ""
@@ -266,17 +313,23 @@ def extract_state(text: str) -> str:
 
 def extract_city(text: str) -> str:
     text_lower = text.lower()
-
     for alias, canonical in CITY_ALIASES.items():
         if alias in text_lower:
             return canonical
 
-    # Try patterns like "Austin, TX" or "NYC"
     m = re.search(r"\b(New York|Brooklyn|Austin|Boston|Chicago|Los Angeles|San Francisco|Nashville|Atlanta|Seattle|Philadelphia|Washington)\b", text, flags=re.IGNORECASE)
     if m:
         return normalize_city(m.group(1))
-
     return ""
+
+
+def looks_like_address(line: str) -> bool:
+    lowered = line.lower()
+    if any(word in lowered for word in ADDRESS_WORDS):
+        return True
+    if re.search(r"\b\d{2,5}\b", line) and any(word in lowered for word in ADDRESS_WORDS):
+        return True
+    return False
 
 
 def looks_like_venue(line: str) -> bool:
@@ -289,38 +342,36 @@ def looks_like_artist(line: str) -> bool:
 
     if len(line) < 3:
         return False
-
+    if looks_like_address(line):
+        return False
     if any(word in lowered for word in EXCLUDE_ARTIST_WORDS):
         return False
-
     if re.search(r"\b(19[6-9]\d|20[0-4]\d)\b", line):
         return False
-
     if "$" in line:
         return False
 
-    # Allow caps-heavy lines and artist separator styles
     alpha_chars = sum(c.isalpha() for c in line)
     upper_chars = sum(c.isupper() for c in line)
-    if alpha_chars >= 4 and upper_chars / max(alpha_chars, 1) > 0.6:
+
+    if "&" in line:
         return True
 
-    if "&" in line or "feat" in lowered:
+    if alpha_chars >= 4 and upper_chars / max(alpha_chars, 1) > 0.6:
         return True
 
     return False
 
 
 def extract_venue(lines) -> str:
-    venue_candidates = []
+    candidates = []
     for line in lines:
-        if looks_like_venue(line):
-            venue_candidates.append(line)
+        if looks_like_venue(line) and not looks_like_address(line):
+            candidates.append(line)
 
-    if venue_candidates:
-        # Prefer shorter venue-like line over address-like line
-        venue_candidates = sorted(venue_candidates, key=lambda x: (len(x), x))
-        return venue_candidates[0]
+    if candidates:
+        candidates = sorted(candidates, key=lambda x: (len(x), x))
+        return normalize_venue(candidates[0])
 
     return ""
 
@@ -337,15 +388,33 @@ def extract_artist(lines, venue="", city="", year="") -> str:
             continue
         if year and year in line:
             continue
+        if looks_like_address(line):
+            continue
+
         if looks_like_artist(line):
-            candidates.append(line)
+            score = 0
+
+            if "&" in line:
+                score += 10
+            if line.isupper():
+                score += 6
+            if "PRESENTS" in line.upper():
+                score -= 10
+            if "THE BOWERY PRESENTS" in line.upper():
+                score -= 10
+            if len(line) <= 40:
+                score += 3
+            if any(word in lowered for word in EXCLUDE_ARTIST_WORDS):
+                score -= 8
+
+            candidates.append((score, line))
 
     if not candidates:
         return ""
 
-    # Prefer lines that are not too long and contain mostly letters
-    candidates = sorted(candidates, key=lambda x: (abs(len(x) - 18), -sum(c.isalpha() for c in x)))
-    return candidates[0].title() if candidates[0].isupper() else candidates[0]
+    candidates.sort(key=lambda x: (-x[0], abs(len(x[1]) - 20)))
+    best = candidates[0][1]
+    return best.title() if best.isupper() else best
 
 
 def prompt_with_default(label: str, default: str = "", required: bool = False) -> str:
@@ -360,6 +429,87 @@ def prompt_with_default(label: str, default: str = "", required: bool = False) -
             print("This field is required.")
             continue
         return final
+
+
+def prompt_role(label: str, default: str = "primary") -> str:
+    while True:
+        value = prompt_with_default(label, default).strip().lower()
+        if value in ROLE_OPTIONS:
+            return value
+        print("Role must be one of: primary, headliner, opener, support, guest")
+
+
+def parse_collaboration_display_artist(display_artist: str):
+    """
+    Split true collaborations like:
+    PJ Harvey & John Parish
+    Simon and Garfunkel
+    Band A / Band B
+    """
+    text = display_artist.strip()
+
+    # preserve display label exactly, but split internal artist records
+    if " & " in text:
+        parts = [p.strip() for p in text.split(" & ") if p.strip()]
+        return parts
+
+    if " and " in text.lower():
+        parts = [p.strip() for p in re.split(r"\band\b", text, flags=re.IGNORECASE) if p.strip()]
+        return parts
+
+    if " / " in text:
+        parts = [p.strip() for p in text.split(" / ") if p.strip()]
+        return parts
+
+    return [text]
+
+
+def build_artist_fields(display_artist: str, display_role: str, additional_artists_raw: str):
+    display_artist = display_artist.strip()
+    display_artist_slug = slugify(display_artist)
+
+    artists = []
+    searchable = []
+
+    display_parts = parse_collaboration_display_artist(display_artist)
+
+    # If the display artist is a true collaboration, split into multiple primary artists
+    if len(display_parts) > 1 and display_role == "primary":
+        for part in display_parts:
+            artists.append({
+                "name": part,
+                "slug": slugify(part),
+                "role": "primary"
+            })
+            searchable.append(slugify(part))
+        searchable.append(display_artist_slug)
+    else:
+        artists.append({
+            "name": display_artist,
+            "slug": display_artist_slug,
+            "role": display_role
+        })
+        searchable.append(display_artist_slug)
+
+    additional_items = [item.strip() for item in additional_artists_raw.split(",") if item.strip()]
+
+    for item in additional_items:
+        role = prompt_role(f"Role for {item}", "opener")
+        item_slug = slugify(item)
+        artists.append({
+            "name": item,
+            "slug": item_slug,
+            "role": role
+        })
+        searchable.append(item_slug)
+
+    # Deduplicate searchable slugs while preserving order
+    searchable_unique = []
+    for slug in searchable:
+        if slug not in searchable_unique:
+            searchable_unique.append(slug)
+
+    return display_artist_slug, artists, searchable_unique
 
 
 def build_share_page(ticket: dict, site_base_url: str) -> str:
@@ -426,7 +576,7 @@ def main():
 
     site_base_url = "https://www.anthonycdorsey.com/shows-ive-seen"
 
-    print("\nShows I Saw - OCR Ingest Helper v1.1\n")
+    print("\nShows I Saw - OCR Ingest Helper v1.1B\n")
 
     source_file = choose_incoming_file(incoming_dir)
     print(f"\nSelected file: {source_file.name}")
@@ -455,8 +605,17 @@ def main():
     print(f"- price:      {guessed_price}")
     print()
 
-    artist = prompt_with_default("Artist", guessed_artist, required=True)
-    venue = prompt_with_default("Venue", guessed_venue, required=True)
+    display_artist = prompt_with_default("Display artist", guessed_artist, required=True)
+    display_role = prompt_role("Role for display artist", "primary")
+    additional_artists_raw = prompt_with_default("Additional billed artists/openers (comma-separated)", "")
+
+    artist_slug, artists, searchable_artist_slugs = build_artist_fields(
+        display_artist=display_artist,
+        display_role=display_role,
+        additional_artists_raw=additional_artists_raw
+    )
+
+    venue = normalize_venue(prompt_with_default("Venue", guessed_venue, required=True))
     city = normalize_city(prompt_with_default("City", guessed_city, required=True))
     state = normalize_state(prompt_with_default("State", guessed_state))
     country = normalize_country(prompt_with_default("Country", guessed_country))
@@ -472,7 +631,6 @@ def main():
     tags_raw = prompt_with_default("Tags (comma-separated)", "")
     rotation = prompt_with_default("Rotation", "0deg")
 
-    artist_slug = slugify(artist)
     venue_slug = slugify(venue)
     slug = f"{artist_slug}-{venue_slug}-{year}"
 
@@ -491,12 +649,14 @@ def main():
     photos = [item.strip() for item in photos_raw.split(",") if item.strip()]
     tags = [item.strip() for item in tags_raw.split(",") if item.strip()]
 
-    share_title = f"{artist} at {venue}, {year} | Shows I Saw"
-    share_description = copy_text if copy_text else f"{artist} at {venue} in {city}, {year}."
+    share_title = f"{display_artist} at {venue}, {year} | Shows I Saw"
+    share_description = copy_text if copy_text else f"{display_artist} at {venue} in {city}, {year}."
 
     ticket = {
-        "artist": artist,
+        "artist": display_artist,
         "artistSlug": artist_slug,
+        "artists": artists,
+        "searchableArtistSlugs": searchable_artist_slugs,
         "exactDate": exact_date,
         "year": year,
         "venue": venue,
@@ -530,6 +690,8 @@ def main():
     ticket_object = f"""{{
   artist: "{js_escape(ticket['artist'])}",
   artistSlug: "{ticket['artistSlug']}",
+  artists: {json.dumps(ticket['artists'], ensure_ascii=False)},
+  searchableArtistSlugs: {json.dumps(ticket['searchableArtistSlugs'], ensure_ascii=False)},
   exactDate: "{ticket['exactDate']}",
   year: "{ticket['year']}",
   venue: "{js_escape(ticket['venue'])}",
@@ -593,6 +755,7 @@ share/{slug}/index.html
 11. PUBLISH CHECKLIST
 
 - Review OCR output in draft JSON
+- Review artist roles carefully
 - Review location fields carefully
 - Create final root ticket image: {final_image_filename}
 - Create final share image: {share_image_filename}
@@ -613,7 +776,10 @@ share/{slug}/index.html
     print(f"Notes file:         {notes_path}")
     print(f"Share page draft:   {share_page_path}")
     print("\nFinal normalized values:")
-    print(f"- artist:           {artist}")
+    print(f"- artist:           {display_artist}")
+    print(f"- artistSlug:       {artist_slug}")
+    print(f"- artists:          {artists}")
+    print(f"- searchable:       {searchable_artist_slugs}")
     print(f"- venue:            {venue}")
     print(f"- city:             {city}")
     print(f"- state:            {state}")

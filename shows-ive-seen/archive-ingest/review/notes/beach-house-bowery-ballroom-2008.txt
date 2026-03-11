@@ -1,0 +1,108 @@
+SHOWS I SAW - OCR INGEST OUTPUT
+
+1. SELECTED INCOMING FILE
+beach-house-scan.jpg
+
+2. ORIGINAL FILE COPIED TO
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\originals\20260310-195350-beach-house-scan.jpg
+
+3. DRAFT JSON FILE
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\draft-json\beach-house-bowery-ballroom-2008.json
+
+4. SHARE PAGE DRAFT
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\share-pages\beach-house-bowery-ballroom-2008.html
+
+5. FINAL ROOT IMAGE FILENAME
+beach-house-bowery-ballroom-2008.jpg
+
+6. FINAL SHARE IMAGE FILENAME
+beach-house-bowery-ballroom-2008-share.jpg
+
+7. SUGGESTED SHARE FOLDER PATH
+share/beach-house-bowery-ballroom-2008/
+
+8. SUGGESTED LIVE SHARE PAGE FILE
+share/beach-house-bowery-ballroom-2008/index.html
+
+9. OCR TEXT PREVIEW
+
+“BYOS0 2] GA GAQ 39 A-OM : EBY@4@2 ras
+TSP og SSENMAD STANDING ——ES002— SB = a 8 2 |
+_ | ae =m CN 33380 ¢ —— A 2 5
+tse HI/AISLE fj . , om | Oo Se | Q = .
+cn” «| BEACH HOUSE ig G8 Ge 8 E:i
+pea > 18 AND OVER WITH 14) CA382B0N © a 2 2 '
+GAO mg | BOWERY BALLROOM ‘ a GAG = Om * =
+| BoUseoK 6 DELANCEY ST. | \ 13.00 he ak !
+j2apecoy MED APR 2, 2008 BPH IRS | 39 NS Gd
+Fates a aatataes
+“ByO%t2 GA
+GAO 39
+(Of
+EBYO402
+ES Oq “CEN NADI
+R
+SFAND
+TN
+A?
+STG
+ENTICONR
+ut
+: CN 333890 ¢
+:
+rE
+oF arouse
+BEACK HOUSE ©
+g GA
+ix
+18 AND OVER Win Ii}
+A BIR 5 et ot
+7 =r 2
+' LASOADUN
+fos
+vine
+EEA
+ost
+BOWERY BALLROOM
+GAQ
+—
+
+10. PASTE-READY TICKET OBJECT FOR tickets.js
+
+{
+  artist: "Beach House",
+  artistSlug: "beach-house",
+  artists: [{"name": "Beach House", "slug": "beach-house", "role": "headliner"}, {"name": "Papercuts", "slug": "papercuts", "role": "opener"}, {"name": "Luke Temple", "slug": "luke-temple", "role": "opener"}],
+  searchableArtistSlugs: ["beach-house", "papercuts", "luke-temple"],
+  exactDate: "2008-04-02",
+  year: "2008",
+  venue: "Bowery Ballroom",
+  city: "New York",
+  state: "NY",
+  country: "USA",
+  copy: "I went to this show primarily to see Papercuts. I loved their earlier albums Can't Go Back and Mockingbird, however, I was supremely surprised by the Beach House performance. They were absolutely amazing.",
+  extendedNotes: "",
+  companions: ["Jon D."],
+  photos: [],
+  youtubeUrl: "https://youtu.be/09ifgfG2wF0?si=cXGQAu6LooaTTBmP",
+  price: "$13.00",
+  tags: ["Bowery", "NYC", "Surprise", "Devotion", "Papercuts", "Fun"],
+  shareTitle: "Beach House at Bowery Ballroom, 2008 | Shows I Saw",
+  shareDescription: "I went to this show primarily to see Papercuts. I loved their earlier albums Can't Go Back and Mockingbird, however, I was supremely surprised by the Beach House performance. They were absolutely amazing.",
+  shareImage: "beach-house-bowery-ballroom-2008-share.jpg",
+  slug: "beach-house-bowery-ballroom-2008",
+  img: "beach-house-bowery-ballroom-2008.jpg",
+  rotation: "0deg"
+},
+
+11. PUBLISH CHECKLIST
+
+- Review OCR output in draft JSON
+- Review artist roles carefully
+- Review location fields carefully
+- Create final root ticket image: beach-house-bowery-ballroom-2008.jpg
+- Create final share image: beach-house-bowery-ballroom-2008-share.jpg
+- Paste ticket object into tickets.js
+- Copy share page draft into share/beach-house-bowery-ballroom-2008/index.html
+- Test the hash link locally
+- Deploy only after manual review
