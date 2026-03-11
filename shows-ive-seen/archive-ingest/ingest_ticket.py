@@ -50,12 +50,40 @@ CITY_ALIASES = {
     "philadelphia": "Philadelphia",
 }
 
+KNOWN_CITY_STATES = {
+    "New York": "NY",
+    "Brooklyn": "NY",
+    "Austin": "TX",
+    "Boston": "MA",
+    "Chicago": "IL",
+    "Los Angeles": "CA",
+    "San Francisco": "CA",
+    "Nashville": "TN",
+    "Atlanta": "GA",
+    "Seattle": "WA",
+    "Philadelphia": "PA",
+    "Washington": "DC",
+}
+
 KNOWN_VENUE_KEYWORDS = [
     "stadium", "theatre", "theater", "center", "centre", "arena", "hall",
     "garden", "club", "pavilion", "ballroom", "bowl", "lounge", "auditorium",
     "amphitheatre", "amphitheater", "room", "palace", "barclays", "beacon",
     "hammerstein", "bowery", "lunch", "forest hills"
 ]
+
+VENUE_LOCATION_HINTS = {
+    "Bowery Ballroom": {"state": "NY", "cities": {"New York"}},
+    "Beacon Theatre": {"state": "NY", "cities": {"New York"}},
+    "Barclays Center": {"state": "NY", "cities": {"Brooklyn", "New York"}},
+    "Forest Hills Stadium": {"state": "NY", "cities": {"Forest Hills", "Queens", "New York"}},
+    "Hammerstein Ballroom": {"state": "NY", "cities": {"New York"}},
+    "Madison Square Garden": {"state": "NY", "cities": {"New York"}},
+    "Frank Erwin Center": {"state": "TX", "cities": {"Austin"}},
+    "Liberty Lunch": {"state": "TX", "cities": {"Austin"}},
+    "Austin Music Hall": {"state": "TX", "cities": {"Austin"}},
+    "Radio City Music Hall": {"state": "NY", "cities": {"New York"}},
+}
 
 ADDRESS_WORDS = [
     "broadway", "street", "st.", "st ", "avenue", "ave", "road", "rd", "blvd",
@@ -92,6 +120,9 @@ MONTHS = {
 }
 
 ROLE_OPTIONS = {"primary", "headliner", "opener", "support", "guest"}
+COMMON_PRICE_CENTS = {"00", "25", "50", "75", "95", "99"}
+ARTIST_JUNK_PATTERN = re.compile(r"[©®™℗]+")
+ARTIST_SUSPICIOUS_PATTERN = re.compile(r"[|_~`<>\[\]{}]")
 
 
 def slugify(text: str) -> str:
@@ -162,25 +193,45 @@ def normalize_venue(value: str) -> str:
     return raw.title() if raw.isupper() else raw
 
 
+def cleanup_display_artist(value: str) -> tuple[str, list[str]]:
+    original = value.strip()
+    cleaned = ARTIST_JUNK_PATTERN.sub("", original)
+    cleaned = cleaned.replace("\uFFFD", "")
+    cleaned = re.sub(r"\s+", " ", cleaned)
+    cleaned = cleaned.strip(" -|/_.,;:")
+    warnings = []
+
+    if cleaned != original:
+        warnings.append(f"Artist cleanup removed suspicious characters: '{original}' -> '{cleaned}'")
+
+    if not cleaned:
+        warnings.append("Display artist is empty after cleanup.")
+    elif ARTIST_SUSPICIOUS_PATTERN.search(cleaned):
+        warnings.append("Display artist still contains suspicious OCR-style characters.")
+    elif re.search(r"[^A-Za-z0-9\)\]!?'&./,+-]$", cleaned):
+        warnings.append("Display artist ends with a suspicious trailing character.")
+
+    return cleaned, warnings
+
 def choose_incoming_file(incoming_dir: Path) -> Path:
     files = sorted(
-        [p for p in incoming_dir.iterdir() if p.is_file() and p.suffix.lower() in SUPPORTED_EXTENSIONS],
-        key=lambda p: p.name.lower()
+        [path for path in incoming_dir.iterdir() if path.is_file() and path.suffix.lower() in SUPPORTED_EXTENSIONS],
+        key=lambda path: path.name.lower()
     )
 
     if not files:
         raise FileNotFoundError("No supported image files found in archive-ingest/incoming/")
 
     print("\nAvailable files in incoming/\n")
-    for i, path in enumerate(files, start=1):
-        print(f"{i}. {path.name}")
+    for index, path in enumerate(files, start=1):
+        print(f"{index}. {path.name}")
 
     while True:
         choice = input("\nChoose a file number: ").strip()
         if choice.isdigit():
-            idx = int(choice)
-            if 1 <= idx <= len(files):
-                return files[idx - 1]
+            selected_index = int(choice)
+            if 1 <= selected_index <= len(files):
+                return files[selected_index - 1]
         print("Please enter a valid number from the list above.")
 
 
@@ -498,7 +549,6 @@ def build_artist_fields(display_artist: str, display_role: str, additional_artis
 
     return display_artist_slug, artists, searchable_unique
 
-
 def build_share_page(ticket: dict, site_base_url: str) -> str:
     slug = ticket["slug"]
     share_title = ticket["shareTitle"]
@@ -553,6 +603,150 @@ def reserve_output_path(path: Path) -> Path:
 
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     return path.with_name(f"{path.stem}-{timestamp}{path.suffix}")
+
+
+def normalize_for_match(value: str) -> str:
+    value = value.casefold()
+    value = re.sub(r"[^a-z0-9]+", " ", value)
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def ocr_mention_count(text: str, value: str) -> int:
+    if not value:
+        return 0
+    normalized_text = normalize_for_match(text)
+    normalized_value = normalize_for_match(value)
+    if not normalized_value:
+        return 0
+    return normalized_text.count(normalized_value)
+
+
+def validate_normalized_values(values: dict, ocr_text: str) -> list[str]:
+    warnings = []
+
+    artist = values["display_artist"]
+    venue = values["venue"]
+    city = values["city"]
+    state = values["state"]
+    year = values["year"]
+    exact_date = values["exact_date"]
+    price = values["price"]
+
+    _, artist_cleanup_warnings = cleanup_display_artist(artist)
+    warnings.extend(artist_cleanup_warnings)
+
+    if len(artist.strip()) < 2:
+        warnings.append("Display artist looks too short. Please confirm it before continuing.")
+
+    if not venue:
+        warnings.append("Venue is blank.")
+
+    expected_state = KNOWN_CITY_STATES.get(city)
+    if expected_state and state and state != expected_state:
+        warnings.append(f"City/state mismatch: {city} is usually {expected_state}, not {state}.")
+
+    venue_hint = VENUE_LOCATION_HINTS.get(venue)
+    if venue_hint:
+        expected_venue_state = venue_hint["state"]
+        expected_cities = venue_hint["cities"]
+        if state and state != expected_venue_state:
+            warnings.append(f"Venue/state mismatch: {venue} is expected to be in {expected_venue_state}, not {state}.")
+        if city and city not in expected_cities:
+            expected_list = ", ".join(sorted(expected_cities))
+            warnings.append(f"Venue/city mismatch: {venue} is usually paired with {expected_list}, not {city}.")
+
+    if not re.fullmatch(r"\d{4}", year):
+        warnings.append("Year should be a 4-digit value.")
+    else:
+        year_number = int(year)
+        if year_number < 1960 or year_number > 2049:
+            warnings.append("Year is outside the expected archive range (1960-2049).")
+
+    if exact_date and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", exact_date):
+        warnings.append("Exact date should use YYYY-MM-DD format.")
+    elif exact_date and not exact_date.startswith(year):
+        warnings.append("Exact date year does not match the selected year.")
+
+    if price:
+        if not re.fullmatch(r"\$\d+(?:\.\d{2})?", price):
+            warnings.append("Price should look like $35.00.")
+        else:
+            amount = float(price.replace("$", ""))
+            cents = price.split(".")[-1] if "." in price else "00"
+            if amount < 5 or amount > 500:
+                warnings.append("Price is outside the expected sanity range ($5-$500).")
+            if cents not in COMMON_PRICE_CENTS:
+                warnings.append(f"Price has uncommon cents ({cents}). Confirm it carefully before continuing.")
+            if ocr_mention_count(ocr_text, price) == 0:
+                warnings.append("Price does not appear to match OCR text exactly. Confirm it carefully before continuing.")
+
+    return warnings
+
+
+def print_normalized_summary(values: dict) -> None:
+    print("\nReview normalized values before slug generation:\n")
+    print(f"- artist:      {values['display_artist']}")
+    print(f"- venue:       {values['venue']}")
+    print(f"- city:        {values['city']}")
+    print(f"- state:       {values['state']}")
+    print(f"- country:     {values['country']}")
+    print(f"- year:        {values['year']}")
+    print(f"- exactDate:   {values['exact_date']}")
+    print(f"- price:       {values['price']}")
+    print(f"- copy:        {values['copy_text']}")
+    print()
+
+
+def review_normalized_values(values: dict, ocr_text: str) -> dict:
+    while True:
+        cleaned_artist, cleanup_warnings = cleanup_display_artist(values["display_artist"])
+        if cleaned_artist != values["display_artist"]:
+            print(f"\nArtist cleanup suggestion applied: {values['display_artist']} -> {cleaned_artist}")
+            values["display_artist"] = cleaned_artist
+
+        warnings = validate_normalized_values(values, ocr_text)
+        print_normalized_summary(values)
+
+        if warnings:
+            print("Warnings:\n")
+            for warning in warnings:
+                print(f"- {warning}")
+            print()
+        else:
+            print("No validation warnings detected.\n")
+
+        choice = input(
+            "Press Enter to continue, or type a field to edit "
+            "(artist, venue, city, state, country, year, date, price, copy): "
+        ).strip().lower()
+
+        if not choice:
+            if warnings:
+                confirm = input("Warnings remain. Continue anyway? [y/N]: ").strip().lower()
+                if confirm != "y":
+                    continue
+            return values
+
+        if choice == "artist":
+            values["display_artist"] = prompt_with_default("Display artist", values["display_artist"], required=True)
+        elif choice == "venue":
+            values["venue"] = normalize_venue(prompt_with_default("Venue", values["venue"], required=True))
+        elif choice == "city":
+            values["city"] = normalize_city(prompt_with_default("City", values["city"], required=True))
+        elif choice == "state":
+            values["state"] = normalize_state(prompt_with_default("State", values["state"]))
+        elif choice == "country":
+            values["country"] = normalize_country(prompt_with_default("Country", values["country"]))
+        elif choice == "year":
+            values["year"] = prompt_with_default("Year (YYYY)", values["year"], required=True)
+        elif choice == "date":
+            values["exact_date"] = prompt_with_default("Exact date (YYYY-MM-DD)", values["exact_date"])
+        elif choice == "price":
+            values["price"] = prompt_with_default("Ticket price", values["price"])
+        elif choice == "copy":
+            values["copy_text"] = prompt_with_default("Short memory/copy text", values["copy_text"])
+        else:
+            print("Unknown field. Please choose one of the listed field names.")
 
 
 def build_ticket_object(ticket: dict) -> str:
@@ -720,7 +914,6 @@ Slug: {ticket['slug']}
 This tool only creates review artifacts. It never updates the live site automatically.
 """
 
-
 def main() -> None:
     script_path = Path(__file__).resolve()
     archive_ingest_dir = script_path.parent
@@ -737,7 +930,7 @@ def main() -> None:
 
     site_base_url = "https://www.anthonycdorsey.com/shows-ive-seen"
 
-    print("\nShows I Saw - OCR Ingest Helper v2.0\n")
+    print("\nShows I Saw - OCR Ingest Helper v2.1\n")
     print("This tool creates review artifacts only. It never updates the live site automatically.\n")
 
     source_file = choose_incoming_file(incoming_dir)
@@ -768,14 +961,15 @@ def main() -> None:
     print()
 
     display_artist = prompt_with_default("Display artist", guessed_artist, required=True)
+    display_artist, initial_artist_cleanup_warnings = cleanup_display_artist(display_artist)
+    if initial_artist_cleanup_warnings:
+        print("\nArtist cleanup notes:")
+        for warning in initial_artist_cleanup_warnings:
+            print(f"- {warning}")
+        print()
+
     display_role = prompt_role("Role for display artist", "primary")
     additional_artists_raw = prompt_with_default("Additional billed artists/openers (comma-separated)", "")
-
-    artist_slug, artists, searchable_artist_slugs = build_artist_fields(
-        display_artist=display_artist,
-        display_role=display_role,
-        additional_artists_raw=additional_artists_raw,
-    )
 
     venue = normalize_venue(prompt_with_default("Venue", guessed_venue, required=True))
     city = normalize_city(prompt_with_default("City", guessed_city, required=True))
@@ -792,6 +986,37 @@ def main() -> None:
     youtube_url = normalize_youtube_url(prompt_with_default("YouTube URL", ""))
     tags_raw = prompt_with_default("Tags (comma-separated)", "")
     rotation = prompt_with_default("Rotation", "0deg")
+
+    normalized_values = review_normalized_values(
+        {
+            "display_artist": display_artist,
+            "venue": venue,
+            "city": city,
+            "state": state,
+            "country": country,
+            "year": year,
+            "exact_date": exact_date,
+            "price": price,
+            "copy_text": copy_text,
+        },
+        ocr_text,
+    )
+
+    display_artist = normalized_values["display_artist"]
+    venue = normalized_values["venue"]
+    city = normalized_values["city"]
+    state = normalized_values["state"]
+    country = normalized_values["country"]
+    year = normalized_values["year"]
+    exact_date = normalized_values["exact_date"]
+    price = normalized_values["price"]
+    copy_text = normalized_values["copy_text"]
+
+    artist_slug, artists, searchable_artist_slugs = build_artist_fields(
+        display_artist=display_artist,
+        display_role=display_role,
+        additional_artists_raw=additional_artists_raw,
+    )
 
     venue_slug = slugify(venue)
     slug = f"{artist_slug}-{venue_slug}-{year}"
