@@ -1,0 +1,53 @@
+SHOWS I SAW - SINGLE TICKET INGEST REVIEW
+
+Selected source:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\incoming\pj-harvey-john-parish-beacon-theater-2009.jpg
+
+Saved source archive copy:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\originals\pj-harvey-and-john-parish-beacon-theater-2009-original.jpg
+
+Final canonical image uses original (no enhancement applied):
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\originals\original-copy\pj-harvey-and-john-parish-beacon-theater-2009-original.jpg
+
+Temporary OCR working image:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\working\ocr-support\pj-harvey-and-john-parish-beacon-theater-2009-ocr-working.jpg
+
+Draft JSON:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\draft-json\pj-harvey-and-john-parish-beacon-theater-2009.json
+
+Contact sheet:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\contact-sheets\pj-harvey-and-john-parish-beacon-theater-2009-contact-sheet.jpg
+
+Proposed metadata:
+- artist: PJ Harvey & John Parish
+- venue: Beacon Theater
+- year: 2009
+- exactDate: 
+- city: 
+- state: 
+- price: 
+- slug: pj-harvey-and-john-parish-beacon-theater-2009
+- reviewSlug: review-pj-harvey-john-parish-beacon-theater-2009
+
+Confidence:
+- OCR average: 0.44
+- artist: 0.82
+- venue: 0.84
+- year: 0.74
+- exact date: 0.00
+- overall: 0.75
+- low confidence: no
+
+Canonical naming committed:
+yes
+
+OCR working-image notes:
+- Applied illumination normalization to reduce uneven scan lighting and faded paper cast.
+- Raised bright low-saturation paper regions toward off-white while preserving artwork and darker ink regions.
+- Applied mild edge-preserving sharpening for OCR readability without redrawing text.
+
+Warnings:
+- Overall OCR confidence is weak; review text carefully.
+
+Next step:
+- Review metadata/content and manually publish later.

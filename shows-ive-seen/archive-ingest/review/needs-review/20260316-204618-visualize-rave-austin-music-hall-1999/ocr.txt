@@ -1,0 +1,30 @@
+SHOWS I SAW - OCR DIAGNOSTICS
+
+Selected best variant: display
+Selected config: --psm 6 [display]
+
+RAW OCR TEXT
+
+Ley le ‘ MIND MELT MINISTRIES AND ©
+Ni eee * NEPTUNE PROJEGT PRESENT =a
+es (ao 8 VIiIeti ai iIZe can
+ee LO Fl gm aut: GQ oe rg oO |
+< ‘ hy a 3 SN r for ROBUST ng Fe =
+NY ) . } a © : F % oS _ Lae ooo 4 e = oO
+ey ree -ewes - eeee a eeeee ccee
+NEY S S CAI POE AUSTIN MUSIC HALL [E
+iar : iT) Vibe AWSTIN, TEXAS =
+ALOU ki ; |
+
+CLEANED OCR TEXT
+
+Ley le ‘ MIND MELT MINISTRIES AND ©
+Ni eee * NEPTUNE PROJEGT PRESENT =a
+es (ao 8 VIiIeti ai iIZe can
+ee LO Fl gm aut: GQ oe rg oO |
+< ‘ hy a 3 SN r for ROBUST ng Fe =
+NY ) . } a © : F % oS _ Lae ooo 4 e = oO
+ey ree -ewes - eeee a eeeee ccee
+NEY S S CAI POE AUSTIN MUSIC HALL [E
+iar : iT) Vibe AWSTIN, TEXAS =
+ALOU ki ; |

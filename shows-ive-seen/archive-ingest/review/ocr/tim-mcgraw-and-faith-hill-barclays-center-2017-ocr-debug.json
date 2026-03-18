@@ -1,0 +1,67 @@
+{
+  "selectedBestVariant": "ocr-gray",
+  "selectedConfig": "--psm 11 [ocr-gray]",
+  "averageConfidence": 0.75,
+  "runs": [
+    {
+      "variant": "display",
+      "config": "--psm 6",
+      "averageConfidence": 0.596,
+      "lineCount": 7,
+      "characterCount": 316,
+      "score": 60.836,
+      "rawText": "EVENT CODE SECTION ROW/BOX SEAT ADMISSION EVENT CODE ; ga\nA1027E 225 20 12 COMP FBALO27E | Co\n> 0.00 UPPER LEVEL 0.00 ~*~ 383x | FRaeee\na TIM MCGRAW & FAITH HILL CN 58628 col=e= See\n9,,383X THE WORLD TOUR 2017 —0269BCE SJ=e= A ,\nCE603C NO PROF CAMS VID/AUD REC © 0.00 RE== Baw |\nccauom FRI OCT 27 2017 7:30 PM sexx —",
+      "cleanedText": "EVENT CODE SECTION ROW/BOX SEAT ADMISSION EVENT CODE ; ga\nA1027E 225 20 12 COMP FBALO27E | Co\n> 0.00 UPPER LEVEL 0.00 ~*~ 383x | FRaeee\na TIM MCGRAW & FAITH HILL CN 58628 col=e= See\n9,,383X THE WORLD TOUR 2017 —0269BCE SJ=e= A ,\nCE603C NO PROF CAMS VID/AUD REC © 0.00 RE== Baw |\nccauom FRI OCT 27 2017 7:30 PM sexx —"
+    },
+    {
+      "variant": "ocr-gray",
+      "config": "--psm 6",
+      "averageConfidence": 0.672,
+      "lineCount": 5,
+      "characterCount": 207,
+      "score": 68.429,
+      "rawText": "$ 0,00 UPPER LEVEL 0.00 ~ 383x | [eae\na TIM MCGRAW & FAITH HILL CN 38628 60 == oe\n0, 383X THE WORLD TOUR 2017 (0269BCE O== aa ,\n20 12 BARCLAYS CENTER o 9 oe *\nCE603C NO PROF CAMS VID/AUD REC © 0.00 2/EE= Eee",
+      "cleanedText": "$ 0,00 UPPER LEVEL 0.00 ~ 383x | [eae\na TIM MCGRAW & FAITH HILL CN 38628 60 == oe\n0, 383X THE WORLD TOUR 2017 (0269BCE O== aa ,\n20 12 BARCLAYS CENTER o 9 oe *\nCE603C NO PROF CAMS VID/AUD REC © 0.00 2/EE= Eee"
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 6",
+      "averageConfidence": 0.413,
+      "lineCount": 8,
+      "characterCount": 377,
+      "score": 42.481,
+      "rawText": "/ , * 9 EVENTCODE | SECTION ROW/BOX SEAT — —_—~—__ __ : ————\n| Suc... ADMISS TT , rae 5 :\n| Saa00 UPPER LEVEL LPO. 00 + * 383x | fee 7\n| temo. | TIM MCGRAW & FAITH HILL” CN 58628 SESS | ee | |\n| Qw383X i THE WORLD TOUR 2017.\" CO269BCE™ Sts FL-o | 7\n720 12) | BARCLAYS CENTER ™ 20 SER Hh OS\n| CE603C NO PROF CAMS VID/AUD REC C 0.00 RiES= Naa\noP ee ee oo be, : barclayscenter.com",
+      "cleanedText": "/ , * 9 EVENTCODE | SECTION ROW/BOX SEAT — —_—~—__ __ : ————\n| Suc... ADMISS TT , rae 5 :\n| Saa00 UPPER LEVEL LPO. 00 + * 383x | fee 7\n| temo. | TIM MCGRAW & FAITH HILL” CN 58628 SESS | ee | |\n| Qw383X i THE WORLD TOUR 2017.\" CO269BCE™ Sts FL-o | 7\n720 12) | BARCLAYS CENTER ™ 20 SER Hh OS\n| CE603C NO PROF CAMS VID/AUD REC C 0.00 RiES= Naa\noP ee ee oo be, : barclayscenter.com"
+    },
+    {
+      "variant": "display",
+      "config": "--psm 11",
+      "averageConfidence": 0.684,
+      "lineCount": 46,
+      "characterCount": 458,
+      "score": 69.557,
+      "rawText": "EVENT CODE\n\nSECTION\n\nROW/BOX\n\nSEAT\n\nADMISSION\n\nEVENT CODE\n\nA1027E\n\n225\n\n20 12\n\nCOMP\n\nEBA1O27E\n\nUPPER LEVEL\n\n0.00\n\n383X\n\n00\n\nCN 58628\n\nSes\n\nSECTION\n\nTIM MCGRAW & FAITH HILL\n\nPara] es\n\nC=\n\nws\n\n225\n\nSOUL2SOUL ~~\n\nC7SRSGGE A DES\n\neevee os eres\n\n0, 383X\n\nTHE WORLD TOUR 2017\n\n(O269BCE\n\nrm\n\nFO ne ne\n\nSea S BSE\n\nBARCLAYS CENTER\n\n(ea eS\n\nro\n\nevel?\n\nrow 20\n\naE SE\n\nCE603C\n\nNC PROF CAMS VID/AUD REC\n\n(\n\n0.00\n\nFRI OCT 27 2017 7:30 PM\n\nSEAT\n\narcla\n\nPRICE (TAX INCLUDED)",
+      "cleanedText": "EVENT CODE\nSECTION\nROW/BOX\nSEAT\nADMISSION\nEVENT CODE\nA1027E\n225\n20 12\nCOMP\nEBA1O27E\nUPPER LEVEL\n0.00\n383X\n00\nCN 58628\nSes\nSECTION\nTIM MCGRAW & FAITH HILL\nPara] es\nC=\nws\n225\nSOUL2SOUL ~~\nC7SRSGGE A DES\neevee os eres\n0, 383X\nTHE WORLD TOUR 2017\n(O269BCE\nrm\nFO ne ne\nSea S BSE\nBARCLAYS CENTER\n(ea eS\nro\nevel?\nrow 20\naE SE\nCE603C\nNC PROF CAMS VID/AUD REC\n(\n0.00\nFRI OCT 27 2017 7:30 PM\nSEAT\narcla\nPRICE (TAX INCLUDED)"
+    },
+    {
+      "variant": "ocr-gray",
+      "config": "--psm 11",
+      "averageConfidence": 0.75,
+      "lineCount": 43,
+      "characterCount": 413,
+      "score": 76.187,
+      "rawText": "EVENT CODE\n\nSECTION\n\nROW/BOX\n\nSEAT\n\nADMISSION\n\nEVENT CODE\n\nA1027E\n\n225\n\n20 12\n\nCOMP\n\nFBALO27E\n\nUPPER LEVEL\n\n0.00\n\n383X\n\nPS ee\n\n00\n\nCN 58628\n\ntis\n\nSECTION\n\nTIM MCGRAW & FAITH HILL\n\n225\n\nSOUL2SOUL\n\nSEC 225\n\neer s eee\n\nfh)\n\nTPE ER\n\nTHE WORLD TOUR 2017\n\n(O0269BCE\n\nrm\n\neS BT\n\nBARCLAYS CENTER\n\nROW\n\nOe |\n\n20 12\n\n20\n\nCE603C\n\nNO PROF CAMS VID/AUD REC\n\n(\n\n0.00\n\nFRI OCT 27 2017 7:30 PM\n\nSEAT\n\nclays:\n\nPRICE (TAX INCLUDED)",
+      "cleanedText": "EVENT CODE\nSECTION\nROW/BOX\nSEAT\nADMISSION\nEVENT CODE\nA1027E\n225\n20 12\nCOMP\nFBALO27E\nUPPER LEVEL\n0.00\n383X\nPS ee\n00\nCN 58628\ntis\nSECTION\nTIM MCGRAW & FAITH HILL\n225\nSOUL2SOUL\nSEC 225\neer s eee\nfh)\nTPE ER\nTHE WORLD TOUR 2017\n(O0269BCE\nrm\neS BT\nBARCLAYS CENTER\nROW\nOe |\n20 12\n20\nCE603C\nNO PROF CAMS VID/AUD REC\n(\n0.00\nFRI OCT 27 2017 7:30 PM\nSEAT\nclays:\nPRICE (TAX INCLUDED)"
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 11",
+      "averageConfidence": 0.498,
+      "lineCount": 96,
+      "characterCount": 741,
+      "score": 51.038,
+      "rawText": "~\n\na\n\nEVENT CODE\n\nSECTION\n\nROW/BOX\n\nSEAT\n\nS\n\nADMISSION ©\n\n\" EVENT CODE\n\nNeg\n\nag 1\n\nAl027E 225\n\n20. ae\n\nCOMP\n\n- FBA1027E\n\nEe\n\n!\n\nPs\n\n> 0,00 U PPER LEVEL\n\n0.00\n\n383x\n\neres ST\n\n]\n\nCN 38628\n\ned RS\n\ns\n\n‘DQ\n\nSECTION\n\n]\n\nTIM MCGRAW 8 | FAITH HILL\n\neee\n\nee\n\n(“4\n\nra\n\nES:\n\n|\n\nEee\n\na\n\n225\n\n|\n\n(Y SOUL2SOUL er ays.\n\ne225\n\nEo Eee\n\nwe. Ree\n\nPGES DS\n\n©:\n\n‘|\n\nener eet arenes\n\nee ee\n\nRe\n\nOw 383%\n\nKOWY\n\nSeal\n\n_ THE WORLD TOUR 2017.\n\n-(0269BCE\n\nPf aoe ee eee Se\n\nETE PES\n\nrem Sere a te\n\n‘a\n\n|\n\nrm\n\nCe |\n\n20 12:\n\n|\n\nof\n\nBARCLAYS CENTER:\n\nROW\n\n20\n\n1\n\nSE he ET\n\na” Ta mee\n\nRA Ws\n\neh\n\nCE603C\n\n|\n\n“NO PROF CAMS VID/AUD REC\n\n.\n\n0.00\n\nOD ate ten\n\neerrarss ee\n\ner Se\n\neee\n\n]\n\nNe\n\nnL\n\nPRICE (TAX INCLUDED)\n\n]\n\nQ PM\n\nSEAT\n\nbarclaysc\n\nFRI OCT 27 2017\n\nce\n\n\\\n\nqQ\n\n~\n\nas",
+      "cleanedText": "~\na\nEVENT CODE\nSECTION\nROW/BOX\nSEAT\nS\nADMISSION ©\n\" EVENT CODE\nNeg\nag 1\nAl027E 225\n20. ae\nCOMP\n- FBA1027E\nEe\n!\nPs\n> 0,00 U PPER LEVEL\n0.00\n383x\neres ST\n]\nCN 38628\ned RS\ns\n‘DQ\nSECTION\n]\nTIM MCGRAW 8 | FAITH HILL\neee\nee\n(“4\nra\nES:\n|\nEee\na\n225\n|\n(Y SOUL2SOUL er ays.\ne225\nEo Eee\nwe. Ree\nPGES DS\n©:\n‘|\nener eet arenes\nee ee\nRe\nOw 383%\nKOWY\nSeal\n_ THE WORLD TOUR 2017.\n-(0269BCE\nPf aoe ee eee Se\nETE PES\nrem Sere a te\n‘a\n|\nrm\nCe |\n20 12:\n|\nof\nBARCLAYS CENTER:\nROW\n20\n1\nSE he ET\na” Ta mee\nRA Ws\neh\nCE603C\n|\n“NO PROF CAMS VID/AUD REC\n.\n0.00\nOD ate ten\neerrarss ee\ner Se\neee\n]\nNe\nnL\nPRICE (TAX INCLUDED)\n]\nQ PM\nSEAT\nbarclaysc\nFRI OCT 27 2017\nce\n\\\nqQ\n~\nas"
+    }
+  ]
+}

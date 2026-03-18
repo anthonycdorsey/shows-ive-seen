@@ -3,6 +3,7 @@ import json
 import re
 import shutil
 from datetime import datetime
+from dataclasses import dataclass
 
 import cv2
 import numpy as np
@@ -123,6 +124,20 @@ ROLE_OPTIONS = {"primary", "headliner", "opener", "support", "guest"}
 COMMON_PRICE_CENTS = {"00", "25", "50", "75", "95", "99"}
 ARTIST_JUNK_PATTERN = re.compile(r"[©®™℗]+")
 ARTIST_SUSPICIOUS_PATTERN = re.compile(r"[|_~`<>\[\]{}]")
+
+
+@dataclass
+class ReviewArtifactResult:
+    ticket: dict
+    provenance: dict
+    research: dict
+    ticket_object: str
+    draft_json_path: Path
+    notes_path: Path
+    share_page_path: Path
+    copied_original_path: Path
+    validation_warnings: list[str]
+    ocr_lines: list[str]
 
 
 def slugify(text: str) -> str:
@@ -913,6 +928,202 @@ Slug: {ticket['slug']}
 
 This tool only creates review artifacts. It never updates the live site automatically.
 """
+
+
+def build_initial_ticket_values(ocr_text: str, ocr_lines: list[str]) -> dict:
+    guessed_year = extract_year(ocr_text)
+    guessed_date = extract_exact_date(ocr_text)
+    guessed_price = extract_price(ocr_text)
+    guessed_city = extract_city(ocr_text)
+    guessed_state = extract_state(ocr_text)
+    guessed_venue = extract_venue(ocr_lines)
+    guessed_artist = extract_artist(ocr_lines, venue=guessed_venue, city=guessed_city, year=guessed_year)
+
+    display_artist, artist_cleanup_warnings = cleanup_display_artist(guessed_artist)
+    if not display_artist:
+        display_artist = guessed_artist.strip()
+
+    return {
+        "display_artist": display_artist,
+        "display_role": "primary",
+        "additional_artists_raw": "",
+        "venue": normalize_venue(guessed_venue),
+        "city": normalize_city(guessed_city),
+        "state": normalize_state(guessed_state),
+        "country": "USA",
+        "year": guessed_year,
+        "exact_date": guessed_date,
+        "price": guessed_price,
+        "copy_text": "",
+        "extended_notes": "",
+        "companions_raw": "",
+        "photos_raw": "",
+        "youtube_url": "",
+        "tags_raw": "",
+        "rotation": "0deg",
+        "initial_artist_cleanup_warnings": artist_cleanup_warnings,
+    }
+
+
+def create_review_artifacts_for_file(
+    source_file: Path,
+    archive_ingest_dir: Path,
+    project_root: Path,
+    site_base_url: str,
+    *,
+    metadata_overrides: dict | None = None,
+) -> ReviewArtifactResult:
+    originals_dir = archive_ingest_dir / "originals"
+    draft_json_dir = archive_ingest_dir / "review" / "draft-json"
+    notes_dir = archive_ingest_dir / "review" / "notes"
+    share_pages_dir = archive_ingest_dir / "review" / "share-pages"
+
+    for folder in [originals_dir, draft_json_dir, notes_dir, share_pages_dir]:
+        folder.mkdir(parents=True, exist_ok=True)
+
+    ocr_text = run_ocr(source_file)
+    ocr_lines = get_lines(ocr_text)
+    values = build_initial_ticket_values(ocr_text, ocr_lines)
+
+    if metadata_overrides:
+        for key, value in metadata_overrides.items():
+            if key in values and isinstance(value, str):
+                values[key] = value.strip()
+
+    values["display_artist"], cleanup_warnings = cleanup_display_artist(values["display_artist"])
+    if not values["display_artist"]:
+        values["display_artist"] = "Unknown Artist"
+
+    values["venue"] = normalize_venue(values["venue"])
+    values["city"] = normalize_city(values["city"])
+    values["state"] = normalize_state(values["state"])
+    values["country"] = normalize_country(values["country"])
+    values["youtube_url"] = normalize_youtube_url(values["youtube_url"])
+    validation_warnings = values["initial_artist_cleanup_warnings"] + cleanup_warnings + validate_normalized_values(values, ocr_text)
+
+    artist_slug, artists, searchable_artist_slugs = build_artist_fields(
+        display_artist=values["display_artist"],
+        display_role=values["display_role"],
+        additional_artists_raw=values["additional_artists_raw"],
+    )
+
+    venue_slug = slugify(values["venue"]) or "unknown-venue"
+    year_for_slug = values["year"] if values["year"] else "unknown-year"
+    slug = f"{artist_slug}-{venue_slug}-{year_for_slug}".strip("-")
+    slug = re.sub(r"-+", "-", slug)
+
+    final_image_filename = f"{slug}.jpg"
+    share_image_filename = f"{slug}-share.jpg"
+    json_filename = f"{slug}.json"
+    notes_filename = f"{slug}.txt"
+    share_page_filename = f"{slug}.html"
+
+    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    copied_original_name = f"{timestamp}-{source_file.name}"
+    copied_original_path = reserve_output_path(originals_dir / copied_original_name)
+    shutil.copy2(source_file, copied_original_path)
+
+    companions = [item.strip() for item in values["companions_raw"].split(",") if item.strip()]
+    photos = [item.strip() for item in values["photos_raw"].split(",") if item.strip()]
+    tags = [item.strip() for item in values["tags_raw"].split(",") if item.strip()]
+
+    venue_for_description = values["venue"] if values["venue"] else "Unknown venue"
+    city_for_description = values["city"] if values["city"] else "Unknown city"
+    year_for_description = values["year"] if values["year"] else "Unknown year"
+    share_title = f"{values['display_artist']} at {venue_for_description}, {year_for_description} | Shows I Saw"
+    share_description = (
+        values["copy_text"]
+        if values["copy_text"]
+        else f"{values['display_artist']} at {venue_for_description} in {city_for_description}, {year_for_description}."
+    )
+
+    ticket = {
+        "artist": values["display_artist"],
+        "artistSlug": artist_slug,
+        "artists": artists,
+        "searchableArtistSlugs": searchable_artist_slugs,
+        "exactDate": values["exact_date"],
+        "year": values["year"],
+        "venue": values["venue"],
+        "city": values["city"],
+        "state": values["state"],
+        "country": values["country"],
+        "copy": values["copy_text"],
+        "extendedNotes": values["extended_notes"],
+        "companions": companions,
+        "photos": photos,
+        "youtubeUrl": values["youtube_url"],
+        "price": values["price"],
+        "tags": tags,
+        "shareTitle": share_title,
+        "shareDescription": share_description,
+        "shareImage": share_image_filename,
+        "slug": slug,
+        "img": final_image_filename,
+        "rotation": values["rotation"],
+    }
+
+    provenance = build_provenance_map(ticket, ocr_text)
+    research = build_research_enrichment(ticket, ocr_text, ocr_lines)
+
+    review_payload = {
+        "reviewStatus": "pending_human_review",
+        "generatedAt": datetime.now().isoformat(timespec="seconds"),
+        "ticket": ticket,
+        "provenance": provenance,
+        "research": research,
+        "source": {
+            "selectedIncomingFile": source_file.name,
+            "sourceOriginal": str(copied_original_path.relative_to(project_root)).replace("\\", "/"),
+            "ocrTextPreview": ocr_lines[:40],
+        },
+        "validationWarnings": validation_warnings,
+    }
+
+    ticket_object = build_ticket_object(ticket)
+    review_payload["ticketObjectForTicketsJs"] = ticket_object
+
+    draft_json_path = reserve_output_path(draft_json_dir / json_filename)
+    with open(draft_json_path, "w", encoding="utf-8") as file_handle:
+        json.dump(review_payload, file_handle, indent=2, ensure_ascii=False)
+
+    share_page_html = build_share_page(ticket, site_base_url)
+    share_page_path = reserve_output_path(share_pages_dir / share_page_filename)
+    with open(share_page_path, "w", encoding="utf-8") as file_handle:
+        file_handle.write(share_page_html)
+
+    notes_text = build_notes_text(
+        source_file=source_file,
+        copied_original_path=copied_original_path,
+        draft_json_path=draft_json_path,
+        share_page_path=share_page_path,
+        final_image_filename=final_image_filename,
+        share_image_filename=share_image_filename,
+        slug=slug,
+        ocr_lines=ocr_lines,
+        ticket_object=ticket_object,
+        ticket=ticket,
+        provenance=provenance,
+        research=research,
+    )
+
+    notes_path = reserve_output_path(notes_dir / notes_filename)
+    with open(notes_path, "w", encoding="utf-8") as file_handle:
+        file_handle.write(notes_text)
+
+    return ReviewArtifactResult(
+        ticket=ticket,
+        provenance=provenance,
+        research=research,
+        ticket_object=ticket_object,
+        draft_json_path=draft_json_path,
+        notes_path=notes_path,
+        share_page_path=share_page_path,
+        copied_original_path=copied_original_path,
+        validation_warnings=validation_warnings,
+        ocr_lines=ocr_lines,
+    )
+
 
 def main() -> None:
     script_path = Path(__file__).resolve()

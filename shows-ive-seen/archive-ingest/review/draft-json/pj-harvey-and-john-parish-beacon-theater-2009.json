@@ -1,0 +1,449 @@
+{
+  "reviewStatus": "ready_for_approval",
+  "generatedAt": "2026-03-16T19:53:07",
+  "canonicalNamingCommitted": true,
+  "metadataConfidence": {
+    "artist": 0.82,
+    "venue": 0.84,
+    "year": 0.74,
+    "exactDate": 0.0,
+    "coreMetadata": 0.806,
+    "overall": 0.749,
+    "ocrAverage": 0.436,
+    "lowConfidence": false,
+    "canonicalEligible": true
+  },
+  "ticket": {
+    "artist": "PJ Harvey & John Parish",
+    "artistSlug": "pj-harvey-and-john-parish",
+    "exactDate": "",
+    "year": "2009",
+    "venue": "Beacon Theater",
+    "city": "New York",
+    "state": "NY",
+    "country": "USA",
+    "copy": "PJ Harvey & John Parish at Beacon Theater in New York, 2009. A preserved ticket from the archive.",
+    "extendedNotes": "This draft keeps the tone concise until a fuller memory is added. The ticket anchors PJ Harvey & John Parish at Beacon Theater in New York during 2009. Update this with personal context, openers, companions, or anything specific that still feels vivid.",
+    "companions": [],
+    "photos": [],
+    "youtubeUrl": "",
+    "price": "",
+    "tags": [
+      "2000s",
+      "new york"
+    ],
+    "shareTitle": "PJ Harvey & John Parish at Beacon Theater, 2009 | Shows I Saw",
+    "shareDescription": "PJ Harvey & John Parish at Beacon Theater in New York, 2009. A preserved ticket from the archive.",
+    "shareImage": "pj-harvey-and-john-parish-beacon-theater-2009-share.jpg",
+    "slug": "pj-harvey-and-john-parish-beacon-theater-2009",
+    "img": "pj-harvey-and-john-parish-beacon-theater-2009.jpg",
+    "rotation": "0deg",
+    "notes": "",
+    "youtube": ""
+  },
+  "proposedMetadata": {
+    "artist": "PJ Harvey & John Parish",
+    "venue": "Beacon Theater",
+    "year": "2009",
+    "exactDate": "",
+    "city": "",
+    "state": "",
+    "country": "USA",
+    "price": ""
+  },
+  "source": {
+    "inputFile": "pj-harvey-john-parish-beacon-theater-2009.jpg",
+    "savedOriginal": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\originals\\pj-harvey-and-john-parish-beacon-theater-2009-original.jpg",
+    "savedCleaned": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\working\\ocr-support\\pj-harvey-and-john-parish-beacon-theater-2009-ocr-working.jpg",
+    "ocrConfig": "--psm 6 [display]",
+    "ocrPreview": [
+      "I ta",
+      "PON 38° 8 FE oo |",
+      ". Hn",
+      "a a ee Os “Tr",
+      "oN g 25e SE",
+      "=i <a on a",
+      "— ~w aj =",
+      "Taj — = aay",
+      "Aaa o> = ote)",
+      "meood .7 FA",
+      "~ D> a | i",
+      "© p= ee",
+      "oe im +57",
+      ". |_|",
+      "co a=. om in",
+      "-- 2m BZo0,",
+      "SS < — :",
+      "ie — YH j-~-_r",
+      "a) ee .,~Bo |",
+      "ne :",
+      "| 7a S",
+      "‘ep ) or =~ S",
+      "SEAT Is) foe] <[->)",
+      "®& o ote)",
+      "nD ©",
+      "‘> ® St > <r |",
+      "| 488877600555 |",
+      "| ticketmaster",
+      "| getticketsat ticketmaster.com _",
+      "ae EXCHANGE EXCEPT AS PROVIDED HEREIN. NO REFUNDS. NO REENTRY."
+    ]
+  },
+  "warnings": [
+    "Overall OCR confidence is weak; review text carefully."
+  ],
+  "debug": {
+    "artistCandidates": [
+      {
+        "accepted": true,
+        "value": "I ta",
+        "score": 0.788,
+        "plausibility": 0.788,
+        "ocrConfidence": 0.12,
+        "topRatio": 0.019,
+        "sourceLine": "I ta",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      }
+    ],
+    "rejectedArtistCandidates": [
+      {
+        "accepted": false,
+        "value": "PON 38°",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.423,
+        "topRatio": 0.039,
+        "sourceLine": "PON 38° 8 FE oo |",
+        "reasons": [
+          "contains digits",
+          "contains too many non-letter characters",
+          "not dominated by alphabetic characters",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Hn",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.2,
+        "topRatio": 0.042,
+        "sourceLine": ". Hn",
+        "reasons": [
+          "not dominated by alphabetic characters"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "\"Tr",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.378,
+        "topRatio": 0.065,
+        "sourceLine": "a a ee Os “Tr",
+        "reasons": [
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "25e",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.302,
+        "topRatio": 0.098,
+        "sourceLine": "oN g 25e SE",
+        "reasons": [
+          "contains digits",
+          "looks like alphanumeric event code",
+          "not dominated by alphabetic characters",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "I <a On A",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.37,
+        "topRatio": 0.234,
+        "sourceLine": "=i <a on a",
+        "reasons": [
+          "not dominated by alphabetic characters",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "W Aj",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.545,
+        "topRatio": 0.246,
+        "sourceLine": "— ~w aj =",
+        "reasons": [
+          "not dominated by alphabetic characters",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Taj aay",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.427,
+        "topRatio": 0.263,
+        "sourceLine": "Taj — = aay",
+        "reasons": [
+          "not dominated by alphabetic characters",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Aaa ote",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.54,
+        "topRatio": 0.336,
+        "sourceLine": "Aaa o> = ote)",
+        "reasons": [
+          "not dominated by alphabetic characters",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Meood",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.303,
+        "topRatio": 0.349,
+        "sourceLine": "meood .7 FA",
+        "reasons": [
+          "contains digits",
+          "not dominated by alphabetic characters"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "D> a | i",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.46,
+        "topRatio": 0.364,
+        "sourceLine": "~ D> a | i",
+        "reasons": [
+          "not dominated by alphabetic characters",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "P= Ee",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.357,
+        "topRatio": 0.398,
+        "sourceLine": "© p= ee",
+        "reasons": [
+          "not dominated by alphabetic characters",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "+57",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.203,
+        "topRatio": 0.413,
+        "sourceLine": "oe im +57",
+        "reasons": [
+          "contains digits",
+          "not dominated by alphabetic characters"
+        ]
+      }
+    ],
+    "venueCandidates": [],
+    "dateCandidates": [],
+    "filenamePriorsUsed": true,
+    "filenamePriors": {
+      "used": true,
+      "artist": "PJ Harvey & John Parish",
+      "artistParts": [
+        "PJ Harvey",
+        "John Parish"
+      ],
+      "venue": "Beacon Theater",
+      "venueParts": [
+        "Beacon Theater"
+      ],
+      "year": "2009",
+      "structuredPlausible": true,
+      "sourceStem": "pj-harvey-john-parish-beacon-theater-2009",
+      "bodyParts": [
+        "pj",
+        "harvey",
+        "john",
+        "parish",
+        "beacon",
+        "theater"
+      ],
+      "bestSplit": 4
+    },
+    "approvalBlockers": []
+  },
+  "futureEnrichment": {
+    "enabled": false,
+    "notes": [
+      "Confirm headliner and opener billing from an authoritative source.",
+      "Confirm venue naming and the exact date if OCR quality is weak.",
+      "Find one or more likely setlist references for the tour date range.",
+      "Verify contextual background before using any editorial copy."
+    ]
+  },
+  "enrichment": {
+    "styleMode": "concise_editorial",
+    "fieldsFilledAutomatically": [
+      "city",
+      "copy",
+      "extendedNotes",
+      "shareDescription",
+      "state",
+      "tags"
+    ],
+    "fieldSources": {
+      "artist": "approved_metadata",
+      "venue": "approved_metadata",
+      "year": "approved_metadata",
+      "slug": "approved_metadata",
+      "artistSlug": "approved_metadata",
+      "img": "approved_metadata",
+      "rotation": "approved_metadata",
+      "city": "venue_lookup",
+      "state": "venue_lookup",
+      "country": "venue_lookup",
+      "copy": "auto_drafted",
+      "extendedNotes": "auto_drafted",
+      "tags": "auto_drafted",
+      "shareDescription": "auto_drafted",
+      "shareTitle": "approved_metadata",
+      "shareImage": "approved_metadata"
+    },
+    "groupedFieldSources": {
+      "OCR / filename priors / current": [
+        "artist",
+        "artistSlug",
+        "img",
+        "rotation",
+        "shareImage",
+        "shareTitle",
+        "slug",
+        "venue",
+        "year"
+      ],
+      "venue lookup": [
+        "city",
+        "country",
+        "state"
+      ],
+      "legacy curated": [],
+      "external facts": [],
+      "auto drafted": [
+        "copy",
+        "extendedNotes",
+        "shareDescription",
+        "tags"
+      ]
+    },
+    "remainingMissing": [],
+    "readyForApproval": true,
+    "legacyMatch": {
+      "matched": false,
+      "reason": "no local legacy curated JSON candidate passed the similarity threshold"
+    },
+    "externalFacts": {
+      "matched": false,
+      "reason": "no external facts configured",
+      "facts": {}
+    },
+    "researchPacket": {
+      "status": "placeholder_ready_for_live_research",
+      "provider": {
+        "name": "offline_placeholder",
+        "liveLookupUsed": false,
+        "description": "No live web research was performed in this environment. Suggestions are structured placeholders for human review."
+      },
+      "requiresHumanReview": true,
+      "researchGaps": [
+        "Confirm headliner and opener billing from an authoritative source.",
+        "Confirm venue naming and the exact date if OCR quality is weak.",
+        "Find one or more likely setlist references for the tour date range.",
+        "Verify contextual background before using any editorial copy."
+      ],
+      "suggestions": {
+        "lineup": [],
+        "venueDateConfirmation": {
+          "note": "OCR suggests PJ Harvey & John Parish at Beacon Theater on 2009 in New York, NY. Confirm against the ticket text, personal records, and a trusted outside source before publishing.",
+          "confidenceLabel": "inferred_from_research",
+          "basis": "OCR-derived metadata plus normalized user-confirmed fields"
+        },
+        "likelySetlistReferences": [
+          {
+            "description": "Look for setlists and tour context around PJ Harvey & John Parish performances near 2009. Use this to confirm headliner/opener roles and identify likely songs from that run.",
+            "confidenceLabel": "generated_suggestion",
+            "basis": "Template guidance for later research"
+          }
+        ],
+        "contextualShowBackground": [
+          {
+            "description": "Research the tour cycle around PJ Harvey & John Parish on or near 2009, including the album era, notable opener history, and whether this date was part of a special run, festival, or reunion.",
+            "confidenceLabel": "generated_suggestion",
+            "basis": "Generated suggestion from known ticket fields"
+          }
+        ],
+        "editorialCopySuggestions": [
+          {
+            "text": "PJ Harvey & John Parish at Beacon Theater in New York (2009) stands out as a memory worth anchoring in a specific detail: what drew you to the show, what the room felt like, and what made the performance stick.",
+            "confidenceLabel": "generated_suggestion",
+            "basis": "Generated writing prompt from confirmed metadata"
+          }
+        ],
+        "tagSuggestions": [
+          {
+            "tag": "2000s",
+            "confidenceLabel": "generated_suggestion",
+            "basis": "Generated from ticket metadata and existing archive style"
+          },
+          {
+            "tag": "new york",
+            "confidenceLabel": "generated_suggestion",
+            "basis": "Generated from ticket metadata and existing archive style"
+          },
+          {
+            "tag": "beacon theater",
+            "confidenceLabel": "generated_suggestion",
+            "basis": "Generated from ticket metadata and existing archive style"
+          }
+        ]
+      },
+      "ocrSignals": {
+        "lineCount": 30,
+        "artistMentions": 0,
+        "venueMentions": 0,
+        "dateMentions": 0
+      }
+    },
+    "hints": {
+      "openers": [],
+      "tour": "",
+      "setlistHints": [
+        "Look for setlists and tour context around PJ Harvey & John Parish performances near 2009. Use this to confirm headliner/opener roles and identify likely songs from that run."
+      ],
+      "youtubeCandidate": ""
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "reviewStatus": "pending_human_review",
+  "generatedAt": "2026-03-16T20:03:06",
+  "canonicalNamingCommitted": false,
+  "metadataConfidence": {
+    "artist": 0.82,
+    "venue": 0.84,
+    "year": 0.74,
+    "exactDate": 0.0,
+    "coreMetadata": 0.806,
+    "overall": 0.68,
+    "ocrAverage": 0.0,
+    "lowConfidence": false,
+    "canonicalEligible": true
+  },
+  "ticket": {
+    "artist": "Community Service & Tour Austin",
+    "artistSlug": "community-service-and-tour-austin",
+    "exactDate": "",
+    "year": "1999",
+    "venue": "Music Hall",
+    "city": "",
+    "state": "",
+    "country": "USA",
+    "copy": "",
+    "extendedNotes": "",
+    "companions": [],
+    "photos": [],
+    "youtubeUrl": "",
+    "price": "",
+    "tags": [],
+    "shareTitle": "Community Service & Tour Austin at Music Hall, 1999 | Shows I Saw",
+    "shareDescription": "",
+    "shareImage": "community-service-and-tour-austin-music-hall-1999-share.jpg",
+    "slug": "community-service-and-tour-austin-music-hall-1999",
+    "img": "community-service-and-tour-austin-music-hall-1999.jpg",
+    "rotation": "0deg"
+  },
+  "proposedMetadata": {
+    "artist": "Community Service & Tour Austin",
+    "venue": "Music Hall",
+    "year": "1999",
+    "exactDate": "",
+    "city": "",
+    "state": "",
+    "country": "USA",
+    "price": ""
+  },
+  "source": {
+    "inputFile": "community-service-tour-austin-music-hall-1999.jpg",
+    "savedOriginal": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\review\\needs-review\\20260316-200258-community-service-tour-austin-music-hall-1999\\original.jpg",
+    "savedCleaned": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\review\\needs-review\\20260316-200258-community-service-tour-austin-music-hall-1999\\ocr-working.jpg",
+    "ocrConfig": "--psm 6",
+    "ocrPreview": []
+  },
+  "warnings": [
+    "Overall OCR confidence is weak; review text carefully."
+  ],
+  "debug": {
+    "artistCandidates": [],
+    "rejectedArtistCandidates": [],
+    "venueCandidates": [],
+    "dateCandidates": [],
+    "filenamePriorsUsed": true,
+    "filenamePriors": {
+      "used": true,
+      "artist": "Community Service & Tour Austin",
+      "artistParts": [
+        "Community Service",
+        "Tour Austin"
+      ],
+      "venue": "Music Hall",
+      "venueParts": [
+        "Music Hall"
+      ],
+      "year": "1999",
+      "structuredPlausible": true,
+      "sourceStem": "community-service-tour-austin-music-hall-1999",
+      "bodyParts": [
+        "community",
+        "service",
+        "tour",
+        "austin",
+        "music",
+        "hall"
+      ],
+      "bestSplit": 4
+    },
+    "approvalBlockers": []
+  },
+  "futureEnrichment": {
+    "enabled": false,
+    "notes": [
+      "External venue/date verification can plug in after OCR review is approved.",
+      "Ticketmaster/Setlist.fm/manual research can enrich city, lineup, and copy later without changing this draft contract."
+    ]
+  },
+  "reviewSlug": "review-community-service-tour-austin-music-hall-1999"
+}

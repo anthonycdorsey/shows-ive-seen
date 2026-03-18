@@ -1,0 +1,226 @@
+SHOWS I SAW - OCR DIAGNOSTICS
+
+Selected best variant: ocr-binary
+Selected config: --psm 11 [ocr-binary]
+
+RAW OCR TEXT
+
+VV
+ons
+shinTgm
+Berner
+Shh
+utr
+Hide
+av
+Se
+preg
+SECTION/BOX
+my yas
+ey
+aq
+Rad
+LK
+oma
+ae
+Mer ye
+by
+a)
+wel
+ar Hem
+a
+1 (on
+bow iw
+Fi,
+fane
+Reeser
+wen pare nee aerneten terse sa
+Denes entanenrsargennsnceteremenen,
+fi
+sovkigneas
+ADMS
+e
+Wo
+c
+OR
+a
+aZ
+.
+a
+an,
+So.
+00 eartenem enn enmennanmenness ee
+OE
+ee
+MASTER: TICKETMASTERTICY Re RTE TUASTLRTICRET AST
+ley Miner
+aorenty:
+ie
+REN ASTER TICKETMASTENTICKE TMASTERTICKE TMASTERTICKETMASTERTIC
+ESIN
+TERTICKE TMASTERTIC!
+r
+i PRESENT
+BEST*8
+i
+a,
+rie
+ay
+Ce
+Is
+|
+ae
+borers
+i
+a4
+5
+2
+|
+on
+By
+Ec
+es
+a]
+‘
+Ny
+r a
+c
+ALAM
+4
+VE
+hee
+"
+lg
+rE
+CTILITY
+INCLUDE DY
+poms pas pow
+ra)
+Bs i
+F
+fm E..
+I
+saledd
+‘
+t
+H
+SAT SEP 26 1998 &
+i MBPT
+SEP
+iy
+U
+a
+]&
+’
+—,
+
+CLEANED OCR TEXT
+
+VV
+ons
+shinTgm
+Berner
+Shh
+utr
+Hide
+av
+Se
+preg
+SECTION/BOX
+my yas
+ey
+aq
+Rad
+LK
+oma
+ae
+Mer ye
+by
+a)
+wel
+ar Hem
+a
+1 (on
+bow iw
+Fi,
+fane
+Reeser
+wen pare nee aerneten terse sa
+Denes entanenrsargennsnceteremenen,
+fi
+sovkigneas
+ADMS
+e
+Wo
+c
+OR
+a
+aZ
+.
+a
+an,
+So.
+00 eartenem enn enmennanmenness ee
+OE
+ee
+MASTER: TICKETMASTERTICY Re RTE TUASTLRTICRET AST
+ley Miner
+aorenty:
+ie
+REN ASTER TICKETMASTENTICKE TMASTERTICKE TMASTERTICKETMASTERTIC
+ESIN
+TERTICKE TMASTERTIC!
+r
+i PRESENT
+BEST*8
+i
+a,
+rie
+ay
+Ce
+Is
+|
+ae
+borers
+i
+a4
+5
+2
+|
+on
+By
+Ec
+es
+a]
+‘
+Ny
+r a
+c
+ALAM
+4
+VE
+hee
+"
+lg
+rE
+CTILITY
+INCLUDE DY
+poms pas pow
+ra)
+Bs i
+F
+fm E..
+I
+saledd
+‘
+t
+H
+SAT SEP 26 1998 &
+i MBPT
+SEP
+iy
+U
+a
+]&
+’
+—,

@@ -1,0 +1,93 @@
+{
+  "reviewStatus": "approved_filename_pending_content_review",
+  "generatedAt": "2026-03-16T15:13:42",
+  "canonicalNamingCommitted": true,
+  "metadataConfidence": {
+    "artist": 0.95,
+    "venue": 0.97,
+    "year": 0.88,
+    "exactDate": 0.92,
+    "overall": 0.911,
+    "ocrAverage": 0.75,
+    "lowConfidence": false
+  },
+  "ticket": {
+    "artist": "Tim McGraw & Faith Hill",
+    "artistSlug": "tim-mcgraw-and-faith-hill",
+    "exactDate": "2017-10-27",
+    "year": "2017",
+    "venue": "Barclays Center",
+    "city": "",
+    "state": "",
+    "country": "USA",
+    "copy": "",
+    "extendedNotes": "",
+    "companions": [],
+    "photos": [],
+    "youtubeUrl": "",
+    "price": "",
+    "tags": [],
+    "shareTitle": "Tim McGraw & Faith Hill at Barclays Center, 2017 | Shows I Saw",
+    "shareDescription": "",
+    "shareImage": "tim-mcgraw-and-faith-hill-barclays-center-2017-share.jpg",
+    "slug": "tim-mcgraw-and-faith-hill-barclays-center-2017",
+    "img": "tim-mcgraw-and-faith-hill-barclays-center-2017.jpg",
+    "rotation": "0deg"
+  },
+  "proposedMetadata": {
+    "artist": "Tim McGraw & Faith Hill",
+    "venue": "Barclays Center",
+    "year": "2017",
+    "exactDate": "2017-10-27",
+    "city": "",
+    "state": "",
+    "country": "USA",
+    "price": ""
+  },
+  "source": {
+    "inputFile": "Clean Ticket.jpg",
+    "savedOriginal": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\originals\\tim-mcgraw-and-faith-hill-barclays-center-2017-original.jpg",
+    "savedCleaned": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\working\\cleaned-single\\tim-mcgraw-and-faith-hill-barclays-center-2017.jpg",
+    "ocrConfig": "--psm 11 [ocr-gray]",
+    "ocrPreview": [
+      "EVENT CODE",
+      "SECTION",
+      "ROW/BOX",
+      "SEAT",
+      "ADMISSION",
+      "EVENT CODE",
+      "A1027E",
+      "225",
+      "20 12",
+      "COMP",
+      "FBALO27E",
+      "UPPER LEVEL",
+      "0.00",
+      "383X",
+      "PS ee",
+      "00",
+      "CN 58628",
+      "tis",
+      "SECTION",
+      "TIM MCGRAW & FAITH HILL",
+      "225",
+      "SOUL2SOUL",
+      "SEC 225",
+      "eer s eee",
+      "fh)",
+      "TPE ER",
+      "THE WORLD TOUR 2017",
+      "(O0269BCE",
+      "rm",
+      "eS BT"
+    ]
+  },
+  "warnings": [],
+  "futureEnrichment": {
+    "enabled": false,
+    "notes": [
+      "External venue/date verification can plug in after OCR review is approved.",
+      "Ticketmaster/Setlist.fm/manual research can enrich city, lineup, and copy later without changing this draft contract."
+    ]
+  }
+}

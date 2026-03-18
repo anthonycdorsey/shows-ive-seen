@@ -1,0 +1,50 @@
+SHOWS I SAW - SINGLE TICKET INGEST REVIEW
+
+Selected source:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\incoming\Clean Ticket.jpg
+
+Saved original:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\originals\tim-mcgraw-and-faith-hill-barclays-center-2017-original.jpg
+
+Saved cleaned master:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\working\cleaned-single\tim-mcgraw-and-faith-hill-barclays-center-2017.jpg
+
+Draft JSON:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\draft-json\tim-mcgraw-and-faith-hill-barclays-center-2017.json
+
+Contact sheet:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\contact-sheets\tim-mcgraw-and-faith-hill-barclays-center-2017-contact-sheet.jpg
+
+Proposed metadata:
+- artist: Tim McGraw & Faith Hill
+- venue: Barclays Center
+- year: 2017
+- exactDate: 2017-10-27
+- city: 
+- state: 
+- price: 
+- slug: tim-mcgraw-and-faith-hill-barclays-center-2017
+- reviewSlug: review-clean-ticket
+
+Confidence:
+- OCR average: 0.75
+- artist: 0.95
+- venue: 0.97
+- year: 0.88
+- exact date: 0.92
+- overall: 0.91
+- low confidence: no
+
+Canonical naming committed:
+yes
+
+Image cleanup notes:
+- Applied illumination normalization to reduce uneven scan lighting and faded paper cast.
+- Raised bright low-saturation paper regions toward off-white while preserving artwork and darker ink regions.
+- Applied mild edge-preserving sharpening for OCR readability without redrawing text.
+
+Warnings:
+- none
+
+Next step:
+- Review metadata/content and manually publish later.

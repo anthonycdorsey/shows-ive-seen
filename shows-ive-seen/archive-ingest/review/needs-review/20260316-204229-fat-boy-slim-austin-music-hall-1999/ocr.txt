@@ -1,0 +1,42 @@
+SHOWS I SAW - OCR DIAGNOSTICS
+
+Selected best variant: display
+Selected config: --psm 6 [display]
+
+RAW OCR TEXT
+
+, a § a Do reece ee, Wee ee Per sd Te aE Re EL AG: ke REE Be Bene Poke RGRGE Bh. OOS Gee eee aS Ie So tc Mere TE Bante an
+SL: Re RSET ERE HBA SE RENGAUREBERE 5 psi aes cag cts MAR ct acy. Sa ue sad Caeee Satay Eg: SERA GS CR SEAR OR WH Gk. Bease xe Bet Gea Gh A. SESES ALS Re a ere SS oO Sea a
+REHEE ci owcet seg Sp Bean GRUCaRGeL WS GH We dat a Banat Banh, Dinca suns Bion Cee freee, Ania “Waa nt Hate ds eae Bakes iy ASG. “Sagih aes BRS Fakes by Baaaeh F iiaied Peng suanbechaaieiniindccen ape: cone gy aati WORE O
+pec tet ee ee ea, So Ge Meo She SN RRR Teeus eee ae te PRES Pleat fed “Magee, Ayal (Ger “Ee Gated Be S GEGED UGE Bay Bete, Ge ae Eee ee OE TORE fy oma aac eiacte: Masnenaneteagrmnst suena Ca gM Sera eR eee
+Tape Sh Ge Goes aus Pies oe Weeee, Bo Ga NE “GG Bier Ee eee ce ere ea me ee me Om a ee ea ee eae a a Bisa ounmaanaanaga eee A PMD Meet Beas:
+-....rmrt~—~—OCC‘“ Ee le Se reenter pee fle eee Mine tlt Rete ee eee Be 3
+AMBRE FO OS SLUR RRO a cnGhonarancnis: ‘Soa: Bae Br oS. Grats weet in! a tee i, Ee sine. G5 babe: Ue REGS GEES, Teeaeke, EE RE SEE S. SGGas Aas 28, SE Se EY 2B BR dS crc 5 ARS HanbsthrGunsiaculnndags Re ae ee Be SRT
+ERR Ra ene eS aN I GP MER Baud Mok GP day? ane) Waka Ge atin? te TUS (2 GE 20 BRR acca ORE chad ui eee PS een:
+By 2 SESS BEE GL RRES 0 RRE GASoe ek GReS G: Ge Beak A ABER eee Pay eet pit Reena SB ST SE orig be a can oe roe penta ERENT Sp at papi Seay ok remaenics ae: Buren ae
+a ee ee & OS Pe Foe Reg BLL ese ee ste pe ee ee eee ears a eee eee eh os Bee oe Se
+Altea’ Re 4 ? RininnimneReE “s Th GRAS a RGaionGAROHEr gee men Age a. ca TAU RRR REC UT, paar Svan susan sweneuamseenaaaney Bt fanaa SaaS ee ener ne err ee Se a
++108 as Way fas tas i) Sauknis BORMEOR fan Aik CEES aaa = Sa i Age JeGeceaeR R [ESSERE EER Ong Gh os Ae aabepanta ct Suet ttaa tna maainware aman acaba ate Eee SRR >
+‘ nS ‘ NRE, 0 uence tonics tliat UC Rae
+F- eae ENG PEA aA Peer aE EEE SHEE : . Pion earn cin elation re era ea SUAS GG GAT Ras Raaca oA n Ea 3
+cA ee. eee Lee eau Ria 4 fe Spepererststt seas ELS TTA EaGs an Bisa aaisuaihmna nice aa Rapraeeceaniuneneaes aimaaenacemae para
+ie dm, i P_gmmadaty
+
+CLEANED OCR TEXT
+
+, a § a Do reece ee, Wee ee Per sd Te aE Re EL AG: ke REE Be Bene Poke RGRGE Bh. OOS Gee eee aS Ie So tc Mere TE Bante an
+SL: Re RSET ERE HBA SE RENGAUREBERE 5 psi aes cag cts MAR ct acy. Sa ue sad Caeee Satay Eg: SERA GS CR SEAR OR WH Gk. Bease xe Bet Gea Gh A. SESES ALS Re a ere SS oO Sea a
+REHEE ci owcet seg Sp Bean GRUCaRGeL WS GH We dat a Banat Banh, Dinca suns Bion Cee freee, Ania “Waa nt Hate ds eae Bakes iy ASG. “Sagih aes BRS Fakes by Baaaeh F iiaied Peng suanbechaaieiniindccen ape: cone gy aati WORE O
+pec tet ee ee ea, So Ge Meo She SN RRR Teeus eee ae te PRES Pleat fed “Magee, Ayal (Ger “Ee Gated Be S GEGED UGE Bay Bete, Ge ae Eee ee OE TORE fy oma aac eiacte: Masnenaneteagrmnst suena Ca gM Sera eR eee
+Tape Sh Ge Goes aus Pies oe Weeee, Bo Ga NE “GG Bier Ee eee ce ere ea me ee me Om a ee ea ee eae a a Bisa ounmaanaanaga eee A PMD Meet Beas:
+-....rmrt~—~—OCC‘“ Ee le Se reenter pee fle eee Mine tlt Rete ee eee Be 3
+AMBRE FO OS SLUR RRO a cnGhonarancnis: ‘Soa: Bae Br oS. Grats weet in! a tee i, Ee sine. G5 babe: Ue REGS GEES, Teeaeke, EE RE SEE S. SGGas Aas 28, SE Se EY 2B BR dS crc 5 ARS HanbsthrGunsiaculnndags Re ae ee Be SRT
+ERR Ra ene eS aN I GP MER Baud Mok GP day? ane) Waka Ge atin? te TUS (2 GE 20 BRR acca ORE chad ui eee PS een:
+By 2 SESS BEE GL RRES 0 RRE GASoe ek GReS G: Ge Beak A ABER eee Pay eet pit Reena SB ST SE orig be a can oe roe penta ERENT Sp at papi Seay ok remaenics ae: Buren ae
+a ee ee & OS Pe Foe Reg BLL ese ee ste pe ee ee eee ears a eee eee eh os Bee oe Se
+Altea’ Re 4 ? RininnimneReE “s Th GRAS a RGaionGAROHEr gee men Age a. ca TAU RRR REC UT, paar Svan susan sweneuamseenaaaney Bt fanaa SaaS ee ener ne err ee Se a
++108 as Way fas tas i) Sauknis BORMEOR fan Aik CEES aaa = Sa i Age JeGeceaeR R [ESSERE EER Ong Gh os Ae aabepanta ct Suet ttaa tna maainware aman acaba ate Eee SRR >
+‘ nS ‘ NRE, 0 uence tonics tliat UC Rae
+F- eae ENG PEA aA Peer aE EEE SHEE : . Pion earn cin elation re era ea SUAS GG GAT Ras Raaca oA n Ea 3
+cA ee. eee Lee eau Ria 4 fe Spepererststt seas ELS TTA EaGs an Bisa aaisuaihmna nice aa Rapraeeceaniuneneaes aimaaenacemae para
+ie dm, i P_gmmadaty

@@ -1,0 +1,255 @@
+{
+  "reviewStatus": "pending_human_review",
+  "generatedAt": "2026-03-16T20:46:18",
+  "canonicalNamingCommitted": false,
+  "metadataConfidence": {
+    "artist": 0.78,
+    "venue": 0.97,
+    "year": 0.44,
+    "exactDate": 0.0,
+    "coreMetadata": 0.58,
+    "overall": 0.711,
+    "ocrAverage": 0.368,
+    "lowConfidence": true,
+    "canonicalEligible": false
+  },
+  "ticket": {
+    "artist": "Robust & Lae ooo",
+    "artistSlug": "robust-and-lae-ooo",
+    "exactDate": "",
+    "year": "1999",
+    "venue": "Music Hall [e",
+    "city": "",
+    "state": "",
+    "country": "USA",
+    "copy": "",
+    "extendedNotes": "",
+    "companions": [],
+    "photos": [],
+    "youtubeUrl": "",
+    "price": "",
+    "tags": [],
+    "shareTitle": "Robust & Lae ooo at Music Hall [e, 1999 | Shows I Saw",
+    "shareDescription": "",
+    "shareImage": "",
+    "slug": "",
+    "img": "",
+    "rotation": "0deg"
+  },
+  "proposedMetadata": {
+    "artist": "Robust & Lae ooo",
+    "venue": "Music Hall [e",
+    "year": "1999",
+    "exactDate": "",
+    "city": "",
+    "state": "",
+    "country": "USA",
+    "price": ""
+  },
+  "source": {
+    "inputFile": "visualize-rave-austin-music-hall-1999.jpg",
+    "savedOriginal": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\review\\needs-review\\20260316-204618-visualize-rave-austin-music-hall-1999\\original.jpg",
+    "savedCleaned": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\review\\needs-review\\20260316-204618-visualize-rave-austin-music-hall-1999\\ocr-working.jpg",
+    "ocrConfig": "--psm 6 [display]",
+    "ocrPreview": [
+      "Ley le ‘ MIND MELT MINISTRIES AND ©",
+      "Ni eee * NEPTUNE PROJEGT PRESENT =a",
+      "es (ao 8 VIiIeti ai iIZe can",
+      "ee LO Fl gm aut: GQ oe rg oO |",
+      "< ‘ hy a 3 SN r for ROBUST ng Fe =",
+      "NY ) . } a © : F % oS _ Lae ooo 4 e = oO",
+      "ey ree -ewes - eeee a eeeee ccee",
+      "NEY S S CAI POE AUSTIN MUSIC HALL [E",
+      "iar : iT) Vibe AWSTIN, TEXAS =",
+      "ALOU ki ; |"
+    ]
+  },
+  "warnings": [
+    "Overall OCR confidence is weak; review text carefully."
+  ],
+  "debug": {
+    "artistCandidates": [
+      {
+        "accepted": true,
+        "value": "Ney Cai Poe",
+        "score": 0.755,
+        "plausibility": 0.755,
+        "ocrConfidence": 0.518,
+        "topRatio": 0.759,
+        "sourceLine": "NEY S S CAI POE AUSTIN MUSIC HALL [E",
+        "reasons": [
+          "split mixed artist/venue line",
+          "looks like a human-readable artist/band line"
+        ]
+      }
+    ],
+    "rejectedArtistCandidates": [
+      {
+        "accepted": false,
+        "value": "Ley MIND MELT MINISTRIES AND",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.662,
+        "topRatio": 0.161,
+        "sourceLine": "Ley le ‘ MIND MELT MINISTRIES AND ©",
+        "reasons": [
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "eee NEPTUNE PROJEGT PRESENT",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.577,
+        "topRatio": 0.238,
+        "sourceLine": "Ni eee * NEPTUNE PROJEGT PRESENT =a",
+        "reasons": [
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "(ao VIiIeti iIZe can",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.28,
+        "topRatio": 0.317,
+        "sourceLine": "es (ao 8 VIiIeti ai iIZe can",
+        "reasons": [
+          "contains digits",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "aut:",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.444,
+        "topRatio": 0.401,
+        "sourceLine": "ee LO Fl gm aut: GQ oe rg oO |",
+        "reasons": [
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Robust",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.247,
+        "topRatio": 0.502,
+        "sourceLine": "< ‘ hy a 3 SN r for ROBUST ng Fe =",
+        "reasons": [
+          "contains digits",
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Lae ooo",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.304,
+        "topRatio": 0.548,
+        "sourceLine": "NY ) . } a © : F % oS _ Lae ooo 4 e = oO",
+        "reasons": [
+          "contains digits",
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "not dominated by alphabetic characters",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Ree -Ewes Eeee Eeeee Ccee",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.064,
+        "topRatio": 0.648,
+        "sourceLine": "ey ree -ewes - eeee a eeeee ccee",
+        "reasons": [
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "iar iT) Vibe AWSTIN, TEXAS",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.337,
+        "topRatio": 0.769,
+        "sourceLine": "iar : iT) Vibe AWSTIN, TEXAS =",
+        "reasons": [
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Alou",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.343,
+        "topRatio": 0.894,
+        "sourceLine": "ALOU ki ; |",
+        "reasons": [
+          "not dominated by alphabetic characters",
+          "does not resemble a recognizable artist name"
+        ]
+      }
+    ],
+    "venueCandidates": [
+      {
+        "value": "Austin Music Hall [e",
+        "score": 0.97
+      }
+    ],
+    "dateCandidates": [],
+    "filenamePriorsUsed": true,
+    "filenamePriors": {
+      "used": true,
+      "artist": "Visualize Rave",
+      "artistParts": [
+        "Visualize Rave"
+      ],
+      "venue": "Austin Music Hall",
+      "venueParts": [
+        "Austin Music Hall"
+      ],
+      "year": "1999",
+      "structuredPlausible": true,
+      "sourceStem": "visualize-rave-austin-music-hall-1999",
+      "bodyParts": [
+        "visualize",
+        "rave",
+        "austin",
+        "music",
+        "hall"
+      ],
+      "bestSplit": 2
+    },
+    "approvalBlockers": [
+      "year confidence too weak",
+      "core metadata confidence below approval threshold"
+    ]
+  },
+  "futureEnrichment": {
+    "enabled": false,
+    "notes": [
+      "External venue/date verification can plug in after OCR review is approved.",
+      "Ticketmaster/Setlist.fm/manual research can enrich city, lineup, and copy later without changing this draft contract."
+    ]
+  },
+  "reviewSlug": "review-visualize-rave-austin-music-hall-1999"
+}

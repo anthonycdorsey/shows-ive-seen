@@ -1,0 +1,50 @@
+SHOWS I SAW - OCR DIAGNOSTICS
+
+Selected best variant: display
+Selected config: --psm 6 [display]
+
+RAW OCR TEXT
+
+SSaeneas ee re eet CAEN MoaiS: acs nora gS" Tiga eo we eg By git Wess. See aera cass He oe tea eee | ie UES EMO MES Gee aaa a ee er
+eee OE eae Sa gee ee ee Se Ae apa acre arate By ea ioe oe A ye es, rie acl ate ait) eee bic FS PAD ey ee BESS Pe
+Bubs) SERGE RS ESTAS Shaka e aa aaea gay a a BG? A 20a Byfield Baad 2 BE Wak" ageeee lee. Sh gangs © "Uh Beis Bee BeaES BE a eG SE Tears 7 Boe eZ Rena eg
+Beeeecste 88 ack. Need ea ge ed mes eam "a Raaap se coo W MiGs Bid BR Soh i ae. Eo ye yah Ge SERED a fee, BE HF Bee Eo RN ee Se ae Pe
+Recccoae 2. saa RE AF Gade Fees iy 335% ck, “Sasaah. te Wee ee 4 ABRs i gefing eeSe Tia pt ERE animate Say Garni. eke alae a Gad Ganae aaa serecaueaeaecen Re core an a ak Ree Gi fc Sea Bremen tee Tag sebahiaie peseeor: esse ae Guns saceeaase =
+Baccboae cccasekcncndanccndon seen eas Ueendaaeahen Te eee ay page ae ee : Beep ge AEN ages PI EM SRE, Pose Baty GAG Gin Be Ger ae siete eR Uy Acseteen iain elie sa esas 274 energised Penn nas Pete een. Ic cearererereerie tener
+Ronaniag): oss crcnanantcauagauneran FU Br eset Se SE BE Pee Se abe ie Uae emey: the is & aoeGe Soe 1 EN ESL iee Barie Pa a ae a eo ae Beale ieas BASLE CHAI 8-1) ° AR Pattee eat Eon PA RRS S Ee ee 222 peste Beets ity cae
+Beescriae Coe Pe aaa ete OE eee FSree: Bae HE ABB PaRRE Sonne gee pGee ao 266 Saas “ee 5 eeees GRE ty WHER fb deiteteisterapte eee HDAC heen Ba Re HE EEE EE RE a DASE OE RARER READABLE GB aC) BERG tunes tthe g 2 Sie bihesanoiceaso: big ese ages Huss a
+peeercee G2 ek hs seat URGE Sunt Shee EY Geeks See SRA TARE baa Ses SCE aty Zee Saja Be Oe aes, aa EM a Pe TCS TAG Bed Ageandagayetagagaaacanans Ta Gee aE Morenci: 24 CCU ARN Rana anon 35 3 bibs See oe i 4
+Rascatste Sok Gait. iecaty. wee aaee ‘Se, NRG SRE oe SERA saanaenced are nuaaastesoaaee Reson oGe ees BERG RARER CR SSRN aE aE ean estan a Rede Gere an ed ig “ALReaee Med a ae GP 388 JOR BRR WR Rg oat Ta Speeeaneas ee seageeeeee See ee
+Bese ites Sak GE iiee Pe, FT Seae Bete, Beer oy, We BE REG. GRRE AE OB BEE 8 shodonseronsaenudeasats RGR SAGAR aU aE AG nasa Ga on ong acrennAe Agee Rent eat CE ESP OE Re: “AEE CALA: RS ee Prepare <a Saker Ee a Ee on
+Bevsisis ey oder Rear ony esas naa anen nae neem ary pc OS EERE RS AS RRE Geen nn eaae ce Gua mceanaen GORE: a Ege a lap yg Tage OBOE Geb, “GAiide RRS Saat “Se Faget gpa BEER: Aarne Sat ae ERS amee ane | peccreaee oa ee ie ut
+gerrceuaa capa ta gosatay canna eause ok: pe ei eae a at eR GARR “Chadd Bae, Hast Gt seed fie Be SRE ORES ORE Se, oy eee ps SEE SP ‘he NG? Bere wes. | spaeyaanetesnth Gatteed recs ae wneeuead Our Se a ee SS eee
+Sea meena: WS: ee pita are eg EE ee on a i eee GENO O RENOIR LADINO ST a ea eee ener seaeneees Wee eee ee eee 5 ESRC a
+Seo ee Supe, Mid Bilt, ae hak She Sakata ac bgesallst ti Hat ae Bera acauyeanaiaerenptemuet ne aie Sete cae SUT CS RES SHE ee Rooi eaten sieaenien: es| Giainsera dae ect SERRE eee cee tte te Secs ee 2S Sa
+7 ae Be ar ea a. et Se eee) Ware Gee ne cae ae ae ee ee ee
+5 ARNE VAR MAE ee oe RIN So AN ORAS oh ee ee oa Sea se ee | a eee eee BR TES:
+ae wecenccucay Seo BOERS SES Eee eeae Wa Bognreah CRea Sana naaa freer ee eer eee Batam ran Aen anunanmuRn Mane aanaE 4
+BN ee ee Bec enero inoue
+Saree Gane aueocbiaaacacas Se RES a RRM a cena a SRE Sis te neuariean saan aetna
+
+CLEANED OCR TEXT
+
+SSaeneas ee re eet CAEN MoaiS: acs nora gS" Tiga eo we eg By git Wess. See aera cass He oe tea eee | ie UES EMO MES Gee aaa a ee er
+eee OE eae Sa gee ee ee Se Ae apa acre arate By ea ioe oe A ye es, rie acl ate ait) eee bic FS PAD ey ee BESS Pe
+Bubs) SERGE RS ESTAS Shaka e aa aaea gay a a BG? A 20a Byfield Baad 2 BE Wak" ageeee lee. Sh gangs © "Uh Beis Bee BeaES BE a eG SE Tears 7 Boe eZ Rena eg
+Beeeecste 88 ack. Need ea ge ed mes eam "a Raaap se coo W MiGs Bid BR Soh i ae. Eo ye yah Ge SERED a fee, BE HF Bee Eo RN ee Se ae Pe
+Recccoae 2. saa RE AF Gade Fees iy 335% ck, “Sasaah. te Wee ee 4 ABRs i gefing eeSe Tia pt ERE animate Say Garni. eke alae a Gad Ganae aaa serecaueaeaecen Re core an a ak Ree Gi fc Sea Bremen tee Tag sebahiaie peseeor: esse ae Guns saceeaase =
+Baccboae cccasekcncndanccndon seen eas Ueendaaeahen Te eee ay page ae ee : Beep ge AEN ages PI EM SRE, Pose Baty GAG Gin Be Ger ae siete eR Uy Acseteen iain elie sa esas 274 energised Penn nas Pete een. Ic cearererereerie tener
+Ronaniag): oss crcnanantcauagauneran FU Br eset Se SE BE Pee Se abe ie Uae emey: the is & aoeGe Soe 1 EN ESL iee Barie Pa a ae a eo ae Beale ieas BASLE CHAI 8-1) ° AR Pattee eat Eon PA RRS S Ee ee 222 peste Beets ity cae
+Beescriae Coe Pe aaa ete OE eee FSree: Bae HE ABB PaRRE Sonne gee pGee ao 266 Saas “ee 5 eeees GRE ty WHER fb deiteteisterapte eee HDAC heen Ba Re HE EEE EE RE a DASE OE RARER READABLE GB aC) BERG tunes tthe g 2 Sie bihesanoiceaso: big ese ages Huss a
+peeercee G2 ek hs seat URGE Sunt Shee EY Geeks See SRA TARE baa Ses SCE aty Zee Saja Be Oe aes, aa EM a Pe TCS TAG Bed Ageandagayetagagaaacanans Ta Gee aE Morenci: 24 CCU ARN Rana anon 35 3 bibs See oe i 4
+Rascatste Sok Gait. iecaty. wee aaee ‘Se, NRG SRE oe SERA saanaenced are nuaaastesoaaee Reson oGe ees BERG RARER CR SSRN aE aE ean estan a Rede Gere an ed ig “ALReaee Med a ae GP 388 JOR BRR WR Rg oat Ta Speeeaneas ee seageeeeee See ee
+Bese ites Sak GE iiee Pe, FT Seae Bete, Beer oy, We BE REG. GRRE AE OB BEE 8 shodonseronsaenudeasats RGR SAGAR aU aE AG nasa Ga on ong acrennAe Agee Rent eat CE ESP OE Re: “AEE CALA: RS ee Prepare <a Saker Ee a Ee on
+Bevsisis ey oder Rear ony esas naa anen nae neem ary pc OS EERE RS AS RRE Geen nn eaae ce Gua mceanaen GORE: a Ege a lap yg Tage OBOE Geb, “GAiide RRS Saat “Se Faget gpa BEER: Aarne Sat ae ERS amee ane | peccreaee oa ee ie ut
+gerrceuaa capa ta gosatay canna eause ok: pe ei eae a at eR GARR “Chadd Bae, Hast Gt seed fie Be SRE ORES ORE Se, oy eee ps SEE SP ‘he NG? Bere wes. | spaeyaanetesnth Gatteed recs ae wneeuead Our Se a ee SS eee
+Sea meena: WS: ee pita are eg EE ee on a i eee GENO O RENOIR LADINO ST a ea eee ener seaeneees Wee eee ee eee 5 ESRC a
+Seo ee Supe, Mid Bilt, ae hak She Sakata ac bgesallst ti Hat ae Bera acauyeanaiaerenptemuet ne aie Sete cae SUT CS RES SHE ee Rooi eaten sieaenien: es| Giainsera dae ect SERRE eee cee tte te Secs ee 2S Sa
+7 ae Be ar ea a. et Se eee) Ware Gee ne cae ae ae ee ee ee
+5 ARNE VAR MAE ee oe RIN So AN ORAS oh ee ee oa Sea se ee | a eee eee BR TES:
+ae wecenccucay Seo BOERS SES Eee eeae Wa Bognreah CRea Sana naaa freer ee eer eee Batam ran Aen anunanmuRn Mane aanaE 4
+BN ee ee Bec enero inoue
+Saree Gane aueocbiaaacacas Se RES a RRM a cena a SRE Sis te neuariean saan aetna

@@ -1,0 +1,46 @@
+SHOWS I SAW - OCR DIAGNOSTICS
+
+Selected best variant: display
+Selected config: --psm 6 [display]
+
+RAW OCR TEXT
+
+Pee BLUR aa
+WL
+- S$MASHMOUTH
+“LIBERTY LUNCH
+405 W..2ND:
+AUSTIN» -TX == |
+su
+SEPT 30, 1997
+DOORS. 8:90 PM—
+814.00)
+SURCHARGE
+SEC ROW SEAT
+GEN. ADM. [-
+pe OG 15 ee
+Qore BLUR oY ETS
+$14.00 + S/C T
+= 0818. A
+“SEPT 30, 1997
+
+CLEANED OCR TEXT
+
+Pee BLUR aa
+WL
+- S$MASHMOUTH
+“LIBERTY LUNCH
+405 W..2ND:
+AUSTIN» -TX == |
+su
+SEPT 30, 1997
+DOORS. 8:90 PM—
+814.00)
+SURCHARGE
+SEC ROW SEAT
+GEN. ADM. [-
+pe OG 15 ee
+Qore BLUR oY ETS
+$14.00 + S/C T
+= 0818. A
+“SEPT 30, 1997

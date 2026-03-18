@@ -1,0 +1,1247 @@
+{
+  "selectedBestVariant": "display",
+  "selectedConfig": "--psm 6 [display]",
+  "averageConfidence": 0.368,
+  "coreMetadataConfidence": 0.58,
+  "canonicalEligible": false,
+  "approvalBlockers": [
+    "year confidence too weak",
+    "core metadata confidence below approval threshold"
+  ],
+  "ocrPassCount": 3,
+  "ocrEarlyExitTriggered": false,
+  "ocrEarlyExitReason": "",
+  "topArtistCandidates": [
+    {
+      "accepted": true,
+      "value": "Ney Cai Poe",
+      "score": 0.755,
+      "plausibility": 0.755,
+      "ocrConfidence": 0.518,
+      "topRatio": 0.759,
+      "sourceLine": "NEY S S CAI POE AUSTIN MUSIC HALL [E",
+      "reasons": [
+        "split mixed artist/venue line",
+        "looks like a human-readable artist/band line"
+      ]
+    }
+  ],
+  "rejectedArtistCandidates": [
+    {
+      "accepted": false,
+      "value": "Ley MIND MELT MINISTRIES AND",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.662,
+      "topRatio": 0.161,
+      "sourceLine": "Ley le ‘ MIND MELT MINISTRIES AND ©",
+      "reasons": [
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "eee NEPTUNE PROJEGT PRESENT",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.577,
+      "topRatio": 0.238,
+      "sourceLine": "Ni eee * NEPTUNE PROJEGT PRESENT =a",
+      "reasons": [
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "(ao VIiIeti iIZe can",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.28,
+      "topRatio": 0.317,
+      "sourceLine": "es (ao 8 VIiIeti ai iIZe can",
+      "reasons": [
+        "contains digits",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "aut:",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.444,
+      "topRatio": 0.401,
+      "sourceLine": "ee LO Fl gm aut: GQ oe rg oO |",
+      "reasons": [
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Robust",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.247,
+      "topRatio": 0.502,
+      "sourceLine": "< ‘ hy a 3 SN r for ROBUST ng Fe =",
+      "reasons": [
+        "contains digits",
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Lae ooo",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.304,
+      "topRatio": 0.548,
+      "sourceLine": "NY ) . } a © : F % oS _ Lae ooo 4 e = oO",
+      "reasons": [
+        "contains digits",
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "not dominated by alphabetic characters",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Ree -Ewes Eeee Eeeee Ccee",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.064,
+      "topRatio": 0.648,
+      "sourceLine": "ey ree -ewes - eeee a eeeee ccee",
+      "reasons": [
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "iar iT) Vibe AWSTIN, TEXAS",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.337,
+      "topRatio": 0.769,
+      "sourceLine": "iar : iT) Vibe AWSTIN, TEXAS =",
+      "reasons": [
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Alou",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.343,
+      "topRatio": 0.894,
+      "sourceLine": "ALOU ki ; |",
+      "reasons": [
+        "not dominated by alphabetic characters",
+        "does not resemble a recognizable artist name"
+      ]
+    }
+  ],
+  "topVenueCandidates": [
+    {
+      "value": "Austin Music Hall [e",
+      "score": 0.97
+    }
+  ],
+  "dateCandidates": [],
+  "filenamePriorsUsed": true,
+  "filenamePriors": {
+    "used": true,
+    "artist": "Visualize Rave",
+    "artistParts": [
+      "Visualize Rave"
+    ],
+    "venue": "Austin Music Hall",
+    "venueParts": [
+      "Austin Music Hall"
+    ],
+    "year": "1999",
+    "structuredPlausible": true,
+    "sourceStem": "visualize-rave-austin-music-hall-1999",
+    "bodyParts": [
+      "visualize",
+      "rave",
+      "austin",
+      "music",
+      "hall"
+    ],
+    "bestSplit": 2
+  },
+  "filenamePriorBreakdown": {
+    "used": true,
+    "artist": "Visualize Rave",
+    "artistParts": [
+      "Visualize Rave"
+    ],
+    "venue": "Austin Music Hall",
+    "venueParts": [
+      "Austin Music Hall"
+    ],
+    "year": "1999",
+    "structuredPlausible": true,
+    "sourceStem": "visualize-rave-austin-music-hall-1999",
+    "bodyParts": [
+      "visualize",
+      "rave",
+      "austin",
+      "music",
+      "hall"
+    ],
+    "bestSplit": 2
+  },
+  "multiArtistParsingAttempted": true,
+  "multiArtistParsingMatched": true,
+  "venueTailSplittingAttempted": true,
+  "venueTailSplittingMatched": true,
+  "activeParserStagesRun": [
+    "ocr_text_selected",
+    "artist_candidates_extracted",
+    "venue_candidates_extracted",
+    "date_candidates_extracted",
+    "filename_priors_loaded",
+    "multi_artist_parser_checked",
+    "venue_tail_split_checked",
+    "final_selector_resolved"
+  ],
+  "functionChain": [
+    "run_ocr_variants",
+    "extract_artist_candidates",
+    "extract_venue_candidates",
+    "extract_year",
+    "extract_exact_date",
+    "build_filename_priors",
+    "detect_multi_artist_billing",
+    "split_artist_prefix_from_venue",
+    "final_selection_resolution"
+  ],
+  "finalSelectorWinner": "venue_tail_split",
+  "finalSelectorReason": "A mixed OCR venue candidate was split to isolate the venue tail.",
+  "selectorDebug": {
+    "parserStagesRun": [
+      "ocr_text_selected",
+      "artist_candidates_extracted",
+      "venue_candidates_extracted",
+      "date_candidates_extracted",
+      "filename_priors_loaded",
+      "multi_artist_parser_checked",
+      "venue_tail_split_checked",
+      "final_selector_resolved"
+    ],
+    "multiArtistParsingAttempted": true,
+    "multiArtistParsingMatched": true,
+    "venueTailSplittingAttempted": true,
+    "venueTailSplittingMatched": true,
+    "structuredFilenameFallbackUsed": false,
+    "finalSelectorWinner": "venue_tail_split",
+    "finalSelectorReason": "A mixed OCR venue candidate was split to isolate the venue tail.",
+    "finalArtist": "Robust & Lae ooo",
+    "finalVenue": "Music Hall [e",
+    "finalYear": "1999",
+    "functionChain": [
+      "run_ocr_variants",
+      "extract_artist_candidates",
+      "extract_venue_candidates",
+      "extract_year",
+      "extract_exact_date",
+      "build_filename_priors",
+      "detect_multi_artist_billing",
+      "split_artist_prefix_from_venue",
+      "final_selection_resolution"
+    ]
+  },
+  "chosenArtistExplanation": [
+    "split mixed artist/venue line",
+    "looks like a human-readable artist/band line"
+  ],
+  "rawOcrTextByPass": [
+    {
+      "variant": "display",
+      "config": "--psm 6",
+      "rawText": "Ley le ‘ MIND MELT MINISTRIES AND ©\nNi eee * NEPTUNE PROJEGT PRESENT =a\nes (ao 8 VIiIeti ai iIZe can\nee LO Fl gm aut: GQ oe rg oO |\n< ‘ hy a 3 SN r for ROBUST ng Fe =\nNY ) . } a © : F % oS _ Lae ooo 4 e = oO\ney ree -ewes - eeee a eeeee ccee\nNEY S S CAI POE AUSTIN MUSIC HALL [E\niar : iT) Vibe AWSTIN, TEXAS =\nALOU ki ; |",
+      "cleanedText": "Ley le ‘ MIND MELT MINISTRIES AND ©\nNi eee * NEPTUNE PROJEGT PRESENT =a\nes (ao 8 VIiIeti ai iIZe can\nee LO Fl gm aut: GQ oe rg oO |\n< ‘ hy a 3 SN r for ROBUST ng Fe =\nNY ) . } a © : F % oS _ Lae ooo 4 e = oO\ney ree -ewes - eeee a eeeee ccee\nNEY S S CAI POE AUSTIN MUSIC HALL [E\niar : iT) Vibe AWSTIN, TEXAS =\nALOU ki ; |"
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 6",
+      "rawText": "By LO S MIND M oo pee py\nGee = Bl NEPTUNE J MINISTRIES AND a oe\nScie O- El WH Sp tbe tea eran\noer tS =) NO El mm Cia Deets oon LS\n. a i > LN roa f I>, Sener et ens aI ae A — i >=\nALIS 2S gt We > i ee A? o\nlem I Wy ousTy vrudic ue i",
+      "cleanedText": "By LO S MIND M oo pee py\nGee = Bl NEPTUNE J MINISTRIES AND a oe\nScie O- El WH Sp tbe tea eran\noer tS =) NO El mm Cia Deets oon LS\n. a i > LN roa f I>, Sener et ens aI ae A — i >=\nALIS 2S gt We > i ee A? o\nlem I Wy ousTy vrudic ue i"
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 11",
+      "rawText": "-y f eee f] a een ees meray\ni\nne a\nte sei ~\n~~ oe\n~\n|\n!\nory,\ntrae\nte\nWen\nAND\nMIND MELT MINISTRIE\nSy\nESET\nwry\nNEPTUME PROJEGT Prt\n5\n- By\nah\na\nBor\nEu Fy\nie\nae\nta\nsit\nSa dell\ng\nay\nZG\n55\ni Deora\npee\nIon\nayteee fatete\na stetete\ni\nke\n(E)\nhd\nsae\nrh\nysN i)\nS|\nre\ni\nsites ax\no |\ntes\n* 1 eae\nreratetere.s,\nRES:\n7939S\nzO\nCgDI\nDoe,\nwtoteret\nA RS\nes\né\nMe\neS\nal\nNe,\nWy\nAUSTIN MUSIC HALL\nare\n4\n=\nMek\nIe\nEXA\nT\nyee\nBoe\noy\nShon\nBI\n3g te\ni ne! Pg Ca» iss\nt\nnee",
+      "cleanedText": "-y f eee f] a een ees meray\ni\nne a\nte sei ~\n~~ oe\n~\n|\n!\nory,\ntrae\nte\nWen\nAND\nMIND MELT MINISTRIE\nSy\nESET\nwry\nNEPTUME PROJEGT Prt\n5\n- By\nah\na\nBor\nEu Fy\nie\nae\nta\nsit\nSa dell\ng\nay\nZG\n55\ni Deora\npee\nIon\nayteee fatete\na stetete\ni\nke\n(E)\nhd\nsae\nrh\nysN i)\nS|\nre\ni\nsites ax\no |\ntes\n* 1 eae\nreratetere.s,\nRES:\n7939S\nzO\nCgDI\nDoe,\nwtoteret\nA RS\nes\né\nMe\neS\nal\nNe,\nWy\nAUSTIN MUSIC HALL\nare\n4\n=\nMek\nIe\nEXA\nT\nyee\nBoe\noy\nShon\nBI\n3g te\ni ne! Pg Ca» iss\nt\nnee"
+    }
+  ],
+  "runs": [
+    {
+      "variant": "display",
+      "config": "--psm 6",
+      "averageConfidence": 0.368,
+      "lineCount": 10,
+      "characterCount": 320,
+      "score": 38.02,
+      "coreMetadataConfidence": 0.58,
+      "runtimeMs": 1073.7,
+      "timeoutSeconds": 4,
+      "rawText": "Ley le ‘ MIND MELT MINISTRIES AND ©\nNi eee * NEPTUNE PROJEGT PRESENT =a\nes (ao 8 VIiIeti ai iIZe can\nee LO Fl gm aut: GQ oe rg oO |\n< ‘ hy a 3 SN r for ROBUST ng Fe =\nNY ) . } a © : F % oS _ Lae ooo 4 e = oO\ney ree -ewes - eeee a eeeee ccee\nNEY S S CAI POE AUSTIN MUSIC HALL [E\niar : iT) Vibe AWSTIN, TEXAS =\nALOU ki ; |",
+      "cleanedText": "Ley le ‘ MIND MELT MINISTRIES AND ©\nNi eee * NEPTUNE PROJEGT PRESENT =a\nes (ao 8 VIiIeti ai iIZe can\nee LO Fl gm aut: GQ oe rg oO |\n< ‘ hy a 3 SN r for ROBUST ng Fe =\nNY ) . } a © : F % oS _ Lae ooo 4 e = oO\ney ree -ewes - eeee a eeeee ccee\nNEY S S CAI POE AUSTIN MUSIC HALL [E\niar : iT) Vibe AWSTIN, TEXAS =\nALOU ki ; |",
+      "lineEntries": [
+        {
+          "text": "Ley le ‘ MIND MELT MINISTRIES AND ©",
+          "avg_confidence": 0.662,
+          "top_ratio": 0.161,
+          "left": 150,
+          "top": 166,
+          "right": 2430,
+          "bottom": 305
+        },
+        {
+          "text": "Ni eee * NEPTUNE PROJEGT PRESENT =a",
+          "avg_confidence": 0.577,
+          "top_ratio": 0.238,
+          "left": 151,
+          "top": 245,
+          "right": 2558,
+          "bottom": 336
+        },
+        {
+          "text": "es (ao 8 VIiIeti ai iIZe can",
+          "avg_confidence": 0.28,
+          "top_ratio": 0.317,
+          "left": 151,
+          "top": 326,
+          "right": 2721,
+          "bottom": 492
+        },
+        {
+          "text": "ee LO Fl gm aut: GQ oe rg oO |",
+          "avg_confidence": 0.444,
+          "top_ratio": 0.401,
+          "left": 152,
+          "top": 413,
+          "right": 2721,
+          "bottom": 576
+        },
+        {
+          "text": "< ‘ hy a 3 SN r for ROBUST ng Fe =",
+          "avg_confidence": 0.247,
+          "top_ratio": 0.502,
+          "left": 152,
+          "top": 517,
+          "right": 2673,
+          "bottom": 670
+        },
+        {
+          "text": "NY ) . } a © : F % oS _ Lae ooo 4 e = oO",
+          "avg_confidence": 0.304,
+          "top_ratio": 0.548,
+          "left": 170,
+          "top": 564,
+          "right": 2676,
+          "bottom": 756
+        },
+        {
+          "text": "ey ree -ewes - eeee a eeeee ccee",
+          "avg_confidence": 0.064,
+          "top_ratio": 0.648,
+          "left": 202,
+          "top": 667,
+          "right": 2723,
+          "bottom": 851
+        },
+        {
+          "text": "NEY S S CAI POE AUSTIN MUSIC HALL [E",
+          "avg_confidence": 0.518,
+          "top_ratio": 0.759,
+          "left": 212,
+          "top": 781,
+          "right": 2435,
+          "bottom": 872
+        },
+        {
+          "text": "iar : iT) Vibe AWSTIN, TEXAS =",
+          "avg_confidence": 0.337,
+          "top_ratio": 0.769,
+          "left": 153,
+          "top": 791,
+          "right": 2446,
+          "bottom": 1029
+        },
+        {
+          "text": "ALOU ki ; |",
+          "avg_confidence": 0.343,
+          "top_ratio": 0.894,
+          "left": 153,
+          "top": 920,
+          "right": 2721,
+          "bottom": 1029
+        }
+      ]
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 6",
+      "averageConfidence": 0.328,
+      "lineCount": 7,
+      "characterCount": 231,
+      "score": 34.038,
+      "coreMetadataConfidence": 0.0,
+      "runtimeMs": 472.7,
+      "timeoutSeconds": 3,
+      "rawText": "By LO S MIND M oo pee py\nGee = Bl NEPTUNE J MINISTRIES AND a oe\nScie O- El WH Sp tbe tea eran\noer tS =) NO El mm Cia Deets oon LS\n. a i > LN roa f I>, Sener et ens aI ae A — i >=\nALIS 2S gt We > i ee A? o\nlem I Wy ousTy vrudic ue i",
+      "cleanedText": "By LO S MIND M oo pee py\nGee = Bl NEPTUNE J MINISTRIES AND a oe\nScie O- El WH Sp tbe tea eran\noer tS =) NO El mm Cia Deets oon LS\n. a i > LN roa f I>, Sener et ens aI ae A — i >=\nALIS 2S gt We > i ee A? o\nlem I Wy ousTy vrudic ue i",
+      "lineEntries": [
+        {
+          "text": "By LO S MIND M oo pee py",
+          "avg_confidence": 0.431,
+          "top_ratio": 0.098,
+          "left": 108,
+          "top": 99,
+          "right": 2430,
+          "bottom": 326
+        },
+        {
+          "text": "Gee = Bl NEPTUNE J MINISTRIES AND a oe",
+          "avg_confidence": 0.424,
+          "top_ratio": 0.143,
+          "left": 151,
+          "top": 145,
+          "right": 2713,
+          "bottom": 491
+        },
+        {
+          "text": "Scie O- El WH Sp tbe tea eran",
+          "avg_confidence": 0.25,
+          "top_ratio": 0.193,
+          "left": 151,
+          "top": 196,
+          "right": 2648,
+          "bottom": 514
+        },
+        {
+          "text": "oer tS =) NO El mm Cia Deets oon LS",
+          "avg_confidence": 0.276,
+          "top_ratio": 0.272,
+          "left": 31,
+          "top": 276,
+          "right": 2722,
+          "bottom": 597
+        },
+        {
+          "text": ". a i > LN roa f I>, Sener et ens aI ae A — i >=",
+          "avg_confidence": 0.364,
+          "top_ratio": 0.321,
+          "left": 161,
+          "top": 326,
+          "right": 2559,
+          "bottom": 609
+        },
+        {
+          "text": "ALIS 2S gt We > i ee A? o",
+          "avg_confidence": 0.312,
+          "top_ratio": 0.407,
+          "left": 11,
+          "top": 413,
+          "right": 2673,
+          "bottom": 755
+        },
+        {
+          "text": "lem I Wy ousTy vrudic ue i",
+          "avg_confidence": 0.187,
+          "top_ratio": 0.691,
+          "left": 115,
+          "top": 701,
+          "right": 2717,
+          "bottom": 1015
+        }
+      ]
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 11",
+      "averageConfidence": 0.348,
+      "lineCount": 84,
+      "characterCount": 441,
+      "score": 36.031,
+      "coreMetadataConfidence": 0.58,
+      "runtimeMs": 576.9,
+      "timeoutSeconds": 3,
+      "rawText": "-y f eee f] a een ees meray\ni\nne a\nte sei ~\n~~ oe\n~\n|\n!\nory,\ntrae\nte\nWen\nAND\nMIND MELT MINISTRIE\nSy\nESET\nwry\nNEPTUME PROJEGT Prt\n5\n- By\nah\na\nBor\nEu Fy\nie\nae\nta\nsit\nSa dell\ng\nay\nZG\n55\ni Deora\npee\nIon\nayteee fatete\na stetete\ni\nke\n(E)\nhd\nsae\nrh\nysN i)\nS|\nre\ni\nsites ax\no |\ntes\n* 1 eae\nreratetere.s,\nRES:\n7939S\nzO\nCgDI\nDoe,\nwtoteret\nA RS\nes\né\nMe\neS\nal\nNe,\nWy\nAUSTIN MUSIC HALL\nare\n4\n=\nMek\nIe\nEXA\nT\nyee\nBoe\noy\nShon\nBI\n3g te\ni ne! Pg Ca» iss\nt\nnee",
+      "cleanedText": "-y f eee f] a een ees meray\ni\nne a\nte sei ~\n~~ oe\n~\n|\n!\nory,\ntrae\nte\nWen\nAND\nMIND MELT MINISTRIE\nSy\nESET\nwry\nNEPTUME PROJEGT Prt\n5\n- By\nah\na\nBor\nEu Fy\nie\nae\nta\nsit\nSa dell\ng\nay\nZG\n55\ni Deora\npee\nIon\nayteee fatete\na stetete\ni\nke\n(E)\nhd\nsae\nrh\nysN i)\nS|\nre\ni\nsites ax\no |\ntes\n* 1 eae\nreratetere.s,\nRES:\n7939S\nzO\nCgDI\nDoe,\nwtoteret\nA RS\nes\né\nMe\neS\nal\nNe,\nWy\nAUSTIN MUSIC HALL\nare\n4\n=\nMek\nIe\nEXA\nT\nyee\nBoe\noy\nShon\nBI\n3g te\ni ne! Pg Ca» iss\nt\nnee",
+      "lineEntries": [
+        {
+          "text": "-y f eee f] a een ees meray",
+          "avg_confidence": 0.289,
+          "top_ratio": 0.085,
+          "left": 1729,
+          "top": 88,
+          "right": 2293,
+          "bottom": 152
+        },
+        {
+          "text": "i",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.093,
+          "left": 2508,
+          "top": 97,
+          "right": 2728,
+          "bottom": 266
+        },
+        {
+          "text": "ne a",
+          "avg_confidence": 0.165,
+          "top_ratio": 0.099,
+          "left": 1204,
+          "top": 103,
+          "right": 1525,
+          "bottom": 131
+        },
+        {
+          "text": "te sei ~",
+          "avg_confidence": 0.33,
+          "top_ratio": 0.1,
+          "left": 496,
+          "top": 104,
+          "right": 669,
+          "bottom": 111
+        },
+        {
+          "text": "~~ oe",
+          "avg_confidence": 0.475,
+          "top_ratio": 0.1,
+          "left": 955,
+          "top": 104,
+          "right": 1060,
+          "bottom": 112
+        },
+        {
+          "text": "~",
+          "avg_confidence": 0.77,
+          "top_ratio": 0.104,
+          "left": 105,
+          "top": 108,
+          "right": 134,
+          "bottom": 117
+        },
+        {
+          "text": "|",
+          "avg_confidence": 0.26,
+          "top_ratio": 0.104,
+          "left": 342,
+          "top": 108,
+          "right": 395,
+          "bottom": 158
+        },
+        {
+          "text": "!",
+          "avg_confidence": 0.58,
+          "top_ratio": 0.117,
+          "left": 1611,
+          "top": 121,
+          "right": 1614,
+          "bottom": 137
+        },
+        {
+          "text": "ory,",
+          "avg_confidence": 0.59,
+          "top_ratio": 0.154,
+          "left": 293,
+          "top": 160,
+          "right": 337,
+          "bottom": 195
+        },
+        {
+          "text": "trae",
+          "avg_confidence": 0.27,
+          "top_ratio": 0.161,
+          "left": 2379,
+          "top": 167,
+          "right": 2438,
+          "bottom": 201
+        },
+        {
+          "text": "te",
+          "avg_confidence": 0.29,
+          "top_ratio": 0.162,
+          "left": 150,
+          "top": 168,
+          "right": 252,
+          "bottom": 240
+        },
+        {
+          "text": "Wen",
+          "avg_confidence": 0.67,
+          "top_ratio": 0.18,
+          "left": 297,
+          "top": 187,
+          "right": 430,
+          "bottom": 246
+        },
+        {
+          "text": "AND",
+          "avg_confidence": 0.96,
+          "top_ratio": 0.19,
+          "left": 1975,
+          "top": 197,
+          "right": 2153,
+          "bottom": 244
+        },
+        {
+          "text": "MIND MELT MINISTRIE",
+          "avg_confidence": 0.927,
+          "top_ratio": 0.191,
+          "left": 1033,
+          "top": 198,
+          "right": 1894,
+          "bottom": 253
+        },
+        {
+          "text": "Sy",
+          "avg_confidence": 0.3,
+          "top_ratio": 0.237,
+          "left": 150,
+          "top": 246,
+          "right": 204,
+          "bottom": 325
+        },
+        {
+          "text": "ESET",
+          "avg_confidence": 0.29,
+          "top_ratio": 0.243,
+          "left": 1914,
+          "top": 252,
+          "right": 2180,
+          "bottom": 354
+        },
+        {
+          "text": "wry",
+          "avg_confidence": 0.11,
+          "top_ratio": 0.244,
+          "left": 343,
+          "top": 253,
+          "right": 397,
+          "bottom": 287
+        },
+        {
+          "text": "NEPTUME PROJEGT Prt",
+          "avg_confidence": 0.737,
+          "top_ratio": 0.246,
+          "left": 1009,
+          "top": 255,
+          "right": 1929,
+          "bottom": 352
+        },
+        {
+          "text": "5",
+          "avg_confidence": 0.53,
+          "top_ratio": 0.27,
+          "left": 747,
+          "top": 280,
+          "right": 808,
+          "bottom": 380
+        },
+        {
+          "text": "- By",
+          "avg_confidence": 0.405,
+          "top_ratio": 0.322,
+          "left": 1649,
+          "top": 334,
+          "right": 1761,
+          "bottom": 431
+        },
+        {
+          "text": "ah",
+          "avg_confidence": 0.05,
+          "top_ratio": 0.331,
+          "left": 322,
+          "top": 344,
+          "right": 369,
+          "bottom": 415
+        },
+        {
+          "text": "a",
+          "avg_confidence": 0.14,
+          "top_ratio": 0.333,
+          "left": 1790,
+          "top": 346,
+          "right": 1832,
+          "bottom": 432
+        },
+        {
+          "text": "Bor",
+          "avg_confidence": 0.06,
+          "top_ratio": 0.334,
+          "left": 168,
+          "top": 347,
+          "right": 253,
+          "bottom": 421
+        },
+        {
+          "text": "Eu Fy",
+          "avg_confidence": 0.19,
+          "top_ratio": 0.344,
+          "left": 1240,
+          "top": 357,
+          "right": 1415,
+          "bottom": 411
+        },
+        {
+          "text": "ie",
+          "avg_confidence": 0.6,
+          "top_ratio": 0.351,
+          "left": 1486,
+          "top": 364,
+          "right": 1615,
+          "bottom": 478
+        },
+        {
+          "text": "ae",
+          "avg_confidence": 0.23,
+          "top_ratio": 0.353,
+          "left": 1179,
+          "top": 366,
+          "right": 1238,
+          "bottom": 423
+        },
+        {
+          "text": "ta",
+          "avg_confidence": 0.32,
+          "top_ratio": 0.353,
+          "left": 2380,
+          "top": 366,
+          "right": 2438,
+          "bottom": 416
+        },
+        {
+          "text": "sit",
+          "avg_confidence": 0.32,
+          "top_ratio": 0.382,
+          "left": 1384,
+          "top": 397,
+          "right": 1415,
+          "bottom": 431
+        },
+        {
+          "text": "Sa dell",
+          "avg_confidence": 0.235,
+          "top_ratio": 0.39,
+          "left": 2223,
+          "top": 405,
+          "right": 2303,
+          "bottom": 430
+        },
+        {
+          "text": "g",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.397,
+          "left": 1577,
+          "top": 412,
+          "right": 1601,
+          "bottom": 450
+        },
+        {
+          "text": "ay",
+          "avg_confidence": 0.3,
+          "top_ratio": 0.401,
+          "left": 315,
+          "top": 416,
+          "right": 400,
+          "bottom": 498
+        },
+        {
+          "text": "ZG",
+          "avg_confidence": 0.31,
+          "top_ratio": 0.403,
+          "left": 1978,
+          "top": 418,
+          "right": 2039,
+          "bottom": 464
+        },
+        {
+          "text": "55",
+          "avg_confidence": 0.21,
+          "top_ratio": 0.421,
+          "left": 1580,
+          "top": 437,
+          "right": 1638,
+          "bottom": 478
+        },
+        {
+          "text": "i Deora",
+          "avg_confidence": 0.015,
+          "top_ratio": 0.423,
+          "left": 1392,
+          "top": 439,
+          "right": 1486,
+          "bottom": 487
+        },
+        {
+          "text": "pee",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.438,
+          "left": 2252,
+          "top": 455,
+          "right": 2299,
+          "bottom": 471
+        },
+        {
+          "text": "Ion",
+          "avg_confidence": 0.62,
+          "top_ratio": 0.452,
+          "left": 522,
+          "top": 469,
+          "right": 672,
+          "bottom": 527
+        },
+        {
+          "text": "ayteee fatete",
+          "avg_confidence": 0.065,
+          "top_ratio": 0.468,
+          "left": 1888,
+          "top": 486,
+          "right": 1968,
+          "bottom": 491
+        },
+        {
+          "text": "a stetete",
+          "avg_confidence": 0.025,
+          "top_ratio": 0.471,
+          "left": 2067,
+          "top": 489,
+          "right": 2116,
+          "bottom": 495
+        },
+        {
+          "text": "i",
+          "avg_confidence": 0.12,
+          "top_ratio": 0.486,
+          "left": 297,
+          "top": 504,
+          "right": 353,
+          "bottom": 585
+        },
+        {
+          "text": "ke",
+          "avg_confidence": 0.58,
+          "top_ratio": 0.498,
+          "left": 152,
+          "top": 517,
+          "right": 221,
+          "bottom": 597
+        },
+        {
+          "text": "(E)",
+          "avg_confidence": 0.14,
+          "top_ratio": 0.511,
+          "left": 2382,
+          "top": 530,
+          "right": 2436,
+          "bottom": 562
+        },
+        {
+          "text": "hd",
+          "avg_confidence": 0.38,
+          "top_ratio": 0.512,
+          "left": 945,
+          "top": 531,
+          "right": 1014,
+          "bottom": 578
+        },
+        {
+          "text": "sae",
+          "avg_confidence": 0.23,
+          "top_ratio": 0.541,
+          "left": 744,
+          "top": 562,
+          "right": 798,
+          "bottom": 626
+        },
+        {
+          "text": "rh",
+          "avg_confidence": 0.29,
+          "top_ratio": 0.549,
+          "left": 1033,
+          "top": 570,
+          "right": 1083,
+          "bottom": 605
+        },
+        {
+          "text": "ysN i)",
+          "avg_confidence": 0.16,
+          "top_ratio": 0.555,
+          "left": 1600,
+          "top": 576,
+          "right": 1761,
+          "bottom": 666
+        },
+        {
+          "text": "S|",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.563,
+          "left": 153,
+          "top": 584,
+          "right": 226,
+          "bottom": 663
+        },
+        {
+          "text": "re",
+          "avg_confidence": 0.64,
+          "top_ratio": 0.564,
+          "left": 296,
+          "top": 585,
+          "right": 400,
+          "bottom": 668
+        },
+        {
+          "text": "i",
+          "avg_confidence": 0.68,
+          "top_ratio": 0.571,
+          "left": 410,
+          "top": 593,
+          "right": 436,
+          "bottom": 693
+        },
+        {
+          "text": "sites ax",
+          "avg_confidence": 0.225,
+          "top_ratio": 0.571,
+          "left": 987,
+          "top": 593,
+          "right": 1123,
+          "bottom": 638
+        },
+        {
+          "text": "o |",
+          "avg_confidence": 0.46,
+          "top_ratio": 0.599,
+          "left": 2611,
+          "top": 622,
+          "right": 2725,
+          "bottom": 751
+        },
+        {
+          "text": "tes",
+          "avg_confidence": 0.62,
+          "top_ratio": 0.601,
+          "left": 751,
+          "top": 624,
+          "right": 803,
+          "bottom": 653
+        },
+        {
+          "text": "* 1 eae",
+          "avg_confidence": 0.1,
+          "top_ratio": 0.604,
+          "left": 959,
+          "top": 627,
+          "right": 1086,
+          "bottom": 683
+        },
+        {
+          "text": "reratetere.s,",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.608,
+          "left": 1976,
+          "top": 631,
+          "right": 2040,
+          "bottom": 659
+        },
+        {
+          "text": "RES:",
+          "avg_confidence": 0.45,
+          "top_ratio": 0.609,
+          "left": 1380,
+          "top": 632,
+          "right": 1480,
+          "bottom": 670
+        },
+        {
+          "text": "7939S",
+          "avg_confidence": 0.18,
+          "top_ratio": 0.627,
+          "left": 1778,
+          "top": 651,
+          "right": 2058,
+          "bottom": 721
+        },
+        {
+          "text": "zO",
+          "avg_confidence": 0.54,
+          "top_ratio": 0.632,
+          "left": 522,
+          "top": 656,
+          "right": 673,
+          "bottom": 701
+        },
+        {
+          "text": "CgDI",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.644,
+          "left": 171,
+          "top": 668,
+          "right": 374,
+          "bottom": 755
+        },
+        {
+          "text": "Doe,",
+          "avg_confidence": 0.27,
+          "top_ratio": 0.645,
+          "left": 1222,
+          "top": 670,
+          "right": 1259,
+          "bottom": 675
+        },
+        {
+          "text": "wtoteret",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.648,
+          "left": 1710,
+          "top": 673,
+          "right": 1764,
+          "bottom": 684
+        },
+        {
+          "text": "A RS",
+          "avg_confidence": 0.275,
+          "top_ratio": 0.696,
+          "left": 1072,
+          "top": 722,
+          "right": 1162,
+          "bottom": 746
+        },
+        {
+          "text": "es",
+          "avg_confidence": 0.47,
+          "top_ratio": 0.709,
+          "left": 1037,
+          "top": 736,
+          "right": 1099,
+          "bottom": 783
+        },
+        {
+          "text": "é",
+          "avg_confidence": 0.13,
+          "top_ratio": 0.72,
+          "left": 1094,
+          "top": 747,
+          "right": 1166,
+          "bottom": 814
+        },
+        {
+          "text": "Me",
+          "avg_confidence": 0.45,
+          "top_ratio": 0.736,
+          "left": 369,
+          "top": 764,
+          "right": 446,
+          "bottom": 896
+        },
+        {
+          "text": "eS",
+          "avg_confidence": 0.01,
+          "top_ratio": 0.74,
+          "left": 1019,
+          "top": 768,
+          "right": 1093,
+          "bottom": 824
+        },
+        {
+          "text": "al",
+          "avg_confidence": 0.6,
+          "top_ratio": 0.759,
+          "left": 154,
+          "top": 788,
+          "right": 191,
+          "bottom": 828
+        },
+        {
+          "text": "Ne,",
+          "avg_confidence": 0.32,
+          "top_ratio": 0.767,
+          "left": 1444,
+          "top": 796,
+          "right": 1490,
+          "bottom": 816
+        },
+        {
+          "text": "Wy",
+          "avg_confidence": 0.53,
+          "top_ratio": 0.773,
+          "left": 1142,
+          "top": 802,
+          "right": 1342,
+          "bottom": 916
+        },
+        {
+          "text": "AUSTIN MUSIC HALL",
+          "avg_confidence": 0.937,
+          "top_ratio": 0.774,
+          "left": 1535,
+          "top": 803,
+          "right": 2317,
+          "bottom": 860
+        },
+        {
+          "text": "are",
+          "avg_confidence": 0.24,
+          "top_ratio": 0.78,
+          "left": 1454,
+          "top": 810,
+          "right": 1494,
+          "bottom": 842
+        },
+        {
+          "text": "4",
+          "avg_confidence": 0.44,
+          "top_ratio": 0.794,
+          "left": 1039,
+          "top": 824,
+          "right": 1120,
+          "bottom": 907
+        },
+        {
+          "text": "=",
+          "avg_confidence": 0.61,
+          "top_ratio": 0.797,
+          "left": 749,
+          "top": 827,
+          "right": 795,
+          "bottom": 848
+        },
+        {
+          "text": "Mek",
+          "avg_confidence": 0.57,
+          "top_ratio": 0.819,
+          "left": 240,
+          "top": 850,
+          "right": 383,
+          "bottom": 947
+        },
+        {
+          "text": "Ie",
+          "avg_confidence": 0.66,
+          "top_ratio": 0.822,
+          "left": 153,
+          "top": 853,
+          "right": 221,
+          "bottom": 934
+        },
+        {
+          "text": "EXA",
+          "avg_confidence": 0.69,
+          "top_ratio": 0.828,
+          "left": 2015,
+          "top": 859,
+          "right": 2168,
+          "bottom": 907
+        },
+        {
+          "text": "T",
+          "avg_confidence": 0.92,
+          "top_ratio": 0.832,
+          "left": 1794,
+          "top": 864,
+          "right": 1840,
+          "bottom": 909
+        },
+        {
+          "text": "yee",
+          "avg_confidence": 0.43,
+          "top_ratio": 0.833,
+          "left": 1421,
+          "top": 865,
+          "right": 1454,
+          "bottom": 883
+        },
+        {
+          "text": "Boe",
+          "avg_confidence": 0.25,
+          "top_ratio": 0.844,
+          "left": 2489,
+          "top": 876,
+          "right": 2726,
+          "bottom": 1027
+        },
+        {
+          "text": "oy",
+          "avg_confidence": 0.25,
+          "top_ratio": 0.845,
+          "left": 309,
+          "top": 877,
+          "right": 595,
+          "bottom": 1032
+        },
+        {
+          "text": "Shon",
+          "avg_confidence": 0.07,
+          "top_ratio": 0.876,
+          "left": 1333,
+          "top": 909,
+          "right": 1397,
+          "bottom": 930
+        },
+        {
+          "text": "BI",
+          "avg_confidence": 0.31,
+          "top_ratio": 0.884,
+          "left": 153,
+          "top": 918,
+          "right": 241,
+          "bottom": 1029
+        },
+        {
+          "text": "3g te",
+          "avg_confidence": 0.395,
+          "top_ratio": 0.9,
+          "left": 1605,
+          "top": 934,
+          "right": 2275,
+          "bottom": 1033
+        },
+        {
+          "text": "i ne! Pg Ca» iss",
+          "avg_confidence": 0.272,
+          "top_ratio": 0.93,
+          "left": 175,
+          "top": 965,
+          "right": 455,
+          "bottom": 1038
+        },
+        {
+          "text": "t",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.952,
+          "left": 115,
+          "top": 988,
+          "right": 119,
+          "bottom": 1003
+        },
+        {
+          "text": "nee",
+          "avg_confidence": 0.31,
+          "top_ratio": 0.987,
+          "left": 853,
+          "top": 1024,
+          "right": 944,
+          "bottom": 1032
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1401 @@
+{
+  "selectedBestVariant": "display",
+  "selectedConfig": "--psm 6 [display]",
+  "averageConfidence": 0.436,
+  "coreMetadataConfidence": 0.806,
+  "canonicalEligible": true,
+  "approvalBlockers": [],
+  "ocrPassCount": 3,
+  "ocrEarlyExitTriggered": false,
+  "ocrEarlyExitReason": "",
+  "topArtistCandidates": [
+    {
+      "accepted": true,
+      "value": "I ta",
+      "score": 0.788,
+      "plausibility": 0.788,
+      "ocrConfidence": 0.12,
+      "topRatio": 0.019,
+      "sourceLine": "I ta",
+      "reasons": [
+        "looks like a human-readable artist/band line"
+      ]
+    }
+  ],
+  "rejectedArtistCandidates": [
+    {
+      "accepted": false,
+      "value": "PON 38°",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.423,
+      "topRatio": 0.039,
+      "sourceLine": "PON 38° 8 FE oo |",
+      "reasons": [
+        "contains digits",
+        "contains too many non-letter characters",
+        "not dominated by alphabetic characters",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Hn",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.2,
+      "topRatio": 0.042,
+      "sourceLine": ". Hn",
+      "reasons": [
+        "not dominated by alphabetic characters"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "\"Tr",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.378,
+      "topRatio": 0.065,
+      "sourceLine": "a a ee Os “Tr",
+      "reasons": [
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "25e",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.302,
+      "topRatio": 0.098,
+      "sourceLine": "oN g 25e SE",
+      "reasons": [
+        "contains digits",
+        "looks like alphanumeric event code",
+        "not dominated by alphabetic characters",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "I <a On A",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.37,
+      "topRatio": 0.234,
+      "sourceLine": "=i <a on a",
+      "reasons": [
+        "not dominated by alphabetic characters",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "W Aj",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.545,
+      "topRatio": 0.246,
+      "sourceLine": "— ~w aj =",
+      "reasons": [
+        "not dominated by alphabetic characters",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Taj aay",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.427,
+      "topRatio": 0.263,
+      "sourceLine": "Taj — = aay",
+      "reasons": [
+        "not dominated by alphabetic characters",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Aaa ote",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.54,
+      "topRatio": 0.336,
+      "sourceLine": "Aaa o> = ote)",
+      "reasons": [
+        "not dominated by alphabetic characters",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Meood",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.303,
+      "topRatio": 0.349,
+      "sourceLine": "meood .7 FA",
+      "reasons": [
+        "contains digits",
+        "not dominated by alphabetic characters"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "D> a | i",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.46,
+      "topRatio": 0.364,
+      "sourceLine": "~ D> a | i",
+      "reasons": [
+        "not dominated by alphabetic characters",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "P= Ee",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.357,
+      "topRatio": 0.398,
+      "sourceLine": "© p= ee",
+      "reasons": [
+        "not dominated by alphabetic characters",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "+57",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.203,
+      "topRatio": 0.413,
+      "sourceLine": "oe im +57",
+      "reasons": [
+        "contains digits",
+        "not dominated by alphabetic characters"
+      ]
+    }
+  ],
+  "topVenueCandidates": [],
+  "dateCandidates": [],
+  "filenamePriorsUsed": true,
+  "filenamePriors": {
+    "used": true,
+    "artist": "PJ Harvey & John Parish",
+    "artistParts": [
+      "PJ Harvey",
+      "John Parish"
+    ],
+    "venue": "Beacon Theater",
+    "venueParts": [
+      "Beacon Theater"
+    ],
+    "year": "2009",
+    "structuredPlausible": true,
+    "sourceStem": "pj-harvey-john-parish-beacon-theater-2009",
+    "bodyParts": [
+      "pj",
+      "harvey",
+      "john",
+      "parish",
+      "beacon",
+      "theater"
+    ],
+    "bestSplit": 4
+  },
+  "filenamePriorBreakdown": {
+    "used": true,
+    "artist": "PJ Harvey & John Parish",
+    "artistParts": [
+      "PJ Harvey",
+      "John Parish"
+    ],
+    "venue": "Beacon Theater",
+    "venueParts": [
+      "Beacon Theater"
+    ],
+    "year": "2009",
+    "structuredPlausible": true,
+    "sourceStem": "pj-harvey-john-parish-beacon-theater-2009",
+    "bodyParts": [
+      "pj",
+      "harvey",
+      "john",
+      "parish",
+      "beacon",
+      "theater"
+    ],
+    "bestSplit": 4
+  },
+  "multiArtistParsingAttempted": true,
+  "multiArtistParsingMatched": true,
+  "venueTailSplittingAttempted": false,
+  "venueTailSplittingMatched": false,
+  "activeParserStagesRun": [
+    "ocr_text_selected",
+    "artist_candidates_extracted",
+    "venue_candidates_extracted",
+    "date_candidates_extracted",
+    "filename_priors_loaded",
+    "multi_artist_parser_checked",
+    "venue_tail_split_checked",
+    "final_selector_resolved"
+  ],
+  "functionChain": [
+    "run_ocr_variants",
+    "extract_artist_candidates",
+    "extract_venue_candidates",
+    "extract_year",
+    "extract_exact_date",
+    "build_filename_priors",
+    "detect_multi_artist_billing",
+    "split_artist_prefix_from_venue",
+    "final_selection_resolution"
+  ],
+  "finalSelectorWinner": "structured_filename_fallback",
+  "finalSelectorReason": "Weak/fragmented OCR triggered a structured filename fallback for multi-artist billing.",
+  "selectorDebug": {
+    "parserStagesRun": [
+      "ocr_text_selected",
+      "artist_candidates_extracted",
+      "venue_candidates_extracted",
+      "date_candidates_extracted",
+      "filename_priors_loaded",
+      "multi_artist_parser_checked",
+      "venue_tail_split_checked",
+      "final_selector_resolved"
+    ],
+    "multiArtistParsingAttempted": true,
+    "multiArtistParsingMatched": true,
+    "venueTailSplittingAttempted": false,
+    "venueTailSplittingMatched": false,
+    "structuredFilenameFallbackUsed": true,
+    "finalSelectorWinner": "structured_filename_fallback",
+    "finalSelectorReason": "Weak/fragmented OCR triggered a structured filename fallback for multi-artist billing.",
+    "finalArtist": "PJ Harvey & John Parish",
+    "finalVenue": "Beacon Theater",
+    "finalYear": "2009",
+    "functionChain": [
+      "run_ocr_variants",
+      "extract_artist_candidates",
+      "extract_venue_candidates",
+      "extract_year",
+      "extract_exact_date",
+      "build_filename_priors",
+      "detect_multi_artist_billing",
+      "split_artist_prefix_from_venue",
+      "final_selection_resolution"
+    ]
+  },
+  "chosenArtistExplanation": [
+    "looks like a human-readable artist/band line"
+  ],
+  "rawOcrTextByPass": [
+    {
+      "variant": "display",
+      "config": "--psm 6",
+      "rawText": "I ta\nPON 38° 8 FE oo |\n. Hn\na a ee Os “Tr\noN g 25e SE\n=i <a on a\n— ~w aj =\nTaj — = aay\nAaa o> = ote)\nmeood .7 FA\n~ D> a | i\n© p= ee\noe im +57\n. |_|\nco a=. om in\n-- 2m BZo0,\nSS < — :\nie — YH j-~-_r\na) ee .,~Bo |\nne :\n| 7a S\n‘ep ) or =~ S\nSEAT Is) foe] <[->)\n®& o ote)\nnD ©\n‘> ® St > <r |\n| 488877600555 |\n| ticketmaster\n| getticketsat ticketmaster.com _\nae EXCHANGE EXCEPT AS PROVIDED HEREIN. NO REFUNDS. NO REENTRY.",
+      "cleanedText": "I ta\nPON 38° 8 FE oo |\n. Hn\na a ee Os “Tr\noN g 25e SE\n=i <a on a\n— ~w aj =\nTaj — = aay\nAaa o> = ote)\nmeood .7 FA\n~ D> a | i\n© p= ee\noe im +57\n. |_|\nco a=. om in\n-- 2m BZo0,\nSS < — :\nie — YH j-~-_r\na) ee .,~Bo |\nne :\n| 7a S\n‘ep ) or =~ S\nSEAT Is) foe] <[->)\n®& o ote)\nnD ©\n‘> ® St > <r |\n| 488877600555 |\n| ticketmaster\n| getticketsat ticketmaster.com _\nae EXCHANGE EXCEPT AS PROVIDED HEREIN. NO REFUNDS. NO REENTRY."
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 6",
+      "rawText": "SN Bo 8 Fh |\neM EB eH Os emi |\nEO N. #8 ~ OF SEs i ~\n' nian hd le :\n4 & Ta. SS DCO\n| #=@eop. MSO) Le\n; €2 >. = mM\n| = os | Pec\nbee a oe ee\nf 488877600555\nticketmaster\n. +7, Ts ame ° IN MAIO\n° getticketsat ticketmaster.com\n~ 1 NO EXCHANGE EXCEPT AS F2OVIDED HEREIN. NO REFUNDS. NO REENTRY.\nNoe ae -_— = ,",
+      "cleanedText": "SN Bo 8 Fh |\neM EB eH Os emi |\nEO N. #8 ~ OF SEs i ~\n' nian hd le :\n4 & Ta. SS DCO\n| #=@eop. MSO) Le\n; €2 >. = mM\n| = os | Pec\nbee a oe ee\nf 488877600555\nticketmaster\n. +7, Ts ame ° IN MAIO\n° getticketsat ticketmaster.com\n~ 1 NO EXCHANGE EXCEPT AS F2OVIDED HEREIN. NO REFUNDS. NO REENTRY.\nNoe ae -_— = ,"
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 11",
+      "rawText": "—~ ~ ~~ em na a > —~\nLe\nae EE OY RL oo Son an Seryotat mete Moen ey we\nSas\nwie\naz\n=e\npe»\nH-—t\npak t\nEe 2\nif.\n1S\n“I Sica\n9 Fo\npres urea! es Sey\na a at a OP ape OE lS Tang\nah SN Seoere\nReaneg SEMI a ae peti ont tne Dn ORS\niri\n=>\n© |\nmC?\n=. j\nine\nai\nTea\nic DS\nHi\n<ib\no\ncif\n7 |\ni\nim\nOo\n= =\nte:\n{cc\ni.\n=\nC1 FS\nSN\n—_— —\nDO AUS GS has PO\nREC ee\nren:\nSEC:\nROW;\n:1\nTo ©\n~\nMico\nnp 271 ©\ni\n[he\nHIT TTTMTTIIN\nmtn\nMerete tie weir rat Oo\nOEE ST eet\nmake Ry os re\ntmaster\n:\nESS\n. ,\n.\n_get tickets at ticketmaster.com\nNO EXCHANGE EXCEPT AS FEOVIDED HEREIN. NO REFUNDS. NO REENTRY.\nSE - ee i 7 —~- = a\n-_",
+      "cleanedText": "—~ ~ ~~ em na a > —~\nLe\nae EE OY RL oo Son an Seryotat mete Moen ey we\nSas\nwie\naz\n=e\npe»\nH-—t\npak t\nEe 2\nif.\n1S\n“I Sica\n9 Fo\npres urea! es Sey\na a at a OP ape OE lS Tang\nah SN Seoere\nReaneg SEMI a ae peti ont tne Dn ORS\niri\n=>\n© |\nmC?\n=. j\nine\nai\nTea\nic DS\nHi\n<ib\no\ncif\n7 |\ni\nim\nOo\n= =\nte:\n{cc\ni.\n=\nC1 FS\nSN\n—_— —\nDO AUS GS has PO\nREC ee\nren:\nSEC:\nROW;\n:1\nTo ©\n~\nMico\nnp 271 ©\ni\n[he\nHIT TTTMTTIIN\nmtn\nMerete tie weir rat Oo\nOEE ST eet\nmake Ry os re\ntmaster\n:\nESS\n. ,\n.\n_get tickets at ticketmaster.com\nNO EXCHANGE EXCEPT AS FEOVIDED HEREIN. NO REFUNDS. NO REENTRY.\nSE - ee i 7 —~- = a\n-_"
+    }
+  ],
+  "runs": [
+    {
+      "variant": "display",
+      "config": "--psm 6",
+      "averageConfidence": 0.436,
+      "lineCount": 30,
+      "characterCount": 415,
+      "score": 44.823,
+      "coreMetadataConfidence": 0.315,
+      "runtimeMs": 1188.7,
+      "timeoutSeconds": 4,
+      "rawText": "I ta\nPON 38° 8 FE oo |\n. Hn\na a ee Os “Tr\noN g 25e SE\n=i <a on a\n— ~w aj =\nTaj — = aay\nAaa o> = ote)\nmeood .7 FA\n~ D> a | i\n© p= ee\noe im +57\n. |_|\nco a=. om in\n-- 2m BZo0,\nSS < — :\nie — YH j-~-_r\na) ee .,~Bo |\nne :\n| 7a S\n‘ep ) or =~ S\nSEAT Is) foe] <[->)\n®& o ote)\nnD ©\n‘> ® St > <r |\n| 488877600555 |\n| ticketmaster\n| getticketsat ticketmaster.com _\nae EXCHANGE EXCEPT AS PROVIDED HEREIN. NO REFUNDS. NO REENTRY.",
+      "cleanedText": "I ta\nPON 38° 8 FE oo |\n. Hn\na a ee Os “Tr\noN g 25e SE\n=i <a on a\n— ~w aj =\nTaj — = aay\nAaa o> = ote)\nmeood .7 FA\n~ D> a | i\n© p= ee\noe im +57\n. |_|\nco a=. om in\n-- 2m BZo0,\nSS < — :\nie — YH j-~-_r\na) ee .,~Bo |\nne :\n| 7a S\n‘ep ) or =~ S\nSEAT Is) foe] <[->)\n®& o ote)\nnD ©\n‘> ® St > <r |\n| 488877600555 |\n| ticketmaster\n| getticketsat ticketmaster.com _\nae EXCHANGE EXCEPT AS PROVIDED HEREIN. NO REFUNDS. NO REENTRY.",
+      "lineEntries": [
+        {
+          "text": "I ta",
+          "avg_confidence": 0.12,
+          "top_ratio": 0.019,
+          "left": 73,
+          "top": 65,
+          "right": 1236,
+          "bottom": 104
+        },
+        {
+          "text": "PON 38° 8 FE oo |",
+          "avg_confidence": 0.423,
+          "top_ratio": 0.039,
+          "left": 105,
+          "top": 133,
+          "right": 1234,
+          "bottom": 260
+        },
+        {
+          "text": ". Hn",
+          "avg_confidence": 0.2,
+          "top_ratio": 0.042,
+          "left": 671,
+          "top": 145,
+          "right": 808,
+          "bottom": 172
+        },
+        {
+          "text": "a a ee Os “Tr",
+          "avg_confidence": 0.378,
+          "top_ratio": 0.065,
+          "left": 97,
+          "top": 225,
+          "right": 1194,
+          "bottom": 296
+        },
+        {
+          "text": "oN g 25e SE",
+          "avg_confidence": 0.302,
+          "top_ratio": 0.098,
+          "left": 105,
+          "top": 339,
+          "right": 1217,
+          "bottom": 441
+        },
+        {
+          "text": "=i <a on a",
+          "avg_confidence": 0.37,
+          "top_ratio": 0.234,
+          "left": 173,
+          "top": 806,
+          "right": 1285,
+          "bottom": 891
+        },
+        {
+          "text": "— ~w aj =",
+          "avg_confidence": 0.545,
+          "top_ratio": 0.246,
+          "left": 173,
+          "top": 847,
+          "right": 1086,
+          "bottom": 925
+        },
+        {
+          "text": "Taj — = aay",
+          "avg_confidence": 0.427,
+          "top_ratio": 0.263,
+          "left": 173,
+          "top": 907,
+          "right": 1199,
+          "bottom": 982
+        },
+        {
+          "text": "Aaa o> = ote)",
+          "avg_confidence": 0.54,
+          "top_ratio": 0.336,
+          "left": 319,
+          "top": 1157,
+          "right": 1201,
+          "bottom": 1234
+        },
+        {
+          "text": "meood .7 FA",
+          "avg_confidence": 0.303,
+          "top_ratio": 0.349,
+          "left": 175,
+          "top": 1205,
+          "right": 1201,
+          "bottom": 1289
+        },
+        {
+          "text": "~ D> a | i",
+          "avg_confidence": 0.46,
+          "top_ratio": 0.364,
+          "left": 175,
+          "top": 1254,
+          "right": 1202,
+          "bottom": 1342
+        },
+        {
+          "text": "© p= ee",
+          "avg_confidence": 0.357,
+          "top_ratio": 0.398,
+          "left": 176,
+          "top": 1373,
+          "right": 1020,
+          "bottom": 1458
+        },
+        {
+          "text": "oe im +57",
+          "avg_confidence": 0.203,
+          "top_ratio": 0.413,
+          "left": 177,
+          "top": 1424,
+          "right": 931,
+          "bottom": 1511
+        },
+        {
+          "text": ". |_|",
+          "avg_confidence": 0.35,
+          "top_ratio": 0.441,
+          "left": 344,
+          "top": 1522,
+          "right": 1043,
+          "bottom": 1638
+        },
+        {
+          "text": "co a=. om in",
+          "avg_confidence": 0.61,
+          "top_ratio": 0.453,
+          "left": 174,
+          "top": 1561,
+          "right": 1043,
+          "bottom": 1660
+        },
+        {
+          "text": "-- 2m BZo0,",
+          "avg_confidence": 0.21,
+          "top_ratio": 0.475,
+          "left": 187,
+          "top": 1637,
+          "right": 1069,
+          "bottom": 1725
+        },
+        {
+          "text": "SS < — :",
+          "avg_confidence": 0.338,
+          "top_ratio": 0.491,
+          "left": 178,
+          "top": 1693,
+          "right": 1085,
+          "bottom": 1746
+        },
+        {
+          "text": "ie — YH j-~-_r",
+          "avg_confidence": 0.323,
+          "top_ratio": 0.503,
+          "left": 179,
+          "top": 1734,
+          "right": 1205,
+          "bottom": 1794
+        },
+        {
+          "text": "a) ee .,~Bo |",
+          "avg_confidence": 0.31,
+          "top_ratio": 0.517,
+          "left": 179,
+          "top": 1781,
+          "right": 1252,
+          "bottom": 1868
+        },
+        {
+          "text": "ne :",
+          "avg_confidence": 0.395,
+          "top_ratio": 0.558,
+          "left": 924,
+          "top": 1923,
+          "right": 1252,
+          "bottom": 1983
+        },
+        {
+          "text": "| 7a S",
+          "avg_confidence": 0.22,
+          "top_ratio": 0.655,
+          "left": 86,
+          "top": 2258,
+          "right": 1096,
+          "bottom": 2355
+        },
+        {
+          "text": "‘ep ) or =~ S",
+          "avg_confidence": 0.254,
+          "top_ratio": 0.665,
+          "left": 310,
+          "top": 2293,
+          "right": 1207,
+          "bottom": 2384
+        },
+        {
+          "text": "SEAT Is) foe] <[->)",
+          "avg_confidence": 0.302,
+          "top_ratio": 0.682,
+          "left": 137,
+          "top": 2350,
+          "right": 1208,
+          "bottom": 2431
+        },
+        {
+          "text": "®& o ote)",
+          "avg_confidence": 0.447,
+          "top_ratio": 0.719,
+          "left": 314,
+          "top": 2478,
+          "right": 1209,
+          "bottom": 2540
+        },
+        {
+          "text": "nD ©",
+          "avg_confidence": 0.685,
+          "top_ratio": 0.723,
+          "left": 156,
+          "top": 2494,
+          "right": 645,
+          "bottom": 2571
+        },
+        {
+          "text": "‘> ® St > <r |",
+          "avg_confidence": 0.328,
+          "top_ratio": 0.731,
+          "left": 157,
+          "top": 2520,
+          "right": 1256,
+          "bottom": 2609
+        },
+        {
+          "text": "| 488877600555 |",
+          "avg_confidence": 0.897,
+          "top_ratio": 0.75,
+          "left": 84,
+          "top": 2586,
+          "right": 1260,
+          "bottom": 2778
+        },
+        {
+          "text": "| ticketmaster",
+          "avg_confidence": 0.47,
+          "top_ratio": 0.87,
+          "left": 84,
+          "top": 3000,
+          "right": 1169,
+          "bottom": 3150
+        },
+        {
+          "text": "| getticketsat ticketmaster.com _",
+          "avg_confidence": 0.605,
+          "top_ratio": 0.948,
+          "left": 88,
+          "top": 3267,
+          "right": 1253,
+          "bottom": 3345
+        },
+        {
+          "text": "ae EXCHANGE EXCEPT AS PROVIDED HEREIN. NO REFUNDS. NO REENTRY.",
+          "avg_confidence": 0.872,
+          "top_ratio": 0.978,
+          "left": 87,
+          "top": 3372,
+          "right": 1237,
+          "bottom": 3448
+        }
+      ]
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 6",
+      "averageConfidence": 0.391,
+      "lineCount": 15,
+      "characterCount": 303,
+      "score": 40.33,
+      "coreMetadataConfidence": 0.314,
+      "runtimeMs": 526.4,
+      "timeoutSeconds": 3,
+      "rawText": "SN Bo 8 Fh |\neM EB eH Os emi |\nEO N. #8 ~ OF SEs i ~\n' nian hd le :\n4 & Ta. SS DCO\n| #=@eop. MSO) Le\n; €2 >. = mM\n| = os | Pec\nbee a oe ee\nf 488877600555\nticketmaster\n. +7, Ts ame ° IN MAIO\n° getticketsat ticketmaster.com\n~ 1 NO EXCHANGE EXCEPT AS F2OVIDED HEREIN. NO REFUNDS. NO REENTRY.\nNoe ae -_— = ,",
+      "cleanedText": "SN Bo 8 Fh |\neM EB eH Os emi |\nEO N. #8 ~ OF SEs i ~\n' nian hd le :\n4 & Ta. SS DCO\n| #=@eop. MSO) Le\n; €2 >. = mM\n| = os | Pec\nbee a oe ee\nf 488877600555\nticketmaster\n. +7, Ts ame ° IN MAIO\n° getticketsat ticketmaster.com\n~ 1 NO EXCHANGE EXCEPT AS F2OVIDED HEREIN. NO REFUNDS. NO REENTRY.\nNoe ae -_— = ,",
+      "lineEntries": [
+        {
+          "text": "SN Bo 8 Fh |",
+          "avg_confidence": 0.278,
+          "top_ratio": 0.04,
+          "left": 77,
+          "top": 137,
+          "right": 1351,
+          "bottom": 244
+        },
+        {
+          "text": "eM EB eH Os emi |",
+          "avg_confidence": 0.235,
+          "top_ratio": 0.065,
+          "left": 36,
+          "top": 225,
+          "right": 1330,
+          "bottom": 296
+        },
+        {
+          "text": "EO N. #8 ~ OF SEs i ~",
+          "avg_confidence": 0.38,
+          "top_ratio": 0.098,
+          "left": 20,
+          "top": 338,
+          "right": 1330,
+          "bottom": 433
+        },
+        {
+          "text": "' nian hd le :",
+          "avg_confidence": 0.136,
+          "top_ratio": 0.15,
+          "left": 8,
+          "top": 520,
+          "right": 1346,
+          "bottom": 619
+        },
+        {
+          "text": "4 & Ta. SS DCO",
+          "avg_confidence": 0.356,
+          "top_ratio": 0.304,
+          "left": 40,
+          "top": 1053,
+          "right": 943,
+          "bottom": 1121
+        },
+        {
+          "text": "| #=@eop. MSO) Le",
+          "avg_confidence": 0.343,
+          "top_ratio": 0.317,
+          "left": 20,
+          "top": 1096,
+          "right": 1108,
+          "bottom": 1168
+        },
+        {
+          "text": "; €2 >. = mM",
+          "avg_confidence": 0.324,
+          "top_ratio": 0.431,
+          "left": 68,
+          "top": 1491,
+          "right": 932,
+          "bottom": 1556
+        },
+        {
+          "text": "| = os | Pec",
+          "avg_confidence": 0.358,
+          "top_ratio": 0.528,
+          "left": 77,
+          "top": 1829,
+          "right": 1205,
+          "bottom": 1914
+        },
+        {
+          "text": "bee a oe ee",
+          "avg_confidence": 0.282,
+          "top_ratio": 0.636,
+          "left": 75,
+          "top": 2203,
+          "right": 1357,
+          "bottom": 2370
+        },
+        {
+          "text": "f 488877600555",
+          "avg_confidence": 0.595,
+          "top_ratio": 0.768,
+          "left": 75,
+          "top": 2659,
+          "right": 949,
+          "bottom": 2742
+        },
+        {
+          "text": "ticketmaster",
+          "avg_confidence": 0.76,
+          "top_ratio": 0.867,
+          "left": 205,
+          "top": 3002,
+          "right": 1145,
+          "bottom": 3138
+        },
+        {
+          "text": ". +7, Ts ame ° IN MAIO",
+          "avg_confidence": 0.304,
+          "top_ratio": 0.878,
+          "left": 128,
+          "top": 3040,
+          "right": 1170,
+          "bottom": 3083
+        },
+        {
+          "text": "° getticketsat ticketmaster.com",
+          "avg_confidence": 0.513,
+          "top_ratio": 0.941,
+          "left": 98,
+          "top": 3257,
+          "right": 1169,
+          "bottom": 3335
+        },
+        {
+          "text": "~ 1 NO EXCHANGE EXCEPT AS F2OVIDED HEREIN. NO REFUNDS. NO REENTRY.",
+          "avg_confidence": 0.749,
+          "top_ratio": 0.969,
+          "left": 8,
+          "top": 3356,
+          "right": 1237,
+          "bottom": 3421
+        },
+        {
+          "text": "Noe ae -_— = ,",
+          "avg_confidence": 0.262,
+          "top_ratio": 0.986,
+          "left": 86,
+          "top": 3415,
+          "right": 1280,
+          "bottom": 3462
+        }
+      ]
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 11",
+      "averageConfidence": 0.347,
+      "lineCount": 70,
+      "characterCount": 587,
+      "score": 35.858,
+      "coreMetadataConfidence": 0.374,
+      "runtimeMs": 831.6,
+      "timeoutSeconds": 3,
+      "rawText": "—~ ~ ~~ em na a > —~\nLe\nae EE OY RL oo Son an Seryotat mete Moen ey we\nSas\nwie\naz\n=e\npe»\nH-—t\npak t\nEe 2\nif.\n1S\n“I Sica\n9 Fo\npres urea! es Sey\na a at a OP ape OE lS Tang\nah SN Seoere\nReaneg SEMI a ae peti ont tne Dn ORS\niri\n=>\n© |\nmC?\n=. j\nine\nai\nTea\nic DS\nHi\n<ib\no\ncif\n7 |\ni\nim\nOo\n= =\nte:\n{cc\ni.\n=\nC1 FS\nSN\n—_— —\nDO AUS GS has PO\nREC ee\nren:\nSEC:\nROW;\n:1\nTo ©\n~\nMico\nnp 271 ©\ni\n[he\nHIT TTTMTTIIN\nmtn\nMerete tie weir rat Oo\nOEE ST eet\nmake Ry os re\ntmaster\n:\nESS\n. ,\n.\n_get tickets at ticketmaster.com\nNO EXCHANGE EXCEPT AS FEOVIDED HEREIN. NO REFUNDS. NO REENTRY.\nSE - ee i 7 —~- = a\n-_",
+      "cleanedText": "—~ ~ ~~ em na a > —~\nLe\nae EE OY RL oo Son an Seryotat mete Moen ey we\nSas\nwie\naz\n=e\npe»\nH-—t\npak t\nEe 2\nif.\n1S\n“I Sica\n9 Fo\npres urea! es Sey\na a at a OP ape OE lS Tang\nah SN Seoere\nReaneg SEMI a ae peti ont tne Dn ORS\niri\n=>\n© |\nmC?\n=. j\nine\nai\nTea\nic DS\nHi\n<ib\no\ncif\n7 |\ni\nim\nOo\n= =\nte:\n{cc\ni.\n=\nC1 FS\nSN\n—_— —\nDO AUS GS has PO\nREC ee\nren:\nSEC:\nROW;\n:1\nTo ©\n~\nMico\nnp 271 ©\ni\n[he\nHIT TTTMTTIIN\nmtn\nMerete tie weir rat Oo\nOEE ST eet\nmake Ry os re\ntmaster\n:\nESS\n. ,\n.\n_get tickets at ticketmaster.com\nNO EXCHANGE EXCEPT AS FEOVIDED HEREIN. NO REFUNDS. NO REENTRY.\nSE - ee i 7 —~- = a\n-_",
+      "lineEntries": [
+        {
+          "text": "—~ ~ ~~ em na a > —~",
+          "avg_confidence": 0.312,
+          "top_ratio": 0.016,
+          "left": 648,
+          "top": 55,
+          "right": 1194,
+          "bottom": 85
+        },
+        {
+          "text": "Le",
+          "avg_confidence": 0.47,
+          "top_ratio": 0.021,
+          "left": 66,
+          "top": 71,
+          "right": 498,
+          "bottom": 99
+        },
+        {
+          "text": "ae EE OY RL oo Son an Seryotat mete Moen ey we",
+          "avg_confidence": 0.205,
+          "top_ratio": 0.025,
+          "left": 174,
+          "top": 88,
+          "right": 695,
+          "bottom": 116
+        },
+        {
+          "text": "Sas",
+          "avg_confidence": 0.34,
+          "top_ratio": 0.029,
+          "left": 825,
+          "top": 100,
+          "right": 934,
+          "bottom": 107
+        },
+        {
+          "text": "wie",
+          "avg_confidence": 0.08,
+          "top_ratio": 0.044,
+          "left": 1041,
+          "top": 153,
+          "right": 1081,
+          "bottom": 167
+        },
+        {
+          "text": "az",
+          "avg_confidence": 0.33,
+          "top_ratio": 0.053,
+          "left": 507,
+          "top": 182,
+          "right": 631,
+          "bottom": 221
+        },
+        {
+          "text": "=e",
+          "avg_confidence": 0.59,
+          "top_ratio": 0.067,
+          "left": 507,
+          "top": 232,
+          "right": 759,
+          "bottom": 279
+        },
+        {
+          "text": "pe»",
+          "avg_confidence": 0.28,
+          "top_ratio": 0.083,
+          "left": 824,
+          "top": 286,
+          "right": 1035,
+          "bottom": 338
+        },
+        {
+          "text": "H-—t",
+          "avg_confidence": 0.7,
+          "top_ratio": 0.084,
+          "left": 293,
+          "top": 290,
+          "right": 493,
+          "bottom": 336
+        },
+        {
+          "text": "pak t",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.092,
+          "left": 1052,
+          "top": 318,
+          "right": 1100,
+          "bottom": 357
+        },
+        {
+          "text": "Ee 2",
+          "avg_confidence": 0.19,
+          "top_ratio": 0.098,
+          "left": 825,
+          "top": 338,
+          "right": 1013,
+          "bottom": 401
+        },
+        {
+          "text": "if.",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.116,
+          "left": 673,
+          "top": 401,
+          "right": 843,
+          "bottom": 443
+        },
+        {
+          "text": "1S",
+          "avg_confidence": 0.14,
+          "top_ratio": 0.122,
+          "left": 1085,
+          "top": 422,
+          "right": 1195,
+          "bottom": 465
+        },
+        {
+          "text": "“I Sica",
+          "avg_confidence": 0.5,
+          "top_ratio": 0.131,
+          "left": 826,
+          "top": 451,
+          "right": 1196,
+          "bottom": 533
+        },
+        {
+          "text": "9 Fo",
+          "avg_confidence": 0.485,
+          "top_ratio": 0.133,
+          "left": 294,
+          "top": 458,
+          "right": 632,
+          "bottom": 507
+        },
+        {
+          "text": "pres urea! es Sey",
+          "avg_confidence": 0.198,
+          "top_ratio": 0.148,
+          "left": 850,
+          "top": 510,
+          "right": 1245,
+          "bottom": 546
+        },
+        {
+          "text": "a a at a OP ape OE lS Tang",
+          "avg_confidence": 0.222,
+          "top_ratio": 0.149,
+          "left": 148,
+          "top": 515,
+          "right": 451,
+          "bottom": 543
+        },
+        {
+          "text": "ah SN Seoere",
+          "avg_confidence": 0.203,
+          "top_ratio": 0.152,
+          "left": 92,
+          "top": 523,
+          "right": 285,
+          "bottom": 570
+        },
+        {
+          "text": "Reaneg SEMI a ae peti ont tne Dn ORS",
+          "avg_confidence": 0.166,
+          "top_ratio": 0.153,
+          "left": 399,
+          "top": 527,
+          "right": 886,
+          "bottom": 571
+        },
+        {
+          "text": "iri",
+          "avg_confidence": 0.15,
+          "top_ratio": 0.155,
+          "left": 1057,
+          "top": 536,
+          "right": 1199,
+          "bottom": 590
+        },
+        {
+          "text": "=>",
+          "avg_confidence": 0.59,
+          "top_ratio": 0.188,
+          "left": 1052,
+          "top": 650,
+          "right": 1197,
+          "bottom": 695
+        },
+        {
+          "text": "© |",
+          "avg_confidence": 0.55,
+          "top_ratio": 0.215,
+          "left": 958,
+          "top": 742,
+          "right": 1039,
+          "bottom": 788
+        },
+        {
+          "text": "mC?",
+          "avg_confidence": 0.45,
+          "top_ratio": 0.222,
+          "left": 1040,
+          "top": 766,
+          "right": 1198,
+          "bottom": 821
+        },
+        {
+          "text": "=. j",
+          "avg_confidence": 0.705,
+          "top_ratio": 0.23,
+          "left": 958,
+          "top": 795,
+          "right": 1039,
+          "bottom": 847
+        },
+        {
+          "text": "ine",
+          "avg_confidence": 0.09,
+          "top_ratio": 0.256,
+          "left": 1036,
+          "top": 884,
+          "right": 1088,
+          "bottom": 922
+        },
+        {
+          "text": "ai",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.305,
+          "left": 1046,
+          "top": 1052,
+          "right": 1200,
+          "bottom": 1105
+        },
+        {
+          "text": "Tea",
+          "avg_confidence": 0.4,
+          "top_ratio": 0.312,
+          "left": 433,
+          "top": 1077,
+          "right": 521,
+          "bottom": 1116
+        },
+        {
+          "text": "ic DS",
+          "avg_confidence": 0.485,
+          "top_ratio": 0.337,
+          "left": 1089,
+          "top": 1162,
+          "right": 1203,
+          "bottom": 1229
+        },
+        {
+          "text": "Hi",
+          "avg_confidence": 0.25,
+          "top_ratio": 0.349,
+          "left": 1053,
+          "top": 1204,
+          "right": 1201,
+          "bottom": 1270
+        },
+        {
+          "text": "<ib",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.373,
+          "left": 826,
+          "top": 1287,
+          "right": 1020,
+          "bottom": 1382
+        },
+        {
+          "text": "o",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.392,
+          "left": 1048,
+          "top": 1353,
+          "right": 1100,
+          "bottom": 1421
+        },
+        {
+          "text": "cif",
+          "avg_confidence": 0.32,
+          "top_ratio": 0.398,
+          "left": 826,
+          "top": 1373,
+          "right": 1021,
+          "bottom": 1440
+        },
+        {
+          "text": "7 |",
+          "avg_confidence": 0.49,
+          "top_ratio": 0.434,
+          "left": 827,
+          "top": 1498,
+          "right": 932,
+          "bottom": 1553
+        },
+        {
+          "text": "i",
+          "avg_confidence": 0.59,
+          "top_ratio": 0.445,
+          "left": 68,
+          "top": 1535,
+          "right": 82,
+          "bottom": 1578
+        },
+        {
+          "text": "im",
+          "avg_confidence": 0.48,
+          "top_ratio": 0.449,
+          "left": 921,
+          "top": 1550,
+          "right": 1022,
+          "bottom": 1644
+        },
+        {
+          "text": "Oo",
+          "avg_confidence": 0.25,
+          "top_ratio": 0.474,
+          "left": 921,
+          "top": 1636,
+          "right": 1022,
+          "bottom": 1710
+        },
+        {
+          "text": "= =",
+          "avg_confidence": 0.53,
+          "top_ratio": 0.484,
+          "left": 186,
+          "top": 1669,
+          "right": 256,
+          "bottom": 1681
+        },
+        {
+          "text": "te:",
+          "avg_confidence": 0.18,
+          "top_ratio": 0.509,
+          "left": 194,
+          "top": 1757,
+          "right": 258,
+          "bottom": 1779
+        },
+        {
+          "text": "{cc",
+          "avg_confidence": 0.43,
+          "top_ratio": 0.535,
+          "left": 1087,
+          "top": 1848,
+          "right": 1205,
+          "bottom": 1912
+        },
+        {
+          "text": "i.",
+          "avg_confidence": 0.84,
+          "top_ratio": 0.542,
+          "left": 923,
+          "top": 1871,
+          "right": 982,
+          "bottom": 1914
+        },
+        {
+          "text": "=",
+          "avg_confidence": 0.45,
+          "top_ratio": 0.553,
+          "left": 1057,
+          "top": 1907,
+          "right": 1206,
+          "bottom": 1951
+        },
+        {
+          "text": "C1 FS",
+          "avg_confidence": 0.495,
+          "top_ratio": 0.561,
+          "left": 961,
+          "top": 1935,
+          "right": 1104,
+          "bottom": 2002
+        },
+        {
+          "text": "SN",
+          "avg_confidence": 0.72,
+          "top_ratio": 0.569,
+          "left": 664,
+          "top": 1963,
+          "right": 700,
+          "bottom": 1984
+        },
+        {
+          "text": "—_— —",
+          "avg_confidence": 0.345,
+          "top_ratio": 0.604,
+          "left": 1119,
+          "top": 2084,
+          "right": 1243,
+          "bottom": 2112
+        },
+        {
+          "text": "DO AUS GS has PO",
+          "avg_confidence": 0.182,
+          "top_ratio": 0.605,
+          "left": 144,
+          "top": 2089,
+          "right": 329,
+          "bottom": 2117
+        },
+        {
+          "text": "REC ee",
+          "avg_confidence": 0.285,
+          "top_ratio": 0.605,
+          "left": 834,
+          "top": 2089,
+          "right": 996,
+          "bottom": 2104
+        },
+        {
+          "text": "ren:",
+          "avg_confidence": 0.28,
+          "top_ratio": 0.606,
+          "left": 497,
+          "top": 2092,
+          "right": 557,
+          "bottom": 2099
+        },
+        {
+          "text": "SEC:",
+          "avg_confidence": 0.7,
+          "top_ratio": 0.612,
+          "left": 718,
+          "top": 2113,
+          "right": 805,
+          "bottom": 2155
+        },
+        {
+          "text": "ROW;",
+          "avg_confidence": 0.8,
+          "top_ratio": 0.613,
+          "left": 433,
+          "top": 2114,
+          "right": 532,
+          "bottom": 2156
+        },
+        {
+          "text": ":1",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.653,
+          "left": 1096,
+          "top": 2252,
+          "right": 1207,
+          "bottom": 2296
+        },
+        {
+          "text": "To ©",
+          "avg_confidence": 0.565,
+          "top_ratio": 0.683,
+          "left": 141,
+          "top": 2357,
+          "right": 376,
+          "bottom": 2422
+        },
+        {
+          "text": "~",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.706,
+          "left": 0,
+          "top": 2438,
+          "right": 40,
+          "bottom": 2453
+        },
+        {
+          "text": "Mico",
+          "avg_confidence": 0.57,
+          "top_ratio": 0.713,
+          "left": 1056,
+          "top": 2461,
+          "right": 1209,
+          "bottom": 2522
+        },
+        {
+          "text": "np 271 ©",
+          "avg_confidence": 0.74,
+          "top_ratio": 0.716,
+          "left": 156,
+          "top": 2472,
+          "right": 649,
+          "bottom": 2556
+        },
+        {
+          "text": "i",
+          "avg_confidence": 0.61,
+          "top_ratio": 0.751,
+          "left": 693,
+          "top": 2591,
+          "right": 696,
+          "bottom": 2600
+        },
+        {
+          "text": "[he",
+          "avg_confidence": 0.39,
+          "top_ratio": 0.757,
+          "left": 75,
+          "top": 2613,
+          "right": 118,
+          "bottom": 2635
+        },
+        {
+          "text": "HIT TTTMTTIIN",
+          "avg_confidence": 0.01,
+          "top_ratio": 0.77,
+          "left": 226,
+          "top": 2658,
+          "right": 712,
+          "bottom": 2804
+        },
+        {
+          "text": "mtn",
+          "avg_confidence": 0.39,
+          "top_ratio": 0.771,
+          "left": 728,
+          "top": 2659,
+          "right": 1010,
+          "bottom": 2803
+        },
+        {
+          "text": "Merete tie weir rat Oo",
+          "avg_confidence": 0.166,
+          "top_ratio": 0.84,
+          "left": 750,
+          "top": 2900,
+          "right": 1008,
+          "bottom": 2942
+        },
+        {
+          "text": "OEE ST eet",
+          "avg_confidence": 0.18,
+          "top_ratio": 0.842,
+          "left": 492,
+          "top": 2906,
+          "right": 693,
+          "bottom": 2945
+        },
+        {
+          "text": "make Ry os re",
+          "avg_confidence": 0.292,
+          "top_ratio": 0.844,
+          "left": 314,
+          "top": 2913,
+          "right": 454,
+          "bottom": 2944
+        },
+        {
+          "text": "tmaster",
+          "avg_confidence": 0.19,
+          "top_ratio": 0.846,
+          "left": 559,
+          "top": 2921,
+          "right": 1220,
+          "bottom": 3136
+        },
+        {
+          "text": ":",
+          "avg_confidence": 0.51,
+          "top_ratio": 0.847,
+          "left": 227,
+          "top": 2924,
+          "right": 245,
+          "bottom": 3168
+        },
+        {
+          "text": "ESS",
+          "avg_confidence": 0.14,
+          "top_ratio": 0.848,
+          "left": 193,
+          "top": 2925,
+          "right": 229,
+          "bottom": 2936
+        },
+        {
+          "text": ". ,",
+          "avg_confidence": 0.115,
+          "top_ratio": 0.861,
+          "left": 91,
+          "top": 2972,
+          "right": 133,
+          "bottom": 3061
+        },
+        {
+          "text": ".",
+          "avg_confidence": 0.45,
+          "top_ratio": 0.916,
+          "left": 203,
+          "top": 3162,
+          "right": 213,
+          "bottom": 3169
+        },
+        {
+          "text": "_get tickets at ticketmaster.com",
+          "avg_confidence": 0.838,
+          "top_ratio": 0.932,
+          "left": 139,
+          "top": 3217,
+          "right": 1169,
+          "bottom": 3351
+        },
+        {
+          "text": "NO EXCHANGE EXCEPT AS FEOVIDED HEREIN. NO REFUNDS. NO REENTRY.",
+          "avg_confidence": 0.809,
+          "top_ratio": 0.977,
+          "left": 124,
+          "top": 3371,
+          "right": 1237,
+          "bottom": 3410
+        },
+        {
+          "text": "SE - ee i 7 —~- = a",
+          "avg_confidence": 0.193,
+          "top_ratio": 0.996,
+          "left": 302,
+          "top": 3436,
+          "right": 1107,
+          "bottom": 3451
+        },
+        {
+          "text": "-_",
+          "avg_confidence": 0.61,
+          "top_ratio": 0.997,
+          "left": 245,
+          "top": 3440,
+          "right": 274,
+          "bottom": 3450
+        }
+      ]
+    }
+  ]
+}

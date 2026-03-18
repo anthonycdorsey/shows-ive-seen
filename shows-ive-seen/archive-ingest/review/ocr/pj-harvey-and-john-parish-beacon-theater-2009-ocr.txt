@@ -1,0 +1,70 @@
+SHOWS I SAW - OCR DIAGNOSTICS
+
+Selected best variant: display
+Selected config: --psm 6 [display]
+
+RAW OCR TEXT
+
+I ta
+PON 38° 8 FE oo |
+. Hn
+a a ee Os “Tr
+oN g 25e SE
+=i <a on a
+— ~w aj =
+Taj — = aay
+Aaa o> = ote)
+meood .7 FA
+~ D> a | i
+© p= ee
+oe im +57
+. |_|
+co a=. om in
+-- 2m BZo0,
+SS < — :
+ie — YH j-~-_r
+a) ee .,~Bo |
+ne :
+| 7a S
+‘ep ) or =~ S
+SEAT Is) foe] <[->)
+®& o ote)
+nD ©
+‘> ® St > <r |
+| 488877600555 |
+| ticketmaster
+| getticketsat ticketmaster.com _
+ae EXCHANGE EXCEPT AS PROVIDED HEREIN. NO REFUNDS. NO REENTRY.
+
+CLEANED OCR TEXT
+
+I ta
+PON 38° 8 FE oo |
+. Hn
+a a ee Os “Tr
+oN g 25e SE
+=i <a on a
+— ~w aj =
+Taj — = aay
+Aaa o> = ote)
+meood .7 FA
+~ D> a | i
+© p= ee
+oe im +57
+. |_|
+co a=. om in
+-- 2m BZo0,
+SS < — :
+ie — YH j-~-_r
+a) ee .,~Bo |
+ne :
+| 7a S
+‘ep ) or =~ S
+SEAT Is) foe] <[->)
+®& o ote)
+nD ©
+‘> ® St > <r |
+| 488877600555 |
+| ticketmaster
+| getticketsat ticketmaster.com _
+ae EXCHANGE EXCEPT AS PROVIDED HEREIN. NO REFUNDS. NO REENTRY.

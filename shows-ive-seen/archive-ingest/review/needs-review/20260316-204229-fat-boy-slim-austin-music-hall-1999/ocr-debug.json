@@ -1,0 +1,481 @@
+{
+  "selectedBestVariant": "display",
+  "selectedConfig": "--psm 6 [display]",
+  "averageConfidence": 0.167,
+  "coreMetadataConfidence": 0.806,
+  "canonicalEligible": true,
+  "approvalBlockers": [],
+  "ocrPassCount": 1,
+  "ocrEarlyExitTriggered": true,
+  "ocrEarlyExitReason": "the first useful OCR pass already indicated extremely weak text",
+  "topArtistCandidates": [],
+  "rejectedArtistCandidates": [
+    {
+      "accepted": false,
+      "value": "reece ee, Wee Per AG: REE Bene Poke RGRGE Bh. OOS Gee eee Mere Bante",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.168,
+      "topRatio": 0.172,
+      "sourceLine": ", a § a Do reece ee, Wee ee Per sd Te aE Re EL AG: ke REE Be Bene Poke RGRGE Bh. OOS Gee eee aS Ie So tc Mere TE Bante an",
+      "reasons": [
+        "length out of artist range",
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "SL: RSET ERE HBA RENGAUREBERE psi aes cag cts MAR acy. sad Caeee Satay Eg: SERA SEAR Gk. Bease Bet Gea SESES ALS ere Sea",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.171,
+      "topRatio": 0.342,
+      "sourceLine": "SL: Re RSET ERE HBA SE RENGAUREBERE 5 psi aes cag cts MAR ct acy. Sa ue sad Caeee Satay Eg: SERA GS CR SEAR OR WH Gk. Bease xe Bet Gea Gh A. SESES ALS Re a ere SS oO Sea a",
+      "reasons": [
+        "length out of artist range",
+        "contains digits",
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "REHEE owcet seg Bean GRUCaRGeL dat Banat Banh, Dinca suns Bion Cee freee, Ania \"Waa Hate eae Bakes ASG. \"Sagih aes BRS Fakes Baaaeh iiaied Peng suanbechaaieiniindccen ape: cone aati WORE",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.128,
+      "topRatio": 0.537,
+      "sourceLine": "REHEE ci owcet seg Sp Bean GRUCaRGeL WS GH We dat a Banat Banh, Dinca suns Bion Cee freee, Ania “Waa nt Hate ds eae Bakes iy ASG. “Sagih aes BRS Fakes by Baaaeh F iiaied Peng suanbechaaieiniindccen ape: cone gy aati WORE O",
+      "reasons": [
+        "length out of artist range",
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "pec tet ea, Meo She RRR Teeus eee PRES Pleat fed \"Magee, Ayal (Ger \"Ee Gated GEGED UGE Bay Bete, Eee TORE oma aac eiacte: Masnenaneteagrmnst suena Sera eee",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.163,
+      "topRatio": 0.554,
+      "sourceLine": "pec tet ee ee ea, So Ge Meo She SN RRR Teeus eee ae te PRES Pleat fed “Magee, Ayal (Ger “Ee Gated Be S GEGED UGE Bay Bete, Ge ae Eee ee OE TORE fy oma aac eiacte: Masnenaneteagrmnst suena Ca gM Sera eR eee",
+      "reasons": [
+        "length out of artist range",
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Tape Goes aus Pies Weeee, \"GG Bier eee ere eae Bisa ounmaanaanaga eee PMD Meet Beas",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.177,
+      "topRatio": 0.568,
+      "sourceLine": "Tape Sh Ge Goes aus Pies oe Weeee, Bo Ga NE “GG Bier Ee eee ce ere ea me ee me Om a ee ea ee eae a a Bisa ounmaanaanaga eee A PMD Meet Beas:",
+      "reasons": [
+        "length out of artist range",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "rmrt~—~—OCC'\" reenter pee fle eee Mine tlt Rete eee",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.235,
+      "topRatio": 0.589,
+      "sourceLine": "-....rmrt~—~—OCC‘“ Ee le Se reenter pee fle eee Mine tlt Rete ee eee Be 3",
+      "reasons": [
+        "length out of artist range",
+        "contains digits",
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "AMBRE SLUR RRO cnGhonarancnis: 'Soa: Bae oS. Grats weet in! tee sine. babe: REGS GEES, Teeaeke, SEE SGGas Aas 28, crc ARS HanbsthrGunsiaculnndags SRT",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.195,
+      "topRatio": 0.606,
+      "sourceLine": "AMBRE FO OS SLUR RRO a cnGhonarancnis: ‘Soa: Bae Br oS. Grats weet in! a tee i, Ee sine. G5 babe: Ue REGS GEES, Teeaeke, EE RE SEE S. SGGas Aas 28, SE Se EY 2B BR dS crc 5 ARS HanbsthrGunsiaculnndags Re ae ee Be SRT",
+      "reasons": [
+        "length out of artist range",
+        "contains digits",
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "ERR ene MER Baud Mok day? ane) Waka atin? TUS BRR acca ORE chad eee een",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.171,
+      "topRatio": 0.643,
+      "sourceLine": "ERR Ra ene eS aN I GP MER Baud Mok GP day? ane) Waka Ge atin? te TUS (2 GE 20 BRR acca ORE chad ui eee PS een:",
+      "reasons": [
+        "length out of artist range",
+        "contains digits",
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "SESS BEE RRES RRE GASoe GReS Beak ABER eee Pay eet pit Reena orig can roe penta ERENT papi Seay remaenics ae: Buren",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.172,
+      "topRatio": 0.676,
+      "sourceLine": "By 2 SESS BEE GL RRES 0 RRE GASoe ek GReS G: Ge Beak A ABER eee Pay eet pit Reena SB ST SE orig be a can oe roe penta ERENT Sp at papi Seay ok remaenics ae: Buren ae",
+      "reasons": [
+        "length out of artist range",
+        "contains digits",
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Ears",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.231,
+      "topRatio": 0.73,
+      "sourceLine": "a ee ee & OS Pe Foe Reg BLL ese ee ste pe ee ee eee ears a eee eee eh os Bee oe Se",
+      "reasons": [
+        "length out of artist range",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Altea' RininnimneReE GRAS RGaionGAROHEr gee men Age TAU RRR REC UT, paar Svan susan sweneuamseenaaaney fanaa SaaS ener err",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.116,
+      "topRatio": 0.829,
+      "sourceLine": "Altea’ Re 4 ? RininnimneReE “s Th GRAS a RGaionGAROHEr gee men Age a. ca TAU RRR REC UT, paar Svan susan sweneuamseenaaaney Bt fanaa SaaS ee ener ne err ee Se a",
+      "reasons": [
+        "length out of artist range",
+        "contains digits",
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "108 Way fas tas Sauknis BORMEOR fan Aik CEES aaa Age JeGeceaeR [ESSERE EER Ong aabepanta Suet ttaa tna maainware aman acaba ate Eee SRR",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.158,
+      "topRatio": 0.856,
+      "sourceLine": "+108 as Way fas tas i) Sauknis BORMEOR fan Aik CEES aaa = Sa i Age JeGeceaeR R [ESSERE EER Ong Gh os Ae aabepanta ct Suet ttaa tna maainware aman acaba ate Eee SRR >",
+      "reasons": [
+        "length out of artist range",
+        "contains digits",
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    }
+  ],
+  "topVenueCandidates": [],
+  "dateCandidates": [],
+  "filenamePriorsUsed": true,
+  "filenamePriors": {
+    "used": true,
+    "artist": "Fat Boy & Slim Austin",
+    "artistParts": [
+      "Fat Boy",
+      "Slim Austin"
+    ],
+    "venue": "Music Hall",
+    "venueParts": [
+      "Music Hall"
+    ],
+    "year": "1999",
+    "structuredPlausible": true,
+    "sourceStem": "fat-boy-slim-austin-music-hall-1999",
+    "bodyParts": [
+      "fat",
+      "boy",
+      "slim",
+      "austin",
+      "music",
+      "hall"
+    ],
+    "bestSplit": 4
+  },
+  "filenamePriorBreakdown": {
+    "used": true,
+    "artist": "Fat Boy & Slim Austin",
+    "artistParts": [
+      "Fat Boy",
+      "Slim Austin"
+    ],
+    "venue": "Music Hall",
+    "venueParts": [
+      "Music Hall"
+    ],
+    "year": "1999",
+    "structuredPlausible": true,
+    "sourceStem": "fat-boy-slim-austin-music-hall-1999",
+    "bodyParts": [
+      "fat",
+      "boy",
+      "slim",
+      "austin",
+      "music",
+      "hall"
+    ],
+    "bestSplit": 4
+  },
+  "multiArtistParsingAttempted": true,
+  "multiArtistParsingMatched": true,
+  "venueTailSplittingAttempted": false,
+  "venueTailSplittingMatched": false,
+  "activeParserStagesRun": [
+    "ocr_text_selected",
+    "artist_candidates_extracted",
+    "venue_candidates_extracted",
+    "date_candidates_extracted",
+    "filename_priors_loaded",
+    "multi_artist_parser_checked",
+    "venue_tail_split_checked",
+    "final_selector_resolved"
+  ],
+  "functionChain": [
+    "run_ocr_variants",
+    "extract_artist_candidates",
+    "extract_venue_candidates",
+    "extract_year",
+    "extract_exact_date",
+    "build_filename_priors",
+    "detect_multi_artist_billing",
+    "split_artist_prefix_from_venue",
+    "final_selection_resolution"
+  ],
+  "finalSelectorWinner": "structured_filename_fallback",
+  "finalSelectorReason": "Weak/fragmented OCR triggered a structured filename fallback for multi-artist billing.",
+  "selectorDebug": {
+    "parserStagesRun": [
+      "ocr_text_selected",
+      "artist_candidates_extracted",
+      "venue_candidates_extracted",
+      "date_candidates_extracted",
+      "filename_priors_loaded",
+      "multi_artist_parser_checked",
+      "venue_tail_split_checked",
+      "final_selector_resolved"
+    ],
+    "multiArtistParsingAttempted": true,
+    "multiArtistParsingMatched": true,
+    "venueTailSplittingAttempted": false,
+    "venueTailSplittingMatched": false,
+    "structuredFilenameFallbackUsed": true,
+    "finalSelectorWinner": "structured_filename_fallback",
+    "finalSelectorReason": "Weak/fragmented OCR triggered a structured filename fallback for multi-artist billing.",
+    "finalArtist": "Fat Boy & Slim Austin",
+    "finalVenue": "Music Hall",
+    "finalYear": "1999",
+    "functionChain": [
+      "run_ocr_variants",
+      "extract_artist_candidates",
+      "extract_venue_candidates",
+      "extract_year",
+      "extract_exact_date",
+      "build_filename_priors",
+      "detect_multi_artist_billing",
+      "split_artist_prefix_from_venue",
+      "final_selection_resolution"
+    ]
+  },
+  "chosenArtistExplanation": [],
+  "rawOcrTextByPass": [
+    {
+      "variant": "display",
+      "config": "--psm 6",
+      "rawText": ", a § a Do reece ee, Wee ee Per sd Te aE Re EL AG: ke REE Be Bene Poke RGRGE Bh. OOS Gee eee aS Ie So tc Mere TE Bante an\nSL: Re RSET ERE HBA SE RENGAUREBERE 5 psi aes cag cts MAR ct acy. Sa ue sad Caeee Satay Eg: SERA GS CR SEAR OR WH Gk. Bease xe Bet Gea Gh A. SESES ALS Re a ere SS oO Sea a\nREHEE ci owcet seg Sp Bean GRUCaRGeL WS GH We dat a Banat Banh, Dinca suns Bion Cee freee, Ania “Waa nt Hate ds eae Bakes iy ASG. “Sagih aes BRS Fakes by Baaaeh F iiaied Peng suanbechaaieiniindccen ape: cone gy aati WORE O\npec tet ee ee ea, So Ge Meo She SN RRR Teeus eee ae te PRES Pleat fed “Magee, Ayal (Ger “Ee Gated Be S GEGED UGE Bay Bete, Ge ae Eee ee OE TORE fy oma aac eiacte: Masnenaneteagrmnst suena Ca gM Sera eR eee\nTape Sh Ge Goes aus Pies oe Weeee, Bo Ga NE “GG Bier Ee eee ce ere ea me ee me Om a ee ea ee eae a a Bisa ounmaanaanaga eee A PMD Meet Beas:\n-....rmrt~—~—OCC‘“ Ee le Se reenter pee fle eee Mine tlt Rete ee eee Be 3\nAMBRE FO OS SLUR RRO a cnGhonarancnis: ‘Soa: Bae Br oS. Grats weet in! a tee i, Ee sine. G5 babe: Ue REGS GEES, Teeaeke, EE RE SEE S. SGGas Aas 28, SE Se EY 2B BR dS crc 5 ARS HanbsthrGunsiaculnndags Re ae ee Be SRT\nERR Ra ene eS aN I GP MER Baud Mok GP day? ane) Waka Ge atin? te TUS (2 GE 20 BRR acca ORE chad ui eee PS een:\nBy 2 SESS BEE GL RRES 0 RRE GASoe ek GReS G: Ge Beak A ABER eee Pay eet pit Reena SB ST SE orig be a can oe roe penta ERENT Sp at papi Seay ok remaenics ae: Buren ae\na ee ee & OS Pe Foe Reg BLL ese ee ste pe ee ee eee ears a eee eee eh os Bee oe Se\nAltea’ Re 4 ? RininnimneReE “s Th GRAS a RGaionGAROHEr gee men Age a. ca TAU RRR REC UT, paar Svan susan sweneuamseenaaaney Bt fanaa SaaS ee ener ne err ee Se a\n+108 as Way fas tas i) Sauknis BORMEOR fan Aik CEES aaa = Sa i Age JeGeceaeR R [ESSERE EER Ong Gh os Ae aabepanta ct Suet ttaa tna maainware aman acaba ate Eee SRR >\n‘ nS ‘ NRE, 0 uence tonics tliat UC Rae\nF- eae ENG PEA aA Peer aE EEE SHEE : . Pion earn cin elation re era ea SUAS GG GAT Ras Raaca oA n Ea 3\ncA ee. eee Lee eau Ria 4 fe Spepererststt seas ELS TTA EaGs an Bisa aaisuaihmna nice aa Rapraeeceaniuneneaes aimaaenacemae para\nie dm, i P_gmmadaty",
+      "cleanedText": ", a § a Do reece ee, Wee ee Per sd Te aE Re EL AG: ke REE Be Bene Poke RGRGE Bh. OOS Gee eee aS Ie So tc Mere TE Bante an\nSL: Re RSET ERE HBA SE RENGAUREBERE 5 psi aes cag cts MAR ct acy. Sa ue sad Caeee Satay Eg: SERA GS CR SEAR OR WH Gk. Bease xe Bet Gea Gh A. SESES ALS Re a ere SS oO Sea a\nREHEE ci owcet seg Sp Bean GRUCaRGeL WS GH We dat a Banat Banh, Dinca suns Bion Cee freee, Ania “Waa nt Hate ds eae Bakes iy ASG. “Sagih aes BRS Fakes by Baaaeh F iiaied Peng suanbechaaieiniindccen ape: cone gy aati WORE O\npec tet ee ee ea, So Ge Meo She SN RRR Teeus eee ae te PRES Pleat fed “Magee, Ayal (Ger “Ee Gated Be S GEGED UGE Bay Bete, Ge ae Eee ee OE TORE fy oma aac eiacte: Masnenaneteagrmnst suena Ca gM Sera eR eee\nTape Sh Ge Goes aus Pies oe Weeee, Bo Ga NE “GG Bier Ee eee ce ere ea me ee me Om a ee ea ee eae a a Bisa ounmaanaanaga eee A PMD Meet Beas:\n-....rmrt~—~—OCC‘“ Ee le Se reenter pee fle eee Mine tlt Rete ee eee Be 3\nAMBRE FO OS SLUR RRO a cnGhonarancnis: ‘Soa: Bae Br oS. Grats weet in! a tee i, Ee sine. G5 babe: Ue REGS GEES, Teeaeke, EE RE SEE S. SGGas Aas 28, SE Se EY 2B BR dS crc 5 ARS HanbsthrGunsiaculnndags Re ae ee Be SRT\nERR Ra ene eS aN I GP MER Baud Mok GP day? ane) Waka Ge atin? te TUS (2 GE 20 BRR acca ORE chad ui eee PS een:\nBy 2 SESS BEE GL RRES 0 RRE GASoe ek GReS G: Ge Beak A ABER eee Pay eet pit Reena SB ST SE orig be a can oe roe penta ERENT Sp at papi Seay ok remaenics ae: Buren ae\na ee ee & OS Pe Foe Reg BLL ese ee ste pe ee ee eee ears a eee eee eh os Bee oe Se\nAltea’ Re 4 ? RininnimneReE “s Th GRAS a RGaionGAROHEr gee men Age a. ca TAU RRR REC UT, paar Svan susan sweneuamseenaaaney Bt fanaa SaaS ee ener ne err ee Se a\n+108 as Way fas tas i) Sauknis BORMEOR fan Aik CEES aaa = Sa i Age JeGeceaeR R [ESSERE EER Ong Gh os Ae aabepanta ct Suet ttaa tna maainware aman acaba ate Eee SRR >\n‘ nS ‘ NRE, 0 uence tonics tliat UC Rae\nF- eae ENG PEA aA Peer aE EEE SHEE : . Pion earn cin elation re era ea SUAS GG GAT Ras Raaca oA n Ea 3\ncA ee. eee Lee eau Ria 4 fe Spepererststt seas ELS TTA EaGs an Bisa aaisuaihmna nice aa Rapraeeceaniuneneaes aimaaenacemae para\nie dm, i P_gmmadaty"
+    }
+  ],
+  "runs": [
+    {
+      "variant": "display",
+      "config": "--psm 6",
+      "averageConfidence": 0.167,
+      "lineCount": 16,
+      "characterCount": 2131,
+      "score": 17.917,
+      "coreMetadataConfidence": 0.0,
+      "runtimeMs": 4595.6,
+      "timeoutSeconds": 4,
+      "rawText": ", a § a Do reece ee, Wee ee Per sd Te aE Re EL AG: ke REE Be Bene Poke RGRGE Bh. OOS Gee eee aS Ie So tc Mere TE Bante an\nSL: Re RSET ERE HBA SE RENGAUREBERE 5 psi aes cag cts MAR ct acy. Sa ue sad Caeee Satay Eg: SERA GS CR SEAR OR WH Gk. Bease xe Bet Gea Gh A. SESES ALS Re a ere SS oO Sea a\nREHEE ci owcet seg Sp Bean GRUCaRGeL WS GH We dat a Banat Banh, Dinca suns Bion Cee freee, Ania “Waa nt Hate ds eae Bakes iy ASG. “Sagih aes BRS Fakes by Baaaeh F iiaied Peng suanbechaaieiniindccen ape: cone gy aati WORE O\npec tet ee ee ea, So Ge Meo She SN RRR Teeus eee ae te PRES Pleat fed “Magee, Ayal (Ger “Ee Gated Be S GEGED UGE Bay Bete, Ge ae Eee ee OE TORE fy oma aac eiacte: Masnenaneteagrmnst suena Ca gM Sera eR eee\nTape Sh Ge Goes aus Pies oe Weeee, Bo Ga NE “GG Bier Ee eee ce ere ea me ee me Om a ee ea ee eae a a Bisa ounmaanaanaga eee A PMD Meet Beas:\n-....rmrt~—~—OCC‘“ Ee le Se reenter pee fle eee Mine tlt Rete ee eee Be 3\nAMBRE FO OS SLUR RRO a cnGhonarancnis: ‘Soa: Bae Br oS. Grats weet in! a tee i, Ee sine. G5 babe: Ue REGS GEES, Teeaeke, EE RE SEE S. SGGas Aas 28, SE Se EY 2B BR dS crc 5 ARS HanbsthrGunsiaculnndags Re ae ee Be SRT\nERR Ra ene eS aN I GP MER Baud Mok GP day? ane) Waka Ge atin? te TUS (2 GE 20 BRR acca ORE chad ui eee PS een:\nBy 2 SESS BEE GL RRES 0 RRE GASoe ek GReS G: Ge Beak A ABER eee Pay eet pit Reena SB ST SE orig be a can oe roe penta ERENT Sp at papi Seay ok remaenics ae: Buren ae\na ee ee & OS Pe Foe Reg BLL ese ee ste pe ee ee eee ears a eee eee eh os Bee oe Se\nAltea’ Re 4 ? RininnimneReE “s Th GRAS a RGaionGAROHEr gee men Age a. ca TAU RRR REC UT, paar Svan susan sweneuamseenaaaney Bt fanaa SaaS ee ener ne err ee Se a\n+108 as Way fas tas i) Sauknis BORMEOR fan Aik CEES aaa = Sa i Age JeGeceaeR R [ESSERE EER Ong Gh os Ae aabepanta ct Suet ttaa tna maainware aman acaba ate Eee SRR >\n‘ nS ‘ NRE, 0 uence tonics tliat UC Rae\nF- eae ENG PEA aA Peer aE EEE SHEE : . Pion earn cin elation re era ea SUAS GG GAT Ras Raaca oA n Ea 3\ncA ee. eee Lee eau Ria 4 fe Spepererststt seas ELS TTA EaGs an Bisa aaisuaihmna nice aa Rapraeeceaniuneneaes aimaaenacemae para\nie dm, i P_gmmadaty",
+      "cleanedText": ", a § a Do reece ee, Wee ee Per sd Te aE Re EL AG: ke REE Be Bene Poke RGRGE Bh. OOS Gee eee aS Ie So tc Mere TE Bante an\nSL: Re RSET ERE HBA SE RENGAUREBERE 5 psi aes cag cts MAR ct acy. Sa ue sad Caeee Satay Eg: SERA GS CR SEAR OR WH Gk. Bease xe Bet Gea Gh A. SESES ALS Re a ere SS oO Sea a\nREHEE ci owcet seg Sp Bean GRUCaRGeL WS GH We dat a Banat Banh, Dinca suns Bion Cee freee, Ania “Waa nt Hate ds eae Bakes iy ASG. “Sagih aes BRS Fakes by Baaaeh F iiaied Peng suanbechaaieiniindccen ape: cone gy aati WORE O\npec tet ee ee ea, So Ge Meo She SN RRR Teeus eee ae te PRES Pleat fed “Magee, Ayal (Ger “Ee Gated Be S GEGED UGE Bay Bete, Ge ae Eee ee OE TORE fy oma aac eiacte: Masnenaneteagrmnst suena Ca gM Sera eR eee\nTape Sh Ge Goes aus Pies oe Weeee, Bo Ga NE “GG Bier Ee eee ce ere ea me ee me Om a ee ea ee eae a a Bisa ounmaanaanaga eee A PMD Meet Beas:\n-....rmrt~—~—OCC‘“ Ee le Se reenter pee fle eee Mine tlt Rete ee eee Be 3\nAMBRE FO OS SLUR RRO a cnGhonarancnis: ‘Soa: Bae Br oS. Grats weet in! a tee i, Ee sine. G5 babe: Ue REGS GEES, Teeaeke, EE RE SEE S. SGGas Aas 28, SE Se EY 2B BR dS crc 5 ARS HanbsthrGunsiaculnndags Re ae ee Be SRT\nERR Ra ene eS aN I GP MER Baud Mok GP day? ane) Waka Ge atin? te TUS (2 GE 20 BRR acca ORE chad ui eee PS een:\nBy 2 SESS BEE GL RRES 0 RRE GASoe ek GReS G: Ge Beak A ABER eee Pay eet pit Reena SB ST SE orig be a can oe roe penta ERENT Sp at papi Seay ok remaenics ae: Buren ae\na ee ee & OS Pe Foe Reg BLL ese ee ste pe ee ee eee ears a eee eee eh os Bee oe Se\nAltea’ Re 4 ? RininnimneReE “s Th GRAS a RGaionGAROHEr gee men Age a. ca TAU RRR REC UT, paar Svan susan sweneuamseenaaaney Bt fanaa SaaS ee ener ne err ee Se a\n+108 as Way fas tas i) Sauknis BORMEOR fan Aik CEES aaa = Sa i Age JeGeceaeR R [ESSERE EER Ong Gh os Ae aabepanta ct Suet ttaa tna maainware aman acaba ate Eee SRR >\n‘ nS ‘ NRE, 0 uence tonics tliat UC Rae\nF- eae ENG PEA aA Peer aE EEE SHEE : . Pion earn cin elation re era ea SUAS GG GAT Ras Raaca oA n Ea 3\ncA ee. eee Lee eau Ria 4 fe Spepererststt seas ELS TTA EaGs an Bisa aaisuaihmna nice aa Rapraeeceaniuneneaes aimaaenacemae para\nie dm, i P_gmmadaty",
+      "lineEntries": [
+        {
+          "text": ", a § a Do reece ee, Wee ee Per sd Te aE Re EL AG: ke REE Be Bene Poke RGRGE Bh. OOS Gee eee aS Ie So tc Mere TE Bante an",
+          "avg_confidence": 0.168,
+          "top_ratio": 0.172,
+          "left": 173,
+          "top": 277,
+          "right": 2819,
+          "bottom": 384
+        },
+        {
+          "text": "SL: Re RSET ERE HBA SE RENGAUREBERE 5 psi aes cag cts MAR ct acy. Sa ue sad Caeee Satay Eg: SERA GS CR SEAR OR WH Gk. Bease xe Bet Gea Gh A. SESES ALS Re a ere SS oO Sea a",
+          "avg_confidence": 0.171,
+          "top_ratio": 0.342,
+          "left": 179,
+          "top": 551,
+          "right": 2834,
+          "bottom": 651
+        },
+        {
+          "text": "REHEE ci owcet seg Sp Bean GRUCaRGeL WS GH We dat a Banat Banh, Dinca suns Bion Cee freee, Ania “Waa nt Hate ds eae Bakes iy ASG. “Sagih aes BRS Fakes by Baaaeh F iiaied Peng suanbechaaieiniindccen ape: cone gy aati WORE O",
+          "avg_confidence": 0.128,
+          "top_ratio": 0.537,
+          "left": 168,
+          "top": 865,
+          "right": 2748,
+          "bottom": 975
+        },
+        {
+          "text": "pec tet ee ee ea, So Ge Meo She SN RRR Teeus eee ae te PRES Pleat fed “Magee, Ayal (Ger “Ee Gated Be S GEGED UGE Bay Bete, Ge ae Eee ee OE TORE fy oma aac eiacte: Masnenaneteagrmnst suena Ca gM Sera eR eee",
+          "avg_confidence": 0.163,
+          "top_ratio": 0.554,
+          "left": 167,
+          "top": 892,
+          "right": 2835,
+          "bottom": 1001
+        },
+        {
+          "text": "Tape Sh Ge Goes aus Pies oe Weeee, Bo Ga NE “GG Bier Ee eee ce ere ea me ee me Om a ee ea ee eae a a Bisa ounmaanaanaga eee A PMD Meet Beas:",
+          "avg_confidence": 0.177,
+          "top_ratio": 0.568,
+          "left": 166,
+          "top": 915,
+          "right": 2835,
+          "bottom": 1025
+        },
+        {
+          "text": "-....rmrt~—~—OCC‘“ Ee le Se reenter pee fle eee Mine tlt Rete ee eee Be 3",
+          "avg_confidence": 0.235,
+          "top_ratio": 0.589,
+          "left": 177,
+          "top": 948,
+          "right": 2843,
+          "bottom": 1059
+        },
+        {
+          "text": "AMBRE FO OS SLUR RRO a cnGhonarancnis: ‘Soa: Bae Br oS. Grats weet in! a tee i, Ee sine. G5 babe: Ue REGS GEES, Teeaeke, EE RE SEE S. SGGas Aas 28, SE Se EY 2B BR dS crc 5 ARS HanbsthrGunsiaculnndags Re ae ee Be SRT",
+          "avg_confidence": 0.195,
+          "top_ratio": 0.606,
+          "left": 172,
+          "top": 975,
+          "right": 2840,
+          "bottom": 1077
+        },
+        {
+          "text": "ERR Ra ene eS aN I GP MER Baud Mok GP day? ane) Waka Ge atin? te TUS (2 GE 20 BRR acca ORE chad ui eee PS een:",
+          "avg_confidence": 0.171,
+          "top_ratio": 0.643,
+          "left": 173,
+          "top": 1036,
+          "right": 2843,
+          "bottom": 1145
+        },
+        {
+          "text": "By 2 SESS BEE GL RRES 0 RRE GASoe ek GReS G: Ge Beak A ABER eee Pay eet pit Reena SB ST SE orig be a can oe roe penta ERENT Sp at papi Seay ok remaenics ae: Buren ae",
+          "avg_confidence": 0.172,
+          "top_ratio": 0.676,
+          "left": 191,
+          "top": 1088,
+          "right": 2823,
+          "bottom": 1191
+        },
+        {
+          "text": "a ee ee & OS Pe Foe Reg BLL ese ee ste pe ee ee eee ears a eee eee eh os Bee oe Se",
+          "avg_confidence": 0.231,
+          "top_ratio": 0.73,
+          "left": 228,
+          "top": 1176,
+          "right": 2843,
+          "bottom": 1281
+        },
+        {
+          "text": "Altea’ Re 4 ? RininnimneReE “s Th GRAS a RGaionGAROHEr gee men Age a. ca TAU RRR REC UT, paar Svan susan sweneuamseenaaaney Bt fanaa SaaS ee ener ne err ee Se a",
+          "avg_confidence": 0.116,
+          "top_ratio": 0.829,
+          "left": 231,
+          "top": 1334,
+          "right": 2844,
+          "bottom": 1443
+        },
+        {
+          "text": "+108 as Way fas tas i) Sauknis BORMEOR fan Aik CEES aaa = Sa i Age JeGeceaeR R [ESSERE EER Ong Gh os Ae aabepanta ct Suet ttaa tna maainware aman acaba ate Eee SRR >",
+          "avg_confidence": 0.158,
+          "top_ratio": 0.856,
+          "left": 333,
+          "top": 1378,
+          "right": 2842,
+          "bottom": 1475
+        },
+        {
+          "text": "‘ nS ‘ NRE, 0 uence tonics tliat UC Rae",
+          "avg_confidence": 0.189,
+          "top_ratio": 0.924,
+          "left": 470,
+          "top": 1488,
+          "right": 2853,
+          "bottom": 1589
+        },
+        {
+          "text": "F- eae ENG PEA aA Peer aE EEE SHEE : . Pion earn cin elation re era ea SUAS GG GAT Ras Raaca oA n Ea 3",
+          "avg_confidence": 0.136,
+          "top_ratio": 0.94,
+          "left": 236,
+          "top": 1514,
+          "right": 2486,
+          "bottom": 1610
+        },
+        {
+          "text": "cA ee. eee Lee eau Ria 4 fe Spepererststt seas ELS TTA EaGs an Bisa aaisuaihmna nice aa Rapraeeceaniuneneaes aimaaenacemae para",
+          "avg_confidence": 0.153,
+          "top_ratio": 0.946,
+          "left": 356,
+          "top": 1523,
+          "right": 2640,
+          "bottom": 1603
+        },
+        {
+          "text": "ie dm, i P_gmmadaty",
+          "avg_confidence": 0.17,
+          "top_ratio": 0.967,
+          "left": 381,
+          "top": 1557,
+          "right": 1291,
+          "bottom": 1604
+        }
+      ],
+      "earlyExit": "weak-pass-stop"
+    }
+  ]
+}

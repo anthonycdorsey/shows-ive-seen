@@ -1,0 +1,151 @@
+{
+  "selectedBestVariant": "",
+  "selectedConfig": "--psm 6",
+  "averageConfidence": 0.0,
+  "coreMetadataConfidence": 0.806,
+  "canonicalEligible": true,
+  "approvalBlockers": [],
+  "ocrPassCount": 1,
+  "ocrEarlyExitTriggered": true,
+  "ocrEarlyExitReason": "OCR timed out on a weak ticket pass",
+  "topArtistCandidates": [],
+  "rejectedArtistCandidates": [],
+  "topVenueCandidates": [],
+  "dateCandidates": [],
+  "filenamePriorsUsed": true,
+  "filenamePriors": {
+    "used": true,
+    "artist": "Community Service & Tour Austin",
+    "artistParts": [
+      "Community Service",
+      "Tour Austin"
+    ],
+    "venue": "Music Hall",
+    "venueParts": [
+      "Music Hall"
+    ],
+    "year": "1999",
+    "structuredPlausible": true,
+    "sourceStem": "community-service-tour-austin-music-hall-1999",
+    "bodyParts": [
+      "community",
+      "service",
+      "tour",
+      "austin",
+      "music",
+      "hall"
+    ],
+    "bestSplit": 4
+  },
+  "filenamePriorBreakdown": {
+    "used": true,
+    "artist": "Community Service & Tour Austin",
+    "artistParts": [
+      "Community Service",
+      "Tour Austin"
+    ],
+    "venue": "Music Hall",
+    "venueParts": [
+      "Music Hall"
+    ],
+    "year": "1999",
+    "structuredPlausible": true,
+    "sourceStem": "community-service-tour-austin-music-hall-1999",
+    "bodyParts": [
+      "community",
+      "service",
+      "tour",
+      "austin",
+      "music",
+      "hall"
+    ],
+    "bestSplit": 4
+  },
+  "multiArtistParsingAttempted": true,
+  "multiArtistParsingMatched": true,
+  "venueTailSplittingAttempted": false,
+  "venueTailSplittingMatched": false,
+  "activeParserStagesRun": [
+    "ocr_text_selected",
+    "artist_candidates_extracted",
+    "venue_candidates_extracted",
+    "date_candidates_extracted",
+    "filename_priors_loaded",
+    "multi_artist_parser_checked",
+    "venue_tail_split_checked",
+    "final_selector_resolved"
+  ],
+  "functionChain": [
+    "run_ocr_variants",
+    "extract_artist_candidates",
+    "extract_venue_candidates",
+    "extract_year",
+    "extract_exact_date",
+    "build_filename_priors",
+    "detect_multi_artist_billing",
+    "split_artist_prefix_from_venue",
+    "final_selection_resolution"
+  ],
+  "finalSelectorWinner": "structured_filename_fallback",
+  "finalSelectorReason": "Weak/fragmented OCR triggered a structured filename fallback for multi-artist billing.",
+  "selectorDebug": {
+    "parserStagesRun": [
+      "ocr_text_selected",
+      "artist_candidates_extracted",
+      "venue_candidates_extracted",
+      "date_candidates_extracted",
+      "filename_priors_loaded",
+      "multi_artist_parser_checked",
+      "venue_tail_split_checked",
+      "final_selector_resolved"
+    ],
+    "multiArtistParsingAttempted": true,
+    "multiArtistParsingMatched": true,
+    "venueTailSplittingAttempted": false,
+    "venueTailSplittingMatched": false,
+    "structuredFilenameFallbackUsed": true,
+    "finalSelectorWinner": "structured_filename_fallback",
+    "finalSelectorReason": "Weak/fragmented OCR triggered a structured filename fallback for multi-artist billing.",
+    "finalArtist": "Community Service & Tour Austin",
+    "finalVenue": "Music Hall",
+    "finalYear": "1999",
+    "functionChain": [
+      "run_ocr_variants",
+      "extract_artist_candidates",
+      "extract_venue_candidates",
+      "extract_year",
+      "extract_exact_date",
+      "build_filename_priors",
+      "detect_multi_artist_billing",
+      "split_artist_prefix_from_venue",
+      "final_selection_resolution"
+    ]
+  },
+  "chosenArtistExplanation": [],
+  "rawOcrTextByPass": [
+    {
+      "variant": "display",
+      "config": "--psm 6",
+      "rawText": "",
+      "cleanedText": ""
+    }
+  ],
+  "runs": [
+    {
+      "variant": "display",
+      "config": "--psm 6",
+      "averageConfidence": 0.0,
+      "lineCount": 0,
+      "characterCount": 0,
+      "score": 0.0,
+      "coreMetadataConfidence": 0.0,
+      "runtimeMs": 4504.4,
+      "rawText": "",
+      "cleanedText": "",
+      "lineEntries": [],
+      "timeoutSeconds": 4,
+      "timedOut": true,
+      "earlyExit": "timeout-stop"
+    }
+  ]
+}

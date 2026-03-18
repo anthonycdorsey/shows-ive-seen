@@ -1,0 +1,53 @@
+SHOWS I SAW - SINGLE TICKET INGEST REVIEW
+
+Selected source:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\incoming\visualize-rave-austin-music-hall-1999.jpg
+
+Saved source archive copy:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204618-visualize-rave-austin-music-hall-1999\original.jpg
+
+Final canonical image uses original (no enhancement applied):
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204618-visualize-rave-austin-music-hall-1999\final-image.jpg
+
+Temporary OCR working image:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204618-visualize-rave-austin-music-hall-1999\ocr-working.jpg
+
+Draft JSON:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204618-visualize-rave-austin-music-hall-1999\draft.json
+
+Contact sheet:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204618-visualize-rave-austin-music-hall-1999\contact-sheet.jpg
+
+Proposed metadata:
+- artist: Robust & Lae ooo
+- venue: Music Hall [e
+- year: 1999
+- exactDate: 
+- city: 
+- state: 
+- price: 
+- slug: 
+- reviewSlug: review-visualize-rave-austin-music-hall-1999
+
+Confidence:
+- OCR average: 0.37
+- artist: 0.78
+- venue: 0.97
+- year: 0.44
+- exact date: 0.00
+- overall: 0.71
+- low confidence: yes
+
+Canonical naming committed:
+no
+
+OCR working-image notes:
+- Applied illumination normalization to reduce uneven scan lighting and faded paper cast.
+- Raised bright low-saturation paper regions toward off-white while preserving artwork and darker ink regions.
+- Applied mild edge-preserving sharpening for OCR readability without redrawing text.
+
+Warnings:
+- Overall OCR confidence is weak; review text carefully.
+
+Next step:
+- Resolve metadata uncertainty and rename only after approval.

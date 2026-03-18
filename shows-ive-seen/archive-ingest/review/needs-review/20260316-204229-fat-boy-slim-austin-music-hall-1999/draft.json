@@ -1,0 +1,302 @@
+{
+  "reviewStatus": "pending_human_review",
+  "generatedAt": "2026-03-16T20:42:40",
+  "canonicalNamingCommitted": false,
+  "metadataConfidence": {
+    "artist": 0.82,
+    "venue": 0.84,
+    "year": 0.74,
+    "exactDate": 0.0,
+    "coreMetadata": 0.806,
+    "overall": 0.706,
+    "ocrAverage": 0.167,
+    "lowConfidence": false,
+    "canonicalEligible": true
+  },
+  "ticket": {
+    "artist": "Fat Boy & Slim Austin",
+    "artistSlug": "fat-boy-and-slim-austin",
+    "exactDate": "",
+    "year": "1999",
+    "venue": "Music Hall",
+    "city": "Teeaeke",
+    "state": "EE",
+    "country": "USA",
+    "copy": "",
+    "extendedNotes": "",
+    "companions": [],
+    "photos": [],
+    "youtubeUrl": "",
+    "price": "",
+    "tags": [],
+    "shareTitle": "Fat Boy & Slim Austin at Music Hall, 1999 | Shows I Saw",
+    "shareDescription": "",
+    "shareImage": "fat-boy-and-slim-austin-music-hall-1999-share.jpg",
+    "slug": "fat-boy-and-slim-austin-music-hall-1999",
+    "img": "fat-boy-and-slim-austin-music-hall-1999.jpg",
+    "rotation": "0deg"
+  },
+  "proposedMetadata": {
+    "artist": "Fat Boy & Slim Austin",
+    "venue": "Music Hall",
+    "year": "1999",
+    "exactDate": "",
+    "city": "Teeaeke",
+    "state": "EE",
+    "country": "USA",
+    "price": ""
+  },
+  "source": {
+    "inputFile": "fat-boy-slim-austin-music-hall-1999.jpg",
+    "savedOriginal": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\review\\needs-review\\20260316-204229-fat-boy-slim-austin-music-hall-1999\\original.jpg",
+    "savedCleaned": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\review\\needs-review\\20260316-204229-fat-boy-slim-austin-music-hall-1999\\ocr-working.jpg",
+    "ocrConfig": "--psm 6 [display]",
+    "ocrPreview": [
+      ", a § a Do reece ee, Wee ee Per sd Te aE Re EL AG: ke REE Be Bene Poke RGRGE Bh. OOS Gee eee aS Ie So tc Mere TE Bante an",
+      "SL: Re RSET ERE HBA SE RENGAUREBERE 5 psi aes cag cts MAR ct acy. Sa ue sad Caeee Satay Eg: SERA GS CR SEAR OR WH Gk. Bease xe Bet Gea Gh A. SESES ALS Re a ere SS oO Sea a",
+      "REHEE ci owcet seg Sp Bean GRUCaRGeL WS GH We dat a Banat Banh, Dinca suns Bion Cee freee, Ania “Waa nt Hate ds eae Bakes iy ASG. “Sagih aes BRS Fakes by Baaaeh F iiaied Peng suanbechaaieiniindccen ape: cone gy aati WORE O",
+      "pec tet ee ee ea, So Ge Meo She SN RRR Teeus eee ae te PRES Pleat fed “Magee, Ayal (Ger “Ee Gated Be S GEGED UGE Bay Bete, Ge ae Eee ee OE TORE fy oma aac eiacte: Masnenaneteagrmnst suena Ca gM Sera eR eee",
+      "Tape Sh Ge Goes aus Pies oe Weeee, Bo Ga NE “GG Bier Ee eee ce ere ea me ee me Om a ee ea ee eae a a Bisa ounmaanaanaga eee A PMD Meet Beas:",
+      "-....rmrt~—~—OCC‘“ Ee le Se reenter pee fle eee Mine tlt Rete ee eee Be 3",
+      "AMBRE FO OS SLUR RRO a cnGhonarancnis: ‘Soa: Bae Br oS. Grats weet in! a tee i, Ee sine. G5 babe: Ue REGS GEES, Teeaeke, EE RE SEE S. SGGas Aas 28, SE Se EY 2B BR dS crc 5 ARS HanbsthrGunsiaculnndags Re ae ee Be SRT",
+      "ERR Ra ene eS aN I GP MER Baud Mok GP day? ane) Waka Ge atin? te TUS (2 GE 20 BRR acca ORE chad ui eee PS een:",
+      "By 2 SESS BEE GL RRES 0 RRE GASoe ek GReS G: Ge Beak A ABER eee Pay eet pit Reena SB ST SE orig be a can oe roe penta ERENT Sp at papi Seay ok remaenics ae: Buren ae",
+      "a ee ee & OS Pe Foe Reg BLL ese ee ste pe ee ee eee ears a eee eee eh os Bee oe Se",
+      "Altea’ Re 4 ? RininnimneReE “s Th GRAS a RGaionGAROHEr gee men Age a. ca TAU RRR REC UT, paar Svan susan sweneuamseenaaaney Bt fanaa SaaS ee ener ne err ee Se a",
+      "+108 as Way fas tas i) Sauknis BORMEOR fan Aik CEES aaa = Sa i Age JeGeceaeR R [ESSERE EER Ong Gh os Ae aabepanta ct Suet ttaa tna maainware aman acaba ate Eee SRR >",
+      "‘ nS ‘ NRE, 0 uence tonics tliat UC Rae",
+      "F- eae ENG PEA aA Peer aE EEE SHEE : . Pion earn cin elation re era ea SUAS GG GAT Ras Raaca oA n Ea 3",
+      "cA ee. eee Lee eau Ria 4 fe Spepererststt seas ELS TTA EaGs an Bisa aaisuaihmna nice aa Rapraeeceaniuneneaes aimaaenacemae para",
+      "ie dm, i P_gmmadaty"
+    ]
+  },
+  "warnings": [
+    "Overall OCR confidence is weak; review text carefully."
+  ],
+  "debug": {
+    "artistCandidates": [],
+    "rejectedArtistCandidates": [
+      {
+        "accepted": false,
+        "value": "reece ee, Wee Per AG: REE Bene Poke RGRGE Bh. OOS Gee eee Mere Bante",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.168,
+        "topRatio": 0.172,
+        "sourceLine": ", a § a Do reece ee, Wee ee Per sd Te aE Re EL AG: ke REE Be Bene Poke RGRGE Bh. OOS Gee eee aS Ie So tc Mere TE Bante an",
+        "reasons": [
+          "length out of artist range",
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "SL: RSET ERE HBA RENGAUREBERE psi aes cag cts MAR acy. sad Caeee Satay Eg: SERA SEAR Gk. Bease Bet Gea SESES ALS ere Sea",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.171,
+        "topRatio": 0.342,
+        "sourceLine": "SL: Re RSET ERE HBA SE RENGAUREBERE 5 psi aes cag cts MAR ct acy. Sa ue sad Caeee Satay Eg: SERA GS CR SEAR OR WH Gk. Bease xe Bet Gea Gh A. SESES ALS Re a ere SS oO Sea a",
+        "reasons": [
+          "length out of artist range",
+          "contains digits",
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "REHEE owcet seg Bean GRUCaRGeL dat Banat Banh, Dinca suns Bion Cee freee, Ania \"Waa Hate eae Bakes ASG. \"Sagih aes BRS Fakes Baaaeh iiaied Peng suanbechaaieiniindccen ape: cone aati WORE",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.128,
+        "topRatio": 0.537,
+        "sourceLine": "REHEE ci owcet seg Sp Bean GRUCaRGeL WS GH We dat a Banat Banh, Dinca suns Bion Cee freee, Ania “Waa nt Hate ds eae Bakes iy ASG. “Sagih aes BRS Fakes by Baaaeh F iiaied Peng suanbechaaieiniindccen ape: cone gy aati WORE O",
+        "reasons": [
+          "length out of artist range",
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "pec tet ea, Meo She RRR Teeus eee PRES Pleat fed \"Magee, Ayal (Ger \"Ee Gated GEGED UGE Bay Bete, Eee TORE oma aac eiacte: Masnenaneteagrmnst suena Sera eee",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.163,
+        "topRatio": 0.554,
+        "sourceLine": "pec tet ee ee ea, So Ge Meo She SN RRR Teeus eee ae te PRES Pleat fed “Magee, Ayal (Ger “Ee Gated Be S GEGED UGE Bay Bete, Ge ae Eee ee OE TORE fy oma aac eiacte: Masnenaneteagrmnst suena Ca gM Sera eR eee",
+        "reasons": [
+          "length out of artist range",
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Tape Goes aus Pies Weeee, \"GG Bier eee ere eae Bisa ounmaanaanaga eee PMD Meet Beas",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.177,
+        "topRatio": 0.568,
+        "sourceLine": "Tape Sh Ge Goes aus Pies oe Weeee, Bo Ga NE “GG Bier Ee eee ce ere ea me ee me Om a ee ea ee eae a a Bisa ounmaanaanaga eee A PMD Meet Beas:",
+        "reasons": [
+          "length out of artist range",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "rmrt~—~—OCC'\" reenter pee fle eee Mine tlt Rete eee",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.235,
+        "topRatio": 0.589,
+        "sourceLine": "-....rmrt~—~—OCC‘“ Ee le Se reenter pee fle eee Mine tlt Rete ee eee Be 3",
+        "reasons": [
+          "length out of artist range",
+          "contains digits",
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "AMBRE SLUR RRO cnGhonarancnis: 'Soa: Bae oS. Grats weet in! tee sine. babe: REGS GEES, Teeaeke, SEE SGGas Aas 28, crc ARS HanbsthrGunsiaculnndags SRT",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.195,
+        "topRatio": 0.606,
+        "sourceLine": "AMBRE FO OS SLUR RRO a cnGhonarancnis: ‘Soa: Bae Br oS. Grats weet in! a tee i, Ee sine. G5 babe: Ue REGS GEES, Teeaeke, EE RE SEE S. SGGas Aas 28, SE Se EY 2B BR dS crc 5 ARS HanbsthrGunsiaculnndags Re ae ee Be SRT",
+        "reasons": [
+          "length out of artist range",
+          "contains digits",
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "ERR ene MER Baud Mok day? ane) Waka atin? TUS BRR acca ORE chad eee een",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.171,
+        "topRatio": 0.643,
+        "sourceLine": "ERR Ra ene eS aN I GP MER Baud Mok GP day? ane) Waka Ge atin? te TUS (2 GE 20 BRR acca ORE chad ui eee PS een:",
+        "reasons": [
+          "length out of artist range",
+          "contains digits",
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "SESS BEE RRES RRE GASoe GReS Beak ABER eee Pay eet pit Reena orig can roe penta ERENT papi Seay remaenics ae: Buren",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.172,
+        "topRatio": 0.676,
+        "sourceLine": "By 2 SESS BEE GL RRES 0 RRE GASoe ek GReS G: Ge Beak A ABER eee Pay eet pit Reena SB ST SE orig be a can oe roe penta ERENT Sp at papi Seay ok remaenics ae: Buren ae",
+        "reasons": [
+          "length out of artist range",
+          "contains digits",
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Ears",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.231,
+        "topRatio": 0.73,
+        "sourceLine": "a ee ee & OS Pe Foe Reg BLL ese ee ste pe ee ee eee ears a eee eee eh os Bee oe Se",
+        "reasons": [
+          "length out of artist range",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Altea' RininnimneReE GRAS RGaionGAROHEr gee men Age TAU RRR REC UT, paar Svan susan sweneuamseenaaaney fanaa SaaS ener err",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.116,
+        "topRatio": 0.829,
+        "sourceLine": "Altea’ Re 4 ? RininnimneReE “s Th GRAS a RGaionGAROHEr gee men Age a. ca TAU RRR REC UT, paar Svan susan sweneuamseenaaaney Bt fanaa SaaS ee ener ne err ee Se a",
+        "reasons": [
+          "length out of artist range",
+          "contains digits",
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "108 Way fas tas Sauknis BORMEOR fan Aik CEES aaa Age JeGeceaeR [ESSERE EER Ong aabepanta Suet ttaa tna maainware aman acaba ate Eee SRR",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.158,
+        "topRatio": 0.856,
+        "sourceLine": "+108 as Way fas tas i) Sauknis BORMEOR fan Aik CEES aaa = Sa i Age JeGeceaeR R [ESSERE EER Ong Gh os Ae aabepanta ct Suet ttaa tna maainware aman acaba ate Eee SRR >",
+        "reasons": [
+          "length out of artist range",
+          "contains digits",
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      }
+    ],
+    "venueCandidates": [],
+    "dateCandidates": [],
+    "filenamePriorsUsed": true,
+    "filenamePriors": {
+      "used": true,
+      "artist": "Fat Boy & Slim Austin",
+      "artistParts": [
+        "Fat Boy",
+        "Slim Austin"
+      ],
+      "venue": "Music Hall",
+      "venueParts": [
+        "Music Hall"
+      ],
+      "year": "1999",
+      "structuredPlausible": true,
+      "sourceStem": "fat-boy-slim-austin-music-hall-1999",
+      "bodyParts": [
+        "fat",
+        "boy",
+        "slim",
+        "austin",
+        "music",
+        "hall"
+      ],
+      "bestSplit": 4
+    },
+    "approvalBlockers": []
+  },
+  "futureEnrichment": {
+    "enabled": false,
+    "notes": [
+      "External venue/date verification can plug in after OCR review is approved.",
+      "Ticketmaster/Setlist.fm/manual research can enrich city, lineup, and copy later without changing this draft contract."
+    ]
+  },
+  "reviewSlug": "review-fat-boy-slim-austin-music-hall-1999"
+}

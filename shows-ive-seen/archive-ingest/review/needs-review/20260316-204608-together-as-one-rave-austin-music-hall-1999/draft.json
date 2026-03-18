@@ -1,0 +1,356 @@
+{
+  "reviewStatus": "pending_human_review",
+  "generatedAt": "2026-03-16T20:46:11",
+  "canonicalNamingCommitted": false,
+  "metadataConfidence": {
+    "artist": 0.954,
+    "venue": 0.72,
+    "year": 0.88,
+    "exactDate": 0.0,
+    "coreMetadata": 0.855,
+    "overall": 0.769,
+    "ocrAverage": 0.39,
+    "lowConfidence": false,
+    "canonicalEligible": true
+  },
+  "ticket": {
+    "artist": "coe PRESENTS",
+    "artistSlug": "coe-presents",
+    "exactDate": "",
+    "year": "1999",
+    "venue": "Music Hall",
+    "city": "",
+    "state": "",
+    "country": "USA",
+    "copy": "",
+    "extendedNotes": "",
+    "companions": [],
+    "photos": [],
+    "youtubeUrl": "",
+    "price": "$25.00",
+    "tags": [],
+    "shareTitle": "coe PRESENTS at Music Hall, 1999 | Shows I Saw",
+    "shareDescription": "",
+    "shareImage": "coe-presents-music-hall-1999-share.jpg",
+    "slug": "coe-presents-music-hall-1999",
+    "img": "coe-presents-music-hall-1999.jpg",
+    "rotation": "0deg"
+  },
+  "proposedMetadata": {
+    "artist": "coe PRESENTS",
+    "venue": "Music Hall",
+    "year": "1999",
+    "exactDate": "",
+    "city": "",
+    "state": "",
+    "country": "USA",
+    "price": "$25.00"
+  },
+  "source": {
+    "inputFile": "together-as-one-rave-austin-music-hall-1999.jpg",
+    "savedOriginal": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\review\\needs-review\\20260316-204608-together-as-one-rave-austin-music-hall-1999\\original.jpg",
+    "savedCleaned": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\review\\needs-review\\20260316-204608-together-as-one-rave-austin-music-hall-1999\\ocr-working.jpg",
+    "ocrConfig": "--psm 6 [display]",
+    "ocrPreview": [
+      "| AO SEG TIN ROW SEAT”) |",
+      "GEN. ADM.",
+      "SEPT 11. 1999.",
+      "; Ov ADMir ONE} DATE ONLY i]",
+      "~. AFTERDARK _",
+      "-RED MARS AND |",
+      "cement ZED AN “cose:",
+      "=< PRODUCTIONS:",
+      "coe PRESENTS",
+      "<< TOGETHER AS.",
+      "Grane ay ane Moons eer",
+      "- AUSTIN MUSIC",
+      "poe NAC",
+      "Po ePT-11ls 1999",
+      "ee Sucre",
+      "Re PRICE Nclextanen",
+      "io $25.00",
+      "» GEN. ADM.",
+      "rage OS27"
+    ]
+  },
+  "warnings": [
+    "Overall OCR confidence is weak; review text carefully."
+  ],
+  "debug": {
+    "artistCandidates": [
+      {
+        "accepted": true,
+        "value": "coe PRESENTS",
+        "score": 0.954,
+        "plausibility": 0.954,
+        "ocrConfidence": 0.545,
+        "topRatio": 0.428,
+        "sourceLine": "coe PRESENTS",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      },
+      {
+        "accepted": true,
+        "value": "poe NAC",
+        "score": 0.871,
+        "plausibility": 0.871,
+        "ocrConfidence": 0.295,
+        "topRatio": 0.608,
+        "sourceLine": "poe NAC",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      },
+      {
+        "accepted": true,
+        "value": "Sucre",
+        "score": 0.765,
+        "plausibility": 0.765,
+        "ocrConfidence": 0.285,
+        "topRatio": 0.715,
+        "sourceLine": "ee Sucre",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      },
+      {
+        "accepted": true,
+        "value": "Austin Music",
+        "score": 0.681,
+        "plausibility": 0.681,
+        "ocrConfidence": 0.37,
+        "topRatio": 0.567,
+        "sourceLine": "- AUSTIN MUSIC",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      },
+      {
+        "accepted": true,
+        "value": "Grane ane Moons eer",
+        "score": 0.668,
+        "plausibility": 0.668,
+        "ocrConfidence": 0.182,
+        "topRatio": 0.536,
+        "sourceLine": "Grane ay ane Moons eer",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      },
+      {
+        "accepted": true,
+        "value": "cement ZED \"cose",
+        "score": 0.631,
+        "plausibility": 0.631,
+        "ocrConfidence": 0.165,
+        "topRatio": 0.358,
+        "sourceLine": "cement ZED AN “cose:",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      }
+    ],
+    "rejectedArtistCandidates": [
+      {
+        "accepted": false,
+        "value": "Seat",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.251,
+        "topRatio": 0.118,
+        "sourceLine": "| AO SEG TIN ROW SEAT”) |",
+        "reasons": [
+          "contains common ticket-fee or seating term",
+          "contains ticket metadata label",
+          "near seating or event label",
+          "contains too many non-letter characters",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Gen. Adm",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.95,
+        "topRatio": 0.166,
+        "sourceLine": "GEN. ADM.",
+        "reasons": [
+          "not dominated by alphabetic characters"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Sept 11. 1999",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.92,
+        "topRatio": 0.201,
+        "sourceLine": "SEPT 11. 1999.",
+        "reasons": [
+          "contains digits",
+          "contains too many non-letter characters",
+          "not dominated by alphabetic characters",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "ADMir ONE} DATE ONLY",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.197,
+        "topRatio": 0.237,
+        "sourceLine": "; Ov ADMir ONE} DATE ONLY i]",
+        "reasons": [
+          "contains ticket metadata label",
+          "word count is not plausible for an artist line",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Afterdark",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.33,
+        "topRatio": 0.276,
+        "sourceLine": "~. AFTERDARK _",
+        "reasons": [
+          "not dominated by alphabetic characters",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Mars",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.792,
+        "topRatio": 0.312,
+        "sourceLine": "-RED MARS AND |",
+        "reasons": [
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Productions",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.31,
+        "topRatio": 0.393,
+        "sourceLine": "=< PRODUCTIONS:",
+        "reasons": [
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Together",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.58,
+        "topRatio": 0.464,
+        "sourceLine": "<< TOGETHER AS.",
+        "reasons": [
+          "not dominated by alphabetic characters"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "ePT-11ls 1999",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.317,
+        "topRatio": 0.676,
+        "sourceLine": "Po ePT-11ls 1999",
+        "reasons": [
+          "contains digits",
+          "contains too many non-letter characters",
+          "not dominated by alphabetic characters",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "PRICE Nclextanen",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.357,
+        "topRatio": 0.765,
+        "sourceLine": "Re PRICE Nclextanen",
+        "reasons": [
+          "contains common ticket-fee or seating term",
+          "contains ticket metadata label"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "$25.00",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.295,
+        "topRatio": 0.82,
+        "sourceLine": "io $25.00",
+        "reasons": [
+          "contains price-like text",
+          "contains digits",
+          "contains too many non-letter characters",
+          "not dominated by alphabetic characters"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Gen. Adm",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.627,
+        "topRatio": 0.926,
+        "sourceLine": "» GEN. ADM.",
+        "reasons": [
+          "not dominated by alphabetic characters"
+        ]
+      }
+    ],
+    "venueCandidates": [],
+    "dateCandidates": [],
+    "filenamePriorsUsed": true,
+    "filenamePriors": {
+      "used": true,
+      "artist": "Together AS & One Rave",
+      "artistParts": [
+        "Together AS",
+        "One Rave"
+      ],
+      "venue": "Austin Music Hall",
+      "venueParts": [
+        "Austin Music Hall"
+      ],
+      "year": "1999",
+      "structuredPlausible": true,
+      "sourceStem": "together-as-one-rave-austin-music-hall-1999",
+      "bodyParts": [
+        "together",
+        "as",
+        "one",
+        "rave",
+        "austin",
+        "music",
+        "hall"
+      ],
+      "bestSplit": 4
+    },
+    "approvalBlockers": []
+  },
+  "futureEnrichment": {
+    "enabled": false,
+    "notes": [
+      "External venue/date verification can plug in after OCR review is approved.",
+      "Ticketmaster/Setlist.fm/manual research can enrich city, lineup, and copy later without changing this draft contract."
+    ]
+  },
+  "reviewSlug": "review-together-as-one-rave-austin-music-hall-1999"
+}

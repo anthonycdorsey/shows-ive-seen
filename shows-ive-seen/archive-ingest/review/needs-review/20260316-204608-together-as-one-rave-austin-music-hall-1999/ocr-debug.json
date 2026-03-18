@@ -1,0 +1,1854 @@
+{
+  "selectedBestVariant": "display",
+  "selectedConfig": "--psm 6 [display]",
+  "averageConfidence": 0.39,
+  "coreMetadataConfidence": 0.855,
+  "canonicalEligible": true,
+  "approvalBlockers": [],
+  "ocrPassCount": 3,
+  "ocrEarlyExitTriggered": false,
+  "ocrEarlyExitReason": "",
+  "topArtistCandidates": [
+    {
+      "accepted": true,
+      "value": "coe PRESENTS",
+      "score": 0.954,
+      "plausibility": 0.954,
+      "ocrConfidence": 0.545,
+      "topRatio": 0.428,
+      "sourceLine": "coe PRESENTS",
+      "reasons": [
+        "looks like a human-readable artist/band line"
+      ]
+    },
+    {
+      "accepted": true,
+      "value": "poe NAC",
+      "score": 0.871,
+      "plausibility": 0.871,
+      "ocrConfidence": 0.295,
+      "topRatio": 0.608,
+      "sourceLine": "poe NAC",
+      "reasons": [
+        "looks like a human-readable artist/band line"
+      ]
+    },
+    {
+      "accepted": true,
+      "value": "Sucre",
+      "score": 0.765,
+      "plausibility": 0.765,
+      "ocrConfidence": 0.285,
+      "topRatio": 0.715,
+      "sourceLine": "ee Sucre",
+      "reasons": [
+        "looks like a human-readable artist/band line"
+      ]
+    },
+    {
+      "accepted": true,
+      "value": "Austin Music",
+      "score": 0.681,
+      "plausibility": 0.681,
+      "ocrConfidence": 0.37,
+      "topRatio": 0.567,
+      "sourceLine": "- AUSTIN MUSIC",
+      "reasons": [
+        "looks like a human-readable artist/band line"
+      ]
+    },
+    {
+      "accepted": true,
+      "value": "Grane ane Moons eer",
+      "score": 0.668,
+      "plausibility": 0.668,
+      "ocrConfidence": 0.182,
+      "topRatio": 0.536,
+      "sourceLine": "Grane ay ane Moons eer",
+      "reasons": [
+        "looks like a human-readable artist/band line"
+      ]
+    },
+    {
+      "accepted": true,
+      "value": "cement ZED \"cose",
+      "score": 0.631,
+      "plausibility": 0.631,
+      "ocrConfidence": 0.165,
+      "topRatio": 0.358,
+      "sourceLine": "cement ZED AN “cose:",
+      "reasons": [
+        "looks like a human-readable artist/band line"
+      ]
+    }
+  ],
+  "rejectedArtistCandidates": [
+    {
+      "accepted": false,
+      "value": "Seat",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.251,
+      "topRatio": 0.118,
+      "sourceLine": "| AO SEG TIN ROW SEAT”) |",
+      "reasons": [
+        "contains common ticket-fee or seating term",
+        "contains ticket metadata label",
+        "near seating or event label",
+        "contains too many non-letter characters",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Gen. Adm",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.95,
+      "topRatio": 0.166,
+      "sourceLine": "GEN. ADM.",
+      "reasons": [
+        "not dominated by alphabetic characters"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Sept 11. 1999",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.92,
+      "topRatio": 0.201,
+      "sourceLine": "SEPT 11. 1999.",
+      "reasons": [
+        "contains digits",
+        "contains too many non-letter characters",
+        "not dominated by alphabetic characters",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "ADMir ONE} DATE ONLY",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.197,
+      "topRatio": 0.237,
+      "sourceLine": "; Ov ADMir ONE} DATE ONLY i]",
+      "reasons": [
+        "contains ticket metadata label",
+        "word count is not plausible for an artist line",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Afterdark",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.33,
+      "topRatio": 0.276,
+      "sourceLine": "~. AFTERDARK _",
+      "reasons": [
+        "not dominated by alphabetic characters",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Mars",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.792,
+      "topRatio": 0.312,
+      "sourceLine": "-RED MARS AND |",
+      "reasons": [
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Productions",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.31,
+      "topRatio": 0.393,
+      "sourceLine": "=< PRODUCTIONS:",
+      "reasons": [
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Together",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.58,
+      "topRatio": 0.464,
+      "sourceLine": "<< TOGETHER AS.",
+      "reasons": [
+        "not dominated by alphabetic characters"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "ePT-11ls 1999",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.317,
+      "topRatio": 0.676,
+      "sourceLine": "Po ePT-11ls 1999",
+      "reasons": [
+        "contains digits",
+        "contains too many non-letter characters",
+        "not dominated by alphabetic characters",
+        "does not resemble a recognizable artist name"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "PRICE Nclextanen",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.357,
+      "topRatio": 0.765,
+      "sourceLine": "Re PRICE Nclextanen",
+      "reasons": [
+        "contains common ticket-fee or seating term",
+        "contains ticket metadata label"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "$25.00",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.295,
+      "topRatio": 0.82,
+      "sourceLine": "io $25.00",
+      "reasons": [
+        "contains price-like text",
+        "contains digits",
+        "contains too many non-letter characters",
+        "not dominated by alphabetic characters"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Gen. Adm",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.627,
+      "topRatio": 0.926,
+      "sourceLine": "» GEN. ADM.",
+      "reasons": [
+        "not dominated by alphabetic characters"
+      ]
+    }
+  ],
+  "topVenueCandidates": [],
+  "dateCandidates": [],
+  "filenamePriorsUsed": true,
+  "filenamePriors": {
+    "used": true,
+    "artist": "Together AS & One Rave",
+    "artistParts": [
+      "Together AS",
+      "One Rave"
+    ],
+    "venue": "Austin Music Hall",
+    "venueParts": [
+      "Austin Music Hall"
+    ],
+    "year": "1999",
+    "structuredPlausible": true,
+    "sourceStem": "together-as-one-rave-austin-music-hall-1999",
+    "bodyParts": [
+      "together",
+      "as",
+      "one",
+      "rave",
+      "austin",
+      "music",
+      "hall"
+    ],
+    "bestSplit": 4
+  },
+  "filenamePriorBreakdown": {
+    "used": true,
+    "artist": "Together AS & One Rave",
+    "artistParts": [
+      "Together AS",
+      "One Rave"
+    ],
+    "venue": "Austin Music Hall",
+    "venueParts": [
+      "Austin Music Hall"
+    ],
+    "year": "1999",
+    "structuredPlausible": true,
+    "sourceStem": "together-as-one-rave-austin-music-hall-1999",
+    "bodyParts": [
+      "together",
+      "as",
+      "one",
+      "rave",
+      "austin",
+      "music",
+      "hall"
+    ],
+    "bestSplit": 4
+  },
+  "multiArtistParsingAttempted": true,
+  "multiArtistParsingMatched": false,
+  "venueTailSplittingAttempted": false,
+  "venueTailSplittingMatched": true,
+  "activeParserStagesRun": [
+    "ocr_text_selected",
+    "artist_candidates_extracted",
+    "venue_candidates_extracted",
+    "date_candidates_extracted",
+    "filename_priors_loaded",
+    "multi_artist_parser_checked",
+    "venue_tail_split_checked",
+    "final_selector_resolved"
+  ],
+  "functionChain": [
+    "run_ocr_variants",
+    "extract_artist_candidates",
+    "extract_venue_candidates",
+    "extract_year",
+    "extract_exact_date",
+    "build_filename_priors",
+    "detect_multi_artist_billing",
+    "split_artist_prefix_from_venue",
+    "final_selection_resolution"
+  ],
+  "finalSelectorWinner": "venue_tail_split",
+  "finalSelectorReason": "A mixed OCR venue candidate was split to isolate the venue tail.",
+  "selectorDebug": {
+    "parserStagesRun": [
+      "ocr_text_selected",
+      "artist_candidates_extracted",
+      "venue_candidates_extracted",
+      "date_candidates_extracted",
+      "filename_priors_loaded",
+      "multi_artist_parser_checked",
+      "venue_tail_split_checked",
+      "final_selector_resolved"
+    ],
+    "multiArtistParsingAttempted": true,
+    "multiArtistParsingMatched": false,
+    "venueTailSplittingAttempted": false,
+    "venueTailSplittingMatched": true,
+    "structuredFilenameFallbackUsed": false,
+    "finalSelectorWinner": "venue_tail_split",
+    "finalSelectorReason": "A mixed OCR venue candidate was split to isolate the venue tail.",
+    "finalArtist": "coe PRESENTS",
+    "finalVenue": "Music Hall",
+    "finalYear": "1999",
+    "functionChain": [
+      "run_ocr_variants",
+      "extract_artist_candidates",
+      "extract_venue_candidates",
+      "extract_year",
+      "extract_exact_date",
+      "build_filename_priors",
+      "detect_multi_artist_billing",
+      "split_artist_prefix_from_venue",
+      "final_selection_resolution"
+    ]
+  },
+  "chosenArtistExplanation": [
+    "looks like a human-readable artist/band line"
+  ],
+  "rawOcrTextByPass": [
+    {
+      "variant": "display",
+      "config": "--psm 6",
+      "rawText": "| AO SEG TIN ROW SEAT”) |\nGEN. ADM.\nSEPT 11. 1999.\n; Ov ADMir ONE} DATE ONLY i]\n~. AFTERDARK _\n-RED MARS AND |\ncement ZED AN “cose:\n=< PRODUCTIONS:\ncoe PRESENTS\n<< TOGETHER AS.\nGrane ay ane Moons eer\n- AUSTIN MUSIC\npoe NAC\nPo ePT-11ls 1999\nee Sucre\nRe PRICE Nclextanen\nio $25.00\n» GEN. ADM.\nrage OS27",
+      "cleanedText": "| AO SEG TIN ROW SEAT”) |\nGEN. ADM.\nSEPT 11. 1999.\n; Ov ADMir ONE} DATE ONLY i]\n~. AFTERDARK _\n-RED MARS AND |\ncement ZED AN “cose:\n=< PRODUCTIONS:\ncoe PRESENTS\n<< TOGETHER AS.\nGrane ay ane Moons eer\n- AUSTIN MUSIC\npoe NAC\nPo ePT-11ls 1999\nee Sucre\nRe PRICE Nclextanen\nio $25.00\n» GEN. ADM.\nrage OS27"
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 6",
+      "rawText": "| SAREE ROTERRETTOTeMITTer aE\nNM eencecen)\noy RE ae ye UO\na “en SD escenario ad cepa\ni Q 1 . “, _ ot\n“~ } SEPT 11, 1999] .\nRee ee ADM ONE I Mia DATE ON cc ae\nae fx piv + 4 PTS ey pe y fa oan PSSA Hams tie Se eT Berk Le oe\nat, Apescec nnteete er tie sds . : SOS ny oe\ni EOE oc bg bE\n\" “ Lhossnattnesittrn : 9 le fa) : O- Dp M or asupunctansrnn seen\ni ER eae FR ENO TET TNT\na ON GE i EEO erode] ans OTEK Pt Sette\nirl Roth PUT ars Sina sar iat TAI cea ee: “\ncal Nes. SEC ROW — SEAT)\naon ot oy\" as J ,\n“che GEN. ADM\na ut : e , . U",
+      "cleanedText": "| SAREE ROTERRETTOTeMITTer aE\nNM eencecen)\noy RE ae ye UO\na “en SD escenario ad cepa\ni Q 1 . “, _ ot\n“~ } SEPT 11, 1999] .\nRee ee ADM ONE I Mia DATE ON cc ae\nae fx piv + 4 PTS ey pe y fa oan PSSA Hams tie Se eT Berk Le oe\nat, Apescec nnteete er tie sds . : SOS ny oe\ni EOE oc bg bE\n\" “ Lhossnattnesittrn : 9 le fa) : O- Dp M or asupunctansrnn seen\ni ER eae FR ENO TET TNT\na ON GE i EEO erode] ans OTEK Pt Sette\nirl Roth PUT ars Sina sar iat TAI cea ee: “\ncal Nes. SEC ROW — SEAT)\naon ot oy\" as J ,\n“che GEN. ADM\na ut : e , . U"
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 11",
+      "rawText": "es\nce\nre\nie\none\n4m\nEN\neS\n§\n+h\nARES,\nfs,\nae\nsie\nUe,\naS\nee\nMi\nref\nA\nfa)\n05\nat\nOW\nWe\nfy\naioge eed\nnoe\nCp,\nVi\na\nte\nma):\nea\nTels\nwaa\nBh.\neh\nGEN. ADM .\nPas:\n199\nEPT 11,\n6G\nQornyn\nai\ntile a th\niy\nAp ay\nSs\naa\nnt\ncad\nvr}\n=e\nAM\nae\nt\nmae\nME\nvis\nSoy\nie\n$33\nea’\nAF TERDARK\nRs\na\nRED.\nMARS AND\nate\nZEDA\niN\nwoaler:\nPRODUCTIONS\nPRESENTS\npesrse\nbea\nOGETHER<AS\nnh\n‘ONE\n*\nAUS\nMUSTC\n‘HAL\ntt peeds\n,\nbated eds\nDateotye\nSATURDAY\nrive\nate gs\nPT <11\n1999\nce\nger\n90--PM\nN'\nae 8\nThen\nhs\nND)\noat\nTOT aE ces\nIb.\n$25. 00\nty\nra\n- SEC\nSEAT:\nROW\nViet\noe\nGEN. ADM..\ntor\ni\n. 0527\nwe\nve\nermal Stren atten Seat ege\n\"\nte",
+      "cleanedText": "es\nce\nre\nie\none\n4m\nEN\neS\n§\n+h\nARES,\nfs,\nae\nsie\nUe,\naS\nee\nMi\nref\nA\nfa)\n05\nat\nOW\nWe\nfy\naioge eed\nnoe\nCp,\nVi\na\nte\nma):\nea\nTels\nwaa\nBh.\neh\nGEN. ADM .\nPas:\n199\nEPT 11,\n6G\nQornyn\nai\ntile a th\niy\nAp ay\nSs\naa\nnt\ncad\nvr}\n=e\nAM\nae\nt\nmae\nME\nvis\nSoy\nie\n$33\nea’\nAF TERDARK\nRs\na\nRED.\nMARS AND\nate\nZEDA\niN\nwoaler:\nPRODUCTIONS\nPRESENTS\npesrse\nbea\nOGETHER<AS\nnh\n‘ONE\n*\nAUS\nMUSTC\n‘HAL\ntt peeds\n,\nbated eds\nDateotye\nSATURDAY\nrive\nate gs\nPT <11\n1999\nce\nger\n90--PM\nN'\nae 8\nThen\nhs\nND)\noat\nTOT aE ces\nIb.\n$25. 00\nty\nra\n- SEC\nSEAT:\nROW\nViet\noe\nGEN. ADM..\ntor\ni\n. 0527\nwe\nve\nermal Stren atten Seat ege\n\"\nte"
+    }
+  ],
+  "runs": [
+    {
+      "variant": "display",
+      "config": "--psm 6",
+      "averageConfidence": 0.39,
+      "lineCount": 19,
+      "characterCount": 300,
+      "score": 40.152,
+      "coreMetadataConfidence": 0.58,
+      "runtimeMs": 1061.8,
+      "timeoutSeconds": 4,
+      "rawText": "| AO SEG TIN ROW SEAT”) |\nGEN. ADM.\nSEPT 11. 1999.\n; Ov ADMir ONE} DATE ONLY i]\n~. AFTERDARK _\n-RED MARS AND |\ncement ZED AN “cose:\n=< PRODUCTIONS:\ncoe PRESENTS\n<< TOGETHER AS.\nGrane ay ane Moons eer\n- AUSTIN MUSIC\npoe NAC\nPo ePT-11ls 1999\nee Sucre\nRe PRICE Nclextanen\nio $25.00\n» GEN. ADM.\nrage OS27",
+      "cleanedText": "| AO SEG TIN ROW SEAT”) |\nGEN. ADM.\nSEPT 11. 1999.\n; Ov ADMir ONE} DATE ONLY i]\n~. AFTERDARK _\n-RED MARS AND |\ncement ZED AN “cose:\n=< PRODUCTIONS:\ncoe PRESENTS\n<< TOGETHER AS.\nGrane ay ane Moons eer\n- AUSTIN MUSIC\npoe NAC\nPo ePT-11ls 1999\nee Sucre\nRe PRICE Nclextanen\nio $25.00\n» GEN. ADM.\nrage OS27",
+      "lineEntries": [
+        {
+          "text": "| AO SEG TIN ROW SEAT”) |",
+          "avg_confidence": 0.251,
+          "top_ratio": 0.118,
+          "left": 116,
+          "top": 302,
+          "right": 1034,
+          "bottom": 399
+        },
+        {
+          "text": "GEN. ADM.",
+          "avg_confidence": 0.95,
+          "top_ratio": 0.166,
+          "left": 328,
+          "top": 425,
+          "right": 840,
+          "bottom": 491
+        },
+        {
+          "text": "SEPT 11. 1999.",
+          "avg_confidence": 0.92,
+          "top_ratio": 0.201,
+          "left": 209,
+          "top": 516,
+          "right": 1016,
+          "bottom": 584
+        },
+        {
+          "text": "; Ov ADMir ONE} DATE ONLY i]",
+          "avg_confidence": 0.197,
+          "top_ratio": 0.237,
+          "left": 121,
+          "top": 606,
+          "right": 1034,
+          "bottom": 695
+        },
+        {
+          "text": "~. AFTERDARK _",
+          "avg_confidence": 0.33,
+          "top_ratio": 0.276,
+          "left": 131,
+          "top": 708,
+          "right": 1008,
+          "bottom": 828
+        },
+        {
+          "text": "-RED MARS AND |",
+          "avg_confidence": 0.792,
+          "top_ratio": 0.312,
+          "left": 167,
+          "top": 799,
+          "right": 1011,
+          "bottom": 923
+        },
+        {
+          "text": "cement ZED AN “cose:",
+          "avg_confidence": 0.165,
+          "top_ratio": 0.358,
+          "left": 138,
+          "top": 916,
+          "right": 1019,
+          "bottom": 1010
+        },
+        {
+          "text": "=< PRODUCTIONS:",
+          "avg_confidence": 0.31,
+          "top_ratio": 0.393,
+          "left": 133,
+          "top": 1008,
+          "right": 1020,
+          "bottom": 1101
+        },
+        {
+          "text": "coe PRESENTS",
+          "avg_confidence": 0.545,
+          "top_ratio": 0.428,
+          "left": 138,
+          "top": 1097,
+          "right": 1006,
+          "bottom": 1177
+        },
+        {
+          "text": "<< TOGETHER AS.",
+          "avg_confidence": 0.58,
+          "top_ratio": 0.464,
+          "left": 138,
+          "top": 1190,
+          "right": 1032,
+          "bottom": 1270
+        },
+        {
+          "text": "Grane ay ane Moons eer",
+          "avg_confidence": 0.182,
+          "top_ratio": 0.536,
+          "left": 131,
+          "top": 1373,
+          "right": 1020,
+          "bottom": 1474
+        },
+        {
+          "text": "- AUSTIN MUSIC",
+          "avg_confidence": 0.37,
+          "top_ratio": 0.567,
+          "left": 128,
+          "top": 1452,
+          "right": 921,
+          "bottom": 1549
+        },
+        {
+          "text": "poe NAC",
+          "avg_confidence": 0.295,
+          "top_ratio": 0.608,
+          "left": 120,
+          "top": 1557,
+          "right": 1026,
+          "bottom": 1644
+        },
+        {
+          "text": "Po ePT-11ls 1999",
+          "avg_confidence": 0.317,
+          "top_ratio": 0.676,
+          "left": 124,
+          "top": 1733,
+          "right": 990,
+          "bottom": 1825
+        },
+        {
+          "text": "ee Sucre",
+          "avg_confidence": 0.285,
+          "top_ratio": 0.715,
+          "left": 113,
+          "top": 1831,
+          "right": 955,
+          "bottom": 1976
+        },
+        {
+          "text": "Re PRICE Nclextanen",
+          "avg_confidence": 0.357,
+          "top_ratio": 0.765,
+          "left": 123,
+          "top": 1959,
+          "right": 1030,
+          "bottom": 2102
+        },
+        {
+          "text": "io $25.00",
+          "avg_confidence": 0.295,
+          "top_ratio": 0.82,
+          "left": 121,
+          "top": 2102,
+          "right": 1035,
+          "bottom": 2228
+        },
+        {
+          "text": "» GEN. ADM.",
+          "avg_confidence": 0.627,
+          "top_ratio": 0.926,
+          "left": 180,
+          "top": 2372,
+          "right": 844,
+          "bottom": 2436
+        },
+        {
+          "text": "rage OS27",
+          "avg_confidence": 0.205,
+          "top_ratio": 0.96,
+          "left": 176,
+          "top": 2460,
+          "right": 1035,
+          "bottom": 2562
+        }
+      ]
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 6",
+      "averageConfidence": 0.229,
+      "lineCount": 18,
+      "characterCount": 526,
+      "score": 24.092,
+      "coreMetadataConfidence": 0.486,
+      "runtimeMs": 826.4,
+      "timeoutSeconds": 3,
+      "rawText": "| SAREE ROTERRETTOTeMITTer aE\nNM eencecen)\noy RE ae ye UO\na “en SD escenario ad cepa\ni Q 1 . “, _ ot\n“~ } SEPT 11, 1999] .\nRee ee ADM ONE I Mia DATE ON cc ae\nae fx piv + 4 PTS ey pe y fa oan PSSA Hams tie Se eT Berk Le oe\nat, Apescec nnteete er tie sds . : SOS ny oe\ni EOE oc bg bE\n\" “ Lhossnattnesittrn : 9 le fa) : O- Dp M or asupunctansrnn seen\ni ER eae FR ENO TET TNT\na ON GE i EEO erode] ans OTEK Pt Sette\nirl Roth PUT ars Sina sar iat TAI cea ee: “\ncal Nes. SEC ROW — SEAT)\naon ot oy\" as J ,\n“che GEN. ADM\na ut : e , . U",
+      "cleanedText": "| SAREE ROTERRETTOTeMITTer aE\nNM eencecen)\noy RE ae ye UO\na “en SD escenario ad cepa\ni Q 1 . “, _ ot\n“~ } SEPT 11, 1999] .\nRee ee ADM ONE I Mia DATE ON cc ae\nae fx piv + 4 PTS ey pe y fa oan PSSA Hams tie Se eT Berk Le oe\nat, Apescec nnteete er tie sds . : SOS ny oe\ni EOE oc bg bE\n\" “ Lhossnattnesittrn : 9 le fa) : O- Dp M or asupunctansrnn seen\ni ER eae FR ENO TET TNT\na ON GE i EEO erode] ans OTEK Pt Sette\nirl Roth PUT ars Sina sar iat TAI cea ee: “\ncal Nes. SEC ROW — SEAT)\naon ot oy\" as J ,\n“che GEN. ADM\na ut : e , . U",
+      "lineEntries": [
+        {
+          "text": "| SAREE ROTERRETTOTeMITTer aE",
+          "avg_confidence": 0.01,
+          "top_ratio": 0.031,
+          "left": 2,
+          "top": 82,
+          "right": 1027,
+          "bottom": 146
+        },
+        {
+          "text": "NM eencecen)",
+          "avg_confidence": 0.025,
+          "top_ratio": 0.033,
+          "left": 18,
+          "top": 88,
+          "right": 1028,
+          "bottom": 174
+        },
+        {
+          "text": "oy RE ae ye UO",
+          "avg_confidence": 0.098,
+          "top_ratio": 0.049,
+          "left": 14,
+          "top": 129,
+          "right": 1143,
+          "bottom": 199
+        },
+        {
+          "text": "a “en SD escenario ad cepa",
+          "avg_confidence": 0.238,
+          "top_ratio": 0.13,
+          "left": 19,
+          "top": 341,
+          "right": 1003,
+          "bottom": 414
+        },
+        {
+          "text": "i Q 1 . “, _ ot",
+          "avg_confidence": 0.057,
+          "top_ratio": 0.157,
+          "left": 8,
+          "top": 412,
+          "right": 1141,
+          "bottom": 449
+        },
+        {
+          "text": "“~ } SEPT 11, 1999] .",
+          "avg_confidence": 0.528,
+          "top_ratio": 0.196,
+          "left": 16,
+          "top": 515,
+          "right": 1140,
+          "bottom": 584
+        },
+        {
+          "text": "Ree ee ADM ONE I Mia DATE ON cc ae",
+          "avg_confidence": 0.13,
+          "top_ratio": 0.229,
+          "left": 5,
+          "top": 602,
+          "right": 1149,
+          "bottom": 689
+        },
+        {
+          "text": "ae fx piv + 4 PTS ey pe y fa oan PSSA Hams tie Se eT Berk Le oe",
+          "avg_confidence": 0.268,
+          "top_ratio": 0.248,
+          "left": 6,
+          "top": 651,
+          "right": 1157,
+          "bottom": 702
+        },
+        {
+          "text": "at, Apescec nnteete er tie sds . : SOS ny oe",
+          "avg_confidence": 0.184,
+          "top_ratio": 0.626,
+          "left": 42,
+          "top": 1645,
+          "right": 989,
+          "bottom": 1676
+        },
+        {
+          "text": "i EOE oc bg bE",
+          "avg_confidence": 0.272,
+          "top_ratio": 0.67,
+          "left": 0,
+          "top": 1762,
+          "right": 1024,
+          "bottom": 1810
+        },
+        {
+          "text": "\" “ Lhossnattnesittrn : 9 le fa) : O- Dp M or asupunctansrnn seen",
+          "avg_confidence": 0.244,
+          "top_ratio": 0.69,
+          "left": 6,
+          "top": 1814,
+          "right": 1026,
+          "bottom": 1896
+        },
+        {
+          "text": "i ER eae FR ENO TET TNT",
+          "avg_confidence": 0.134,
+          "top_ratio": 0.748,
+          "left": 15,
+          "top": 1965,
+          "right": 1031,
+          "bottom": 2077
+        },
+        {
+          "text": "a ON GE i EEO erode] ans OTEK Pt Sette",
+          "avg_confidence": 0.236,
+          "top_ratio": 0.76,
+          "left": 4,
+          "top": 1997,
+          "right": 1032,
+          "bottom": 2079
+        },
+        {
+          "text": "irl Roth PUT ars Sina sar iat TAI cea ee: “",
+          "avg_confidence": 0.169,
+          "top_ratio": 0.775,
+          "left": 0,
+          "top": 2036,
+          "right": 1162,
+          "bottom": 2099
+        },
+        {
+          "text": "cal Nes. SEC ROW — SEAT)",
+          "avg_confidence": 0.345,
+          "top_ratio": 0.876,
+          "left": 5,
+          "top": 2303,
+          "right": 998,
+          "bottom": 2377
+        },
+        {
+          "text": "aon ot oy\" as J ,",
+          "avg_confidence": 0.358,
+          "top_ratio": 0.901,
+          "left": 38,
+          "top": 2369,
+          "right": 1134,
+          "bottom": 2396
+        },
+        {
+          "text": "“che GEN. ADM",
+          "avg_confidence": 0.7,
+          "top_ratio": 0.903,
+          "left": 14,
+          "top": 2372,
+          "right": 797,
+          "bottom": 2436
+        },
+        {
+          "text": "a ut : e , . U",
+          "avg_confidence": 0.226,
+          "top_ratio": 0.987,
+          "left": 10,
+          "top": 2594,
+          "right": 865,
+          "bottom": 2628
+        }
+      ]
+    },
+    {
+      "variant": "ocr-binary",
+      "config": "--psm 11",
+      "averageConfidence": 0.368,
+      "lineCount": 121,
+      "characterCount": 582,
+      "score": 38.014,
+      "coreMetadataConfidence": 0.517,
+      "runtimeMs": 784.4,
+      "timeoutSeconds": 3,
+      "rawText": "es\nce\nre\nie\none\n4m\nEN\neS\n§\n+h\nARES,\nfs,\nae\nsie\nUe,\naS\nee\nMi\nref\nA\nfa)\n05\nat\nOW\nWe\nfy\naioge eed\nnoe\nCp,\nVi\na\nte\nma):\nea\nTels\nwaa\nBh.\neh\nGEN. ADM .\nPas:\n199\nEPT 11,\n6G\nQornyn\nai\ntile a th\niy\nAp ay\nSs\naa\nnt\ncad\nvr}\n=e\nAM\nae\nt\nmae\nME\nvis\nSoy\nie\n$33\nea’\nAF TERDARK\nRs\na\nRED.\nMARS AND\nate\nZEDA\niN\nwoaler:\nPRODUCTIONS\nPRESENTS\npesrse\nbea\nOGETHER<AS\nnh\n‘ONE\n*\nAUS\nMUSTC\n‘HAL\ntt peeds\n,\nbated eds\nDateotye\nSATURDAY\nrive\nate gs\nPT <11\n1999\nce\nger\n90--PM\nN'\nae 8\nThen\nhs\nND)\noat\nTOT aE ces\nIb.\n$25. 00\nty\nra\n- SEC\nSEAT:\nROW\nViet\noe\nGEN. ADM..\ntor\ni\n. 0527\nwe\nve\nermal Stren atten Seat ege\n\"\nte",
+      "cleanedText": "es\nce\nre\nie\none\n4m\nEN\neS\n§\n+h\nARES,\nfs,\nae\nsie\nUe,\naS\nee\nMi\nref\nA\nfa)\n05\nat\nOW\nWe\nfy\naioge eed\nnoe\nCp,\nVi\na\nte\nma):\nea\nTels\nwaa\nBh.\neh\nGEN. ADM .\nPas:\n199\nEPT 11,\n6G\nQornyn\nai\ntile a th\niy\nAp ay\nSs\naa\nnt\ncad\nvr}\n=e\nAM\nae\nt\nmae\nME\nvis\nSoy\nie\n$33\nea’\nAF TERDARK\nRs\na\nRED.\nMARS AND\nate\nZEDA\niN\nwoaler:\nPRODUCTIONS\nPRESENTS\npesrse\nbea\nOGETHER<AS\nnh\n‘ONE\n*\nAUS\nMUSTC\n‘HAL\ntt peeds\n,\nbated eds\nDateotye\nSATURDAY\nrive\nate gs\nPT <11\n1999\nce\nger\n90--PM\nN'\nae 8\nThen\nhs\nND)\noat\nTOT aE ces\nIb.\n$25. 00\nty\nra\n- SEC\nSEAT:\nROW\nViet\noe\nGEN. ADM..\ntor\ni\n. 0527\nwe\nve\nermal Stren atten Seat ege\n\"\nte",
+      "lineEntries": [
+        {
+          "text": "es",
+          "avg_confidence": 0.45,
+          "top_ratio": 0.032,
+          "left": 951,
+          "top": 86,
+          "right": 1009,
+          "bottom": 124
+        },
+        {
+          "text": "ce",
+          "avg_confidence": 0.15,
+          "top_ratio": 0.033,
+          "left": 607,
+          "top": 88,
+          "right": 673,
+          "bottom": 141
+        },
+        {
+          "text": "re",
+          "avg_confidence": 0.26,
+          "top_ratio": 0.034,
+          "left": 285,
+          "top": 90,
+          "right": 365,
+          "bottom": 146
+        },
+        {
+          "text": "ie",
+          "avg_confidence": 0.4,
+          "top_ratio": 0.034,
+          "left": 363,
+          "top": 90,
+          "right": 401,
+          "bottom": 131
+        },
+        {
+          "text": "one",
+          "avg_confidence": 0.04,
+          "top_ratio": 0.034,
+          "left": 394,
+          "top": 90,
+          "right": 458,
+          "bottom": 133
+        },
+        {
+          "text": "4m",
+          "avg_confidence": 0.36,
+          "top_ratio": 0.035,
+          "left": 204,
+          "top": 92,
+          "right": 231,
+          "bottom": 109
+        },
+        {
+          "text": "EN",
+          "avg_confidence": 0.21,
+          "top_ratio": 0.035,
+          "left": 164,
+          "top": 93,
+          "right": 209,
+          "bottom": 122
+        },
+        {
+          "text": "eS",
+          "avg_confidence": 0.42,
+          "top_ratio": 0.035,
+          "left": 233,
+          "top": 93,
+          "right": 289,
+          "bottom": 127
+        },
+        {
+          "text": "§",
+          "avg_confidence": 0.23,
+          "top_ratio": 0.035,
+          "left": 32,
+          "top": 94,
+          "right": 174,
+          "bottom": 174
+        },
+        {
+          "text": "+h",
+          "avg_confidence": 0.25,
+          "top_ratio": 0.036,
+          "left": 868,
+          "top": 95,
+          "right": 880,
+          "bottom": 111
+        },
+        {
+          "text": "ARES,",
+          "avg_confidence": 0.35,
+          "top_ratio": 0.038,
+          "left": 771,
+          "top": 100,
+          "right": 810,
+          "bottom": 116
+        },
+        {
+          "text": "fs,",
+          "avg_confidence": 0.05,
+          "top_ratio": 0.041,
+          "left": 720,
+          "top": 110,
+          "right": 779,
+          "bottom": 148
+        },
+        {
+          "text": "ae",
+          "avg_confidence": 0.24,
+          "top_ratio": 0.042,
+          "left": 465,
+          "top": 112,
+          "right": 503,
+          "bottom": 130
+        },
+        {
+          "text": "sie",
+          "avg_confidence": 0.25,
+          "top_ratio": 0.046,
+          "left": 441,
+          "top": 123,
+          "right": 462,
+          "bottom": 133
+        },
+        {
+          "text": "Ue,",
+          "avg_confidence": 0.15,
+          "top_ratio": 0.048,
+          "left": 168,
+          "top": 128,
+          "right": 186,
+          "bottom": 144
+        },
+        {
+          "text": "aS",
+          "avg_confidence": 0.36,
+          "top_ratio": 0.051,
+          "left": 648,
+          "top": 137,
+          "right": 670,
+          "bottom": 159
+        },
+        {
+          "text": "ee",
+          "avg_confidence": 0.17,
+          "top_ratio": 0.053,
+          "left": 129,
+          "top": 140,
+          "right": 247,
+          "bottom": 185
+        },
+        {
+          "text": "Mi",
+          "avg_confidence": 0.34,
+          "top_ratio": 0.056,
+          "left": 867,
+          "top": 148,
+          "right": 884,
+          "bottom": 171
+        },
+        {
+          "text": "ref",
+          "avg_confidence": 0.37,
+          "top_ratio": 0.057,
+          "left": 483,
+          "top": 151,
+          "right": 512,
+          "bottom": 172
+        },
+        {
+          "text": "A",
+          "avg_confidence": 0.45,
+          "top_ratio": 0.062,
+          "left": 571,
+          "top": 166,
+          "right": 586,
+          "bottom": 185
+        },
+        {
+          "text": "fa)",
+          "avg_confidence": 0.3,
+          "top_ratio": 0.063,
+          "left": 429,
+          "top": 169,
+          "right": 445,
+          "bottom": 181
+        },
+        {
+          "text": "05",
+          "avg_confidence": 0.6,
+          "top_ratio": 0.082,
+          "left": 461,
+          "top": 219,
+          "right": 559,
+          "bottom": 284
+        },
+        {
+          "text": "at",
+          "avg_confidence": 0.09,
+          "top_ratio": 0.105,
+          "left": 26,
+          "top": 279,
+          "right": 55,
+          "bottom": 290
+        },
+        {
+          "text": "OW",
+          "avg_confidence": 0.25,
+          "top_ratio": 0.111,
+          "left": 524,
+          "top": 296,
+          "right": 642,
+          "bottom": 393
+        },
+        {
+          "text": "We",
+          "avg_confidence": 0.25,
+          "top_ratio": 0.113,
+          "left": 821,
+          "top": 300,
+          "right": 861,
+          "bottom": 335
+        },
+        {
+          "text": "fy",
+          "avg_confidence": 0.42,
+          "top_ratio": 0.113,
+          "left": 1108,
+          "top": 301,
+          "right": 1129,
+          "bottom": 312
+        },
+        {
+          "text": "aioge eed",
+          "avg_confidence": 0.015,
+          "top_ratio": 0.117,
+          "left": 579,
+          "top": 311,
+          "right": 622,
+          "bottom": 319
+        },
+        {
+          "text": "noe",
+          "avg_confidence": 0.2,
+          "top_ratio": 0.117,
+          "left": 116,
+          "top": 312,
+          "right": 178,
+          "bottom": 357
+        },
+        {
+          "text": "Cp,",
+          "avg_confidence": 0.29,
+          "top_ratio": 0.12,
+          "left": 163,
+          "top": 320,
+          "right": 227,
+          "bottom": 337
+        },
+        {
+          "text": "Vi",
+          "avg_confidence": 0.36,
+          "top_ratio": 0.121,
+          "left": 620,
+          "top": 321,
+          "right": 653,
+          "bottom": 364
+        },
+        {
+          "text": "a",
+          "avg_confidence": 0.53,
+          "top_ratio": 0.124,
+          "left": 458,
+          "top": 331,
+          "right": 475,
+          "bottom": 344
+        },
+        {
+          "text": "te",
+          "avg_confidence": 0.13,
+          "top_ratio": 0.125,
+          "left": 391,
+          "top": 333,
+          "right": 426,
+          "bottom": 354
+        },
+        {
+          "text": "ma):",
+          "avg_confidence": 0.33,
+          "top_ratio": 0.127,
+          "left": 844,
+          "top": 338,
+          "right": 877,
+          "bottom": 357
+        },
+        {
+          "text": "ea",
+          "avg_confidence": 0.34,
+          "top_ratio": 0.129,
+          "left": 185,
+          "top": 344,
+          "right": 230,
+          "bottom": 388
+        },
+        {
+          "text": "Tels",
+          "avg_confidence": 0.44,
+          "top_ratio": 0.131,
+          "left": 112,
+          "top": 349,
+          "right": 156,
+          "bottom": 384
+        },
+        {
+          "text": "waa",
+          "avg_confidence": 0.33,
+          "top_ratio": 0.132,
+          "left": 355,
+          "top": 351,
+          "right": 427,
+          "bottom": 400
+        },
+        {
+          "text": "Bh.",
+          "avg_confidence": 0.18,
+          "top_ratio": 0.133,
+          "left": 457,
+          "top": 353,
+          "right": 483,
+          "bottom": 371
+        },
+        {
+          "text": "eh",
+          "avg_confidence": 0.11,
+          "top_ratio": 0.135,
+          "left": 763,
+          "top": 360,
+          "right": 866,
+          "bottom": 393
+        },
+        {
+          "text": "GEN. ADM .",
+          "avg_confidence": 0.853,
+          "top_ratio": 0.14,
+          "left": 328,
+          "top": 372,
+          "right": 838,
+          "bottom": 492
+        },
+        {
+          "text": "Pas:",
+          "avg_confidence": 0.47,
+          "top_ratio": 0.142,
+          "left": 466,
+          "top": 378,
+          "right": 504,
+          "bottom": 394
+        },
+        {
+          "text": "199",
+          "avg_confidence": 0.91,
+          "top_ratio": 0.194,
+          "left": 756,
+          "top": 516,
+          "right": 915,
+          "bottom": 625
+        },
+        {
+          "text": "EPT 11,",
+          "avg_confidence": 0.815,
+          "top_ratio": 0.195,
+          "left": 272,
+          "top": 518,
+          "right": 665,
+          "bottom": 638
+        },
+        {
+          "text": "6G",
+          "avg_confidence": 0.11,
+          "top_ratio": 0.227,
+          "left": 630,
+          "top": 604,
+          "right": 698,
+          "bottom": 640
+        },
+        {
+          "text": "Qornyn",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.228,
+          "left": 483,
+          "top": 607,
+          "right": 551,
+          "bottom": 625
+        },
+        {
+          "text": "ai",
+          "avg_confidence": 0.18,
+          "top_ratio": 0.228,
+          "left": 303,
+          "top": 608,
+          "right": 364,
+          "bottom": 641
+        },
+        {
+          "text": "tile a th",
+          "avg_confidence": 0.14,
+          "top_ratio": 0.228,
+          "left": 712,
+          "top": 608,
+          "right": 817,
+          "bottom": 648
+        },
+        {
+          "text": "iy",
+          "avg_confidence": 0.29,
+          "top_ratio": 0.229,
+          "left": 365,
+          "top": 609,
+          "right": 389,
+          "bottom": 620
+        },
+        {
+          "text": "Ap ay",
+          "avg_confidence": 0.19,
+          "top_ratio": 0.229,
+          "left": 941,
+          "top": 609,
+          "right": 1031,
+          "bottom": 631
+        },
+        {
+          "text": "Ss",
+          "avg_confidence": 0.29,
+          "top_ratio": 0.232,
+          "left": 421,
+          "top": 617,
+          "right": 453,
+          "bottom": 627
+        },
+        {
+          "text": "aa",
+          "avg_confidence": 0.41,
+          "top_ratio": 0.232,
+          "left": 554,
+          "top": 617,
+          "right": 605,
+          "bottom": 667
+        },
+        {
+          "text": "nt",
+          "avg_confidence": 0.29,
+          "top_ratio": 0.232,
+          "left": 385,
+          "top": 618,
+          "right": 412,
+          "bottom": 665
+        },
+        {
+          "text": "cad",
+          "avg_confidence": 0.03,
+          "top_ratio": 0.233,
+          "left": 882,
+          "top": 620,
+          "right": 920,
+          "bottom": 641
+        },
+        {
+          "text": "vr}",
+          "avg_confidence": 0.41,
+          "top_ratio": 0.236,
+          "left": 497,
+          "top": 629,
+          "right": 512,
+          "bottom": 637
+        },
+        {
+          "text": "=e",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.239,
+          "left": 630,
+          "top": 636,
+          "right": 660,
+          "bottom": 651
+        },
+        {
+          "text": "AM",
+          "avg_confidence": 0.49,
+          "top_ratio": 0.24,
+          "left": 336,
+          "top": 639,
+          "right": 384,
+          "bottom": 695
+        },
+        {
+          "text": "ae",
+          "avg_confidence": 0.67,
+          "top_ratio": 0.241,
+          "left": 999,
+          "top": 642,
+          "right": 1030,
+          "bottom": 682
+        },
+        {
+          "text": "t",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.242,
+          "left": 535,
+          "top": 644,
+          "right": 554,
+          "bottom": 693
+        },
+        {
+          "text": "mae",
+          "avg_confidence": 0.34,
+          "top_ratio": 0.242,
+          "left": 773,
+          "top": 644,
+          "right": 835,
+          "bottom": 660
+        },
+        {
+          "text": "ME",
+          "avg_confidence": 0.39,
+          "top_ratio": 0.244,
+          "left": 450,
+          "top": 651,
+          "right": 487,
+          "bottom": 694
+        },
+        {
+          "text": "vis",
+          "avg_confidence": 0.24,
+          "top_ratio": 0.249,
+          "left": 243,
+          "top": 662,
+          "right": 268,
+          "bottom": 689
+        },
+        {
+          "text": "Soy",
+          "avg_confidence": 0.23,
+          "top_ratio": 0.25,
+          "left": 133,
+          "top": 666,
+          "right": 184,
+          "bottom": 689
+        },
+        {
+          "text": "ie",
+          "avg_confidence": 0.36,
+          "top_ratio": 0.25,
+          "left": 570,
+          "top": 666,
+          "right": 596,
+          "bottom": 689
+        },
+        {
+          "text": "$33",
+          "avg_confidence": 0.14,
+          "top_ratio": 0.253,
+          "left": 741,
+          "top": 673,
+          "right": 758,
+          "bottom": 686
+        },
+        {
+          "text": "ea’",
+          "avg_confidence": 0.27,
+          "top_ratio": 0.254,
+          "left": 926,
+          "top": 676,
+          "right": 947,
+          "bottom": 684
+        },
+        {
+          "text": "AF TERDARK",
+          "avg_confidence": 0.52,
+          "top_ratio": 0.259,
+          "left": 323,
+          "top": 689,
+          "right": 859,
+          "bottom": 826
+        },
+        {
+          "text": "Rs",
+          "avg_confidence": 0.24,
+          "top_ratio": 0.288,
+          "left": 124,
+          "top": 767,
+          "right": 135,
+          "bottom": 784
+        },
+        {
+          "text": "a",
+          "avg_confidence": 0.33,
+          "top_ratio": 0.295,
+          "left": 122,
+          "top": 786,
+          "right": 136,
+          "bottom": 806
+        },
+        {
+          "text": "RED.",
+          "avg_confidence": 0.83,
+          "top_ratio": 0.307,
+          "left": 210,
+          "top": 817,
+          "right": 416,
+          "bottom": 895
+        },
+        {
+          "text": "MARS AND",
+          "avg_confidence": 0.73,
+          "top_ratio": 0.307,
+          "left": 452,
+          "top": 817,
+          "right": 916,
+          "bottom": 893
+        },
+        {
+          "text": "ate",
+          "avg_confidence": 0.27,
+          "top_ratio": 0.344,
+          "left": 23,
+          "top": 915,
+          "right": 59,
+          "bottom": 926
+        },
+        {
+          "text": "ZEDA",
+          "avg_confidence": 0.9,
+          "top_ratio": 0.346,
+          "left": 438,
+          "top": 922,
+          "right": 682,
+          "bottom": 990
+        },
+        {
+          "text": "iN",
+          "avg_confidence": 0.29,
+          "top_ratio": 0.346,
+          "left": 690,
+          "top": 922,
+          "right": 723,
+          "bottom": 987
+        },
+        {
+          "text": "woaler:",
+          "avg_confidence": 0.07,
+          "top_ratio": 0.358,
+          "left": 116,
+          "top": 953,
+          "right": 158,
+          "bottom": 966
+        },
+        {
+          "text": "PRODUCTIONS",
+          "avg_confidence": 0.96,
+          "top_ratio": 0.369,
+          "left": 275,
+          "top": 982,
+          "right": 912,
+          "bottom": 1098
+        },
+        {
+          "text": "PRESENTS",
+          "avg_confidence": 0.95,
+          "top_ratio": 0.412,
+          "left": 335,
+          "top": 1096,
+          "right": 811,
+          "bottom": 1176
+        },
+        {
+          "text": "pesrse",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.42,
+          "left": 116,
+          "top": 1118,
+          "right": 164,
+          "bottom": 1135
+        },
+        {
+          "text": "bea",
+          "avg_confidence": 0.58,
+          "top_ratio": 0.436,
+          "left": 116,
+          "top": 1160,
+          "right": 136,
+          "bottom": 1179
+        },
+        {
+          "text": "OGETHER<AS",
+          "avg_confidence": 0.43,
+          "top_ratio": 0.448,
+          "left": 328,
+          "top": 1192,
+          "right": 914,
+          "bottom": 1271
+        },
+        {
+          "text": "nh",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.477,
+          "left": 58,
+          "top": 1270,
+          "right": 69,
+          "bottom": 1280
+        },
+        {
+          "text": "‘ONE",
+          "avg_confidence": 0.35,
+          "top_ratio": 0.483,
+          "left": 489,
+          "top": 1287,
+          "right": 678,
+          "bottom": 1350
+        },
+        {
+          "text": "*",
+          "avg_confidence": 0.89,
+          "top_ratio": 0.517,
+          "left": 634,
+          "top": 1378,
+          "right": 675,
+          "bottom": 1415
+        },
+        {
+          "text": "AUS",
+          "avg_confidence": 0.95,
+          "top_ratio": 0.551,
+          "left": 205,
+          "top": 1466,
+          "right": 377,
+          "bottom": 1531
+        },
+        {
+          "text": "MUSTC",
+          "avg_confidence": 0.87,
+          "top_ratio": 0.551,
+          "left": 631,
+          "top": 1467,
+          "right": 918,
+          "bottom": 1530
+        },
+        {
+          "text": "‘HAL",
+          "avg_confidence": 0.41,
+          "top_ratio": 0.585,
+          "left": 432,
+          "top": 1557,
+          "right": 623,
+          "bottom": 1620
+        },
+        {
+          "text": "tt peeds",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.593,
+          "left": 788,
+          "top": 1579,
+          "right": 837,
+          "bottom": 1607
+        },
+        {
+          "text": ",",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.596,
+          "left": 118,
+          "top": 1587,
+          "right": 134,
+          "bottom": 1645
+        },
+        {
+          "text": "bated eds",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.596,
+          "left": 134,
+          "top": 1587,
+          "right": 210,
+          "bottom": 1600
+        },
+        {
+          "text": "Dateotye",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.604,
+          "left": 134,
+          "top": 1609,
+          "right": 190,
+          "bottom": 1623
+        },
+        {
+          "text": "SATURDAY",
+          "avg_confidence": 0.95,
+          "top_ratio": 0.605,
+          "left": 324,
+          "top": 1610,
+          "right": 798,
+          "bottom": 1713
+        },
+        {
+          "text": "rive",
+          "avg_confidence": 0.25,
+          "top_ratio": 0.605,
+          "left": 785,
+          "top": 1610,
+          "right": 809,
+          "bottom": 1619
+        },
+        {
+          "text": "ate gs",
+          "avg_confidence": 0.36,
+          "top_ratio": 0.618,
+          "left": 6,
+          "top": 1645,
+          "right": 60,
+          "bottom": 1661
+        },
+        {
+          "text": "PT <11",
+          "avg_confidence": 0.39,
+          "top_ratio": 0.649,
+          "left": 337,
+          "top": 1729,
+          "right": 615,
+          "bottom": 1805
+        },
+        {
+          "text": "1999",
+          "avg_confidence": 0.53,
+          "top_ratio": 0.653,
+          "left": 757,
+          "top": 1740,
+          "right": 979,
+          "bottom": 1803
+        },
+        {
+          "text": "ce",
+          "avg_confidence": 0.51,
+          "top_ratio": 0.654,
+          "left": 211,
+          "top": 1741,
+          "right": 316,
+          "bottom": 1777
+        },
+        {
+          "text": "ger",
+          "avg_confidence": 0.61,
+          "top_ratio": 0.656,
+          "left": 119,
+          "top": 1746,
+          "right": 161,
+          "bottom": 1766
+        },
+        {
+          "text": "90--PM",
+          "avg_confidence": 0.06,
+          "top_ratio": 0.688,
+          "left": 516,
+          "top": 1831,
+          "right": 795,
+          "bottom": 1895
+        },
+        {
+          "text": "N'",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.751,
+          "left": 179,
+          "top": 1999,
+          "right": 205,
+          "bottom": 2047
+        },
+        {
+          "text": "ae 8",
+          "avg_confidence": 0.26,
+          "top_ratio": 0.751,
+          "left": 904,
+          "top": 2000,
+          "right": 958,
+          "bottom": 2022
+        },
+        {
+          "text": "Then",
+          "avg_confidence": 0.23,
+          "top_ratio": 0.753,
+          "left": 824,
+          "top": 2005,
+          "right": 871,
+          "bottom": 2024
+        },
+        {
+          "text": "hs",
+          "avg_confidence": 0.26,
+          "top_ratio": 0.755,
+          "left": 890,
+          "top": 2011,
+          "right": 900,
+          "bottom": 2025
+        },
+        {
+          "text": "ND)",
+          "avg_confidence": 0.05,
+          "top_ratio": 0.762,
+          "left": 410,
+          "top": 2030,
+          "right": 482,
+          "bottom": 2084
+        },
+        {
+          "text": "oat",
+          "avg_confidence": 0.36,
+          "top_ratio": 0.765,
+          "left": 237,
+          "top": 2036,
+          "right": 334,
+          "bottom": 2084
+        },
+        {
+          "text": "TOT aE ces",
+          "avg_confidence": 0.117,
+          "top_ratio": 0.772,
+          "left": 730,
+          "top": 2057,
+          "right": 959,
+          "bottom": 2092
+        },
+        {
+          "text": "Ib.",
+          "avg_confidence": 0.45,
+          "top_ratio": 0.774,
+          "left": 151,
+          "top": 2062,
+          "right": 161,
+          "bottom": 2073
+        },
+        {
+          "text": "$25. 00",
+          "avg_confidence": 0.935,
+          "top_ratio": 0.775,
+          "left": 392,
+          "top": 2064,
+          "right": 735,
+          "bottom": 2188
+        },
+        {
+          "text": "ty",
+          "avg_confidence": 0.4,
+          "top_ratio": 0.808,
+          "left": 258,
+          "top": 2153,
+          "right": 295,
+          "bottom": 2170
+        },
+        {
+          "text": "ra",
+          "avg_confidence": 0.37,
+          "top_ratio": 0.817,
+          "left": 5,
+          "top": 2175,
+          "right": 37,
+          "bottom": 2187
+        },
+        {
+          "text": "- SEC",
+          "avg_confidence": 0.705,
+          "top_ratio": 0.871,
+          "left": 234,
+          "top": 2319,
+          "right": 389,
+          "bottom": 2357
+        },
+        {
+          "text": "SEAT:",
+          "avg_confidence": 0.91,
+          "top_ratio": 0.871,
+          "left": 752,
+          "top": 2320,
+          "right": 910,
+          "bottom": 2357
+        },
+        {
+          "text": "ROW",
+          "avg_confidence": 0.96,
+          "top_ratio": 0.872,
+          "left": 506,
+          "top": 2322,
+          "right": 644,
+          "bottom": 2358
+        },
+        {
+          "text": "Viet",
+          "avg_confidence": 0.1,
+          "top_ratio": 0.873,
+          "left": 156,
+          "top": 2324,
+          "right": 217,
+          "bottom": 2365
+        },
+        {
+          "text": "oe",
+          "avg_confidence": 0.29,
+          "top_ratio": 0.89,
+          "left": 192,
+          "top": 2370,
+          "right": 222,
+          "bottom": 2387
+        },
+        {
+          "text": "GEN. ADM..",
+          "avg_confidence": 0.83,
+          "top_ratio": 0.891,
+          "left": 297,
+          "top": 2372,
+          "right": 860,
+          "bottom": 2466
+        },
+        {
+          "text": "tor",
+          "avg_confidence": 0.69,
+          "top_ratio": 0.901,
+          "left": 53,
+          "top": 2400,
+          "right": 82,
+          "bottom": 2411
+        },
+        {
+          "text": "i",
+          "avg_confidence": 0.3,
+          "top_ratio": 0.919,
+          "left": 272,
+          "top": 2448,
+          "right": 309,
+          "bottom": 2517
+        },
+        {
+          "text": ". 0527",
+          "avg_confidence": 0.55,
+          "top_ratio": 0.924,
+          "left": 399,
+          "top": 2460,
+          "right": 680,
+          "bottom": 2548
+        },
+        {
+          "text": "we",
+          "avg_confidence": 0.52,
+          "top_ratio": 0.935,
+          "left": 31,
+          "top": 2490,
+          "right": 56,
+          "bottom": 2498
+        },
+        {
+          "text": "ve",
+          "avg_confidence": 0.55,
+          "top_ratio": 0.949,
+          "left": 343,
+          "top": 2527,
+          "right": 365,
+          "bottom": 2545
+        },
+        {
+          "text": "ermal Stren atten Seat ege",
+          "avg_confidence": 0.066,
+          "top_ratio": 0.965,
+          "left": 218,
+          "top": 2570,
+          "right": 490,
+          "bottom": 2598
+        },
+        {
+          "text": "\"",
+          "avg_confidence": 0.86,
+          "top_ratio": 0.967,
+          "left": 14,
+          "top": 2576,
+          "right": 22,
+          "bottom": 2589
+        },
+        {
+          "text": "te",
+          "avg_confidence": 0.42,
+          "top_ratio": 0.995,
+          "left": 113,
+          "top": 2650,
+          "right": 136,
+          "bottom": 2663
+        }
+      ]
+    }
+  ]
+}

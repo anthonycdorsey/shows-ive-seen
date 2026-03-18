@@ -1,0 +1,388 @@
+{
+  "reviewStatus": "pending_human_review",
+  "generatedAt": "2026-03-16T20:46:00",
+  "canonicalNamingCommitted": false,
+  "metadataConfidence": {
+    "artist": 0.921,
+    "venue": 0.72,
+    "year": 0.74,
+    "exactDate": 0.92,
+    "coreMetadata": 0.806,
+    "overall": 0.724,
+    "ocrAverage": 0.344,
+    "lowConfidence": false,
+    "canonicalEligible": true
+  },
+  "ticket": {
+    "artist": "Fane",
+    "artistSlug": "fane",
+    "exactDate": "1998-09-26",
+    "year": "1998",
+    "venue": "Dome Arena",
+    "city": "",
+    "state": "",
+    "country": "USA",
+    "copy": "",
+    "extendedNotes": "",
+    "companions": [],
+    "photos": [],
+    "youtubeUrl": "",
+    "price": "",
+    "tags": [],
+    "shareTitle": "Fane at Dome Arena, 1998 | Shows I Saw",
+    "shareDescription": "",
+    "shareImage": "fane-dome-arena-1998-share.jpg",
+    "slug": "fane-dome-arena-1998",
+    "img": "fane-dome-arena-1998.jpg",
+    "rotation": "0deg"
+  },
+  "proposedMetadata": {
+    "artist": "Fane",
+    "venue": "Dome Arena",
+    "year": "1998",
+    "exactDate": "1998-09-26",
+    "city": "",
+    "state": "",
+    "country": "USA",
+    "price": ""
+  },
+  "source": {
+    "inputFile": "jimmy-page-robert-plant-alamo-dome-arena-1998.jpg",
+    "savedOriginal": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\review\\needs-review\\20260316-204554-jimmy-page-robert-plant-alamo-dome-arena-1998\\original.jpg",
+    "savedCleaned": "C:\\Users\\Antho\\OneDrive\\Documents\\Website\\Shows Ive Seen\\shows-ive-seen\\archive-ingest\\review\\needs-review\\20260316-204554-jimmy-page-robert-plant-alamo-dome-arena-1998\\ocr-working.jpg",
+    "ocrConfig": "--psm 11 [ocr-binary]",
+    "ocrPreview": [
+      "VV",
+      "ons",
+      "shinTgm",
+      "Berner",
+      "Shh",
+      "utr",
+      "Hide",
+      "av",
+      "Se",
+      "preg",
+      "SECTION/BOX",
+      "my yas",
+      "ey",
+      "aq",
+      "Rad",
+      "LK",
+      "oma",
+      "ae",
+      "Mer ye",
+      "by",
+      "a)",
+      "wel",
+      "ar Hem",
+      "a",
+      "1 (on",
+      "bow iw",
+      "Fi,",
+      "fane",
+      "Reeser",
+      "wen pare nee aerneten terse sa"
+    ]
+  },
+  "warnings": [
+    "Overall OCR confidence is weak; review text carefully."
+  ],
+  "debug": {
+    "artistCandidates": [
+      {
+        "accepted": true,
+        "value": "Fane",
+        "score": 0.921,
+        "plausibility": 0.921,
+        "ocrConfidence": 0.0,
+        "topRatio": 0.156,
+        "sourceLine": "fane",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      },
+      {
+        "accepted": true,
+        "value": "Reeser",
+        "score": 0.921,
+        "plausibility": 0.921,
+        "ocrConfidence": 0.23,
+        "topRatio": 0.157,
+        "sourceLine": "Reeser",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      },
+      {
+        "accepted": true,
+        "value": "Preg",
+        "score": 0.9,
+        "plausibility": 0.9,
+        "ocrConfidence": 0.0,
+        "topRatio": 0.068,
+        "sourceLine": "preg",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      },
+      {
+        "accepted": true,
+        "value": "Hide",
+        "score": 0.898,
+        "plausibility": 0.898,
+        "ocrConfidence": 0.33,
+        "topRatio": 0.06,
+        "sourceLine": "Hide",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      },
+      {
+        "accepted": true,
+        "value": "Berner",
+        "score": 0.897,
+        "plausibility": 0.897,
+        "ocrConfidence": 0.16,
+        "topRatio": 0.056,
+        "sourceLine": "Berner",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      },
+      {
+        "accepted": true,
+        "value": "Bow",
+        "score": 0.816,
+        "plausibility": 0.816,
+        "ocrConfidence": 0.395,
+        "topRatio": 0.137,
+        "sourceLine": "bow iw",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      },
+      {
+        "accepted": true,
+        "value": "Hem",
+        "score": 0.814,
+        "plausibility": 0.814,
+        "ocrConfidence": 0.43,
+        "topRatio": 0.129,
+        "sourceLine": "ar Hem",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      },
+      {
+        "accepted": true,
+        "value": "Mer",
+        "score": 0.809,
+        "plausibility": 0.809,
+        "ocrConfidence": 0.54,
+        "topRatio": 0.106,
+        "sourceLine": "Mer ye",
+        "reasons": [
+          "looks like a human-readable artist/band line"
+        ]
+      }
+    ],
+    "rejectedArtistCandidates": [
+      {
+        "accepted": false,
+        "value": "Vv",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.48,
+        "topRatio": 0.01,
+        "sourceLine": "VV",
+        "reasons": [
+          "length out of artist range",
+          "too short to be a likely artist"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Ons",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.4,
+        "topRatio": 0.024,
+        "sourceLine": "ons",
+        "reasons": [
+          "too short to be a likely artist"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Shh",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.27,
+        "topRatio": 0.057,
+        "sourceLine": "Shh",
+        "reasons": [
+          "too short to be a likely artist"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Utr",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.25,
+        "topRatio": 0.057,
+        "sourceLine": "utr",
+        "reasons": [
+          "too short to be a likely artist"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Av",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.25,
+        "topRatio": 0.063,
+        "sourceLine": "av",
+        "reasons": [
+          "length out of artist range",
+          "too short to be a likely artist"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Se",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.44,
+        "topRatio": 0.065,
+        "sourceLine": "Se",
+        "reasons": [
+          "length out of artist range",
+          "too short to be a likely artist"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Section/Box",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.92,
+        "topRatio": 0.076,
+        "sourceLine": "SECTION/BOX",
+        "reasons": [
+          "contains common ticket-fee or seating term",
+          "contains ticket metadata label",
+          "near seating or event label",
+          "does not resemble a recognizable artist name"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Ey",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.35,
+        "topRatio": 0.099,
+        "sourceLine": "ey",
+        "reasons": [
+          "length out of artist range",
+          "too short to be a likely artist"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Aq",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.44,
+        "topRatio": 0.1,
+        "sourceLine": "aq",
+        "reasons": [
+          "length out of artist range",
+          "too short to be a likely artist"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Rad",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.05,
+        "topRatio": 0.101,
+        "sourceLine": "Rad",
+        "reasons": [
+          "too short to be a likely artist"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Lk",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.63,
+        "topRatio": 0.102,
+        "sourceLine": "LK",
+        "reasons": [
+          "length out of artist range",
+          "too short to be a likely artist"
+        ]
+      },
+      {
+        "accepted": false,
+        "value": "Oma",
+        "score": 0.0,
+        "plausibility": 0.0,
+        "ocrConfidence": 0.48,
+        "topRatio": 0.103,
+        "sourceLine": "oma",
+        "reasons": [
+          "too short to be a likely artist"
+        ]
+      }
+    ],
+    "venueCandidates": [],
+    "dateCandidates": [
+      {
+        "value": "1998-09-26",
+        "score": 0.92,
+        "source": "SAT SEP 26 1998"
+      }
+    ],
+    "filenamePriorsUsed": true,
+    "filenamePriors": {
+      "used": true,
+      "artist": "Jimmy Page & Robert Plant",
+      "artistParts": [
+        "Jimmy Page",
+        "Robert Plant"
+      ],
+      "venue": "Alamo Dome Arena",
+      "venueParts": [
+        "Alamo Dome Arena"
+      ],
+      "year": "1998",
+      "structuredPlausible": true,
+      "sourceStem": "jimmy-page-robert-plant-alamo-dome-arena-1998",
+      "bodyParts": [
+        "jimmy",
+        "page",
+        "robert",
+        "plant",
+        "alamo",
+        "dome",
+        "arena"
+      ],
+      "bestSplit": 4
+    },
+    "approvalBlockers": []
+  },
+  "futureEnrichment": {
+    "enabled": false,
+    "notes": [
+      "External venue/date verification can plug in after OCR review is approved.",
+      "Ticketmaster/Setlist.fm/manual research can enrich city, lineup, and copy later without changing this draft contract."
+    ]
+  },
+  "reviewSlug": "review-jimmy-page-robert-plant-alamo-dome-arena-1998"
+}

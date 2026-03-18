@@ -1,0 +1,53 @@
+SHOWS I SAW - SINGLE TICKET INGEST REVIEW
+
+Selected source:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\incoming\blur-liberty-lunch-1997.jpg
+
+Saved source archive copy:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\originals\blur-liberty-lunch-1997-original.jpg
+
+Final canonical image uses original (no enhancement applied):
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\originals\original-copy\blur-liberty-lunch-1997-original.jpg
+
+Temporary OCR working image:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\working\ocr-support\blur-liberty-lunch-1997-ocr-working.jpg
+
+Draft JSON:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\draft-json\blur-liberty-lunch-1997.json
+
+Contact sheet:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\contact-sheets\blur-liberty-lunch-1997-contact-sheet.jpg
+
+Proposed metadata:
+- artist: Blur
+- venue: Liberty Lunch
+- year: 1997
+- exactDate: 1997-09-30
+- city: 
+- state: 
+- price: $14.00
+- slug: blur-liberty-lunch-1997
+- reviewSlug: review-blur-liberty-lunch-1997
+
+Confidence:
+- OCR average: 0.42
+- artist: 0.80
+- venue: 0.97
+- year: 0.88
+- exact date: 0.92
+- overall: 0.81
+- low confidence: no
+
+Canonical naming committed:
+yes
+
+OCR working-image notes:
+- Applied illumination normalization to reduce uneven scan lighting and faded paper cast.
+- Raised bright low-saturation paper regions toward off-white while preserving artwork and darker ink regions.
+- Applied mild edge-preserving sharpening for OCR readability without redrawing text.
+
+Warnings:
+- Overall OCR confidence is weak; review text carefully.
+
+Next step:
+- Review metadata/content and manually publish later.

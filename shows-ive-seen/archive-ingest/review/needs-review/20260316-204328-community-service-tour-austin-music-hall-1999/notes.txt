@@ -1,0 +1,53 @@
+SHOWS I SAW - SINGLE TICKET INGEST REVIEW
+
+Selected source:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\incoming\community-service-tour-austin-music-hall-1999.jpg
+
+Saved source archive copy:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204328-community-service-tour-austin-music-hall-1999\original.jpg
+
+Final canonical image uses original (no enhancement applied):
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204328-community-service-tour-austin-music-hall-1999\final-image.jpg
+
+Temporary OCR working image:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204328-community-service-tour-austin-music-hall-1999\ocr-working.jpg
+
+Draft JSON:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204328-community-service-tour-austin-music-hall-1999\draft.json
+
+Contact sheet:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204328-community-service-tour-austin-music-hall-1999\contact-sheet.jpg
+
+Proposed metadata:
+- artist: Community Service & Tour Austin
+- venue: Music Hall
+- year: 1999
+- exactDate: 
+- city: Pe
+- state: FT
+- price: 
+- slug: community-service-and-tour-austin-music-hall-1999
+- reviewSlug: review-community-service-tour-austin-music-hall-1999
+
+Confidence:
+- OCR average: 0.16
+- artist: 0.82
+- venue: 0.84
+- year: 0.74
+- exact date: 0.00
+- overall: 0.71
+- low confidence: no
+
+Canonical naming committed:
+no
+
+OCR working-image notes:
+- Applied illumination normalization to reduce uneven scan lighting and faded paper cast.
+- Raised bright low-saturation paper regions toward off-white while preserving artwork and darker ink regions.
+- Applied mild edge-preserving sharpening for OCR readability without redrawing text.
+
+Warnings:
+- Overall OCR confidence is weak; review text carefully.
+
+Next step:
+- Resolve metadata uncertainty and rename only after approval.

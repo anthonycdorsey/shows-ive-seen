@@ -1,0 +1,32 @@
+{
+  "Frank Erwin Center": {
+    "city": "Austin",
+    "state": "TX",
+    "country": "USA"
+  },
+  "Liberty Lunch": {
+    "city": "Austin",
+    "state": "TX",
+    "country": "USA"
+  },
+  "Austin Music Hall": {
+    "city": "Austin",
+    "state": "TX",
+    "country": "USA"
+  },
+  "Barclays Center": {
+    "city": "Brooklyn",
+    "state": "NY",
+    "country": "USA"
+  },
+  "Beacon Theater": {
+    "city": "New York",
+    "state": "NY",
+    "country": "USA"
+  },
+  "Beacon Theatre": {
+    "city": "New York",
+    "state": "NY",
+    "country": "USA"
+  }
+}

@@ -1,0 +1,294 @@
+{
+  "reviewStatus": "pending_human_review",
+  "generatedAt": "2026-03-16T20:59:17",
+  "ticket": {
+    "artist": "Fatboy Slim",
+    "artistSlug": "fatboy-slim",
+    "artists": [
+      {
+        "name": "Fatboy Slim",
+        "slug": "fatboy-slim",
+        "role": "primary"
+      }
+    ],
+    "searchableArtistSlugs": [
+      "fatboy-slim"
+    ],
+    "exactDate": "1999-06-19",
+    "year": "1999",
+    "venue": "Austin Music Hall",
+    "city": "Austin",
+    "state": "TX",
+    "country": "USA",
+    "copy": "",
+    "extendedNotes": "",
+    "companions": [],
+    "photos": [],
+    "youtubeUrl": "",
+    "price": "$25.00",
+    "tags": [],
+    "shareTitle": "Fatboy Slim at Austin Music Hall, 1999 | Shows I Saw",
+    "shareDescription": "Fatboy Slim at Austin Music Hall in Austin, 1999.",
+    "shareImage": "fatboy-slim-austin-music-hall-1999-share.jpg",
+    "slug": "fatboy-slim-austin-music-hall-1999",
+    "img": "fatboy-slim-austin-music-hall-1999.jpg",
+    "rotation": "0deg"
+  },
+  "provenance": {
+    "artist": {
+      "value": "Fatboy Slim",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Display artist reviewed during ingest"
+    },
+    "artistSlug": {
+      "value": "fatboy-slim",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Derived from display artist"
+    },
+    "artists": {
+      "value": [
+        {
+          "name": "Fatboy Slim",
+          "slug": "fatboy-slim",
+          "role": "primary"
+        }
+      ],
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Structured artist roles derived during ingest"
+    },
+    "searchableArtistSlugs": {
+      "value": [
+        "fatboy-slim"
+      ],
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Derived search helper fields"
+    },
+    "exactDate": {
+      "value": "1999-06-19",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "OCR suggestion confirmed or entered during ingest"
+    },
+    "year": {
+      "value": "1999",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "OCR suggestion confirmed or entered during ingest"
+    },
+    "venue": {
+      "value": "Austin Music Hall",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Venue normalized during ingest"
+    },
+    "city": {
+      "value": "Austin",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Location normalized during ingest"
+    },
+    "state": {
+      "value": "TX",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Location normalized during ingest"
+    },
+    "country": {
+      "value": "USA",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Defaulted or confirmed during ingest"
+    },
+    "copy": {
+      "value": "",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Human-authored or AI-assisted draft copy"
+    },
+    "extendedNotes": {
+      "value": "",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Human-authored extended notes"
+    },
+    "companions": {
+      "value": [],
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Entered manually during ingest"
+    },
+    "photos": {
+      "value": [],
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Entered manually during ingest"
+    },
+    "youtubeUrl": {
+      "value": "",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Entered manually during ingest"
+    },
+    "price": {
+      "value": "$25.00",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "OCR suggestion confirmed or entered during ingest"
+    },
+    "tags": {
+      "value": [],
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Human-entered or AI-suggested tags"
+    },
+    "shareTitle": {
+      "value": "Fatboy Slim at Austin Music Hall, 1999 | Shows I Saw",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Derived share metadata"
+    },
+    "shareDescription": {
+      "value": "Fatboy Slim at Austin Music Hall in Austin, 1999.",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Derived share metadata"
+    },
+    "shareImage": {
+      "value": "fatboy-slim-austin-music-hall-1999-share.jpg",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Derived filename"
+    },
+    "slug": {
+      "value": "fatboy-slim-austin-music-hall-1999",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Derived from artist, venue, and year"
+    },
+    "img": {
+      "value": "fatboy-slim-austin-music-hall-1999.jpg",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Derived filename"
+    },
+    "rotation": {
+      "value": "0deg",
+      "confidenceLabel": "generated_suggestion",
+      "basis": "Manual presentation setting"
+    }
+  },
+  "research": {
+    "status": "placeholder_ready_for_live_research",
+    "provider": {
+      "name": "offline_placeholder",
+      "liveLookupUsed": false,
+      "description": "No live web research was performed in this environment. Suggestions are structured placeholders for human review."
+    },
+    "requiresHumanReview": true,
+    "researchGaps": [
+      "Confirm headliner and opener billing from an authoritative source.",
+      "Confirm venue naming and the exact date if OCR quality is weak.",
+      "Find one or more likely setlist references for the tour date range.",
+      "Verify contextual background before using any editorial copy."
+    ],
+    "suggestions": {
+      "lineup": [
+        {
+          "artist": "Fatboy Slim",
+          "role": "primary",
+          "confidenceLabel": "confirmed_from_ticket",
+          "basis": "Human-reviewed ticket metadata"
+        }
+      ],
+      "venueDateConfirmation": {
+        "note": "OCR suggests Fatboy Slim at Austin Music Hall on 1999-06-19 in Austin, TX. Confirm against the ticket text, personal records, and a trusted outside source before publishing.",
+        "confidenceLabel": "inferred_from_research",
+        "basis": "OCR-derived metadata plus normalized user-confirmed fields"
+      },
+      "likelySetlistReferences": [
+        {
+          "description": "Look for setlists and tour context around Fatboy Slim performances near 1999-06-19. Use this to confirm headliner/opener roles and identify likely songs from that run.",
+          "confidenceLabel": "generated_suggestion",
+          "basis": "Template guidance for later research"
+        }
+      ],
+      "contextualShowBackground": [
+        {
+          "description": "Research the tour cycle around Fatboy Slim on or near 1999-06-19, including the album era, notable opener history, and whether this date was part of a special run, festival, or reunion.",
+          "confidenceLabel": "generated_suggestion",
+          "basis": "Generated suggestion from known ticket fields"
+        }
+      ],
+      "editorialCopySuggestions": [
+        {
+          "text": "Fatboy Slim at Austin Music Hall in Austin (1999) stands out as a memory worth anchoring in a specific detail: what drew you to the show, what the room felt like, and what made the performance stick.",
+          "confidenceLabel": "generated_suggestion",
+          "basis": "Generated writing prompt from confirmed metadata"
+        }
+      ],
+      "tagSuggestions": [
+        {
+          "tag": "1990s",
+          "confidenceLabel": "generated_suggestion",
+          "basis": "Generated from ticket metadata and existing archive style"
+        },
+        {
+          "tag": "austin",
+          "confidenceLabel": "generated_suggestion",
+          "basis": "Generated from ticket metadata and existing archive style"
+        },
+        {
+          "tag": "austin music hall",
+          "confidenceLabel": "generated_suggestion",
+          "basis": "Generated from ticket metadata and existing archive style"
+        },
+        {
+          "tag": "ticket stub",
+          "confidenceLabel": "generated_suggestion",
+          "basis": "Generated from ticket metadata and existing archive style"
+        }
+      ]
+    },
+    "ocrSignals": {
+      "lineCount": 1224,
+      "artistMentions": 0,
+      "venueMentions": 0,
+      "dateMentions": 0
+    }
+  },
+  "source": {
+    "selectedIncomingFile": "fat-boy-slim-austin-music-hall-1999.jpg",
+    "sourceOriginal": "archive-ingest/originals/20260316-205917-fat-boy-slim-austin-music-hall-1999.jpg",
+    "ocrTextPreview": [
+      "a a Bi ee ‘ ee ;",
+      "a ay ag grado fee bk aba F agaeakey See See pemens",
+      "fe ae oo eS es ne Soc",
+      "a oe al ae he Barc ee Bcepea en eorog eae pe ae Bava om Bea Lg BU Apa siag eG oe",
+      "Roce Bee Ek fants. ae i oo He aoe, me ers TE ag fee && Fits eee es A eE Fan ps te ea eh A) 8 bed a rege",
+      "cet eH eons tok Se ¥ Pee Cie. 3 Gee eae Sanaa PE’: pir eh i a ere Seats Fi Lode ¢: fgets ih te Ge ee",
+      "ae ee a Eee Bete BS Ef oe Bee BE Banos Beri Wicca ae Rae ar ae sia, Hee sees cd Paes at PUSS, Sea aE, ons",
+      "pis ein ery, + aewtes \"Sy niga fa Bah LE oy ey 32) peo eat Serhan: EPR 2, fig A MM Boe, hss Bae) EEE “is ads ats ge aT Age “od pe fi See .",
+      "EW Seat an Sees Nanton fag Borene ae ene Apes ok Be ep a pegs ie Ge Saya ef an Grae fabeein ats p a full iat eed Se EE ais. Hee oy BE eek wee cee \"",
+      "oes eat ea! Racor enn a agra ped Gy cones sgaamaed Re) Bd SPS eR, qth Soccer Be. BARE Ye ta ANE ae “See \"aR eet Rah ee Bae He eas SEAL: eee : ee .",
+      "Boa “ee et \"! ae aa, Va SERBS SERRE og EEE EI er A “tre gee pe eed Be, EE Jif Ee, ee fy HE Hla ae se Le ia eu aie Sos 2: Pens ‘",
+      ". io org wos Eee Se ae iy aS EROS, hey site ate erst pERE Se Py eta Bn Gees ee Bia Ce HF en. aa Henge Ee uo Sere Ek? tse 7 : ods Zs ,",
+      "one, rita Bay he wit aS aay Pa a ne BG Bye ia enanS. cBeey. ce ies x: eR Gee One Bee “Bs Que & ee fis eae Bg HP Bue Hanna Bees Ber een & : : :",
+      "Gace ee soe He: A laa are fee GB Sear as BOuadt: Hane a Se 3 Ca 3 eee 2 EEE? Bee “thee oes Ea 3B Ba BS Coe spe ere 2h Bo . \"",
+      "oe ee se cy # gs Sree Svea Gary LEaag ee Hege Pat eae aaa ah Fi eh ee HEE ge ERB ae cee Haat wee We ve Ee oe ee ; ;",
+      "ieee 1 ett Ai ot cen ae fc waa ee ey “as Rennes cay Be eon ate ne Baie pects 3, RES Mere a eae fr a Beas % Ye ae ROBE 2h HE ELS copys fe f ce : \\",
+      "Sateen ea Hs & 2 Se eee aba Jf 2 bod ! Sea &,, oes ae Oy ces Saint rer Wc ne: ES of Rota EB es este F He eee ae Eh JERE £8 : eyes fas n°",
+      "PB cae Pattie wh Bund “ae Sc oe ee hy 36: Peace eee can ie ah Ree Rn 3, a Mere Be ee a GP gees, Pa # ee Hey Fs . Ae ne ae",
+      "ge een ee a BASS Foe ee Bg & cD EE eas GN ge BA OR ee aaa Reo eh EEG Cee Pe ae rah a ee Fe a : a Pe ee,",
+      "eae ee * eee ie ee ay th ne GER FRE eee ese wage abet st, et nels ens Ea i a es: Bee nee set : ye is : :",
+      "Bade ae Hie See 1 a Rees Bat Sa Te Book cs ls §3 ee Si 4:6: PPE ace ae $25 ae Piet agi aaias sts B eng Bs ne ih aay Bonin aoe Syois a eG ; :",
+      "Ras: at te Bene. Bat uae Bake de eed TR BAU} aise ea ee Red & eb yes pee Saueen ee BS 4 CAE G wy eae BEM pe aes Ba we ee ue a. |e “TS Boe See Dc .",
+      "Ce prea Suche Be Ee, 2 he “detec Bogs “ie ASR eee ee oe ae bea Ma eet SESH Hees Be! Bess BRASS FC HEE ae 8 cn’ oh ae Soi nse E fees ieee aaa ee :",
+      "picked es Ba wave & Le “oes. SEQ ene fy ee S ochat se che BS Be warheaste Be erent ease (ages Breanna pn hate 38 So fat “nee ae : ee",
+      "¥ Eee ae Bet SE a got OF ee Bay 1. he Eon & Poe wast Sau ae aa Swe 8 bo peste petigetadlia de he Me ne Bb este ae eee ba os anaes eee 4 se oe",
+      "ure eg eee me a. wile & ae poe eos Oh oy a, eve BSE diet eB ances fs een ees ae os aise ae we ee Ad he, a oe A So ees ae",
+      "ee Fe ae ee ae Ga sit pie Ggige By ree R ie Bea Beet. oy ee dee eee oe x ay ge se ho ollie eS EEE ay it Bas prea es SAS ees bs RS st",
+      "Fees Ses Bhp Bs Bede oo ee CR AR ae a SubuaS 8 Bey. be a Bete Bl Fs ee 2°85 ae § Eo at ag ge & sAegore Acaslidact ls Reba Ae canetnied ee uae .",
+      "ve a fs oe oe ae ee Ati ee ES pontisy ce eee eee ee mane |... ee oe ye 7 Bin",
+      "a we et aa ah tt faa nd eee BRE 2 sea oe ees zo a EAP We Se eC, iG) Pre | Pas fe Guat Bae ere use Ga oi eee SE Spey Se San Ae ae",
+      "si Oe a ‘eH at pe mea ah eee HGH Cue Eee g eeaae Bet oe Barat ype apnteora ae Gey faa Wah eae Te saben Be Gee see oy ae AT ne cs way 7 ms",
+      "as att fy qi OES SES oaatlietce Oe gd ng, | Bay eRDs. Shae ee he, Bae ae Ee ret See vs ee oo ae . = 4 ae ! S",
+      "MPT tdi “ie ee t pea on Bs oo Pag ne pg ‘tee BEGgau Asie Pearle ip Gaee te e ee Ree dat Ee 8. a ee if ue He a ae! Ravan ee ie en eee (fy whl us",
+      "SP ha pe nn ti peas Reh Bh a We vag yg ey let ees Ef s ee Oe eee es cary afeaee a oe pa perc _ en Loe peels",
+      "Hees bith ees HUG ees io. BH Rage Hat oS goes is oes ee a Bi Ges a eee ee et Beet Ree fe cea peste ony Gane ian: Font Reese aenare PERE ees gett ™ fee",
+      ". ‘ wane BS og ie ee Be ghee A Bas oO be He OB fs fees oe Be URg “St Pid Eee pene bee # Gets Seer | fe Bena EE, ragsdedt Made mecces Ne, eee nal ee",
+      ", 4) . Stet ao WP oR UR Hh fee © Fae fe € bapa, Fee ene ae REL ee: ye BaPee by ee geeee ae ra pare bea - oo ae",
+      "te pie A SE; ee BAR ee ay AP asad a eos: “ht eihes £8 itty pie eB aM, joe en ee eestor ha |B ae Sgn Soa ae. Bint ot eremerm f :",
+      "a pie Tae! Piette He arta a ee i EE mites ee Bei: SE) eA et bis Sa Baie God ne ae Be? pentane ey Hen tay fia BES pa Hatees: DES Teeny RRORcEr ana es . a eae",
+      "i A ETE eae gus aE gt Pe oe io bi SS tee sa TE en ee PaGRCS ee Bs ee ear Pin, Dit Rise Re Bae pH CSREES: Sete & Be Bs ua BES a eRe: iets push senna eRtie oa rots"
+    ]
+  },
+  "reviewArtifacts": {
+    "suggestedShareFolder": "share/fatboy-slim-austin-music-hall-1999/",
+    "suggestedSharePage": "share/fatboy-slim-austin-music-hall-1999/index.html",
+    "finalImageFilename": "fatboy-slim-austin-music-hall-1999.jpg",
+    "finalShareImageFilename": "fatboy-slim-austin-music-hall-1999-share.jpg"
+  },
+  "ticketObjectForTicketsJs": "{\n  artist: \"Fatboy Slim\",\n  artistSlug: \"fatboy-slim\",\n  artists: [\n    {\n          name: \"Fatboy Slim\",\n          slug: \"fatboy-slim\",\n          role: \"primary\",\n        },\n  ],\n  searchableArtistSlugs: [\"fatboy-slim\"],\n  exactDate: \"1999-06-19\",\n  year: \"1999\",\n  venue: \"Austin Music Hall\",\n  city: \"Austin\",\n  state: \"TX\",\n  country: \"USA\",\n  copy: \"\",\n  extendedNotes: \"\",\n  companions: [],\n  photos: [],\n  youtubeUrl: \"\",\n  price: \"$25.00\",\n  tags: [],\n  shareTitle: \"Fatboy Slim at Austin Music Hall, 1999 | Shows I Saw\",\n  shareDescription: \"Fatboy Slim at Austin Music Hall in Austin, 1999.\",\n  shareImage: \"fatboy-slim-austin-music-hall-1999-share.jpg\",\n  slug: \"fatboy-slim-austin-music-hall-1999\",\n  img: \"fatboy-slim-austin-music-hall-1999.jpg\",\n  rotation: \"0deg\",\n},"
+}

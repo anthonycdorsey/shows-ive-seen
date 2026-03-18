@@ -1,0 +1,53 @@
+SHOWS I SAW - SINGLE TICKET INGEST REVIEW
+
+Selected source:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\incoming\jimmy-page-robert-plant-alamo-dome-arena-1998.jpg
+
+Saved source archive copy:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204554-jimmy-page-robert-plant-alamo-dome-arena-1998\original.jpg
+
+Final canonical image uses original (no enhancement applied):
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204554-jimmy-page-robert-plant-alamo-dome-arena-1998\final-image.jpg
+
+Temporary OCR working image:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204554-jimmy-page-robert-plant-alamo-dome-arena-1998\ocr-working.jpg
+
+Draft JSON:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204554-jimmy-page-robert-plant-alamo-dome-arena-1998\draft.json
+
+Contact sheet:
+C:\Users\Antho\OneDrive\Documents\Website\Shows Ive Seen\shows-ive-seen\archive-ingest\review\needs-review\20260316-204554-jimmy-page-robert-plant-alamo-dome-arena-1998\contact-sheet.jpg
+
+Proposed metadata:
+- artist: Fane
+- venue: Dome Arena
+- year: 1998
+- exactDate: 1998-09-26
+- city: 
+- state: 
+- price: 
+- slug: fane-dome-arena-1998
+- reviewSlug: review-jimmy-page-robert-plant-alamo-dome-arena-1998
+
+Confidence:
+- OCR average: 0.34
+- artist: 0.92
+- venue: 0.72
+- year: 0.74
+- exact date: 0.92
+- overall: 0.72
+- low confidence: no
+
+Canonical naming committed:
+no
+
+OCR working-image notes:
+- Applied illumination normalization to reduce uneven scan lighting and faded paper cast.
+- Raised bright low-saturation paper regions toward off-white while preserving artwork and darker ink regions.
+- Applied mild edge-preserving sharpening for OCR readability without redrawing text.
+
+Warnings:
+- Overall OCR confidence is weak; review text carefully.
+
+Next step:
+- Resolve metadata uncertainty and rename only after approval.

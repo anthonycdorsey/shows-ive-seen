@@ -1,0 +1,11 @@
+SHOWS I SAW - OCR DIAGNOSTICS
+
+Selected best variant: 
+Selected config: --psm 6
+
+RAW OCR TEXT
+
+
+
+CLEANED OCR TEXT
+

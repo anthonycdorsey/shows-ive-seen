@@ -1,0 +1,48 @@
+SHOWS I SAW - OCR DIAGNOSTICS
+
+Selected best variant: display
+Selected config: --psm 6 [display]
+
+RAW OCR TEXT
+
+| AO SEG TIN ROW SEAT”) |
+GEN. ADM.
+SEPT 11. 1999.
+; Ov ADMir ONE} DATE ONLY i]
+~. AFTERDARK _
+-RED MARS AND |
+cement ZED AN “cose:
+=< PRODUCTIONS:
+coe PRESENTS
+<< TOGETHER AS.
+Grane ay ane Moons eer
+- AUSTIN MUSIC
+poe NAC
+Po ePT-11ls 1999
+ee Sucre
+Re PRICE Nclextanen
+io $25.00
+» GEN. ADM.
+rage OS27
+
+CLEANED OCR TEXT
+
+| AO SEG TIN ROW SEAT”) |
+GEN. ADM.
+SEPT 11. 1999.
+; Ov ADMir ONE} DATE ONLY i]
+~. AFTERDARK _
+-RED MARS AND |
+cement ZED AN “cose:
+=< PRODUCTIONS:
+coe PRESENTS
+<< TOGETHER AS.
+Grane ay ane Moons eer
+- AUSTIN MUSIC
+poe NAC
+Po ePT-11ls 1999
+ee Sucre
+Re PRICE Nclextanen
+io $25.00
+» GEN. ADM.
+rage OS27

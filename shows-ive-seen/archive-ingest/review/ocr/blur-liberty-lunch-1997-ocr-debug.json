@@ -1,0 +1,434 @@
+{
+  "selectedBestVariant": "display",
+  "selectedConfig": "--psm 6 [display]",
+  "averageConfidence": 0.417,
+  "coreMetadataConfidence": 0.88,
+  "canonicalEligible": true,
+  "approvalBlockers": [],
+  "ocrPassCount": 1,
+  "ocrEarlyExitTriggered": true,
+  "ocrEarlyExitReason": "core metadata was already strong enough after this OCR pass",
+  "topArtistCandidates": [
+    {
+      "accepted": true,
+      "value": "Blur",
+      "score": 0.803,
+      "plausibility": 0.803,
+      "ocrConfidence": 0.487,
+      "topRatio": 0.083,
+      "sourceLine": "Pee BLUR aa",
+      "reasons": [
+        "looks like a human-readable artist/band line"
+      ]
+    },
+    {
+      "accepted": true,
+      "value": "Qore BLUR ETS",
+      "score": 0.752,
+      "plausibility": 0.752,
+      "ocrConfidence": 0.223,
+      "topRatio": 0.768,
+      "sourceLine": "Qore BLUR oY ETS",
+      "reasons": [
+        "looks like a human-readable artist/band line"
+      ]
+    },
+    {
+      "accepted": true,
+      "value": "Liberty",
+      "score": 0.722,
+      "plausibility": 0.722,
+      "ocrConfidence": 0.475,
+      "topRatio": 0.247,
+      "sourceLine": "“LIBERTY LUNCH",
+      "reasons": [
+        "split mixed artist/venue line",
+        "looks like a human-readable artist/band line"
+      ]
+    },
+    {
+      "accepted": true,
+      "value": "S$mashmouth",
+      "score": 0.64,
+      "plausibility": 0.64,
+      "ocrConfidence": 0.0,
+      "topRatio": 0.155,
+      "sourceLine": "- S$MASHMOUTH",
+      "reasons": [
+        "looks like a human-readable artist/band line"
+      ]
+    }
+  ],
+  "rejectedArtistCandidates": [
+    {
+      "accepted": false,
+      "value": "Wl",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.46,
+      "topRatio": 0.119,
+      "sourceLine": "WL",
+      "reasons": [
+        "length out of artist range",
+        "too short to be a likely artist"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "405 W..2nd",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.21,
+      "topRatio": 0.296,
+      "sourceLine": "405 W..2ND:",
+      "reasons": [
+        "contains digits",
+        "contains too many non-letter characters",
+        "not dominated by alphabetic characters"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Austin» -Tx",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.6,
+      "topRatio": 0.317,
+      "sourceLine": "AUSTIN» -TX == |",
+      "reasons": [
+        "contains too many non-letter characters",
+        "not dominated by alphabetic characters"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Su",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.24,
+      "topRatio": 0.399,
+      "sourceLine": "su",
+      "reasons": [
+        "length out of artist range",
+        "too short to be a likely artist"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Sept 30, 1997",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.94,
+      "topRatio": 0.424,
+      "sourceLine": "SEPT 30, 1997",
+      "reasons": [
+        "contains digits",
+        "contains too many non-letter characters",
+        "not dominated by alphabetic characters"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Doors. 8:90",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.147,
+      "topRatio": 0.474,
+      "sourceLine": "DOORS. 8:90 PM—",
+      "reasons": [
+        "contains common ticket-fee or seating term",
+        "contains ticket metadata label",
+        "contains digits",
+        "contains too many non-letter characters",
+        "not dominated by alphabetic characters"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "814.00",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.0,
+      "topRatio": 0.586,
+      "sourceLine": "814.00)",
+      "reasons": [
+        "contains digits",
+        "contains too many non-letter characters",
+        "not dominated by alphabetic characters"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Surcharge",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.0,
+      "topRatio": 0.624,
+      "sourceLine": "SURCHARGE",
+      "reasons": [
+        "contains common ticket-fee or seating term",
+        "looks like uppercase code token"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Seat",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.95,
+      "topRatio": 0.665,
+      "sourceLine": "SEC ROW SEAT",
+      "reasons": [
+        "contains common ticket-fee or seating term",
+        "contains ticket metadata label",
+        "near seating or event label",
+        "looks like uppercase code token"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "Gen. Adm",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.32,
+      "topRatio": 0.687,
+      "sourceLine": "GEN. ADM. [-",
+      "reasons": [
+        "contains too many non-letter characters",
+        "not dominated by alphabetic characters"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "pe OG 15 ee",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.098,
+      "topRatio": 0.723,
+      "sourceLine": "pe OG 15 ee",
+      "reasons": [
+        "contains digits",
+        "looks like alphanumeric event code",
+        "not dominated by alphabetic characters"
+      ]
+    },
+    {
+      "accepted": false,
+      "value": "14.00 & S/C",
+      "score": 0.0,
+      "plausibility": 0.0,
+      "ocrConfidence": 0.438,
+      "topRatio": 0.815,
+      "sourceLine": "$14.00 + S/C T",
+      "reasons": [
+        "contains price-like text",
+        "contains digits",
+        "contains too many non-letter characters",
+        "not dominated by alphabetic characters"
+      ]
+    }
+  ],
+  "topVenueCandidates": [
+    {
+      "value": "Liberty Lunch",
+      "score": 0.97
+    }
+  ],
+  "dateCandidates": [
+    {
+      "value": "1997-09-30",
+      "score": 0.92,
+      "source": "SEPT 30, 1997"
+    }
+  ],
+  "filenamePriorsUsed": false,
+  "filenamePriors": {
+    "used": false,
+    "artist": "Blur",
+    "venue": "Liberty Lunch",
+    "year": "1997"
+  },
+  "chosenArtistExplanation": [
+    "looks like a human-readable artist/band line"
+  ],
+  "runs": [
+    {
+      "variant": "display",
+      "config": "--psm 6",
+      "averageConfidence": 0.417,
+      "lineCount": 18,
+      "characterCount": 218,
+      "score": 42.945,
+      "coreMetadataConfidence": 0.88,
+      "runtimeMs": 1256.5,
+      "timeoutSeconds": 4,
+      "rawText": "Pee BLUR aa\nWL\n- S$MASHMOUTH\n“LIBERTY LUNCH\n405 W..2ND:\nAUSTIN» -TX == |\nsu\nSEPT 30, 1997\nDOORS. 8:90 PM—\n814.00)\nSURCHARGE\nSEC ROW SEAT\nGEN. ADM. [-\npe OG 15 ee\nQore BLUR oY ETS\n$14.00 + S/C T\n= 0818. A\n“SEPT 30, 1997",
+      "cleanedText": "Pee BLUR aa\nWL\n- S$MASHMOUTH\n“LIBERTY LUNCH\n405 W..2ND:\nAUSTIN» -TX == |\nsu\nSEPT 30, 1997\nDOORS. 8:90 PM—\n814.00)\nSURCHARGE\nSEC ROW SEAT\nGEN. ADM. [-\npe OG 15 ee\nQore BLUR oY ETS\n$14.00 + S/C T\n= 0818. A\n“SEPT 30, 1997",
+      "lineEntries": [
+        {
+          "text": "Pee BLUR aa",
+          "avg_confidence": 0.487,
+          "top_ratio": 0.083,
+          "left": 115,
+          "top": 214,
+          "right": 1039,
+          "bottom": 309
+        },
+        {
+          "text": "WL",
+          "avg_confidence": 0.46,
+          "top_ratio": 0.119,
+          "left": 113,
+          "top": 307,
+          "right": 747,
+          "bottom": 394
+        },
+        {
+          "text": "- S$MASHMOUTH",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.155,
+          "left": 115,
+          "top": 398,
+          "right": 841,
+          "bottom": 487
+        },
+        {
+          "text": "“LIBERTY LUNCH",
+          "avg_confidence": 0.475,
+          "top_ratio": 0.247,
+          "left": 122,
+          "top": 635,
+          "right": 1048,
+          "bottom": 756
+        },
+        {
+          "text": "405 W..2ND:",
+          "avg_confidence": 0.21,
+          "top_ratio": 0.296,
+          "left": 125,
+          "top": 763,
+          "right": 896,
+          "bottom": 847
+        },
+        {
+          "text": "AUSTIN» -TX == |",
+          "avg_confidence": 0.6,
+          "top_ratio": 0.317,
+          "left": 156,
+          "top": 815,
+          "right": 1052,
+          "bottom": 947
+        },
+        {
+          "text": "su",
+          "avg_confidence": 0.24,
+          "top_ratio": 0.399,
+          "left": 249,
+          "top": 1028,
+          "right": 1014,
+          "bottom": 1125
+        },
+        {
+          "text": "SEPT 30, 1997",
+          "avg_confidence": 0.94,
+          "top_ratio": 0.424,
+          "left": 205,
+          "top": 1091,
+          "right": 995,
+          "bottom": 1224
+        },
+        {
+          "text": "DOORS. 8:90 PM—",
+          "avg_confidence": 0.147,
+          "top_ratio": 0.474,
+          "left": 132,
+          "top": 1220,
+          "right": 1050,
+          "bottom": 1303
+        },
+        {
+          "text": "814.00)",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.586,
+          "left": 135,
+          "top": 1508,
+          "right": 743,
+          "bottom": 1616
+        },
+        {
+          "text": "SURCHARGE",
+          "avg_confidence": 0.0,
+          "top_ratio": 0.624,
+          "left": 119,
+          "top": 1605,
+          "right": 1058,
+          "bottom": 1704
+        },
+        {
+          "text": "SEC ROW SEAT",
+          "avg_confidence": 0.95,
+          "top_ratio": 0.665,
+          "left": 278,
+          "top": 1711,
+          "right": 920,
+          "bottom": 1758
+        },
+        {
+          "text": "GEN. ADM. [-",
+          "avg_confidence": 0.32,
+          "top_ratio": 0.687,
+          "left": 334,
+          "top": 1768,
+          "right": 1174,
+          "bottom": 1856
+        },
+        {
+          "text": "pe OG 15 ee",
+          "avg_confidence": 0.098,
+          "top_ratio": 0.723,
+          "left": 166,
+          "top": 1860,
+          "right": 1053,
+          "bottom": 1968
+        },
+        {
+          "text": "Qore BLUR oY ETS",
+          "avg_confidence": 0.223,
+          "top_ratio": 0.768,
+          "left": 150,
+          "top": 1978,
+          "right": 1185,
+          "bottom": 2108
+        },
+        {
+          "text": "$14.00 + S/C T",
+          "avg_confidence": 0.438,
+          "top_ratio": 0.815,
+          "left": 143,
+          "top": 2098,
+          "right": 1061,
+          "bottom": 2181
+        },
+        {
+          "text": "= 0818. A",
+          "avg_confidence": 0.4,
+          "top_ratio": 0.883,
+          "left": 149,
+          "top": 2274,
+          "right": 1068,
+          "bottom": 2381
+        },
+        {
+          "text": "“SEPT 30, 1997",
+          "avg_confidence": 0.797,
+          "top_ratio": 0.969,
+          "left": 152,
+          "top": 2495,
+          "right": 998,
+          "bottom": 2574
+        }
+      ],
+      "earlyExit": "strong-core-fields"
+    }
+  ]
+}
