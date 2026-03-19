@@ -402,7 +402,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     max-width:1040px;
     width:100%;
     margin:0 auto;
+    position:relative;
+    padding-top:20px;
     padding-bottom:40px;
+}
+
+.modal-close{
+    position:absolute;
+    top:0;
+    right:0;
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:999px;
+    background:#111;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1rem;
+    line-height:1;
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(0,0,0,0.16);
+    transition:transform 0.18s ease, background 0.18s ease;
+}
+
+.modal-close:hover{
+    background:#2a2a2a;
+    transform:translateY(-1px);
+}
+
+.modal-close:focus-visible{
+    outline:2px solid #111;
+    outline-offset:3px;
 }
 
 #modal-img{
@@ -472,6 +504,48 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin-top:22px;
 }
 
+#back-to-top{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:44px;
+    height:44px;
+    border:1px solid rgba(17,17,17,0.18);
+    border-radius:999px;
+    background:rgba(250,250,248,0.94);
+    color:#111;
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:1.1rem;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 8px 24px rgba(0,0,0,0.08);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translateY(8px);
+    transition:opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease, background 0.2s ease;
+    z-index:5000;
+}
+
+#back-to-top.is-visible{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:translateY(0);
+}
+
+#back-to-top:hover{
+    background:#fff;
+}
+
+#back-to-top:focus-visible{
+    outline:2px solid #111;
+    outline-offset:3px;
+}
+
 .modal-gallery-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
@@ -513,6 +587,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     text-transform:uppercase;
     color:var(--text-grey);
     cursor:pointer;
+    display:none;
 }
 
 /* mobile tuning */
@@ -672,6 +747,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     max-width: 1000px;
     width: 100%;
     margin: 0 auto;
+    position: relative;
+    padding-top: 20px;
 }
 
 #modal-img {
@@ -713,13 +790,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border: 0;
 }
 
-.close-btn {
-    margin-top: 30px;
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-grey);
-    cursor: pointer;
+.modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
     </style>
 </head>
@@ -809,6 +883,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div id="detail-modal">
     <div class="modal-content">
+        <button class="modal-close" type="button" aria-label="Close ticket details" onclick="closeModal()">X</button>
 
         <img id="modal-img" src="" alt="Ticket image">
 
@@ -825,8 +900,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- companions -->
             <div id="m-companions" style="display:none; margin-bottom:15px;"></div>
 
-            <!-- extended notes -->
             <p id="m-notes"
+               hidden
+               aria-hidden="true"
                style="display:none; max-width:700px; margin:0 auto 20px; line-height:1.6;">
             </p>
 
@@ -849,11 +925,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
         </div>
-
-        <div class="close-btn" onclick="closeModal()">Close [X]</div>
-
     </div>
 </div>
+
+<button id="back-to-top" type="button" aria-label="Back to top">↑</button>
 
 <script src="tickets.js?v=3"></script>
 
@@ -888,6 +963,7 @@ const mNotes = document.getElementById('m-notes');
 const mGallery = document.getElementById('m-gallery');
 const mVideoWrap = document.getElementById('m-video-wrap');
 const mVideo = document.getElementById('m-video');
+const backToTopButton = document.getElementById('back-to-top');
 
 const artistSearch = document.getElementById('artist-search');
 const yearFilter = document.getElementById('year-filter');
@@ -960,7 +1036,6 @@ const displayCity = [ticket.city, ticket.state, ticket.country]
     .filter(Boolean)
     .join(", ");
 
-const modalNotes = ticket.extendedNotes || ticket.notes || "";
 const modalYoutube = getYouTubeEmbedUrl(ticket.youtubeUrl || ticket.youtube || "");
 const displayDate = ticket.exactDate || ticket.year || "";
 const displayMeta = [displayDate, ticket.venue, displayCity]
@@ -989,13 +1064,8 @@ if (ticket.price && ticket.price.trim() !== "") {
         mCompanions.innerText = "";
     }
 
-    if (modalNotes && modalNotes.trim() !== "") {
-        mNotes.style.display = "block";
-        mNotes.innerText = modalNotes;
-    } else {
-        mNotes.style.display = "none";
-        mNotes.innerText = "";
-    }
+    mNotes.style.display = "none";
+    mNotes.innerText = "";
 
     if (ticket.photos && ticket.photos.length > 0) {
         mGallery.style.display = "block";
@@ -1050,6 +1120,14 @@ function closeModal(shouldClearHash = true) {
 
     if (shouldClearHash) {
         clearTicketHash();
+    }
+}
+
+function updateBackToTopVisibility() {
+    if (window.scrollY > 500) {
+        backToTopButton.classList.add("is-visible");
+    } else {
+        backToTopButton.classList.remove("is-visible");
     }
 }
 
@@ -1198,6 +1276,10 @@ ticketsContainer.innerHTML = ticketList.map((ticket, index) => `
 
 artistSearch.addEventListener("input", applyFilters);
 yearFilter.addEventListener("change", applyFilters);
+backToTopButton.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+window.addEventListener("scroll", updateBackToTopVisibility);
 
 window.addEventListener("hashchange", () => {
     const slug = getSlugFromHash();
@@ -1220,6 +1302,8 @@ const initialSlug = getSlugFromHash();
 if (initialSlug) {
     openTicketBySlug(initialSlug, false);
 }
+
+updateBackToTopVisibility();
 
 </script>
 
