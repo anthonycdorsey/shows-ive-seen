@@ -199,9 +199,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 .archive-stats__inner{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns:repeat(4, minmax(0, 1fr));
     gap:18px;
-    max-width:980px;
+    max-width:1160px;
     margin:0 auto;
 }
 
@@ -226,14 +226,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 .archive-stat__value{
     display:flex;
+    flex-direction:column;
     align-items:center;
     justify-content:center;
     min-height:56px;
-    font-size:1.55rem;
+    font-size:clamp(1.05rem, 1.7vw, 1.55rem);
     font-weight:800;
     letter-spacing:-0.02em;
     text-align:center;
     line-height:1.15;
+    overflow-wrap:anywhere;
+}
+
+.stat-main{
+    display:block;
+}
+
+.stat-sub{
+    display:block;
+    margin-top:4px;
+    font-size:0.72em;
+    font-weight:700;
+    letter-spacing:0;
+    line-height:1.1;
 }
 
 /* controls */
@@ -285,14 +300,123 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 /* cards */
 .show-archive{
-    margin-top:60px;
-    padding-bottom:50vh;
+    max-width:1380px;
+    margin:60px auto 0;
+    padding:0 5vw 18vh;
+}
+
+.era-section{
+    margin:0 0 42px;
+}
+
+.era-section__header{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:16px;
+    margin:0 0 16px;
+}
+
+.era-section__title{
+    margin:0;
+    font-size:clamp(1rem, 2vw, 1.35rem);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+}
+
+.era-row-wrap{
+    position:relative;
+}
+
+.era-row{
+    display:flex;
+    gap:18px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding:8px 4px 16px;
+    scroll-snap-type:x proximity;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(17,17,17,0.3) rgba(17,17,17,0.08);
+}
+
+.era-row::-webkit-scrollbar{
+    height:10px;
+}
+
+.era-row::-webkit-scrollbar-track{
+    background:rgba(17,17,17,0.06);
+    border-radius:999px;
+}
+
+.era-row-hint{
+    position:absolute;
+    left:-8px;
+    top:50%;
+    transform:translateY(-50%);
+    width:30px;
+    height:30px;
+    border-radius:999px;
+    border:1px solid rgba(17,17,17,0.12);
+    background:rgba(250,250,248,0.92);
+    color:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.9rem;
+    line-height:1;
+    box-shadow:0 8px 20px rgba(0,0,0,0.06);
+    pointer-events:none;
+    transition:opacity 0.2s ease, transform 0.2s ease;
+}
+
+.era-row-wrap.is-scrolled .era-row-hint{
+    opacity:0;
+    transform:translateY(-50%) translateX(-6px);
+}
+
+.era-row::-webkit-scrollbar-thumb{
+    background:rgba(17,17,17,0.28);
+    border-radius:999px;
+}
+
+.ticket-section{
+    flex:0 0 min(420px, 72vw);
+    scroll-snap-align:start;
+}
+
+.show-archive.search-results-mode{
+    max-width:none;
+    padding:0 5vw 44vh;
+}
+
+.show-archive.search-results-mode .ticket-section{
+    position:sticky;
+    top:150px;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    pointer-events:none;
+    flex:initial;
+}
+
+.show-archive.search-results-mode .ticket-card{
+    width:85%;
+    max-width:520px;
+    opacity:0;
+    transform:translateY(150px) rotate(var(--rotation));
+    pointer-events:auto;
+}
+
+.show-archive.search-results-mode .ticket-section.active .ticket-card{
+    opacity:1;
+    transform:translateY(0) rotate(var(--rotation));
 }
 
 .ticket-card{
     position:relative;
-    width:85%;
-    max-width:520px;
+    width:100%;
+    max-width:none;
     aspect-ratio:16 / 9;
     background:linear-gradient(180deg, #ffffff 0%, #fcfcfa 100%);
     padding:20px;
@@ -307,8 +431,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         transform 0.7s cubic-bezier(0.2, 1, 0.3, 1),
         opacity 0.5s ease,
         box-shadow 0.35s ease;
-    opacity:0;
-    transform:translateY(150px) rotate(var(--rotation));
+    opacity:1;
+    transform:translateY(0) rotate(var(--rotation));
     display:flex;
     align-items:center;
     justify-content:center;
@@ -600,6 +724,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         padding:34px 8%;
     }
 
+    .archive-stats__inner{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+    }
+
     .archive-controls{
         padding:24px 8%;
         gap:12px;
@@ -610,16 +738,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         width:100%;
     }
 
-    .ticket-section{
-        top:132px;
-        height:82vh;
-    }
-
     .ticket-card{
-        width:90%;
         max-width:unset;
         border-radius:24px;
         padding:14px;
+    }
+
+    .era-row{
+        gap:14px;
+        padding-bottom:12px;
+    }
+
+    .era-row-hint{
+        left:-2px;
+    }
+
+    .ticket-section{
+        flex-basis:88vw;
     }
 
     .ticket-card__meta{
@@ -672,38 +807,55 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         grid-template-columns:1fr;
     }
 }
-        /* --- STACKING ENGINE --- */
-        .show-archive { margin-top: 50px; padding-bottom: 50vh; }
+        .show-archive { margin-top: 50px; padding-bottom: 18vh; }
 
         .ticket-section {
-            position: sticky;
-            top: 150px; 
-            height: 100vh; 
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            pointer-events: none;
+            position: relative;
+            height: auto;
+            display: block;
+            pointer-events: auto;
         }
 
         .ticket-card {
             position: relative;
-            width: 85%;
-            max-width: 500px;
+            width: 100%;
+            max-width: none;
             aspect-ratio: 16 / 9; 
             background: #fdfdfd;
             padding: 15px;
             box-shadow: 0 12px 45px rgba(0,0,0,0.08);
             cursor: pointer;
             pointer-events: auto;
-            transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease;
-            opacity: 0;
-            transform: translateY(150px) rotate(var(--rotation));
+            transition: transform 0.35s ease, opacity 0.35s ease;
+            opacity: 1;
+            transform: translateY(0) rotate(var(--rotation));
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .ticket-section.active .ticket-card {
+        .show-archive.search-results-mode { padding-bottom: 50vh; }
+
+        .show-archive.search-results-mode .ticket-section {
+            position: sticky;
+            top: 150px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            pointer-events: none;
+        }
+
+        .show-archive.search-results-mode .ticket-card {
+            width: 85%;
+            max-width: 500px;
+            transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s ease;
+            opacity: 0;
+            transform: translateY(150px) rotate(var(--rotation));
+            pointer-events: auto;
+        }
+
+        .show-archive.search-results-mode .ticket-section.active .ticket-card {
             opacity: 1;
             transform: translateY(0) rotate(var(--rotation));
         }
@@ -857,6 +1009,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="archive-stat__label">Most Seen</span>
             <span class="archive-stat__value" id="stat-most-seen">—</span>
         </div>
+        <div class="archive-stat">
+            <span class="archive-stat__label">Most Seen Venue</span>
+            <span class="archive-stat__value" id="stat-most-seen-venue">&#8212;</span>
+        </div>
+
+        <div class="archive-stat">
+            <span class="archive-stat__label">Most Active Year</span>
+            <span class="archive-stat__value" id="stat-most-active-year">&#8212;</span>
+        </div>
+
+        <div class="archive-stat">
+            <span class="archive-stat__label">Avg Shows / Year</span>
+            <span class="archive-stat__value" id="stat-avg-shows-per-year">&#8212;</span>
+        </div>
     </div>
 </section>
 
@@ -953,6 +1119,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 const modal = document.getElementById('detail-modal');
 const mImg = document.getElementById('modal-img');
 const ticketsContainer = document.getElementById('tickets-container');
+const showArchive = document.querySelector('.show-archive');
 
 const mArtist = document.getElementById('m-artist');
 const mMeta = document.getElementById('m-meta');
@@ -970,6 +1137,14 @@ const yearFilter = document.getElementById('year-filter');
 const resultsCount = document.getElementById('results-count');
 
 let filteredTickets = [...tickets];
+const eraBuckets = [
+    { key: "1990s", label: "1990s" },
+    { key: "2000-2004", label: "2000-2004" },
+    { key: "2005-2009", label: "2005-2009" },
+    { key: "2010-2014", label: "2010-2014" },
+    { key: "2015-2019", label: "2015-2019" },
+    { key: "2020s", label: "2020s" }
+];
 
 function getSlugFromHash() {
     return decodeURIComponent(window.location.hash.replace('#', '').trim());
@@ -987,6 +1162,116 @@ function updateHashForTicket(ticket) {
 function clearTicketHash() {
     if (!window.location.hash) return;
     history.replaceState(null, '', window.location.pathname + window.location.search);
+}
+
+function getTicketYearNumber(ticket) {
+    const parsedYear = parseInt(ticket.year, 10);
+    return Number.isNaN(parsedYear) ? Number.MAX_SAFE_INTEGER : parsedYear;
+}
+
+function getTicketSortValue(ticket) {
+    if (ticket.exactDate && /^\d{4}-\d{2}-\d{2}$/.test(ticket.exactDate)) {
+        return `${ticket.exactDate}~0`;
+    }
+
+    return `${String(getTicketYearNumber(ticket)).padStart(4, "0")}~1`;
+}
+
+function compareTicketsForArchive(left, right) {
+    const sortValueComparison = getTicketSortValue(left).localeCompare(getTicketSortValue(right));
+    if (sortValueComparison !== 0) return sortValueComparison;
+
+    const artistComparison = (left.artist || "").localeCompare(right.artist || "");
+    if (artistComparison !== 0) return artistComparison;
+
+    return (left.slug || "").localeCompare(right.slug || "");
+}
+
+function getEraBucketKey(ticket) {
+    const year = getTicketYearNumber(ticket);
+
+    if (year >= 1990 && year <= 1999) return "1990s";
+    if (year >= 2000 && year <= 2004) return "2000-2004";
+    if (year >= 2005 && year <= 2009) return "2005-2009";
+    if (year >= 2010 && year <= 2014) return "2010-2014";
+    if (year >= 2015 && year <= 2019) return "2015-2019";
+    return "2020s";
+}
+
+function groupTicketsByEra(ticketList) {
+    const groups = eraBuckets.map(bucket => ({
+        key: bucket.key,
+        label: bucket.label,
+        tickets: []
+    }));
+
+    ticketList.forEach(ticket => {
+        const eraKey = getEraBucketKey(ticket);
+        const group = groups.find(bucket => bucket.key === eraKey);
+        if (group) {
+            group.tickets.push(ticket);
+        }
+    });
+
+    groups.forEach(group => {
+        group.tickets.sort(compareTicketsForArchive);
+    });
+
+    return groups.filter(group => group.tickets.length > 0);
+}
+
+function renderTicketMarkup(ticket, index) {
+    return `
+        <section class="ticket-section"
+            data-ticket-index="${index}"
+            data-ticket-slug="${escapeHtml(ticket.slug || '')}"
+            data-artist="${escapeHtml(ticket.artist)}"
+            data-year="${escapeHtml(ticket.year)}"
+            data-venue="${escapeHtml(ticket.venue)}"
+            data-city="${escapeHtml(ticket.city)}"
+            data-copy="${escapeHtml(ticket.copy)}"
+            data-img="${escapeHtml(ticket.img)}">
+            <div class="ticket-card" style="--rotation: ${escapeHtml(ticket.rotation)};">
+                <img
+                    src="${escapeHtml(ticket.img)}"
+                    alt="${escapeHtml(ticket.artist)} ticket"
+                    loading="lazy"
+                    decoding="async">
+
+                <div class="ticket-card__meta">
+                    <div class="ticket-card__artist-badge">${escapeHtml(ticket.artist)}</div>
+                    <div class="ticket-card__venue-line">${escapeHtml(ticket.venue)} &middot; ${escapeHtml(ticket.year)}</div>
+                </div>
+
+                <div class="record-light"></div>
+            </div>
+        </section>
+    `;
+}
+
+function setupEraRowHints() {
+    document.querySelectorAll('.era-row-wrap').forEach(wrapper => {
+        const row = wrapper.querySelector('.era-row');
+        if (!row) return;
+
+        const hideHint = () => {
+            wrapper.classList.add('is-scrolled');
+        };
+
+        if (row.scrollLeft > 8) {
+            hideHint();
+            return;
+        }
+
+        row.addEventListener('scroll', () => {
+            if (row.scrollLeft > 8) {
+                hideHint();
+            }
+        }, { passive: true });
+
+        row.addEventListener('wheel', hideHint, { passive: true, once: true });
+        row.addEventListener('touchmove', hideHint, { passive: true, once: true });
+    });
 }
 
 function openTicketBySlug(slug, shouldUpdateHash = false) {
@@ -1163,10 +1448,22 @@ function renderStats() {
     }
 
     const artistCounts = {};
+    const venueCounts = {};
+    const yearCounts = {};
 
     tickets.forEach(ticket => {
         const artist = ticket.artist.trim();
         artistCounts[artist] = (artistCounts[artist] || 0) + 1;
+
+        const venue = (ticket.venue || "").trim();
+        if (venue) {
+            venueCounts[venue] = (venueCounts[venue] || 0) + 1;
+        }
+
+        const year = (ticket.year || "").trim();
+        if (year) {
+            yearCounts[year] = (yearCounts[year] || 0) + 1;
+        }
     });
 
     let mostSeenArtist = '—';
@@ -1183,11 +1480,54 @@ function renderStats() {
         mostSeenArtist = `${mostSeenArtist} (${highestCount})`;
     }
 
+    let mostSeenVenue = 'â€”';
+    let highestVenueCount = 0;
+    for (const venue in venueCounts) {
+        if (venueCounts[venue] > highestVenueCount) {
+            highestVenueCount = venueCounts[venue];
+            mostSeenVenue = venue;
+        }
+    }
+    if (highestVenueCount > 0) {
+        mostSeenVenue = `${mostSeenVenue} (${highestVenueCount})`;
+    }
+
+    let mostActiveYear = 'â€”';
+    let highestYearCount = 0;
+    for (const year in yearCounts) {
+        if (yearCounts[year] > highestYearCount) {
+            highestYearCount = yearCounts[year];
+            mostActiveYear = year;
+        }
+    }
+    if (highestYearCount > 0) {
+        mostActiveYear = `${mostActiveYear} (${highestYearCount} shows)`;
+    }
+
+    const uniqueYearCount = Object.keys(yearCounts).length;
+    const averageShowsPerYear = uniqueYearCount > 0
+        ? `${(totalShows / uniqueYearCount).toFixed(1)} / year`
+        : 'â€”';
+
+    function formatStatWithSubvalue(value) {
+        const text = String(value ?? "").trim();
+        const match = text.match(/^(.*?)(\s*(\([^()]+\)))$/);
+
+        if (!match) {
+            return `<span class="stat-main">${escapeHtml(text)}</span>`;
+        }
+
+        return `<span class="stat-main">${escapeHtml(match[1].trim())}</span><span class="stat-sub">${escapeHtml(match[2].trim())}</span>`;
+    }
+
     document.getElementById('stat-shows').textContent = totalShows;
     document.getElementById('stat-artists').textContent = uniqueArtists;
     document.getElementById('stat-cities').textContent = uniqueCities;
     document.getElementById('stat-years').textContent = yearsCovered;
-    document.getElementById('stat-most-seen').textContent = mostSeenArtist;
+    document.getElementById('stat-most-seen').innerHTML = formatStatWithSubvalue(mostSeenArtist);
+    document.getElementById('stat-most-seen-venue').innerHTML = formatStatWithSubvalue(mostSeenVenue);
+    document.getElementById('stat-most-active-year').innerHTML = formatStatWithSubvalue(mostActiveYear);
+    document.getElementById('stat-avg-shows-per-year').textContent = averageShowsPerYear;
 }
 
 function populateYearFilter(){
@@ -1234,6 +1574,7 @@ function applyFilters(){
 }
 
 function renderTickets(ticketList = tickets) {
+    const hasActiveSearchQuery = artistSearch.value.toLowerCase().trim() !== "";
 
     if (ticketList.length === 0) {
     ticketsContainer.innerHTML = `
@@ -1241,8 +1582,83 @@ function renderTickets(ticketList = tickets) {
             No shows match your search.
         </div>
     `;
+    showArchive.classList.remove("search-results-mode");
     return;
 }
+    if (hasActiveSearchQuery) {
+        showArchive.classList.add("search-results-mode");
+        ticketsContainer.innerHTML = ticketList
+            .slice()
+            .sort(compareTicketsForArchive)
+            .map((ticket, index) => renderTicketMarkup(ticket, index))
+            .join('');
+
+        setupObserver();
+        setupTicketClicks();
+        return;
+    }
+
+    showArchive.classList.remove("search-results-mode");
+    const groupedTicketsForRows = groupTicketsByEra(ticketList);
+    ticketsContainer.innerHTML = groupedTicketsForRows.map(group => `
+        <section class="era-section" data-era="${escapeHtml(group.key)}">
+            <div class="era-section__header">
+                <h2 class="era-section__title">${escapeHtml(group.label)}</h2>
+            </div>
+            <div class="era-row-wrap">
+                <div class="era-row-hint" aria-hidden="true">&#8592;</div>
+                <div class="era-row">
+                    ${group.tickets.map((ticket, index) => renderTicketMarkup(ticket, index)).join('')}
+                </div>
+            </div>
+        </section>
+    `).join('');
+
+    setupObserver();
+    setupEraRowHints();
+    setupTicketClicks();
+    return;
+    const groupedTickets = groupTicketsByEra(ticketList);
+    ticketsContainer.innerHTML = groupedTickets.map(group => `
+        <section class="era-section" data-era="${escapeHtml(group.key)}">
+            <div class="era-section__header">
+                <h2 class="era-section__title">${escapeHtml(group.label)}</h2>
+                <div class="era-section__hint">Scroll horizontally</div>
+            </div>
+            <div class="era-row">
+                ${group.tickets.map((ticket, index) => `
+                    <section class="ticket-section"
+                        data-ticket-index="${index}"
+                        data-ticket-slug="${escapeHtml(ticket.slug || '')}"
+                        data-artist="${escapeHtml(ticket.artist)}"
+                        data-year="${escapeHtml(ticket.year)}"
+                        data-venue="${escapeHtml(ticket.venue)}"
+                        data-city="${escapeHtml(ticket.city)}"
+                        data-copy="${escapeHtml(ticket.copy)}"
+                        data-img="${escapeHtml(ticket.img)}">
+                        <div class="ticket-card" style="--rotation: ${escapeHtml(ticket.rotation)};">
+                            <img
+                                src="${escapeHtml(ticket.img)}"
+                                alt="${escapeHtml(ticket.artist)} ticket"
+                                loading="lazy"
+                                decoding="async">
+
+                            <div class="ticket-card__meta">
+                                <div class="ticket-card__artist-badge">${escapeHtml(ticket.artist)}</div>
+                                <div class="ticket-card__venue-line">${escapeHtml(ticket.venue)} Â· ${escapeHtml(ticket.year)}</div>
+                            </div>
+
+                            <div class="record-light"></div>
+                        </div>
+                    </section>
+                `).join('')}
+            </div>
+        </section>
+    `).join('');
+
+    setupObserver();
+    setupTicketClicks();
+    return;
 ticketsContainer.innerHTML = ticketList.map((ticket, index) => `
     <section class="ticket-section"
         data-ticket-index="${index}"
