@@ -321,7 +321,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin:0;
     font-size:clamp(1rem, 2vw, 1.35rem);
     letter-spacing:0.08em;
-    text-transform:uppercase;
+    text-transform:none;
 }
 
 .era-row-wrap{
@@ -1145,6 +1145,12 @@ const eraBuckets = [
     { key: "2015-2019", label: "'15–'19" },
     { key: "2020s", label: "'20s" }
 ];
+eraBuckets[0].label = "My Earliest Shows";
+eraBuckets[1].label = "'00–'04";
+eraBuckets[2].label = "'05–'09";
+eraBuckets[3].label = "'10–'14";
+eraBuckets[4].label = "'15–'19";
+eraBuckets[5].label = "'20s";
 
 function getSlugFromHash() {
     return decodeURIComponent(window.location.hash.replace('#', '').trim());
