@@ -410,6 +410,164 @@ function Convert-RowToTicketObject {
     }
 }
 
+function ConvertFrom-JsEscapedString {
+    param([string]$Value)
+
+    if ($null -eq $Value) {
+        return ""
+    }
+
+    return $Value.Replace('\"', '"').Replace('\\', '\')
+}
+
+function Get-StringFieldFromJsBlock {
+    param(
+        [string]$Block,
+        [string]$FieldName
+    )
+
+    $match = [regex]::Match($Block, '(?ms)^\s*' + [regex]::Escape($FieldName) + ':\s*"((?:\\.|[^"\\])*)"')
+    if (-not $match.Success) {
+        return ""
+    }
+
+    return ConvertFrom-JsEscapedString $match.Groups[1].Value
+}
+
+function Get-StringArrayFieldFromJsBlock {
+    param(
+        [string]$Block,
+        [string]$FieldName
+    )
+
+    $match = [regex]::Match($Block, '(?ms)^\s*' + [regex]::Escape($FieldName) + ':\s*\[(.*?)\]')
+    if (-not $match.Success) {
+        return @()
+    }
+
+    $items = New-Object System.Collections.Generic.List[string]
+    $stringMatches = [regex]::Matches($match.Groups[1].Value, '"((?:\\.|[^"\\])*)"')
+    foreach ($stringMatch in $stringMatches) {
+        $items.Add((ConvertFrom-JsEscapedString $stringMatch.Groups[1].Value))
+    }
+
+    return @($items.ToArray())
+}
+
+function Get-ExistingTicketsBySlug {
+    param([string]$TicketsFilePath)
+
+    $ticketsBySlug = @{}
+    $content = Get-Content -Path $TicketsFilePath -Raw
+    $blockMatches = [regex]::Matches($content, '(?ms)^\s*\{.*?^\s*\}')
+
+    foreach ($blockMatch in $blockMatches) {
+        $block = $blockMatch.Value
+        $slug = Get-StringFieldFromJsBlock -Block $block -FieldName "slug"
+        if (-not $slug) {
+            continue
+        }
+
+        $ticketsBySlug[$slug] = [pscustomobject]@{
+            copy = Get-StringFieldFromJsBlock -Block $block -FieldName "copy"
+            extendedNotes = Get-StringFieldFromJsBlock -Block $block -FieldName "extendedNotes"
+            notes = Get-StringFieldFromJsBlock -Block $block -FieldName "notes"
+            youtubeUrl = Get-StringFieldFromJsBlock -Block $block -FieldName "youtubeUrl"
+            youtube = Get-StringFieldFromJsBlock -Block $block -FieldName "youtube"
+            companions = Get-StringArrayFieldFromJsBlock -Block $block -FieldName "companions"
+            photos = Get-StringArrayFieldFromJsBlock -Block $block -FieldName "photos"
+            tags = Get-StringArrayFieldFromJsBlock -Block $block -FieldName "tags"
+            rotation = Get-StringFieldFromJsBlock -Block $block -FieldName "rotation"
+        }
+    }
+
+    return $ticketsBySlug
+}
+
+function Test-IsPlaceholderRichText {
+    param([string]$Value)
+
+    $trimmed = Get-TrimmedString $Value
+    if (-not $trimmed) {
+        return $true
+    }
+
+    $placeholderPatterns = @(
+        '^This draft keeps the tone concise',
+        '^Update this with personal context',
+        '^Image filename suggests supplementary material',
+        'A preserved ticket from the archive\.$',
+        ' in \d{4}\.?$',
+        'Exact date not cleanly legible from OCR\.?$'
+    )
+
+    foreach ($pattern in $placeholderPatterns) {
+        if ($trimmed -match $pattern) {
+            return $true
+        }
+    }
+
+    return $false
+}
+
+function Get-MergedRichString {
+    param(
+        [string]$IncomingValue,
+        [string]$ExistingValue
+    )
+
+    $incomingTrimmed = Get-TrimmedString $IncomingValue
+    $existingTrimmed = Get-TrimmedString $ExistingValue
+
+    if ((Test-IsPlaceholderRichText $incomingTrimmed) -and $existingTrimmed) {
+        return $ExistingValue
+    }
+
+    return $IncomingValue
+}
+
+function Get-MergedRichArray {
+    param(
+        [object[]]$IncomingValue,
+        [object[]]$ExistingValue
+    )
+
+    if (@($IncomingValue).Count -eq 0 -and @($ExistingValue).Count -gt 0) {
+        return @($ExistingValue)
+    }
+
+    return @($IncomingValue)
+}
+
+function Merge-TicketWithExistingRichContent {
+    param(
+        [pscustomobject]$IncomingTicket,
+        [pscustomobject]$ExistingTicket
+    )
+
+    if ($null -eq $ExistingTicket) {
+        return $IncomingTicket
+    }
+
+    $IncomingTicket.copy = Get-MergedRichString -IncomingValue $IncomingTicket.copy -ExistingValue $ExistingTicket.copy
+    $IncomingTicket.extendedNotes = Get-MergedRichString -IncomingValue $IncomingTicket.extendedNotes -ExistingValue $ExistingTicket.extendedNotes
+    $IncomingTicket.notes = Get-MergedRichString -IncomingValue $IncomingTicket.notes -ExistingValue $ExistingTicket.notes
+    $IncomingTicket.youtubeUrl = Get-MergedRichString -IncomingValue $IncomingTicket.youtubeUrl -ExistingValue $ExistingTicket.youtubeUrl
+    $IncomingTicket.youtube = Get-MergedRichString -IncomingValue $IncomingTicket.youtube -ExistingValue $ExistingTicket.youtube
+    $IncomingTicket.companions = Get-MergedRichArray -IncomingValue $IncomingTicket.companions -ExistingValue $ExistingTicket.companions
+    $IncomingTicket.photos = Get-MergedRichArray -IncomingValue $IncomingTicket.photos -ExistingValue $ExistingTicket.photos
+    $IncomingTicket.tags = Get-MergedRichArray -IncomingValue $IncomingTicket.tags -ExistingValue $ExistingTicket.tags
+    if ((Get-TrimmedString $IncomingTicket.rotation) -in @("", "0deg") -and (Get-TrimmedString $ExistingTicket.rotation) -and $ExistingTicket.rotation -ne "0deg") {
+        $IncomingTicket.rotation = $ExistingTicket.rotation
+    }
+
+    if ((Test-IsPlaceholderRichText $IncomingTicket.copy) -and (Get-TrimmedString $ExistingTicket.copy)) {
+        $IncomingTicket.shareDescription = $ExistingTicket.copy
+    }
+
+    return $IncomingTicket
+}
+
 function Convert-TicketToJsBlock {
     param([pscustomobject]$Ticket)
 
@@ -553,6 +711,7 @@ try {
     $resolvedImageRoot = (Resolve-Path $ImageRoot).Path
     $resolvedWorkbookPath = (Resolve-Path $WorkbookPath).Path
     $rows = @(Get-WorksheetRows -WorkbookFile $resolvedWorkbookPath -RequestedWorksheetName $WorksheetName)
+    $existingTicketsBySlug = Get-ExistingTicketsBySlug -TicketsFilePath $TicketsJsPath
     $usedSlugs = @{}
     $resolvedShareRoot = Join-Path $resolvedSiteRoot "share"
     $tickets = New-Object System.Collections.Generic.List[object]
@@ -581,6 +740,9 @@ try {
 
         $slug = New-TicketSlug -Row $row -UsedSlugs $usedSlugs
         $ticket = Convert-RowToTicketObject -Row $row -Slug $slug -ResolvedSiteRoot $resolvedSiteRoot
+        if ($existingTicketsBySlug.ContainsKey($slug)) {
+            $ticket = Merge-TicketWithExistingRichContent -IncomingTicket $ticket -ExistingTicket $existingTicketsBySlug[$slug]
+        }
         $tickets.Add($ticket)
     }
 
