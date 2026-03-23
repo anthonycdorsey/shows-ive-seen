@@ -1175,22 +1175,45 @@ function getTicketYearNumber(ticket) {
     return Number.isNaN(parsedYear) ? Number.MAX_SAFE_INTEGER : parsedYear;
 }
 
-function getTicketSortValue(ticket) {
-    if (ticket.exactDate && /^\d{4}-\d{2}-\d{2}$/.test(ticket.exactDate)) {
-        return `${ticket.exactDate}~0`;
+function getTicketTimestamp(ticket) {
+    if (
+        ticket.exactDate &&
+        /^\d{4}-\d{2}-\d{2}$/.test(ticket.exactDate)
+    ) {
+        return {
+            ts: new Date(`${ticket.exactDate}T00:00:00`).getTime(),
+            hasExact: true
+        };
     }
 
-    return `${String(getTicketYearNumber(ticket)).padStart(4, "0")}~1`;
+    return {
+        ts: new Date(`${ticket.year}-01-01T00:00:00`).getTime(),
+        hasExact: false
+    };
 }
 
-function compareTicketsForArchive(left, right) {
-    const sortValueComparison = getTicketSortValue(left).localeCompare(getTicketSortValue(right));
-    if (sortValueComparison !== 0) return sortValueComparison;
+function compareTicketsForArchive(a, b) {
+    const aDate = getTicketTimestamp(a);
+    const bDate = getTicketTimestamp(b);
 
-    const artistComparison = (left.artist || "").localeCompare(right.artist || "");
+    if (aDate.ts !== bDate.ts) {
+        return aDate.ts - bDate.ts;
+    }
+
+    if (aDate.hasExact !== bDate.hasExact) {
+        return aDate.hasExact ? -1 : 1;
+    }
+
+    const artistComparison = (a.artist || "").localeCompare(b.artist || "");
     if (artistComparison !== 0) return artistComparison;
 
-    return (left.slug || "").localeCompare(right.slug || "");
+    return (a.slug || "").localeCompare(b.slug || "");
+}
+
+function sortTicketsChronologically(ticketsArray) {
+    return ticketsArray
+        .slice()
+        .sort(compareTicketsForArchive);
 }
 
 function getEraBucketKey(ticket) {
@@ -1581,6 +1604,7 @@ function applyFilters(){
 
 function renderTickets(ticketList = tickets) {
     const hasActiveSearchQuery = artistSearch.value.toLowerCase().trim() !== "";
+    const sortedTickets = sortTicketsChronologically(ticketList);
 
     if (ticketList.length === 0) {
     ticketsContainer.innerHTML = `
@@ -1593,9 +1617,7 @@ function renderTickets(ticketList = tickets) {
 }
     if (hasActiveSearchQuery) {
         showArchive.classList.add("search-results-mode");
-        ticketsContainer.innerHTML = ticketList
-            .slice()
-            .sort(compareTicketsForArchive)
+        ticketsContainer.innerHTML = sortedTickets
             .map((ticket, index) => renderTicketMarkup(ticket, index))
             .join('');
 
@@ -1605,7 +1627,7 @@ function renderTickets(ticketList = tickets) {
     }
 
     showArchive.classList.remove("search-results-mode");
-    const groupedTicketsForRows = groupTicketsByEra(ticketList);
+    const groupedTicketsForRows = groupTicketsByEra(sortedTickets);
     ticketsContainer.innerHTML = groupedTicketsForRows.map(group => `
         <section class="era-section" data-era="${escapeHtml(group.key)}">
             <div class="era-section__header">
