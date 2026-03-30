@@ -147,7 +147,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 .archive-controls input,
-.archive-controls select{
+.archive-controls select,
+.archive-controls button{
     padding:10px 14px;
     border:1px solid var(--border);
     border-radius:6px;
@@ -265,7 +266,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 .archive-controls input,
-.archive-controls select{
+.archive-controls select,
+.archive-controls button{
     padding:12px 14px;
     border:1px solid var(--border);
     border-radius:14px;
@@ -282,8 +284,57 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     width:min(320px, 100%);
 }
 
+.year-filter{
+    position:relative;
+}
+
+.year-filter__toggle{
+    min-width:150px;
+    text-align:left;
+    cursor:pointer;
+}
+
+.year-filter__menu{
+    position:absolute;
+    top:calc(100% + 8px);
+    left:0;
+    min-width:220px;
+    max-height:260px;
+    overflow-y:auto;
+    padding:10px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:#fff;
+    box-shadow:0 14px 40px rgba(0,0,0,0.08);
+    z-index:5200;
+    display:none;
+}
+
+.year-filter__menu.is-open{
+    display:block;
+}
+
+.year-filter__options{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.year-filter__option{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:0.9rem;
+}
+
+.year-filter__option input{
+    width:auto;
+    min-height:auto;
+}
+
 .archive-controls input:focus,
-.archive-controls select:focus{
+.archive-controls select:focus,
+.archive-controls button:focus{
     outline:none;
     border-color:#d2d2cb;
     box-shadow:0 0 0 4px rgba(0,0,0,0.04);
@@ -734,7 +785,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     .archive-controls input,
-    .archive-controls select{
+    .archive-controls select,
+    .archive-controls button{
         width:100%;
     }
 
@@ -1032,12 +1084,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <input
         type="text"
         id="artist-search"
-        placeholder="Search artist..."
+        placeholder="Search archive..."
     >
 
-    <select id="year-filter">
-        <option value="all">All Years</option>
-    </select>
+    <div class="year-filter">
+        <button
+            type="button"
+            id="year-filter-toggle"
+            class="year-filter__toggle"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="year-filter-menu">
+            All Years
+        </button>
+        <div id="year-filter-menu" class="year-filter__menu" hidden>
+            <div id="year-filter-options" class="year-filter__options"></div>
+        </div>
+    </div>
+
+    <button type="button" id="clear-filters">Clear</button>
 
     <div id="results-count">0 results</div>
 
@@ -1133,23 +1198,27 @@ const mVideo = document.getElementById('m-video');
 const backToTopButton = document.getElementById('back-to-top');
 
 const artistSearch = document.getElementById('artist-search');
-const yearFilter = document.getElementById('year-filter');
+const yearFilterToggle = document.getElementById('year-filter-toggle');
+const yearFilterMenu = document.getElementById('year-filter-menu');
+const yearFilterOptions = document.getElementById('year-filter-options');
+const clearFiltersButton = document.getElementById('clear-filters');
 const resultsCount = document.getElementById('results-count');
 
 let filteredTickets = [...tickets];
+let debounceTimeout;
 const eraBuckets = [
     { key: "1990s", label: "late-'90s" },
-    { key: "2000-2004", label: "'00&#8212;'04" },
-    { key: "2005-2009", label: "'05&#8212;'09" },
-    { key: "2010-2014", label: "'10&#8212;'14" },
-    { key: "2015-2019", label: "'15&#8212;'19" },
+    { key: "2000-2004", label: "'00\u2013'04" },
+    { key: "2005-2009", label: "'05\u2013'09" },
+    { key: "2010-2014", label: "'10\u2013'14" },
+    { key: "2015-2019", label: "'15\u2013'19" },
     { key: "2020s", label: "'20s" }
 ];
 eraBuckets[0].label = "My Earliest Shows";
-eraBuckets[1].label = "'00&#8212;'04";
-eraBuckets[2].label = "'05&#8212;'09";
-eraBuckets[3].label = "'10&#8212;'14";
-eraBuckets[4].label = "'15&#8212;'19";
+eraBuckets[1].label = "'00\u2013'04";
+eraBuckets[2].label = "'05\u2013'09";
+eraBuckets[3].label = "'10\u2013'14";
+eraBuckets[4].label = "'15\u2013'19";
 eraBuckets[5].label = "'20s";
 
 function getSlugFromHash() {
@@ -1609,57 +1678,206 @@ function renderStats() {
     document.getElementById('stat-avg-shows-per-year').textContent = averageShowsPerYear;
 }
 
-function populateYearFilter(){
+function buildSearchableText(ticket) {
+    return [
+        ticket.artist,
+        ticket.artistSlug,
+        ticket.venue,
+        ticket.city,
+        ticket.state,
+        ticket.country,
+        ticket.copy,
+        ticket.extendedNotes,
+        ticket.slug,
+        ...(Array.isArray(ticket.tags) ? ticket.tags : []),
+        ...(Array.isArray(ticket.companions) ? ticket.companions : [])
+    ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+}
+
+function getResultsCountText(count) {
+    return `${count} ${count === 1 ? "result" : "results"}`;
+}
+
+function getSelectedYears() {
+    return [...yearFilterOptions.querySelectorAll('input[type="checkbox"]:checked')]
+        .map(input => input.value);
+}
+
+function setSelectedYears(years) {
+    const selectedYears = new Set(years);
+
+    yearFilterOptions.querySelectorAll('input[type="checkbox"]').forEach(input => {
+        input.checked = selectedYears.has(input.value);
+    });
+}
+
+function updateYearFilterLabel() {
+    const selectedYears = getSelectedYears()
+        .slice()
+        .sort((a, b) => Number(a) - Number(b));
+
+    if (selectedYears.length === 0) {
+        yearFilterToggle.textContent = "All Years";
+        return;
+    }
+
+    if (selectedYears.length <= 2) {
+        yearFilterToggle.textContent = selectedYears.join(", ");
+        return;
+    }
+
+    yearFilterToggle.textContent = `${selectedYears.length} years selected`;
+}
+
+function setYearFilterMenuOpen(isOpen) {
+    yearFilterMenu.hidden = !isOpen;
+    yearFilterMenu.classList.toggle("is-open", isOpen);
+    yearFilterToggle.setAttribute("aria-expanded", String(isOpen));
+}
+
+function updateFilterParams() {
+    const url = new URL(window.location.href);
+    const searchQuery = artistSearch.value.trim();
+    const selectedYears = getSelectedYears();
+
+    if (searchQuery) url.searchParams.set("search", searchQuery);
+    else url.searchParams.delete("search");
+
+    if (selectedYears.length > 0) url.searchParams.set("years", selectedYears.join(","));
+    else url.searchParams.delete("years");
+
+    url.searchParams.delete("tag");
+    url.searchParams.delete("year");
+
+    const query = url.searchParams.toString();
+    history.replaceState(null, "", `${url.pathname}${query ? `?${query}` : ""}${url.hash}`);
+}
+
+function applyFiltersFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const searchParam = params.get("search");
+    const yearsParam = params.get("years");
+
+    if (searchParam) {
+        artistSearch.value = searchParam;
+    }
+
+    if (yearsParam) {
+        setSelectedYears(
+            yearsParam
+                .split(",")
+                .map(year => year.trim())
+                .filter(Boolean)
+        );
+    }
+
+    updateYearFilterLabel();
+}
+
+function populateYearFilterOptions(){
 
     const years = [...new Set(tickets.map(t => t.year))]
         .sort((a,b)=>b-a);
 
     years.forEach(year=>{
-        const option = document.createElement("option");
-        option.value = year;
-        option.textContent = year;
-        yearFilter.appendChild(option);
+        const label = document.createElement("label");
+        label.className = "year-filter__option";
+
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.value = year;
+        input.addEventListener("change", () => {
+            updateYearFilterLabel();
+            applyFilters();
+        });
+
+        const text = document.createElement("span");
+        text.textContent = year;
+
+        label.appendChild(input);
+        label.appendChild(text);
+        yearFilterOptions.appendChild(label);
     });
 
+    updateYearFilterLabel();
 }
-function applyFilters(){
 
-    const artistQuery = artistSearch.value.toLowerCase().trim();
-    const selectedYear = yearFilter.value;
+function applyFilters(shouldScroll = true){
+
+    const searchQuery = artistSearch.value.toLowerCase().trim();
+    const selectedYears = getSelectedYears();
 
     filteredTickets = tickets.filter(ticket=>{
 
-        const searchableArtist = [
-            ticket.artist,
-            ticket.artistSlug
-        ].filter(Boolean).join(" ").toLowerCase();
+        const searchableText = buildSearchableText(ticket);
 
-        const matchesArtist =
-            searchableArtist.includes(artistQuery);
+        const matchesSearch =
+            searchQuery === "" || searchableText.includes(searchQuery);
 
         const matchesYear =
-            selectedYear === "all" ||
-            ticket.year === selectedYear;
+            selectedYears.length === 0 ||
+            selectedYears.includes(ticket.year);
 
-        return matchesArtist && matchesYear;
+        return matchesSearch && matchesYear;
 
     });
+
+    updateFilterParams();
+
+    if (shouldScroll) {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
 
     renderTickets(filteredTickets);
 
     resultsCount.textContent =
-        `${filteredTickets.length} results`;
+        getResultsCountText(filteredTickets.length);
 
+}
+
+function renderSelectedYearSections(ticketList) {
+    const selectedYears = getSelectedYears()
+        .slice()
+        .sort((a, b) => Number(a) - Number(b));
+
+    ticketsContainer.innerHTML = selectedYears.map(year => {
+        const ticketsForYear = ticketList.filter(ticket => ticket.year === year);
+
+        return `
+        <section class="era-section" data-year="${escapeHtml(year)}">
+            <div class="era-section__header">
+                <h2 class="era-section__title">${escapeHtml(year)}</h2>
+            </div>
+            <div class="era-row-wrap">
+                <div class="era-row-hint" aria-hidden="true">&#8592;</div>
+                <div class="era-row">
+                    ${ticketsForYear.map((ticket, index) => renderTicketMarkup(ticket, index)).join('')}
+                </div>
+            </div>
+        </section>
+    `;
+    }).join('');
+
+    setupObserver();
+    setupEraRowHints();
+    setupTicketClicks();
 }
 
 function renderTickets(ticketList = tickets) {
     const hasActiveSearchQuery = artistSearch.value.toLowerCase().trim() !== "";
+    const selectedYears = getSelectedYears();
     const sortedTickets = sortTicketsChronologically(ticketList);
 
     if (ticketList.length === 0) {
         ticketsContainer.innerHTML = `
             <div class="no-results">
-                No shows match your search.
+                No shows match your filters. Try adjusting your search or year.
             </div>
         `;
         showArchive.classList.remove("search-results-mode");
@@ -1678,6 +1896,12 @@ function renderTickets(ticketList = tickets) {
     }
 
     showArchive.classList.remove("search-results-mode");
+
+    if (selectedYears.length > 0) {
+        renderSelectedYearSections(sortedTickets);
+        return;
+    }
+
     const groupedTicketsForRows = groupTicketsByEra(sortedTickets);
     ticketsContainer.innerHTML = groupedTicketsForRows.map(group => `
         <section class="era-section" data-era="${escapeHtml(group.key)}">
@@ -1697,8 +1921,19 @@ function renderTickets(ticketList = tickets) {
     setupEraRowHints();
     setupTicketClicks();
 }
-artistSearch.addEventListener("input", applyFilters);
-yearFilter.addEventListener("change", applyFilters);
+artistSearch.addEventListener("input", () => {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => applyFilters(), 200);
+});
+yearFilterToggle.addEventListener("click", () => {
+    setYearFilterMenuOpen(yearFilterMenu.hidden);
+});
+clearFiltersButton.addEventListener("click", () => {
+    artistSearch.value = "";
+    setSelectedYears([]);
+    updateYearFilterLabel();
+    applyFilters();
+});
 backToTopButton.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 });
@@ -1714,12 +1949,19 @@ window.addEventListener("hashchange", () => {
     }
 });
 
-populateYearFilter();
+document.addEventListener("click", (event) => {
+    const yearFilterWrapper = event.target.closest('.year-filter');
 
-renderTickets();
+    if (!yearFilterWrapper) {
+        setYearFilterMenuOpen(false);
+    }
+});
+
+populateYearFilterOptions();
+applyFiltersFromUrl();
+
+applyFilters(false);
 renderStats();
-
-resultsCount.textContent = `${tickets.length} results`;
 
 const initialSlug = getSlugFromHash();
 if (initialSlug) {
