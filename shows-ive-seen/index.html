@@ -649,10 +649,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 #m-copy{
-    max-width:640px;
-    margin:0 auto 22px !important;
-    line-height:1.7;
-    font-size:0.98rem;
+    max-width:620px;
+    margin:0 auto 26px !important;
+    line-height:1.8;
+    font-size:1rem;
 }
 
 #m-companions,
@@ -665,18 +665,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 #m-companions{
-    max-width:640px;
-    margin:0 auto 16px;
+    max-width:620px;
+    margin:0 auto 24px;
 }
 
 #m-notes{
-    max-width:720px;
-    margin:0 auto 22px !important;
-    line-height:1.75;
+    max-width:620px;
+    margin:0 auto 26px !important;
+    line-height:1.8;
 }
 
 #m-gallery{
-    margin-top:22px;
+    margin-top:0;
+}
+
+.modal-section-label{
+    display:none;
+    max-width:620px;
+    margin:0 auto 10px;
+    font-family:'Courier New', monospace;
+    font-size:0.68rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--text-grey);
+    text-align:center;
+}
+
+.modal-section-label.is-visible{
+    display:block;
+}
+
+.modal-detail-block{
+    margin-top:0;
+}
+
+.modal-gallery-grid{
+    margin-top:0;
+}
+
+.modal-gallery-grid img,
+.modal-gallery-image{
+    cursor:zoom-in;
 }
 
 #back-to-top{
@@ -742,7 +771,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 #m-video-wrap{
     display:none;
-    margin-top:24px !important;
+    margin-top:0 !important;
     width:100%;
 }
 
@@ -753,6 +782,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border:0;
     border-radius:20px;
     box-shadow:0 14px 40px rgba(0,0,0,0.09);
+}
+
+#image-lightbox{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    background:rgba(12,12,12,0.88);
+    z-index:7000;
+}
+
+#image-lightbox.is-open{
+    display:flex;
+}
+
+#image-lightbox-img{
+    max-width:min(92vw, 1200px);
+    max-height:86vh;
+    display:block;
+    border-radius:18px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.35);
+    background:#fff;
+}
+
+#image-lightbox-close{
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:999px;
+    background:#fff;
+    color:#111;
+    font-size:1rem;
+    line-height:1;
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
 .close-btn{
@@ -851,6 +920,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     #m-notes,
     #m-companions{
         font-size:0.92rem;
+    }
+
+    .modal-section-label{
+        max-width:100%;
     }
 }
 
@@ -1129,8 +1202,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p id="m-copy" style="max-width:600px; margin:0 auto 20px;"></p>
 
             <!-- companions -->
+            <div id="m-companions-label" class="modal-section-label">Who I Went With</div>
             <div id="m-companions" style="display:none; margin-bottom:15px;"></div>
 
+            <div id="m-notes-label" class="modal-section-label">What I Remember Most</div>
             <p id="m-notes"
                hidden
                aria-hidden="true"
@@ -1138,9 +1213,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </p>
 
             <!-- photo gallery -->
+            <div id="m-gallery-label" class="modal-section-label">Photos</div>
             <div id="m-gallery" style="display:none;"></div>
 
             <!-- youtube video -->
+            <div id="m-video-label" class="modal-section-label">Video</div>
             <div id="m-video-wrap" style="display:none; margin-top:20px;">
                 <iframe
                     id="m-video"
@@ -1160,6 +1237,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <button id="back-to-top" type="button" aria-label="Back to top">&#8593;</button>
+
+<div id="image-lightbox" aria-hidden="true">
+    <button id="image-lightbox-close" type="button" aria-label="Close image lightbox">X</button>
+    <img id="image-lightbox-img" src="" alt="">
+</div>
 
 <script src="tickets.js?v=3"></script>
 
@@ -1191,10 +1273,17 @@ const mMeta = document.getElementById('m-meta');
 const mPrice = document.getElementById('m-price');
 const mCopy = document.getElementById('m-copy');
 const mCompanions = document.getElementById('m-companions');
+const mCompanionsLabel = document.getElementById('m-companions-label');
 const mNotes = document.getElementById('m-notes');
+const mNotesLabel = document.getElementById('m-notes-label');
 const mGallery = document.getElementById('m-gallery');
+const mGalleryLabel = document.getElementById('m-gallery-label');
 const mVideoWrap = document.getElementById('m-video-wrap');
+const mVideoLabel = document.getElementById('m-video-label');
 const mVideo = document.getElementById('m-video');
+const imageLightbox = document.getElementById('image-lightbox');
+const imageLightboxImg = document.getElementById('image-lightbox-img');
+const imageLightboxClose = document.getElementById('image-lightbox-close');
 const backToTopButton = document.getElementById('back-to-top');
 
 const artistSearch = document.getElementById('artist-search');
@@ -1481,19 +1570,23 @@ if (ticket.price && ticket.price.trim() !== "") {
     mImg.alt = `${ticket.artist} ticket`;
 
     if (ticket.companions && ticket.companions.length > 0) {
+        mCompanionsLabel.classList.add("is-visible");
         mCompanions.style.display = "block";
         mCompanions.innerText = `With: ${ticket.companions.join(", ")}`;
     } else {
+        mCompanionsLabel.classList.remove("is-visible");
         mCompanions.style.display = "none";
         mCompanions.innerText = "";
     }
 
     if (isMeaningfulExtendedNotes(ticket.extendedNotes)) {
+        mNotesLabel.classList.add("is-visible");
         mNotes.style.display = "block";
         mNotes.hidden = false;
         mNotes.setAttribute("aria-hidden", "false");
         mNotes.innerText = ticket.extendedNotes.trim();
     } else {
+        mNotesLabel.classList.remove("is-visible");
         mNotes.style.display = "none";
         mNotes.hidden = true;
         mNotes.setAttribute("aria-hidden", "true");
@@ -1501,11 +1594,13 @@ if (ticket.price && ticket.price.trim() !== "") {
     }
 
     if (ticket.photos && ticket.photos.length > 0) {
+        mGalleryLabel.classList.add("is-visible");
         mGallery.style.display = "block";
         mGallery.innerHTML = `
             <div class="modal-gallery-grid">
                 ${ticket.photos.map(photo => `
                     <img
+    class="modal-gallery-image"
     src="${escapeHtml(photo)}"
     alt="${escapeHtml(ticket.artist)} memory photo"
     loading="lazy"
@@ -1513,15 +1608,24 @@ if (ticket.price && ticket.price.trim() !== "") {
                 `).join("")}
             </div>
         `;
+
+        mGallery.querySelectorAll('.modal-gallery-image').forEach(image => {
+            image.addEventListener('click', () => {
+                openImageLightbox(image.getAttribute('src'), image.getAttribute('alt') || '');
+            });
+        });
     } else {
+        mGalleryLabel.classList.remove("is-visible");
         mGallery.style.display = "none";
         mGallery.innerHTML = "";
     }
 
     if (modalYoutube && modalYoutube.trim() !== "") {
+        mVideoLabel.classList.add("is-visible");
         mVideoWrap.style.display = "block";
         mVideo.src = modalYoutube;
     } else {
+        mVideoLabel.classList.remove("is-visible");
         mVideoWrap.style.display = "none";
         mVideo.src = "";
     }
@@ -1532,6 +1636,20 @@ if (ticket.price && ticket.price.trim() !== "") {
     if (shouldUpdateHash) {
         updateHashForTicket(ticket);
     }
+}
+
+function openImageLightbox(src, alt) {
+    imageLightboxImg.src = src;
+    imageLightboxImg.alt = alt || "";
+    imageLightbox.classList.add("is-open");
+    imageLightbox.setAttribute("aria-hidden", "false");
+}
+
+function closeImageLightbox() {
+    imageLightbox.classList.remove("is-open");
+    imageLightbox.setAttribute("aria-hidden", "true");
+    imageLightboxImg.src = "";
+    imageLightboxImg.alt = "";
 }
 
 function setupTicketClicks() {
@@ -1547,6 +1665,7 @@ function setupTicketClicks() {
 }
 
 function closeModal(shouldClearHash = true) {
+    closeImageLightbox();
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
     mVideo.src = "";
@@ -1937,7 +2056,25 @@ clearFiltersButton.addEventListener("click", () => {
 backToTopButton.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 });
+imageLightboxClose.addEventListener("click", closeImageLightbox);
+imageLightbox.addEventListener("click", (event) => {
+    if (event.target === imageLightbox) {
+        closeImageLightbox();
+    }
+});
 window.addEventListener("scroll", updateBackToTopVisibility);
+document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+
+    if (imageLightbox.classList.contains("is-open")) {
+        closeImageLightbox();
+        return;
+    }
+
+    if (modal.style.display === "block") {
+        closeModal();
+    }
+});
 
 window.addEventListener("hashchange", () => {
     const slug = getSlugFromHash();
