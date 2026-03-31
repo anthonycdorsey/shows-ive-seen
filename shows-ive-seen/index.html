@@ -670,6 +670,38 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     font-size:1rem;
 }
 
+.modal-share-actions{
+    display:none;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin:0 auto 22px;
+    max-width:620px;
+    flex-wrap:wrap;
+}
+
+.modal-share-button{
+    padding:10px 14px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    background:#fff;
+    color:var(--text-main);
+    font-family:'Courier New', monospace;
+    font-size:0.72rem;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+    cursor:pointer;
+}
+
+.modal-share-status{
+    display:none;
+    font-family:'Courier New', monospace;
+    font-size:0.72rem;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    color:var(--text-grey);
+}
+
 #m-companions,
 #m-notes{
     background:rgba(255,255,255,0.68);
@@ -1214,6 +1246,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div id="m-price" style="display:none; margin:0 auto 15px; font-family:'Courier New', monospace; text-transform:uppercase; letter-spacing:1px; color:var(--text-grey);"></div>
 
+            <div id="m-share-actions" class="modal-share-actions">
+                <button id="copy-share-link" class="modal-share-button" type="button">Copy Share Link</button>
+                <span id="copy-share-status" class="modal-share-status" aria-live="polite">Copied</span>
+            </div>
+
             <p id="m-copy" style="max-width:600px; margin:0 auto 20px;"></p>
 
             <!-- companions -->
@@ -1328,6 +1365,9 @@ const showArchive = document.querySelector('.show-archive');
 const mArtist = document.getElementById('m-artist');
 const mMeta = document.getElementById('m-meta');
 const mPrice = document.getElementById('m-price');
+const mShareActions = document.getElementById('m-share-actions');
+const copyShareLinkButton = document.getElementById('copy-share-link');
+const copyShareStatus = document.getElementById('copy-share-status');
 const mCopy = document.getElementById('m-copy');
 const mCompanions = document.getElementById('m-companions');
 const mCompanionsLabel = document.getElementById('m-companions-label');
@@ -1352,6 +1392,8 @@ const resultsCount = document.getElementById('results-count');
 
 let filteredTickets = [...tickets];
 let debounceTimeout;
+let copyShareStatusTimeout;
+let currentShareSlug = "";
 const eraBuckets = [
     { key: "1990s", label: "late-'90s" },
     { key: "2000-2004", label: "'00\u2013'04" },
@@ -1383,6 +1425,36 @@ function updateHashForTicket(ticket) {
 function clearTicketHash() {
     if (!window.location.hash) return;
     history.replaceState(null, '', window.location.pathname + window.location.search);
+}
+
+function getTicketShareUrl(slug) {
+    if (!slug) return "";
+    return `https://www.anthonycdorsey.com/shows-ive-seen/share/${encodeURIComponent(slug)}/`;
+}
+
+async function copyShareLink() {
+    const shareUrl = getTicketShareUrl(currentShareSlug);
+    if (!shareUrl) return;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        return;
+    }
+
+    const tempInput = document.createElement("input");
+    tempInput.value = shareUrl;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    tempInput.remove();
+}
+
+function showCopyShareStatus() {
+    clearTimeout(copyShareStatusTimeout);
+    copyShareStatus.style.display = "inline";
+    copyShareStatusTimeout = setTimeout(() => {
+        copyShareStatus.style.display = "none";
+    }, 1600);
 }
 
 function getTicketYearNumber(ticket) {
@@ -1614,7 +1686,15 @@ const displayMeta = [displayDate, ticket.venue, displayCity]
 
 mArtist.innerText = `${ticket.artist} (${ticket.year})`;
 mMeta.innerText = displayMeta;
+currentShareSlug = ticket.slug || "";
 mCopy.innerText = ticket.copy || "";
+
+if (currentShareSlug) {
+    mShareActions.style.display = "flex";
+} else {
+    mShareActions.style.display = "none";
+}
+copyShareStatus.style.display = "none";
 
 if (ticket.price && ticket.price.trim() !== "") {
     mPrice.style.display = "block";
@@ -1726,6 +1806,10 @@ function closeModal(shouldClearHash = true) {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
     mVideo.src = "";
+    currentShareSlug = "";
+    mShareActions.style.display = "none";
+    copyShareStatus.style.display = "none";
+    clearTimeout(copyShareStatusTimeout);
 
     if (shouldClearHash) {
         clearTicketHash();
@@ -2117,6 +2201,18 @@ imageLightboxClose.addEventListener("click", closeImageLightbox);
 imageLightbox.addEventListener("click", (event) => {
     if (event.target === imageLightbox) {
         closeImageLightbox();
+    }
+});
+copyShareLinkButton.addEventListener("click", async () => {
+    try {
+        await copyShareLink();
+        showCopyShareStatus();
+    } catch (error) {
+        copyShareStatus.textContent = "Copy failed";
+        showCopyShareStatus();
+        setTimeout(() => {
+            copyShareStatus.textContent = "Copied";
+        }, 1600);
     }
 });
 window.addEventListener("scroll", updateBackToTopVisibility);
