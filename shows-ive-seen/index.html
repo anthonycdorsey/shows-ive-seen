@@ -1417,23 +1417,23 @@ function findTicketBySlug(slug) {
     return tickets.find(ticket => ticket.slug === slug);
 }
 
-function updateHashForTicket(ticket) {
-    if (!ticket || !ticket.slug) return;
-    history.replaceState(null, '', `#${encodeURIComponent(ticket.slug)}`);
+function getTicketShareUrl(ticket) {
+    if (!ticket || !ticket.slug) return "https://www.anthonycdorsey.com/shows-ive-seen/";
+    return `https://www.anthonycdorsey.com/shows-ive-seen/share/${encodeURIComponent(ticket.slug)}/`;
 }
 
-function clearTicketHash() {
-    if (!window.location.hash) return;
-    history.replaceState(null, '', window.location.pathname + window.location.search);
+function updateBrowserUrlForTicket(ticket) {
+    history.replaceState(null, "", getTicketShareUrl(ticket));
 }
 
-function getTicketShareUrl(slug) {
-    if (!slug) return "";
-    return `https://www.anthonycdorsey.com/shows-ive-seen/share/${encodeURIComponent(slug)}/`;
+function resetArchiveBrowserUrl() {
+    history.replaceState(null, "", "https://www.anthonycdorsey.com/shows-ive-seen/");
 }
 
 async function copyShareLink() {
-    const shareUrl = getTicketShareUrl(currentShareSlug);
+    const shareUrl = currentShareSlug
+        ? getTicketShareUrl({ slug: currentShareSlug })
+        : "";
     if (!shareUrl) return;
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1771,7 +1771,7 @@ if (ticket.price && ticket.price.trim() !== "") {
     document.body.style.overflow = "hidden";
 
     if (shouldUpdateHash) {
-        updateHashForTicket(ticket);
+        updateBrowserUrlForTicket(ticket);
     }
 }
 
@@ -1812,7 +1812,7 @@ function closeModal(shouldClearHash = true) {
     clearTimeout(copyShareStatusTimeout);
 
     if (shouldClearHash) {
-        clearTicketHash();
+        resetArchiveBrowserUrl();
     }
 }
 
@@ -2233,7 +2233,7 @@ window.addEventListener("hashchange", () => {
     const slug = getSlugFromHash();
 
     if (slug) {
-        openTicketBySlug(slug, false);
+        openTicketBySlug(slug, true);
     } else if (modal.style.display === "block") {
         closeModal(false);
     }
@@ -2255,7 +2255,7 @@ renderStats();
 
 const initialSlug = getSlugFromHash();
 if (initialSlug) {
-    openTicketBySlug(initialSlug, false);
+    openTicketBySlug(initialSlug, true);
 }
 
 updateBackToTopVisibility();
