@@ -20,6 +20,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Call me Tony</title>
+    <link id="dynamic-favicon" rel="icon" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="shows-ive-seen/favicon-share-image/favicon-slate-180.png">
     <style>
         :root {
             --bg-color: #FAFAF8;
@@ -247,6 +249,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <script>
+    function initDynamicFavicon() {
+        const colors = [
+          "#E63946",
+          "#457B9D",
+          "#E9C46A",
+          "#1D3557",
+          "#1A1A1A",
+          "#2A9D8F"
+        ];
+        const favicon = document.getElementById("dynamic-favicon");
+
+        if (!favicon) return;
+
+        let colorIndex = 0;
+
+        const updateFavicon = () => {
+            const backgroundColor = colors[colorIndex];
+            const textColor = backgroundColor === "#E9C46A" ? "#1A1A1A" : "#FFFFFF";
+            const svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <rect width="100" height="100" rx="22" fill="${backgroundColor}" />
+                    <text
+                        x="50%"
+                        y="56%"
+                        text-anchor="middle"
+                        dominant-baseline="middle"
+                        font-family="Courier New, monospace"
+                        font-weight="900"
+                        letter-spacing="1.5"
+                        font-size="68"
+                        fill="${textColor}">TD</text>
+                </svg>
+            `.trim();
+            const encodedSvg = encodeURIComponent(svg);
+            favicon.href = `data:image/svg+xml,${encodedSvg}`;
+            colorIndex = (colorIndex + 1) % colors.length;
+        };
+
+        updateFavicon();
+        setInterval(updateFavicon, 3000);
+    }
+
     const menuToggle = document.getElementById('menuToggle');
     const navDropdown = document.getElementById('navDropdown');
 
@@ -268,6 +312,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.story-card').forEach(card => observer.observe(card));
+    initDynamicFavicon();
 </script>
 
 </body>
