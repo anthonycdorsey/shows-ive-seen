@@ -37,13 +37,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="twitter:image" content="https://www.anthonycdorsey.com/shows-ive-seen/share-image.png">
     <link id="dynamic-favicon" rel="icon" type="image/svg+xml">
     <link rel="apple-touch-icon" href="favicon-share-image/favicon-slate-180.png">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/maplibre-gl@^5.12.0/dist/maplibre-gl.css">
     <style>
         :root {
-            --bg-color: #FAFAF8;
-            --text-main: #1A1A1A;
-            --text-grey: #A0A09A;
-            --border: #E6E6E3;
+            --bg-color: #F3F2EE;
+            --text-main: #151515;
+            --text-grey: #686862;
+            --border: #D8D8D2;
             --accent: #E63946;
+            --comic-yellow: #FFD84D;
+            --comic-red: #E63946;
+            --comic-pink: #FF5FA2;
         }
 
         body {
@@ -223,11 +229,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 .archive-stat{
     text-align:center;
-    background:rgba(255,255,255,0.72);
+    background:rgba(255,255,255,0.88);
     border:1px solid rgba(230,230,227,0.9);
     border-radius:18px;
     padding:16px 14px;
     box-shadow:0 8px 24px rgba(0,0,0,0.035);
+}
+
+.archive-stat[role="button"]{
+    cursor:pointer;
+    transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.archive-stat[role="button"]:hover{
+    transform:translateY(-2px);
+    background:#fff;
+    box-shadow:0 14px 28px rgba(0,0,0,0.06);
+}
+
+.archive-stat[role="button"]:focus-visible{
+    outline:2px solid #111;
+    outline-offset:4px;
+    border-color:#111;
 }
 
 .archive-stat__label{
@@ -276,7 +299,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     align-items:center;
     justify-content:center;
     flex-wrap:wrap;
-    background:rgba(255,255,255,0.55);
+    background:rgba(255,255,255,0.68);
     backdrop-filter:blur(6px);
 }
 
@@ -299,52 +322,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     width:min(320px, 100%);
 }
 
-.year-filter{
-    position:relative;
-}
-
-.year-filter__toggle{
-    min-width:150px;
-    text-align:left;
-    cursor:pointer;
-}
-
-.year-filter__menu{
-    position:absolute;
-    top:calc(100% + 8px);
-    left:0;
-    min-width:220px;
-    max-height:260px;
-    overflow-y:auto;
-    padding:10px;
-    border:1px solid var(--border);
-    border-radius:14px;
-    background:#fff;
-    box-shadow:0 14px 40px rgba(0,0,0,0.08);
-    z-index:5200;
-    display:none;
-}
-
-.year-filter__menu.is-open{
-    display:block;
-}
-
-.year-filter__options{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-
-.year-filter__option{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:0.9rem;
-}
-
-.year-filter__option input{
-    width:auto;
-    min-height:auto;
+.archive-note--results{
+    padding:22px 10% 6px;
+    text-align:center;
 }
 
 .archive-controls input:focus,
@@ -672,25 +652,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 .modal-share-actions{
     display:none;
-    justify-content:center;
+    position:absolute;
+    top:52px;
+    right:0;
     align-items:center;
-    gap:10px;
-    margin:0 auto 22px;
-    max-width:620px;
-    flex-wrap:wrap;
+    flex-direction:column;
+    gap:8px;
+    z-index:2;
 }
 
-.modal-share-button{
-    padding:10px 14px;
-    border:1px solid var(--border);
+.modal-icon-button{
+    width:42px;
+    height:42px;
+    border:0;
     border-radius:999px;
-    background:#fff;
-    color:var(--text-main);
-    font-family:'Courier New', monospace;
-    font-size:0.72rem;
-    letter-spacing:1.4px;
-    text-transform:uppercase;
+    background:#111;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     cursor:pointer;
+    box-shadow:0 10px 30px rgba(0,0,0,0.16);
+    transition:transform 0.18s ease, background 0.18s ease;
+}
+
+.modal-icon-button:hover{
+    background:#2a2a2a;
+    transform:translateY(-1px);
+}
+
+.modal-icon-button:focus-visible{
+    outline:2px solid #111;
+    outline-offset:3px;
+}
+
+.modal-share-button svg{
+    width:18px;
+    height:18px;
 }
 
 .modal-share-status{
@@ -699,7 +697,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     font-size:0.72rem;
     letter-spacing:1.2px;
     text-transform:uppercase;
-    color:var(--text-grey);
+    color:#595954;
+    background:rgba(255,255,255,0.92);
+    padding:4px 8px;
+    border-radius:999px;
+    border:1px solid rgba(230,230,227,0.95);
 }
 
 #m-companions,
@@ -871,6 +873,446 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
+#stats-overlay{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    background:rgba(12,12,12,0.45);
+    z-index:6800;
+}
+
+#stats-overlay.is-open{
+    display:flex;
+}
+
+.stats-overlay__dialog{
+    position:relative;
+    width:min(92vw, 760px);
+    max-height:88vh;
+    overflow:auto;
+    background:rgba(250,250,248,0.98);
+    border:1px solid rgba(230,230,227,0.95);
+    border-radius:28px;
+    padding:28px 26px 24px;
+    box-shadow:0 24px 70px rgba(0,0,0,0.14);
+}
+
+.stats-overlay__close{
+    position:absolute;
+    top:16px;
+    right:16px;
+    z-index:2000;
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:999px;
+    background:#111;
+    color:#fff;
+    cursor:pointer;
+}
+
+.stats-panel-title{
+    margin:0 52px 18px 0;
+    font-size:clamp(1.25rem, 2.4vw, 1.8rem);
+    font-weight:900;
+    letter-spacing:-0.02em;
+}
+
+.stats-panel-copy{
+    margin:0 0 18px;
+    font-family:'Courier New', monospace;
+    color:var(--text-grey);
+    line-height:1.6;
+}
+
+.stats-filter-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin:0 0 18px;
+    max-height:52vh;
+    overflow:auto;
+    padding-right:6px;
+}
+
+.stats-filter-option{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:14px;
+    font-size:0.95rem;
+}
+
+.stats-filter-option input{
+    flex:0 0 auto;
+}
+
+.stats-filter-list::-webkit-scrollbar{
+    width:10px;
+}
+
+.stats-filter-list::-webkit-scrollbar-thumb{
+    background:rgba(17,17,17,0.22);
+    border-radius:999px;
+}
+
+.stats-panel-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:12px;
+}
+
+.stats-panel-button{
+    padding:11px 16px;
+    border:1px solid #111;
+    border-radius:999px;
+    background:#111;
+    color:#fff;
+    cursor:pointer;
+    font-family:'Courier New', monospace;
+    font-size:0.74rem;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+}
+
+.stats-panel-button--secondary{
+    background:#fff;
+    color:#111;
+    border-color:var(--border);
+}
+
+.stats-panel-button:focus-visible,
+.stats-overlay__close:focus-visible{
+    outline:2px solid #111;
+    outline-offset:3px;
+}
+
+.visually-hidden{
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0, 0, 0, 0);
+    white-space:nowrap;
+    border:0;
+}
+
+.comic-panel{
+    position:relative;
+    overflow:hidden;
+    padding:56px 24px 28px;
+    border:4px solid #111;
+    border-radius:24px;
+    background:
+        radial-gradient(circle, rgba(255,255,255,0.35) 8%, transparent 9%) 0 0 / 18px 18px,
+        linear-gradient(135deg, #ff5fa2 0%, #ff5fa2 52%, #e63946 52%, #e63946 100%);
+    box-shadow:inset 0 0 0 4px rgba(255,255,255,0.22);
+}
+
+.comic-panel::before{
+    content:"";
+    position:absolute;
+    top:16px;
+    right:22px;
+    width:86px;
+    height:86px;
+    background:radial-gradient(circle, rgba(255,255,255,0.82) 2px, transparent 3px) 0 0 / 12px 12px;
+    opacity:0.32;
+    pointer-events:none;
+}
+
+.comic-panel::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(28deg, transparent 46%, rgba(255,255,255,0.96) 47%, rgba(255,255,255,0.96) 49%, transparent 50%),
+        linear-gradient(-28deg, transparent 46%, rgba(255,255,255,0.96) 47%, rgba(255,255,255,0.96) 49%, transparent 50%);
+    opacity:0.16;
+    pointer-events:none;
+}
+
+.comic-burst{
+    position:relative;
+    display:inline-block;
+    padding:28px 34px;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0 18%, transparent 19%),
+        linear-gradient(135deg, var(--comic-pink) 0%, var(--comic-red) 100%);
+    color:var(--comic-yellow);
+    border:5px solid #111;
+    clip-path:polygon(50% 0%, 58% 14%, 74% 4%, 76% 22%, 94% 14%, 86% 34%, 100% 50%, 86% 66%, 96% 84%, 76% 78%, 74% 96%, 58% 86%, 50% 100%, 42% 86%, 26% 96%, 24% 78%, 4% 84%, 14% 66%, 0% 50%, 14% 34%, 6% 14%, 24% 22%, 26% 4%, 42% 14%);
+    transform:rotate(-5deg) scale(0.92);
+    font-size:clamp(1.8rem, 5vw, 3rem);
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    -webkit-text-stroke:2px #111;
+    text-shadow:
+        3px 3px 0 #111,
+        -1px -1px 0 #111,
+        1px -1px 0 #111,
+        -1px 1px 0 #111;
+    box-shadow:0 16px 0 rgba(0,0,0,0.18);
+    animation:comicPop 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    z-index:1;
+}
+
+.comic-burst::before{
+    content:"";
+    position:absolute;
+    inset:10px;
+    border:3px dotted rgba(255,216,77,0.58);
+    clip-path:inherit;
+    pointer-events:none;
+}
+
+@keyframes comicPop{
+    0%{transform:rotate(-8deg) scale(0.72);}
+    60%{transform:rotate(-3deg) scale(1.05);}
+    100%{transform:rotate(-5deg) scale(1);}
+}
+
+.comic-panel .stats-panel-actions{
+    position:relative;
+    z-index:2;
+    justify-content:center;
+    margin-top:22px;
+}
+
+.comic-wow{
+    position:relative;
+    display:block;
+    width:min(620px, 100%);
+    margin:0 auto;
+    animation:wowIllustrationPop 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transform-origin:center;
+    z-index:1;
+}
+
+.comic-wow svg{
+    display:block;
+    width:100%;
+    height:auto;
+    overflow:visible;
+}
+
+.comic-wow--large{
+    width:min(590px, 94%);
+}
+
+.comic-wow--small{
+    width:230px;
+    max-width:56vw;
+    margin:0;
+}
+
+.comic-wow--city{
+    width:300px;
+    max-width:58vw;
+    margin:0 0 14px;
+}
+
+.comic-supporting-phrase{
+    position:relative;
+    z-index:2;
+    margin:8px auto 0;
+    color:#fffdf6;
+    font-family:'Courier New', monospace;
+    font-size:clamp(1rem, 2.6vw, 1.65rem);
+    font-weight:900;
+    letter-spacing:0.22em;
+    text-align:center;
+    text-transform:uppercase;
+    text-shadow:
+        2px 2px 0 #111,
+        -1px -1px 0 #111,
+        1px -1px 0 #111;
+}
+
+@keyframes wowIllustrationPop{
+    0%{transform:scale(0.34) rotate(-7deg); opacity:0;}
+    56%{transform:scale(1.16) rotate(2deg); opacity:1;}
+    76%{transform:scale(0.96) rotate(-1deg);}
+    100%{transform:scale(1) rotate(0deg); opacity:1;}
+}
+
+.graph-panel{
+    border:4px solid #111;
+    border-radius:24px;
+    padding:22px 20px;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.88)),
+        radial-gradient(circle, rgba(34,166,213,0.18) 10%, transparent 11%) 0 0 / 18px 18px;
+}
+
+.graph-wow{
+    margin:0 0 18px;
+}
+
+.graph-bars{
+    display:grid;
+    grid-auto-flow:column;
+    grid-auto-columns:minmax(58px, 58px);
+    gap:12px;
+    align-items:end;
+    margin-top:18px;
+    overflow-x:auto;
+    padding-bottom:8px;
+}
+
+.graph-bars::-webkit-scrollbar{
+    height:10px;
+}
+
+.graph-bars::-webkit-scrollbar-thumb{
+    background:rgba(17,17,17,0.22);
+    border-radius:999px;
+}
+
+.graph-bar{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    border:0;
+    padding:0;
+    background:transparent;
+    color:var(--text-main);
+    cursor:pointer;
+    font:inherit;
+}
+
+.graph-bar:focus-visible{
+    outline:2px solid #111;
+    outline-offset:4px;
+    border-radius:12px;
+}
+
+.graph-bar__track{
+    width:100%;
+    min-height:120px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.graph-bar__fill{
+    width:100%;
+    border-radius:12px 12px 6px 6px;
+    background:var(--comic-red);
+    min-height:10px;
+    box-shadow:inset 0 -3px 0 rgba(0,0,0,0.14);
+}
+
+.graph-bar.is-active .graph-bar__fill{
+    background:var(--comic-pink);
+}
+
+.graph-bar__label,
+.graph-bar__value{
+    font-family:'Courier New', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+}
+
+.city-map-panel{
+    position:relative;
+    margin:0 0 18px;
+    padding:18px;
+    border:1px solid var(--border);
+    border-radius:22px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,248,245,0.94));
+}
+
+.city-map{
+    position:relative;
+    width:100%;
+    height:min(58vh, 520px);
+    min-height:420px;
+    border-radius:18px;
+    overflow:hidden;
+    background:#e8eef2;
+}
+
+.city-map.maplibregl-map{
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    width:100%;
+    height:100%;
+}
+
+.city-map .maplibregl-ctrl-attrib{
+    font-size:10px;
+}
+
+.city-map-popup{
+    max-width:190px;
+}
+
+.city-map-popup .maplibregl-popup-content{
+    padding:10px 12px 12px;
+    border:1px solid rgba(17,17,17,0.18);
+    border-radius:10px;
+    box-shadow:0 10px 24px rgba(0,0,0,0.18);
+}
+
+.city-map-popup .maplibregl-popup-tip{
+    border-top-color:#fff;
+}
+
+.city-map-popup__city{
+    margin:0 0 2px;
+    color:#111;
+    font-weight:900;
+    font-size:0.95rem;
+    line-height:1.15;
+}
+
+.city-map-popup__count{
+    margin:0 0 10px;
+    color:#595954;
+    font-family:'Courier New', monospace;
+    font-size:0.75rem;
+}
+
+.city-map-popup__button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:8px 10px;
+    border:1px solid #111;
+    border-radius:999px;
+    background:#111;
+    color:#fff;
+    font-family:'Courier New', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.city-map-popup__button:focus-visible{
+    outline:2px solid #111;
+    outline-offset:3px;
+}
+
+.city-map-fallback{
+    padding:24px;
+    font-family:'Courier New', monospace;
+    color:#595954;
+    line-height:1.6;
+}
+
 .close-btn{
     margin-top:34px;
     font-size:0.78rem;
@@ -904,6 +1346,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .archive-controls select,
     .archive-controls button{
         width:100%;
+    }
+
+    .archive-note--results{
+        padding:20px 8% 6px;
     }
 
     .ticket-card{
@@ -950,6 +1396,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         padding:22px 16px 28px;
     }
 
+    .modal-share-actions{
+        top:52px;
+        right:0;
+    }
+
     #modal-img{
         width:100%;
         max-height:50vh;
@@ -971,6 +1422,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     .modal-section-label{
         max-width:100%;
+    }
+
+    .stats-overlay__dialog{
+        width:min(96vw, 760px);
+        padding:22px 18px 18px;
+    }
+
+    .graph-bars{
+        grid-auto-columns:minmax(48px, 48px);
+    }
+
+    .city-map{
+        height:460px;
+        min-height:360px;
     }
 }
 
@@ -1151,47 +1616,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         I&rsquo;ve kept a ticket stub from every concert I&rsquo;ve attended.<br>
         This is a record of what I chose to spend time with, across years, genres, and cities.
     </div>
-    <div class="archive-note">&#8212; Growing Archive &#8212;</div>
-</section>
+  </section>
 
 <section class="archive-stats" aria-label="Concert archive stats">
     <div class="section-kicker">Archive At A Glance</div>
     <div class="archive-stats__inner">
-        <div class="archive-stat">
+        <div class="archive-stat" id="stat-card-shows" data-stat-action="shows" role="button" tabindex="0" aria-haspopup="dialog">
             <span class="archive-stat__label">Shows</span>
             <span class="archive-stat__value" id="stat-shows">0</span>
         </div>
 
-        <div class="archive-stat">
+        <div class="archive-stat" id="stat-card-artists" data-stat-action="artists" role="button" tabindex="0" aria-haspopup="dialog">
             <span class="archive-stat__label">Artists</span>
             <span class="archive-stat__value" id="stat-artists">0</span>
         </div>
 
-        <div class="archive-stat">
+        <div class="archive-stat" id="stat-card-cities" data-stat-action="cities" role="button" tabindex="0" aria-haspopup="dialog">
             <span class="archive-stat__label">Cities</span>
             <span class="archive-stat__value" id="stat-cities">0</span>
         </div>
 
-        <div class="archive-stat">
+        <div class="archive-stat" id="stat-card-years" data-stat-action="years" role="button" tabindex="0" aria-haspopup="dialog">
             <span class="archive-stat__label">Years</span>
             <span class="archive-stat__value" id="stat-years">0</span>
         </div>
 
-        <div class="archive-stat">
+        <div class="archive-stat" id="stat-card-most-seen" data-stat-action="most-seen" role="button" tabindex="0">
             <span class="archive-stat__label">Most Seen</span>
             <span class="archive-stat__value" id="stat-most-seen">&#8212;</span>
         </div>
-        <div class="archive-stat">
+        <div class="archive-stat" id="stat-card-most-seen-venue" data-stat-action="most-seen-venue" role="button" tabindex="0">
             <span class="archive-stat__label">Most Seen Venue</span>
             <span class="archive-stat__value" id="stat-most-seen-venue">&#8212;</span>
         </div>
 
-        <div class="archive-stat">
+        <div class="archive-stat" id="stat-card-most-active-year" data-stat-action="most-active-year" role="button" tabindex="0">
             <span class="archive-stat__label">Most Active Year</span>
             <span class="archive-stat__value" id="stat-most-active-year">&#8212;</span>
         </div>
 
-        <div class="archive-stat">
+        <div class="archive-stat" id="stat-card-avg-shows" data-stat-action="avg-shows" role="button" tabindex="0" aria-haspopup="dialog">
             <span class="archive-stat__label">Avg Shows / Year</span>
             <span class="archive-stat__value" id="stat-avg-shows-per-year">&#8212;</span>
         </div>
@@ -1207,34 +1671,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         placeholder="Search archive..."
     >
 
-    <div class="year-filter">
-        <button
-            type="button"
-            id="year-filter-toggle"
-            class="year-filter__toggle"
-            aria-haspopup="true"
-            aria-expanded="false"
-            aria-controls="year-filter-menu">
-            All Years
-        </button>
-        <div id="year-filter-menu" class="year-filter__menu" hidden>
-            <div id="year-filter-options" class="year-filter__options"></div>
-        </div>
-    </div>
-
     <button type="button" id="clear-filters">Clear</button>
 
     <div id="results-count">0 results</div>
 
 </section>
 
-<main class="show-archive">
+<div class="archive-note archive-note--results" id="archive-results-anchor">&mdash; Growing Archive &mdash;</div>
+
+<main class="show-archive" id="archive-results">
     <div id="tickets-container"></div>
 </main>
 
 <div id="detail-modal">
     <div class="modal-content">
         <button class="modal-close" type="button" aria-label="Close ticket details" onclick="closeModal()">X</button>
+        <div id="m-share-actions" class="modal-share-actions">
+            <button id="copy-share-link" class="modal-icon-button modal-share-button" type="button" aria-label="Copy share link">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M15 5a3 3 0 1 1 2.96 3.5l-6.12 3.06a3.02 3.02 0 0 1 0 .88l6.12 3.06a3 3 0 1 1-.67 1.34l-6.12-3.06a3 3 0 1 1 0-4.56l6.12-3.06A3 3 0 0 1 15 5Z" fill="currentColor"/>
+                </svg>
+            </button>
+            <span id="copy-share-status" class="modal-share-status" aria-live="polite">Copied</span>
+        </div>
 
         <img id="modal-img" src="" alt="Ticket image">
 
@@ -1245,12 +1704,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div id="m-meta" style="color:var(--text-grey); margin-bottom:15px;"></div>
 
             <div id="m-price" style="display:none; margin:0 auto 15px; font-family:'Courier New', monospace; text-transform:uppercase; letter-spacing:1px; color:var(--text-grey);"></div>
-
-            <div id="m-share-actions" class="modal-share-actions">
-                <button id="copy-share-link" class="modal-share-button" type="button">Copy Share Link</button>
-                <span id="copy-share-status" class="modal-share-status" aria-live="polite">Copied</span>
-            </div>
-
             <p id="m-copy" style="max-width:600px; margin:0 auto 20px;"></p>
 
             <!-- companions -->
@@ -1295,6 +1748,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <img id="image-lightbox-img" src="" alt="">
 </div>
 
+<div id="stats-overlay" aria-hidden="true" hidden>
+    <div class="stats-overlay__dialog" role="dialog" aria-modal="true" aria-labelledby="stats-overlay-title">
+        <button id="stats-overlay-close" type="button" class="stats-overlay__close" aria-label="Close stat details">X</button>
+        <div id="stats-overlay-content"></div>
+    </div>
+</div>
+
+<script
+    src="https://unpkg.com/maplibre-gl@^5.12.0/dist/maplibre-gl.js"></script>
 <script src="tickets.js?v=3"></script>
 
 <script>
@@ -1381,19 +1843,57 @@ const mVideo = document.getElementById('m-video');
 const imageLightbox = document.getElementById('image-lightbox');
 const imageLightboxImg = document.getElementById('image-lightbox-img');
 const imageLightboxClose = document.getElementById('image-lightbox-close');
+const statsOverlay = document.getElementById('stats-overlay');
+const statsOverlayContent = document.getElementById('stats-overlay-content');
+const statsOverlayClose = document.getElementById('stats-overlay-close');
 const backToTopButton = document.getElementById('back-to-top');
+const archiveResultsAnchor = document.getElementById('archive-results-anchor');
 
 const artistSearch = document.getElementById('artist-search');
-const yearFilterToggle = document.getElementById('year-filter-toggle');
-const yearFilterMenu = document.getElementById('year-filter-menu');
-const yearFilterOptions = document.getElementById('year-filter-options');
 const clearFiltersButton = document.getElementById('clear-filters');
 const resultsCount = document.getElementById('results-count');
+const statCards = [...document.querySelectorAll('.archive-stat[data-stat-action]')];
 
 let filteredTickets = [...tickets];
 let debounceTimeout;
 let copyShareStatusTimeout;
 let currentShareSlug = "";
+let statsOverlayRestore = null;
+let cityMap = null;
+let cityMapPopup = null;
+let activeSpecialBrowseSectionLabel = "";
+let activeSpecialBrowseFilter = null;
+const filterState = {
+    selectedArtists: new Set(),
+    selectedCities: new Set(),
+    selectedYears: new Set()
+};
+const statsState = {
+    mostSeenArtist: "",
+    mostSeenVenue: "",
+    mostActiveYear: "",
+    showsPerYear: [],
+    artistCounts: [],
+    cityCounts: [],
+    yearCounts: [],
+    currentTrigger: null
+};
+const CITY_COORDS = {
+    "New York": [40.7128, -74.0060],
+    "Brooklyn": [40.6782, -73.9442],
+    "Queens": [40.7282, -73.7949],
+    "Jersey City": [40.7178, -74.0431],
+    "Philadelphia": [39.9526, -75.1652],
+    "Newark": [40.7357, -74.1724],
+    "Toronto": [43.6532, -79.3832],
+    "Austin": [30.2672, -97.7431],
+    "Houston": [29.7604, -95.3698],
+    "Driftwood": [30.1230, -98.0319],
+    "London": [51.5072, -0.1276],
+    "Barcelona": [41.3874, 2.1686],
+    "Ravello": [40.6493, 14.6117]
+};
+const CITY_MAP_SOURCE_ID = "archive-cities";
 const eraBuckets = [
     { key: "1990s", label: "late-'90s" },
     { key: "2000-2004", label: "'00\u2013'04" },
@@ -1533,7 +2033,7 @@ function groupTicketsByEra(ticketList) {
         group.tickets.sort(compareTicketsForArchive);
     });
 
-    return groups.filter(group => group.tickets.length > 0);
+    return groups.filter(group => group.tickets.length > 0).reverse();
 }
 
 function renderTicketMarkup(ticket, index) {
@@ -1848,16 +2348,17 @@ function renderStats() {
         .map(ticket => parseInt(ticket.year, 10))
         .filter(year => !isNaN(year));
 
-    let yearsCovered = "—";
+    let yearsCovered = "\u2014";
     if (years.length > 0) {
         const minYear = Math.min(...years);
         const maxYear = Math.max(...years);
-        yearsCovered = minYear === maxYear ? `${minYear}` : `${minYear}–${maxYear}`;
+        yearsCovered = minYear === maxYear ? `${minYear}` : `${minYear}\u2013${maxYear}`;
     }
 
     const artistCounts = {};
     const venueCounts = {};
     const yearCounts = {};
+    const cityCounts = {};
 
     tickets.forEach(ticket => {
         const artist = ticket.artist.trim();
@@ -1866,6 +2367,11 @@ function renderStats() {
         const venue = (ticket.venue || "").trim();
         if (venue) {
             venueCounts[venue] = (venueCounts[venue] || 0) + 1;
+        }
+
+        const city = (ticket.city || "").trim();
+        if (city) {
+            cityCounts[city] = (cityCounts[city] || 0) + 1;
         }
 
         const year = (ticket.year || "").trim();
@@ -1917,6 +2423,14 @@ function renderStats() {
         ? `${(totalShows / uniqueYearCount).toFixed(1)} / year`
         : '&#8212;';
 
+    statsState.artistCounts = getSortedCountEntries(artistCounts);
+    statsState.cityCounts = getSortedCountEntries(cityCounts);
+    statsState.yearCounts = getSortedCountEntries(yearCounts);
+    statsState.showsPerYear = Object.entries(yearCounts).map(([year, count]) => ({ year, count }));
+    statsState.mostSeenArtist = statsState.artistCounts[0]?.[0] || "";
+    statsState.mostSeenVenue = getSortedCountEntries(venueCounts)[0]?.[0] || "";
+    statsState.mostActiveYear = statsState.yearCounts[0]?.[0] || "";
+
     function formatStatWithSubvalue(value) {
         const text = String(value ?? "").trim();
         const match = text.match(/^(.*?)(\s*(\([^()]+\)))$/);
@@ -1962,40 +2476,38 @@ function getResultsCountText(count) {
 }
 
 function getSelectedYears() {
-    return [...yearFilterOptions.querySelectorAll('input[type="checkbox"]:checked')]
-        .map(input => input.value);
+    return [...filterState.selectedYears];
 }
 
 function setSelectedYears(years) {
-    const selectedYears = new Set(years);
-
-    yearFilterOptions.querySelectorAll('input[type="checkbox"]').forEach(input => {
-        input.checked = selectedYears.has(input.value);
-    });
+    filterState.selectedYears = new Set((years || []).map(normalizeFilterValue).filter(Boolean));
 }
 
-function updateYearFilterLabel() {
-    const selectedYears = getSelectedYears()
-        .slice()
-        .sort((a, b) => Number(a) - Number(b));
-
-    if (selectedYears.length === 0) {
-        yearFilterToggle.textContent = "All Years";
-        return;
-    }
-
-    if (selectedYears.length <= 2) {
-        yearFilterToggle.textContent = selectedYears.join(", ");
-        return;
-    }
-
-    yearFilterToggle.textContent = `${selectedYears.length} years selected`;
+function getSelectedArtists() {
+    return [...filterState.selectedArtists];
 }
 
-function setYearFilterMenuOpen(isOpen) {
-    yearFilterMenu.hidden = !isOpen;
-    yearFilterMenu.classList.toggle("is-open", isOpen);
-    yearFilterToggle.setAttribute("aria-expanded", String(isOpen));
+function setSelectedArtists(artists) {
+    filterState.selectedArtists = new Set((artists || []).map(normalizeFilterValue).filter(Boolean));
+}
+
+function getSelectedCities() {
+    return [...filterState.selectedCities];
+}
+
+function setSelectedCities(cities) {
+    filterState.selectedCities = new Set((cities || []).map(normalizeFilterValue).filter(Boolean));
+}
+
+function clearSelectableFilters() {
+    setSelectedArtists([]);
+    setSelectedCities([]);
+    setSelectedYears([]);
+}
+
+function clearSpecialBrowseSection() {
+    activeSpecialBrowseSectionLabel = "";
+    activeSpecialBrowseFilter = null;
 }
 
 function updateFilterParams() {
@@ -2033,42 +2545,616 @@ function applyFiltersFromUrl() {
                 .filter(Boolean)
         );
     }
-
-    updateYearFilterLabel();
 }
 
-function populateYearFilterOptions(){
+function getSelectedYearsSortedAscending() {
+    return getSelectedYears().slice().sort((a, b) => Number(a) - Number(b));
+}
 
-    const years = [...new Set(tickets.map(t => t.year))]
-        .sort((a,b)=>b-a);
+function closeStatsOverlay() {
+    if (cityMap) {
+        cityMap.remove();
+        cityMap = null;
+        cityMapPopup = null;
+    }
+    statsOverlay.hidden = true;
+    statsOverlay.classList.remove("is-open");
+    statsOverlay.setAttribute("aria-hidden", "true");
+    statsOverlayContent.innerHTML = "";
+    statsState.currentTrigger = null;
+    if (typeof statsOverlayRestore === "function") {
+        statsOverlayRestore();
+    }
+    statsOverlayRestore = null;
+}
 
-    years.forEach(year=>{
-        const label = document.createElement("label");
-        label.className = "year-filter__option";
+function openStatsOverlay(contentHtml, restoreFocusElement = null) {
+    statsOverlayContent.innerHTML = contentHtml;
+    statsOverlay.hidden = false;
+    statsOverlay.classList.add("is-open");
+    statsOverlay.setAttribute("aria-hidden", "false");
+    statsState.currentTrigger = restoreFocusElement;
+    statsOverlayRestore = restoreFocusElement
+        ? () => restoreFocusElement.focus()
+        : null;
+    statsOverlayClose.focus();
+}
 
-        const input = document.createElement("input");
-        input.type = "checkbox";
-        input.value = year;
-        input.addEventListener("change", () => {
-            updateYearFilterLabel();
-            applyFilters();
-        });
+function getSortedCountEntries(values) {
+    return Object.entries(values).sort((a, b) => {
+        if (b[1] !== a[1]) return b[1] - a[1];
+        return a[0].localeCompare(b[0]);
+    });
+}
 
-        const text = document.createElement("span");
-        text.textContent = year;
+function normalizeFilterValue(value) {
+    return String(value ?? "").trim();
+}
 
-        label.appendChild(input);
-        label.appendChild(text);
-        yearFilterOptions.appendChild(label);
+function pluralizeShows(count) {
+    return `${count} ${count === 1 ? "show" : "shows"}`;
+}
+
+function getCityShowCount(city) {
+    const match = statsState.cityCounts.find(([name]) => name === city);
+    return match ? match[1] : 0;
+}
+
+function getCityFeatureCollection(cityEntries) {
+    return {
+        type: "FeatureCollection",
+        features: cityEntries.map(([city, count]) => {
+            const [lat, lng] = CITY_COORDS[city];
+            return {
+                type: "Feature",
+                properties: {
+                    city,
+                    count,
+                    label: `${city} (${pluralizeShows(count)})`
+                },
+                geometry: {
+                    type: "Point",
+                    coordinates: [lng, lat]
+                }
+            };
+        })
+    };
+}
+
+function renderComicWowGraphic(text, modifierClass = "") {
+    const safeText = escapeHtml(text).toUpperCase();
+    const showBackground = !modifierClass.includes("comic-wow--transparent");
+    const idSuffix = safeText.replace(/[^A-Z0-9]+/g, "-").replace(/^-|-$/g, "").toLowerCase() || "wow";
+    const isShortText = safeText.length <= 5;
+    const textLength = isShortText ? 315 : 470;
+    const fontSize = isShortText ? 126 : 76;
+    const backgroundMarkup = showBackground
+        ? `
+                <rect x="0" y="0" width="640" height="360" rx="4" fill="#18a7c8"></rect>
+                <rect x="0" y="0" width="640" height="360" rx="4" fill="url(#comicDots-${idSuffix})"></rect>
+                <path d="M40 18 L166 130 M600 18 L474 130 M16 176 L150 176 M624 176 L490 176 M40 342 L168 230 M600 342 L472 230" stroke="#fff" stroke-width="8" stroke-linecap="round"></path>`
+        : `
+                <path d="M46 24 L170 132 M594 24 L470 132 M28 180 L150 180 M612 180 L490 180 M46 336 L170 228 M594 336 L470 228" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity="0.92"></path>`;
+
+    return `
+        <div class="comic-wow ${modifierClass}" aria-hidden="true">
+            <svg viewBox="0 0 640 360" role="img" aria-label="${safeText}">
+                <defs>
+                    <pattern id="comicDots-${idSuffix}" width="13" height="13" patternUnits="userSpaceOnUse">
+                        <circle cx="2.6" cy="2.6" r="1.7" fill="#075a70" opacity="0.45"></circle>
+                    </pattern>
+                    <pattern id="whiteDots-${idSuffix}" width="15" height="15" patternUnits="userSpaceOnUse">
+                        <circle cx="3" cy="3" r="1.8" fill="#111" opacity="0.22"></circle>
+                    </pattern>
+                    <linearGradient id="comicRed-${idSuffix}" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ff4f9a"></stop>
+                        <stop offset="48%" stop-color="#ef244b"></stop>
+                        <stop offset="100%" stop-color="#c80f2f"></stop>
+                    </linearGradient>
+                    <linearGradient id="comicText-${idSuffix}" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#fff35c"></stop>
+                        <stop offset="100%" stop-color="#ffb21f"></stop>
+                    </linearGradient>
+                </defs>
+                ${backgroundMarkup}
+                <polygon points="320,12 382,98 514,38 486,130 630,100 504,184 604,292 452,242 446,340 354,260 320,350 286,260 194,340 188,242 36,292 136,184 10,100 154,130 126,38 258,98" fill="#111"></polygon>
+                <polygon points="320,34 374,112 488,62 466,140 592,116 480,186 564,268 434,224 426,306 348,236 320,314 292,236 214,306 206,224 76,268 160,186 48,116 174,140 152,62 266,112" fill="url(#comicRed-${idSuffix})"></polygon>
+                <polygon points="320,68 360,124 442,92 424,152 524,138 436,186 500,246 402,216 396,280 340,226 320,286 300,226 244,280 238,216 140,246 204,186 116,138 216,152 198,92 280,124" fill="#111"></polygon>
+                <polygon points="320,84 352,136 418,112 402,160 482,152 412,188 462,230 384,204 378,250 334,214 320,262 306,214 262,250 256,204 178,230 228,188 158,152 238,160 222,112 288,136" fill="#fffdf6"></polygon>
+                <polygon points="320,84 352,136 418,112 402,160 482,152 412,188 462,230 384,204 378,250 334,214 320,262 306,214 262,250 256,204 178,230 228,188 158,152 238,160 222,112 288,136" fill="url(#whiteDots-${idSuffix})" opacity="0.72"></polygon>
+                <g transform="rotate(-7 320 190)">
+                    <text x="320" y="190" text-anchor="middle" dominant-baseline="middle" font-family="Impact, Haettenschweiler, 'Arial Black', sans-serif" font-size="${fontSize}" font-weight="900" font-style="italic" letter-spacing="3" textLength="${textLength}" lengthAdjust="spacingAndGlyphs" fill="#111" stroke="#111" stroke-width="17" stroke-linejoin="round">${safeText}</text>
+                    <text x="300" y="212" text-anchor="middle" dominant-baseline="middle" font-family="Impact, Haettenschweiler, 'Arial Black', sans-serif" font-size="${fontSize}" font-weight="900" font-style="italic" letter-spacing="3" textLength="${textLength}" lengthAdjust="spacingAndGlyphs" fill="#a27632" opacity="0.86">${safeText}</text>
+                    <text x="320" y="190" text-anchor="middle" dominant-baseline="middle" font-family="Impact, Haettenschweiler, 'Arial Black', sans-serif" font-size="${fontSize}" font-weight="900" font-style="italic" letter-spacing="3" textLength="${textLength}" lengthAdjust="spacingAndGlyphs" fill="url(#comicText-${idSuffix})" stroke="#111" stroke-width="5.5" stroke-linejoin="round">${safeText}</text>
+                </g>
+            </svg>
+        </div>
+    `;
+}
+
+function renderArtistsPanel(trigger = null) {
+    const listHtml = [...statsState.artistCounts]
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map(([artist, count]) => `
+        <label class="stats-filter-option">
+            <input type="checkbox" data-filter-artist="${escapeHtml(artist)}" ${filterState.selectedArtists.has(artist) ? "checked" : ""}>
+            <span>${escapeHtml(artist)} (${count})</span>
+        </label>
+    `).join("");
+
+    openStatsOverlay(`
+        <h3 class="stats-panel-title" id="stats-overlay-title">Filter By Artist</h3>
+        <div class="stats-panel-actions">
+            <button type="button" class="stats-panel-button stats-panel-button--secondary" data-clear-artists="true">Clear Selection</button>
+        </div>
+        <div class="stats-filter-list">${listHtml}</div>
+    `, trigger);
+}
+
+function renderCitiesPanel(trigger = null) {
+    openStatsOverlay(`
+        <h3 class="stats-panel-title" id="stats-overlay-title">Explore Shows by City</h3>
+        <div class="stats-panel-actions">
+            <button type="button" class="stats-panel-button stats-panel-button--secondary" data-clear-cities="true">Clear Selection</button>
+        </div>
+        ${renderComicWowGraphic("WHAT A WORLD!", "comic-wow--city comic-wow--transparent")}
+        <div class="city-map-panel">
+            <div id="city-filter-map" class="city-map" aria-label="Concert cities map"></div>
+        </div>
+    `, trigger);
+    window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(initCityMap);
+    });
+}
+
+function initCityMap() {
+    const mapElement = document.getElementById("city-filter-map");
+    if (!mapElement) return;
+
+    const mapRect = mapElement.getBoundingClientRect();
+    if (mapRect.width < 100 || mapRect.height < 100) {
+        window.setTimeout(initCityMap, 120);
+        return;
+    }
+
+    if (cityMap) {
+        cityMap.remove();
+        cityMap = null;
+        cityMapPopup = null;
+    }
+
+    const cityEntries = statsState.cityCounts
+        .filter(([city]) => CITY_COORDS[city]);
+
+    if (!window.maplibregl || cityEntries.length === 0) {
+        mapElement.innerHTML = `
+            <div class="city-map-fallback">
+                ${cityEntries.map(([city, count]) => `
+                    <button type="button" class="stats-panel-button stats-panel-button--secondary" data-city-fallback="${escapeHtml(city)}">
+                        ${escapeHtml(city)} (${count})
+                    </button>
+                `).join(" ")}
+            </div>
+        `;
+        return;
+    }
+
+    cityMap = new maplibregl.Map({
+        container: mapElement,
+        style: {
+            version: 8,
+            sources: {
+                "carto-light": {
+                    type: "raster",
+                    tiles: [
+                        "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+                        "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+                        "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+                        "https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+                    ],
+                    tileSize: 256,
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                }
+            },
+            layers: [
+                {
+                    id: "carto-light",
+                    type: "raster",
+                    source: "carto-light"
+                }
+            ]
+        },
+        center: [-42, 39.5],
+        zoom: 2,
+        minZoom: 1.4,
+        maxZoom: 12,
+        attributionControl: true
     });
 
-    updateYearFilterLabel();
+    cityMap.scrollZoom.disable();
+    cityMap.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-left");
+    cityMapPopup = new maplibregl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        offset: 34,
+        className: "city-map-popup"
+    });
+
+    const bounds = new maplibregl.LngLatBounds();
+    cityEntries.forEach(([city]) => {
+        const [lat, lng] = CITY_COORDS[city];
+        bounds.extend([lng, lat]);
+    });
+
+    const settleMap = () => {
+        if (!cityMap) return;
+        cityMap.resize();
+        if (!bounds.isEmpty()) {
+            cityMap.fitBounds(bounds, { padding: 72, maxZoom: 4.6, duration: 0 });
+        }
+        syncCityMapMarkerState();
+    };
+
+    cityMap.once("load", () => {
+        addCityClusterLayers(cityEntries);
+        settleMap();
+    });
+    window.setTimeout(settleMap, 160);
+    window.setTimeout(settleMap, 420);
+}
+
+function addCityClusterLayers(cityEntries) {
+    if (!cityMap || cityMap.getSource(CITY_MAP_SOURCE_ID)) return;
+
+    cityMap.addSource(CITY_MAP_SOURCE_ID, {
+        type: "geojson",
+        data: getCityFeatureCollection(cityEntries),
+        cluster: true,
+        clusterRadius: 58,
+        clusterMaxZoom: 7,
+        clusterProperties: {
+            show_count: ["+", ["get", "count"]]
+        }
+    });
+
+    cityMap.addLayer({
+        id: "city-clusters",
+        type: "circle",
+        source: CITY_MAP_SOURCE_ID,
+        filter: ["has", "point_count"],
+        paint: {
+            "circle-color": "#FFD84D",
+            "circle-radius": [
+                "step",
+                ["get", "show_count"],
+                25,
+                25,
+                31,
+                75,
+                37
+            ],
+            "circle-stroke-color": "#111",
+            "circle-stroke-width": 4,
+            "circle-opacity": 0.96
+        }
+    });
+
+    cityMap.addLayer({
+        id: "city-cluster-count",
+        type: "symbol",
+        source: CITY_MAP_SOURCE_ID,
+        filter: ["has", "point_count"],
+        layout: {
+            "text-field": ["concat", ["to-string", ["get", "show_count"]], "\nshows"],
+            "text-font": ["Noto Sans Bold"],
+            "text-size": 12,
+            "text-line-height": 0.9,
+            "text-allow-overlap": true
+        },
+        paint: {
+            "text-color": "#111"
+        }
+    });
+
+    cityMap.addLayer({
+        id: "city-points",
+        type: "circle",
+        source: CITY_MAP_SOURCE_ID,
+        filter: ["!", ["has", "point_count"]],
+        paint: {
+            "circle-color": "#E63946",
+            "circle-radius": 14,
+            "circle-stroke-color": "#111",
+            "circle-stroke-width": 4
+        }
+    });
+
+    cityMap.addLayer({
+        id: "city-points-inner",
+        type: "circle",
+        source: CITY_MAP_SOURCE_ID,
+        filter: ["!", ["has", "point_count"]],
+        paint: {
+            "circle-color": "#fff",
+            "circle-radius": 5
+        }
+    });
+
+    cityMap.addLayer({
+        id: "city-point-selected",
+        type: "circle",
+        source: CITY_MAP_SOURCE_ID,
+        filter: ["==", ["get", "city"], getSelectedCities()[0] || ""],
+        paint: {
+            "circle-color": "#FFD84D",
+            "circle-radius": 18,
+            "circle-stroke-color": "#111",
+            "circle-stroke-width": 4
+        }
+    });
+
+    cityMap.addLayer({
+        id: "city-point-selected-inner",
+        type: "circle",
+        source: CITY_MAP_SOURCE_ID,
+        filter: ["==", ["get", "city"], getSelectedCities()[0] || ""],
+        paint: {
+            "circle-color": "#fff",
+            "circle-radius": 6
+        }
+    });
+
+    cityMap.on("click", "city-clusters", handleCityClusterClick);
+    cityMap.on("click", "city-points", handleCityPointClick);
+    cityMap.on("click", handleCityMapBackgroundClick);
+    cityMap.on("mouseenter", "city-clusters", () => {
+        cityMap.getCanvas().style.cursor = "pointer";
+    });
+    cityMap.on("mouseleave", "city-clusters", () => {
+        cityMap.getCanvas().style.cursor = "";
+    });
+    cityMap.on("mouseenter", "city-points", () => {
+        cityMap.getCanvas().style.cursor = "pointer";
+    });
+    cityMap.on("mouseleave", "city-points", () => {
+        cityMap.getCanvas().style.cursor = "";
+    });
+}
+
+function handleCityClusterClick(event) {
+    if (event.originalEvent) event.originalEvent.stopPropagation();
+    const feature = cityMap.queryRenderedFeatures(event.point, {
+        layers: ["city-clusters"]
+    })[0];
+    if (!feature) return;
+
+    if (cityMapPopup) cityMapPopup.remove();
+
+    const source = cityMap.getSource(CITY_MAP_SOURCE_ID);
+    const clusterId = feature.properties.cluster_id;
+    const coordinates = feature.geometry.coordinates.slice();
+
+    const zoomCluster = zoom => {
+        cityMap.easeTo({
+            center: coordinates,
+            zoom: Math.min(zoom + 0.2, 10),
+            duration: 650
+        });
+    };
+
+    const expansionZoom = source.getClusterExpansionZoom(clusterId, (error, zoom) => {
+        if (!error && Number.isFinite(zoom)) zoomCluster(zoom);
+    });
+
+    if (expansionZoom && typeof expansionZoom.then === "function") {
+        expansionZoom.then(zoomCluster).catch(() => {});
+    } else if (Number.isFinite(expansionZoom)) {
+        zoomCluster(expansionZoom);
+    }
+}
+
+function handleCityPointClick(event) {
+    if (event.originalEvent) event.originalEvent.stopPropagation();
+    const feature = event.features && event.features[0];
+    if (!feature) return;
+
+    const city = feature.properties.city;
+    const count = Number(feature.properties.count) || 0;
+    const coordinates = feature.geometry.coordinates.slice();
+
+    clearSpecialBrowseSection();
+    setSelectedCities([city]);
+    syncCityMapMarkerState();
+    showCityMapPopup(city, count, coordinates, true);
+    applyFilters(false);
+}
+
+function handleCityMapBackgroundClick(event) {
+    const interactiveFeatures = cityMap.queryRenderedFeatures(event.point, {
+        layers: ["city-clusters", "city-points", "city-point-selected", "city-point-selected-inner"]
+    });
+
+    if (interactiveFeatures.length > 0) return;
+
+    clearSelectedCity({ keepArchiveResults: true });
+}
+
+function clearSelectedCity({ keepArchiveResults = false } = {}) {
+    setSelectedCities([]);
+    syncCityMapMarkerState();
+    if (cityMapPopup) cityMapPopup.remove();
+
+    if (!keepArchiveResults) {
+        clearSpecialBrowseSection();
+        applyFilters(false);
+    }
+}
+
+function showCityMapPopup(city, count, coordinates, includeButton = true) {
+    const popupButton = includeButton
+        ? `<button type="button" class="city-map-popup__button" data-view-city-shows="${escapeHtml(city)}">View ${escapeHtml(city)} shows</button>`
+        : "";
+
+    cityMapPopup
+        .setLngLat(coordinates)
+        .setHTML(`
+            <div class="city-map-popup__city">${escapeHtml(city)}</div>
+            <div class="city-map-popup__count">${escapeHtml(pluralizeShows(count))}</div>
+            ${popupButton}
+        `)
+        .addTo(cityMap);
+
+    const popupElement = cityMapPopup.getElement();
+    if (popupElement) {
+        popupElement.addEventListener("click", event => {
+            event.stopPropagation();
+        });
+    }
+
+    window.setTimeout(() => {
+        const escapedCity = window.CSS && CSS.escape
+            ? CSS.escape(city)
+            : city.replace(/"/g, '\\"');
+        const button = document.querySelector(`[data-view-city-shows="${escapedCity}"]`);
+        if (!button) return;
+        button.addEventListener("click", () => {
+            viewSelectedCityShows(city);
+        }, { once: true });
+    }, 0);
+}
+
+function syncCityMapMarkerState() {
+    const selectedCity = getSelectedCities()[0] || "";
+    if (!cityMap || !cityMap.getLayer("city-point-selected")) return;
+    const selectedFilter = ["==", ["get", "city"], selectedCity];
+    cityMap.setFilter("city-point-selected", selectedFilter);
+    cityMap.setFilter("city-point-selected-inner", selectedFilter);
+}
+
+function viewSelectedCityShows(city) {
+    artistSearch.value = "";
+    clearSelectableFilters();
+    setSelectedCities([city]);
+    clearSpecialBrowseSection();
+    activeSpecialBrowseSectionLabel = `Shows from ${city}`;
+    closeStatsOverlay();
+    applyFilters();
+}
+
+function renderYearsPanel(trigger = null) {
+    const listHtml = [...statsState.yearCounts]
+        .sort((a, b) => Number(b[0]) - Number(a[0]))
+        .map(([year, count]) => `
+        <label class="stats-filter-option">
+            <input type="checkbox" data-filter-year="${escapeHtml(year)}" ${filterState.selectedYears.has(year) ? "checked" : ""}>
+            <span>${escapeHtml(year)} (${count})</span>
+        </label>
+    `).join("");
+
+    openStatsOverlay(`
+        <h3 class="stats-panel-title" id="stats-overlay-title">Filter By Year</h3>
+        <div class="stats-panel-actions">
+            <button type="button" class="stats-panel-button stats-panel-button--secondary" data-clear-years="true">Clear Selection</button>
+        </div>
+        <div class="stats-filter-list">${listHtml}</div>
+    `, trigger);
+}
+
+function renderShowsOverlay(trigger = null) {
+    openStatsOverlay(`
+        <div class="comic-panel">
+            <h3 class="visually-hidden" id="stats-overlay-title">WOW, that's a lot!</h3>
+            ${renderComicWowGraphic("WOW!", "comic-wow--large")}
+            <div class="comic-supporting-phrase">That's a lot</div>
+            <div class="stats-panel-actions">
+                <button type="button" class="stats-panel-button" data-scroll-to-archive="true">Take me to the shows</button>
+            </div>
+        </div>
+    `, trigger);
+}
+
+function renderAverageGraphOverlay(trigger = null) {
+    const highestYear = statsState.mostActiveYear;
+    const maxCount = Math.max(...statsState.showsPerYear.map(item => item.count), 1);
+    const barsHtml = statsState.showsPerYear
+        .slice()
+        .sort((a, b) => Number(a.year) - Number(b.year))
+        .map(item => {
+            const barHeight = Math.max(10, Math.round((item.count / maxCount) * 180));
+            const isActive = item.year === highestYear;
+            return `
+                <button type="button" class="graph-bar ${isActive ? "is-active" : ""}" data-chart-year="${escapeHtml(item.year)}" aria-label="Show ${item.count} shows from ${escapeHtml(item.year)}">
+                    <div class="graph-bar__value">${item.count}</div>
+                    <div class="graph-bar__track">
+                        <div class="graph-bar__fill" style="height:${barHeight}px"></div>
+                    </div>
+                    <div class="graph-bar__label">${escapeHtml(item.year)}</div>
+                </button>
+            `;
+        }).join("");
+
+    openStatsOverlay(`
+        <div class="graph-panel">
+            <div class="graph-wow">${renderComicWowGraphic("WOW!", "comic-wow--small comic-wow--transparent")}</div>
+            <h3 class="stats-panel-title" id="stats-overlay-title">Shows Per Year</h3>
+            <div class="graph-bars">${barsHtml}</div>
+        </div>
+    `, trigger);
+}
+
+function handleStatAction(action, trigger = null) {
+    switch (action) {
+        case "shows":
+            renderShowsOverlay(trigger);
+            break;
+        case "artists":
+            clearSpecialBrowseSection();
+            renderArtistsPanel(trigger);
+            break;
+        case "cities":
+            clearSpecialBrowseSection();
+            renderCitiesPanel(trigger);
+            break;
+        case "years":
+            clearSpecialBrowseSection();
+            renderYearsPanel(trigger);
+            break;
+        case "most-seen":
+            clearSelectableFilters();
+            clearSpecialBrowseSection();
+            artistSearch.value = "";
+            activeSpecialBrowseSectionLabel = statsState.mostSeenArtist;
+            activeSpecialBrowseFilter = { type: "artist", value: statsState.mostSeenArtist };
+            applyFilters();
+            break;
+        case "most-seen-venue":
+            clearSelectableFilters();
+            clearSpecialBrowseSection();
+            artistSearch.value = "";
+            activeSpecialBrowseSectionLabel = statsState.mostSeenVenue;
+            activeSpecialBrowseFilter = { type: "venue", value: statsState.mostSeenVenue };
+            applyFilters();
+            break;
+        case "most-active-year":
+            artistSearch.value = "";
+            clearSelectableFilters();
+            clearSpecialBrowseSection();
+            activeSpecialBrowseSectionLabel = statsState.mostActiveYear;
+            activeSpecialBrowseFilter = { type: "year", value: statsState.mostActiveYear };
+            applyFilters();
+            break;
+        case "avg-shows":
+            renderAverageGraphOverlay(trigger);
+            break;
+    }
 }
 
 function applyFilters(shouldScroll = true){
 
     const searchQuery = artistSearch.value.toLowerCase().trim();
-    const selectedYears = getSelectedYears();
+    const selectedYears = getSelectedYears().map(normalizeFilterValue);
+    const selectedArtists = getSelectedArtists().map(normalizeFilterValue);
+    const selectedCities = getSelectedCities().map(normalizeFilterValue);
 
     filteredTickets = tickets.filter(ticket=>{
 
@@ -2079,35 +3165,44 @@ function applyFilters(shouldScroll = true){
 
         const matchesYear =
             selectedYears.length === 0 ||
-            selectedYears.includes(ticket.year);
+            selectedYears.includes(normalizeFilterValue(ticket.year));
 
-        return matchesSearch && matchesYear;
+        const matchesArtist =
+            selectedArtists.length === 0 ||
+            selectedArtists.includes(normalizeFilterValue(ticket.artist));
+
+        const matchesCity =
+            selectedCities.length === 0 ||
+            selectedCities.includes(normalizeFilterValue(ticket.city));
+
+        const matchesSpecialBrowseFilter =
+            !activeSpecialBrowseFilter ||
+            (activeSpecialBrowseFilter.type === "artist" && normalizeFilterValue(ticket.artist) === normalizeFilterValue(activeSpecialBrowseFilter.value)) ||
+            (activeSpecialBrowseFilter.type === "venue" && normalizeFilterValue(ticket.venue) === normalizeFilterValue(activeSpecialBrowseFilter.value)) ||
+            (activeSpecialBrowseFilter.type === "year" && normalizeFilterValue(ticket.year) === normalizeFilterValue(activeSpecialBrowseFilter.value));
+
+        return matchesSearch && matchesYear && matchesArtist && matchesCity && matchesSpecialBrowseFilter;
 
     });
 
     updateFilterParams();
-
-    if (shouldScroll) {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    }
 
     renderTickets(filteredTickets);
 
     resultsCount.textContent =
         getResultsCountText(filteredTickets.length);
 
+    if (shouldScroll) {
+        archiveResultsAnchor.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
 }
 
 function renderSelectedYearSections(ticketList) {
-    const selectedYears = getSelectedYears()
-        .slice()
-        .sort((a, b) => Number(a) - Number(b));
+    const selectedYears = getSelectedYearsSortedAscending();
 
     ticketsContainer.innerHTML = selectedYears.map(year => {
-        const ticketsForYear = ticketList.filter(ticket => ticket.year === year);
+        const ticketsForYear = ticketList.filter(ticket => normalizeFilterValue(ticket.year) === normalizeFilterValue(year));
 
         return `
         <section class="era-section" data-year="${escapeHtml(year)}">
@@ -2129,6 +3224,26 @@ function renderSelectedYearSections(ticketList) {
     setupTicketClicks();
 }
 
+function renderCustomArchiveSection(ticketList, sectionLabel) {
+    ticketsContainer.innerHTML = `
+        <section class="era-section" data-custom-section="${escapeHtml(sectionLabel)}">
+            <div class="era-section__header">
+                <h2 class="era-section__title">${escapeHtml(sectionLabel)}</h2>
+            </div>
+            <div class="era-row-wrap">
+                <div class="era-row-hint" aria-hidden="true">&#8592;</div>
+                <div class="era-row">
+                    ${ticketList.map((ticket, index) => renderTicketMarkup(ticket, index)).join('')}
+                </div>
+            </div>
+        </section>
+    `;
+
+    setupObserver();
+    setupEraRowHints();
+    setupTicketClicks();
+}
+
 function renderTickets(ticketList = tickets) {
     const hasActiveSearchQuery = artistSearch.value.toLowerCase().trim() !== "";
     const selectedYears = getSelectedYears();
@@ -2137,7 +3252,7 @@ function renderTickets(ticketList = tickets) {
     if (ticketList.length === 0) {
         ticketsContainer.innerHTML = `
             <div class="no-results">
-                No shows match your filters. Try adjusting your search or year.
+                No shows match your filters. Try adjusting your search, artist, city, or year.
             </div>
         `;
         showArchive.classList.remove("search-results-mode");
@@ -2156,6 +3271,11 @@ function renderTickets(ticketList = tickets) {
     }
 
     showArchive.classList.remove("search-results-mode");
+
+    if (activeSpecialBrowseSectionLabel && !hasActiveSearchQuery) {
+        renderCustomArchiveSection(sortedTickets, activeSpecialBrowseSectionLabel);
+        return;
+    }
 
     if (selectedYears.length > 0) {
         renderSelectedYearSections(sortedTickets);
@@ -2182,16 +3302,14 @@ function renderTickets(ticketList = tickets) {
     setupTicketClicks();
 }
 artistSearch.addEventListener("input", () => {
+    clearSpecialBrowseSection();
     clearTimeout(debounceTimeout);
     debounceTimeout = setTimeout(() => applyFilters(), 200);
 });
-yearFilterToggle.addEventListener("click", () => {
-    setYearFilterMenuOpen(yearFilterMenu.hidden);
-});
 clearFiltersButton.addEventListener("click", () => {
     artistSearch.value = "";
-    setSelectedYears([]);
-    updateYearFilterLabel();
+    clearSelectableFilters();
+    clearSpecialBrowseSection();
     applyFilters();
 });
 backToTopButton.addEventListener("click", () => {
@@ -2201,6 +3319,12 @@ imageLightboxClose.addEventListener("click", closeImageLightbox);
 imageLightbox.addEventListener("click", (event) => {
     if (event.target === imageLightbox) {
         closeImageLightbox();
+    }
+});
+statsOverlayClose.addEventListener("click", closeStatsOverlay);
+statsOverlay.addEventListener("click", (event) => {
+    if (event.target === statsOverlay) {
+        closeStatsOverlay();
     }
 });
 copyShareLinkButton.addEventListener("click", async () => {
@@ -2215,12 +3339,110 @@ copyShareLinkButton.addEventListener("click", async () => {
         }, 1600);
     }
 });
+statCards.forEach(card => {
+    card.addEventListener("click", () => {
+        handleStatAction(card.dataset.statAction, card);
+    });
+    card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            handleStatAction(card.dataset.statAction, card);
+        }
+    });
+});
+statsOverlayContent.addEventListener("change", (event) => {
+    const target = event.target;
+
+    if (target.matches("[data-filter-artist]")) {
+        clearSpecialBrowseSection();
+        const artist = target.getAttribute("data-filter-artist");
+        const selectedArtists = new Set(getSelectedArtists());
+        if (target.checked) selectedArtists.add(artist);
+        else selectedArtists.delete(artist);
+        setSelectedArtists([...selectedArtists]);
+        applyFilters(false);
+    }
+
+    if (target.matches("[data-filter-year]")) {
+        clearSpecialBrowseSection();
+        const year = target.getAttribute("data-filter-year");
+        const selectedYears = new Set(getSelectedYears());
+        if (target.checked) selectedYears.add(year);
+        else selectedYears.delete(year);
+        setSelectedYears([...selectedYears]);
+        applyFilters(false);
+    }
+});
+statsOverlayContent.addEventListener("click", (event) => {
+    const cityFallback = event.target.closest("[data-city-fallback]");
+    if (cityFallback) {
+        clearSpecialBrowseSection();
+        const city = cityFallback.getAttribute("data-city-fallback");
+        setSelectedCities([city]);
+        activeSpecialBrowseSectionLabel = `Shows from ${city}`;
+        renderCitiesPanel(statsState.currentTrigger || null);
+        applyFilters(false);
+        return;
+    }
+
+    const chartBar = event.target.closest("[data-chart-year]");
+    if (chartBar) {
+        const year = chartBar.getAttribute("data-chart-year");
+        artistSearch.value = "";
+        clearSelectableFilters();
+        clearSpecialBrowseSection();
+        activeSpecialBrowseSectionLabel = year;
+        activeSpecialBrowseFilter = { type: "year", value: year };
+        closeStatsOverlay();
+        applyFilters();
+        return;
+    }
+
+    if (event.target.closest("[data-clear-artists]")) {
+        setSelectedArtists([]);
+        clearSpecialBrowseSection();
+        renderArtistsPanel(statsState.currentTrigger || null);
+        applyFilters(false);
+        return;
+    }
+
+    if (event.target.closest("[data-clear-cities]")) {
+        clearSpecialBrowseSection();
+        clearSelectedCity();
+        return;
+    }
+
+    const viewCityButton = event.target.closest("[data-view-city-shows]");
+    if (viewCityButton) {
+        const city = viewCityButton.getAttribute("data-view-city-shows");
+        viewSelectedCityShows(city);
+        return;
+    }
+
+    if (event.target.closest("[data-clear-years]")) {
+        setSelectedYears([]);
+        clearSpecialBrowseSection();
+        renderYearsPanel(statsState.currentTrigger || null);
+        applyFilters(false);
+        return;
+    }
+
+    if (event.target.closest("[data-scroll-to-archive]")) {
+        closeStatsOverlay();
+        archiveResultsAnchor.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+});
 window.addEventListener("scroll", updateBackToTopVisibility);
 document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
 
     if (imageLightbox.classList.contains("is-open")) {
         closeImageLightbox();
+        return;
+    }
+
+    if (statsOverlay.classList.contains("is-open")) {
+        closeStatsOverlay();
         return;
     }
 
@@ -2238,16 +3460,6 @@ window.addEventListener("hashchange", () => {
         closeModal(false);
     }
 });
-
-document.addEventListener("click", (event) => {
-    const yearFilterWrapper = event.target.closest('.year-filter');
-
-    if (!yearFilterWrapper) {
-        setYearFilterMenuOpen(false);
-    }
-});
-
-populateYearFilterOptions();
 applyFiltersFromUrl();
 
 applyFilters(false);
