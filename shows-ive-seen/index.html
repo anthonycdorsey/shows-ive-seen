@@ -322,6 +322,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     width:min(320px, 100%);
 }
 
+.archive-filter-button.is-active{
+    border-color:#111;
+    background:#111;
+    color:#fff;
+}
+
 .archive-note--results{
     padding:22px 10% 6px;
     text-align:center;
@@ -1671,6 +1677,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         placeholder="Search archive..."
     >
 
+    <button type="button" id="open-artist-filter" class="archive-filter-button" aria-haspopup="dialog">Artist</button>
+    <button type="button" id="open-city-filter" class="archive-filter-button" aria-haspopup="dialog">City</button>
+    <button type="button" id="open-year-filter" class="archive-filter-button" aria-haspopup="dialog">Year</button>
+
     <button type="button" id="clear-filters">Clear</button>
 
     <div id="results-count">0 results</div>
@@ -1850,6 +1860,9 @@ const backToTopButton = document.getElementById('back-to-top');
 const archiveResultsAnchor = document.getElementById('archive-results-anchor');
 
 const artistSearch = document.getElementById('artist-search');
+const openArtistFilterButton = document.getElementById('open-artist-filter');
+const openCityFilterButton = document.getElementById('open-city-filter');
+const openYearFilterButton = document.getElementById('open-year-filter');
 const clearFiltersButton = document.getElementById('clear-filters');
 const resultsCount = document.getElementById('results-count');
 const statCards = [...document.querySelectorAll('.archive-stat[data-stat-action]')];
@@ -2473,6 +2486,34 @@ function buildSearchableText(ticket) {
 
 function getResultsCountText(count) {
     return `${count} ${count === 1 ? "result" : "results"}`;
+}
+
+function updateArchiveFilterControlLabels() {
+    const selectedArtists = getSelectedArtists();
+    const selectedCities = getSelectedCities();
+    const selectedYears = getSelectedYearsSortedAscending();
+
+    openArtistFilterButton.textContent = selectedArtists.length > 0
+        ? `Artist: ${selectedArtists.length}`
+        : "Artist";
+    openArtistFilterButton.classList.toggle("is-active", selectedArtists.length > 0);
+    openArtistFilterButton.setAttribute("aria-pressed", String(selectedArtists.length > 0));
+
+    openCityFilterButton.textContent = selectedCities.length === 1
+        ? `City: ${selectedCities[0]}`
+        : selectedCities.length > 1
+            ? `City: ${selectedCities.length}`
+            : "City";
+    openCityFilterButton.classList.toggle("is-active", selectedCities.length > 0);
+    openCityFilterButton.setAttribute("aria-pressed", String(selectedCities.length > 0));
+
+    openYearFilterButton.textContent = selectedYears.length === 1
+        ? `Year: ${selectedYears[0]}`
+        : selectedYears.length > 1
+            ? `Year: ${selectedYears.length}`
+            : "Year";
+    openYearFilterButton.classList.toggle("is-active", selectedYears.length > 0);
+    openYearFilterButton.setAttribute("aria-pressed", String(selectedYears.length > 0));
 }
 
 function getSelectedYears() {
@@ -3192,6 +3233,8 @@ function applyFilters(shouldScroll = true){
     resultsCount.textContent =
         getResultsCountText(filteredTickets.length);
 
+    updateArchiveFilterControlLabels();
+
     if (shouldScroll) {
         archiveResultsAnchor.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -3306,10 +3349,24 @@ artistSearch.addEventListener("input", () => {
     clearTimeout(debounceTimeout);
     debounceTimeout = setTimeout(() => applyFilters(), 200);
 });
+openArtistFilterButton.addEventListener("click", () => {
+    clearSpecialBrowseSection();
+    renderArtistsPanel(openArtistFilterButton);
+});
+openCityFilterButton.addEventListener("click", () => {
+    clearSpecialBrowseSection();
+    renderCitiesPanel(openCityFilterButton);
+});
+openYearFilterButton.addEventListener("click", () => {
+    clearSpecialBrowseSection();
+    renderYearsPanel(openYearFilterButton);
+});
 clearFiltersButton.addEventListener("click", () => {
     artistSearch.value = "";
     clearSelectableFilters();
     clearSpecialBrowseSection();
+    if (cityMapPopup) cityMapPopup.remove();
+    syncCityMapMarkerState();
     applyFilters();
 });
 backToTopButton.addEventListener("click", () => {
